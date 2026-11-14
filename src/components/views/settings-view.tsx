@@ -54,17 +54,17 @@ function Settings({ farm }: { farm: Farm }) {
         <Card>
           <CardHeader eyebrow="Data" title="Data mode" />
           <CardBody className="space-y-3 text-[12.5px] text-ink-soft">
-            <p className="flex items-center gap-2">Mode: <Badge className={DATA_MODE === "mock" ? "bg-clay-100 text-clay-600" : "bg-forest-100 text-forest-800"}>{DATA_MODE === "mock" ? "Mock (synthetic)" : "API (live)"}</Badge></p>
+            <p className="flex items-center gap-2">Mode: <Badge className={DATA_MODE === "mock" ? "bg-clay-100 text-clay-700" : "bg-emerald-100 text-emerald-800"}>{DATA_MODE === "mock" ? "Mock (synthetic)" : "API (live observations)"}</Badge></p>
             <p>API base URL: <span className="font-mono text-[11.5px] text-ink">{apiBaseUrl()}</span></p>
-            <p className="text-stone-500">Set <span className="font-mono">NEXT_PUBLIC_DATA_MODE=api</span> once the FastAPI backend is running (Phase 6).</p>
+            <p className="text-stone-500">Live API mode connects to FastAPI backend on port 8000 for direct USDA and NASA queries.</p>
           </CardBody>
         </Card>
         <Card>
           <CardHeader eyebrow="Attribution" title="Data & licences" />
           <CardBody className="space-y-2 text-[12px] leading-relaxed text-ink-soft">
-            <p>Planned sources: NASA POWER, NASA SMAP (NSIDC DAAC), NASA HLS and SRTM (LP DAAC), USDA NRCS SSURGO, USDA NASS Cropland Data Layer and Crop Sequence Boundaries.</p>
-            <p>Map rendering: MapLibre GL JS (BSD-3-Clause). No basemap tiles are used in Phase 1.</p>
-            <p>All values currently shown are synthetic. See <Link href="/evidence" className="font-semibold text-forest-700 underline underline-offset-2">Evidence</Link> for verification status.</p>
+            <p>Operational live sources: NASA POWER, USDA NRCS SSURGO, USDA NASS Cropland Data Layer (CDL), and NASA SRTM. Staged for Phase 3: NASA SMAP and NASA HLS.</p>
+            <p>Map rendering: MapLibre GL JS with Esri World Imagery (satellite) and Carto Voyager (topographic basemap).</p>
+            <p>Inspect dataset provenance and methods on the <Link href="/evidence" className="font-semibold text-forest-700 underline underline-offset-2">Evidence registry</Link>.</p>
           </CardBody>
         </Card>
       </div>

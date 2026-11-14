@@ -102,7 +102,7 @@ function Overview({ p }: { p: FieldProfile }) {
       <div className="space-y-6">
         <Card>
           <CardBody className="pt-5">
-            <FieldMap height={240} fields={[{ field_id: field.field_id, name: field.name, geometry: field.geometry, band: res?.composite.band ?? "unknown" }]} colorBy="none" focusId={field.field_id} caption="Synthetic geometry" />
+            <FieldMap height={240} fields={[{ field_id: field.field_id, name: field.name, geometry: field.geometry, band: res?.composite.band ?? "unknown" }]} colorBy="none" focusId={field.field_id} caption={field.source === "synthetic" ? "Synthetic parcel geometry" : "Field boundary · Live API"} />
           </CardBody>
         </Card>
         <Card>

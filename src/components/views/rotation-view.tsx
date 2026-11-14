@@ -1,6 +1,7 @@
 "use client";
+import Image from "next/image";
 import { useMemo, useState } from "react";
-import { ArrowRight, ChevronDown, GitCompare, Pencil, Plus, Sparkles, Trash2, X } from "lucide-react";
+import { ArrowRight, ChevronDown, GitCompare, Pencil, Plus, Trash2, X } from "lucide-react";
 import type { CropHistory, CropOption, RecommendationCandidate, RotationRecommendation, RotationScenario, ScenarioEvaluation } from "@/types/contracts";
 import { useCreateScenario, useCropHistory, useCrops, useDeleteScenario, useRecommendation, useScenarios, useUpdateScenario } from "@/hooks/queries";
 import { useFieldId } from "@/components/layout/field-layout";
@@ -118,14 +119,32 @@ function Recommendations({ r, onUse }: { r: RotationRecommendation; onUse: (code
 
 const FACTOR_LABEL: Record<string, string> = { ph: "Soil pH", drainage: "Drainage", water_holding: "Water holding", gdd: "Heat units (GDD)", slope: "Slope", rotation_history: "Rotation history", regional_climate: "Regional climate" };
 
+const CROP_PHOTOS: Record<number, string> = {
+  24: "/images/crops/wheat.jpg",
+  1: "/images/crops/corn.jpg",
+  5: "/images/crops/soybeans.jpg",
+  36: "/images/crops/alfalfa.jpg",
+  4: "/images/crops/sorghum.jpg",
+};
+
 function CandidateCard({ c, onUse }: { c: RecommendationCandidate; onUse: () => void }) {
   const [open, setOpen] = useState(c.rank === 1);
   const s = FIT_STYLE[c.overall];
+  const photo = CROP_PHOTOS[c.crop_code];
   return (
-    <Card className={cn("overflow-hidden", c.rank === 1 && "ring-1 ring-forest-300")}>
+    <Card className={cn("overflow-hidden", c.rank === 1 && "ring-1 ring-forest-300 shadow-md")}>
       <div className="flex items-start gap-4 p-5">
-        <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl text-[11px] font-bold uppercase text-white shadow-inner" style={{ background: cropColor(c.crop_code) }}>
-          #{c.rank}
+        <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl border border-line shadow-inner">
+          {photo ? (
+            <Image src={photo} alt={c.crop_name} fill sizes="56px" className="object-cover" />
+          ) : (
+            <div className="grid h-full w-full place-items-center text-[11px] font-bold uppercase text-white" style={{ background: cropColor(c.crop_code) }}>
+              #{c.rank}
+            </div>
+          )}
+          <span className="absolute bottom-0 right-0 rounded-tl-md bg-forest-950/80 px-1.5 py-0.5 font-mono text-[10px] font-bold text-white backdrop-blur-xs">
+            #{c.rank}
+          </span>
         </div>
         <div className="min-w-0 flex-1">
           <p className="font-display text-[20px] leading-tight text-ink">{c.crop_name}</p>
@@ -184,7 +203,7 @@ function Scenarios({ fieldId, crops, draft, setDraft, builderOpen, setBuilderOpe
         query={list}
         skeleton={<Skeleton className="h-40" />}
         isEmpty={(d) => d.length === 0}
-        empty={<EmptyState icon={<Sparkles className="h-6 w-6" />} title="Build your first rotation" description="Start from a recommended crop above or create a sequence from scratch." />}
+        empty={<EmptyState icon={<Plus className="h-6 w-6" />} title="Build your first rotation" description="Start from a recommended crop above or create a sequence from scratch." />}
       >
         {() => (
           <div className="grid items-start gap-4 lg:grid-cols-2">
@@ -222,7 +241,7 @@ function Builder({ fieldId, crops, draft, setDraft, onDone }: { fieldId: string;
   };
   return (
     <Card className="border-forest-200">
-      <CardHeader eyebrow={draft.id ? "Edit scenario" : "New scenario"} title="Rotation builder" description="2–8 years. Saving runs the (synthetic) evaluation." actions={<Button size="sm" variant="ghost" onClick={onDone}><X className="h-4 w-4" /> Close</Button>} />
+      <CardHeader eyebrow={draft.id ? "Edit scenario" : "New scenario"} title="Rotation builder" description="2–8 years. Saving computes the multi-year agronomic evaluation." actions={<Button size="sm" variant="ghost" onClick={onDone}><X className="h-4 w-4" /> Close</Button>} />
       <CardBody className="space-y-5">
         <div className="flex flex-wrap gap-4">
           <label className="block min-w-[240px] flex-1">

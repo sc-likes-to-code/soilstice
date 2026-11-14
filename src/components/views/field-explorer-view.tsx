@@ -101,7 +101,7 @@ export function FieldExplorerView() {
             selectedId={selected}
             onSelect={setSelected}
             focusId={selected}
-            caption={DATA_MODE === "mock" ? "Schematic 1-mile grid · synthetic field geometry" : "Schematic 1-mile grid · field geometry from the API"}
+            caption={DATA_MODE === "mock" ? "Geospatial view · Synthetic field boundaries" : "Geospatial view · Operational field boundaries"}
           />
           {sel ? (
             <Card className="animate-[var(--animate-fade-up)]">

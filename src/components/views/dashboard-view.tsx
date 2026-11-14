@@ -82,23 +82,23 @@ function DashboardBody({ data, season }: { data: FarmOverview; season: number })
         <Card>
           <CardHeader
             eyebrow="Fields"
-            title="Farm map"
-            description={`Click a field to highlight it in the table.${DATA_MODE === "mock" ? " Geometry is synthetic in Phase 1." : ""}`}
+            title="Geospatial farm map"
+            description="Interactive satellite view of field parcels with resilience scores. Click a field to inspect."
             actions={<Segmented label="Colour fields by" size="sm" value={colorBy} onChange={setColorBy} options={[{ value: "band", label: "Resilience" }, { value: "crop", label: `Crop ${season}` }]} />}
           />
           <CardBody>
             <FieldMap
-              height={430}
+              height={450}
               fields={data.fields.map((f) => ({ field_id: f.field_id, name: f.name, geometry: f.geometry, band: f.resilience_band, crop: f.latest_crop?.crop_code ?? null }))}
               colorBy={colorBy}
               selectedId={selected}
               onSelect={setSelected}
-              caption={DATA_MODE === "mock" ? "Schematic 1-mile grid · synthetic field geometry" : "Schematic 1-mile grid · field geometry from the API"}
+              caption={DATA_MODE === "mock" ? "Satellite view · Synthetic parcel geometry" : "Satellite view · Field boundaries from API"}
             />
           </CardBody>
         </Card>
         <Card>
-          <CardHeader eyebrow="Attention" title="Field list" description="Sorted by data completeness. Open a field to explore it." />
+          <CardHeader eyebrow="Attention" title="Field roster" description="Sorted by data completeness. Select any field to open its profile." />
           <CardBody className="pt-2">
             <FieldTable fields={data.fields} selected={selected} onHover={setSelected} onOpen={(id) => router.push(`/fields/${id}`)} />
           </CardBody>

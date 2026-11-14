@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, type ReactNode } from "react";
-import { BookOpen, LayoutDashboard, Map as MapIcon, Settings } from "lucide-react";
+import { BookOpen, CheckCircle2, FlaskConical, LayoutDashboard, Map as MapIcon, Settings } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { useActiveFarm } from "@/hooks/active-farm";
 import { usePrefs } from "@/hooks/preferences";
@@ -19,7 +19,7 @@ const NAV = [
 
 function NavLinks({ active }: { active: (m: (p: string) => boolean) => boolean }) {
   return (
-    <nav aria-label="Primary" className="flex items-center gap-1 overflow-x-auto overflow-y-hidden [scrollbar-width:none]">
+    <nav aria-label="Primary" className="flex items-center gap-1 overflow-x-auto overflow-y-hidden py-1 [scrollbar-width:none]">
       {NAV.map(({ href, label, icon: Icon, match }) => {
         const on = active(match);
         return (
@@ -28,8 +28,10 @@ function NavLinks({ active }: { active: (m: (p: string) => boolean) => boolean }
             href={href}
             aria-current={on ? "page" : undefined}
             className={cn(
-              "inline-flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-[13px] font-semibold transition-colors",
-              on ? "bg-forest-800 text-paper" : "text-ink-soft hover:bg-parchment/80 hover:text-ink",
+              "inline-flex shrink-0 items-center gap-2 rounded-lg px-3 py-1.5 text-[13px] font-semibold transition-all duration-150",
+              on
+                ? "bg-forest-800 text-paper shadow-sm"
+                : "text-ink-soft hover:bg-parchment/80 hover:text-ink active:scale-[0.98]",
             )}
           >
             <Icon className="h-4 w-4" aria-hidden />
@@ -54,7 +56,15 @@ function FarmSwitcher() {
   return (
     <div className="flex items-center gap-2">
       <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-stone-500 max-lg:hidden">Farm</span>
-      <Select label="Active farm" value={farm.farm_id} onChange={(id) => setActiveFarmId(id)} options={farms.map((f) => ({ value: f.farm_id, label: `${f.name} · ${f.aoi.label.replace(", Kansas", ", KS")}` }))} />
+      <Select
+        label="Active farm"
+        value={farm.farm_id}
+        onChange={(id) => setActiveFarmId(id)}
+        options={farms.map((f) => ({
+          value: f.farm_id,
+          label: `${f.name} · ${f.aoi.label.replace(", Kansas", ", KS")}`,
+        }))}
+      />
     </div>
   );
 }
@@ -62,22 +72,48 @@ function FarmSwitcher() {
 export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="canvas-grain flex min-h-full flex-1 flex-col">
-      <header className="no-print sticky top-0 z-30 border-b border-line bg-cream/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 md:px-8">
+      <header className="no-print sticky top-0 z-30 border-b border-line/90 bg-cream/92 shadow-[0_1px_3px_rgba(0,0,0,0.03)] backdrop-blur-md">
+        <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-x-6 gap-y-2 px-4 py-2.5 md:px-8">
           <Brand href="/" />
+
           <div className="order-3 w-full md:order-none md:w-auto md:flex-1">
             <Suspense fallback={<NavLinks active={() => false} />}>
               <ActiveNav />
             </Suspense>
           </div>
-          <div className="ml-auto md:ml-0">
+
+          <div className="ml-auto flex items-center gap-3 md:ml-0">
+            <div className="hidden items-center gap-1.5 rounded-full border border-line bg-paper px-2.5 py-1 text-[11px] font-medium text-stone-600 sm:inline-flex">
+              {DATA_MODE === "mock" ? (
+                <>
+                  <FlaskConical className="h-3 w-3 text-clay-600" />
+                  <span>Demo mock</span>
+                </>
+              ) : (
+                <>
+                  <CheckCircle2 className="h-3 w-3 text-emerald-600" />
+                  <span className="font-semibold text-forest-900">Live API</span>
+                </>
+              )}
+            </div>
             <FarmSwitcher />
           </div>
         </div>
       </header>
-      <main className="mx-auto w-full max-w-[1400px] flex-1 px-4 pb-16 pt-8 md:px-8">{children}</main>
-      <footer className="no-print border-t border-line/80 py-6 text-center text-[11.5px] text-stone-500">
-        SOILSTICE · NASA Space Apps Challenge 2026 — Field Shift · {DATA_MODE === "mock" ? "Phase 1 interface with synthetic data" : "Live API data (USDA / NASA sources; see Evidence)"}
+
+      <main className="mx-auto w-full max-w-[1400px] flex-1 px-4 pb-16 pt-7 md:px-8">{children}</main>
+
+      <footer className="no-print border-t border-line/80 bg-paper/40 py-6 text-center text-[12px] text-stone-500 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-4 px-4 md:px-8">
+          <p>
+            <span className="font-display font-semibold text-forest-900">SOILSTICE</span> · NASA Space Apps Challenge 2026 — Field Shift
+          </p>
+          <p className="text-[11.5px] text-stone-500">
+            {DATA_MODE === "mock"
+              ? "Phase 1 interface · Synthetic data demo"
+              : "Live API operational · USDA NRCS SSURGO · USDA NASS CDL · NASA POWER"}
+          </p>
+        </div>
       </footer>
     </div>
   );

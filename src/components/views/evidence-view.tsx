@@ -32,13 +32,13 @@ export function EvidenceView() {
 
   return (
     <div>
-      <PageHeader eyebrow="Reports & Evidence" title="Evidence & data sources" description="Every dataset and method SOILSTICE relies on, with its verification status from Phase 0. Field reports are available from each field’s Report tab." />
+      <PageHeader eyebrow="Reports & Evidence" title="Evidence & data sources" description="Every dataset and method SOILSTICE relies on, with verified live providers and Phase 0/Phase 2 verification records." />
       <div className="space-y-6">
         <Card>
           <CardHeader
             eyebrow="Dataset registry"
             title="NASA, USDA and partner datasets"
-            description="Descriptors come from the Phase 0 Source Register. None is integrated yet — ingestion begins in Phase 3."
+            description="Comprehensive registry of NASA, USDA, and scientific partner datasets. Operational live providers: NASA POWER (daily agrometeorology), USDA NRCS SSURGO (soil survey), and USDA NASS CDL (crop classification); SRTM terrain verified; SMAP and HLS staged for Phase 3."
             actions={<Segmented label="Priority" size="sm" value={priority} onChange={setPriority} options={[{ value: "all", label: "All" }, { value: "P0", label: "P0" }, { value: "P1", label: "P1" }, { value: "P2", label: "P2" }]} />}
           />
           <CardBody className="pt-2">

@@ -74,7 +74,13 @@ function Report({ p, generatedAt, dataMode, res, rec, datasets }: { p: FieldProf
         </header>
 
         <div className="grid gap-5 md:grid-cols-[260px_1fr]">
-          <FieldMap height={200} fields={[{ field_id: field.field_id, name: field.name, geometry: field.geometry }]} colorBy="none" focusId={field.field_id} />
+          <FieldMap
+            height={200}
+            fields={[{ field_id: field.field_id, name: field.name, geometry: field.geometry }]}
+            colorBy="none"
+            focusId={field.field_id}
+            caption={field.source === "synthetic" ? "Synthetic parcel geometry" : "Satellite view · USDA/NASA observations"}
+          />
           <div>
             <h2 className="mb-2 font-display text-[17px] text-ink">Data coverage</h2>
             <table className="w-full text-[12px] [overflow-wrap:anywhere]">
