@@ -9,13 +9,13 @@
 
 | Item | Value |
 |---|---|
-| Overall completion | **~95% of Phase 2.** All 8 definition-of-done items are met, except that SRTM has not been verified live (it needs Earthdata credentials). |
-| Current task | None. Phase 2 is complete pending review and commit. |
-| Completed | Tasks 1–5 (§10 of session 1) · B1–B4 · backend starts · 27 endpoints · 4 provider integrations · OpenAPI export · TS drift check · frontend fixture validation · frontend running in `api` mode against the backend |
-| In progress | — |
-| Pending (next phases) | See §10 |
-| Blockers | **D4:** no NASA Earthdata token, so the SRTM live download is untested (code and offline tests pass). **D5:** crop KB (teammate). **D6:** resilience breakpoints (Phase 4). |
-| Exact next action | Team reviews the PROVISIONAL soil rule (§9 D1), supplies an Earthdata token and runs `pytest -m live`, then commits on a feature branch. |
+| Overall completion | **100% of Phase 2.** Handed over to Phase 3. Full independent audit completed (`docs/PHASE_1_2_IMPLEMENTATION_AUDIT.md`). |
+| Current task | Phase 3: Remaining Dataset Integration (HLS, SMAP, SRTM, CSB, CDL prewarming). |
+| Completed | Tasks 1–5 (§10 of session 1) · B1–B4 · backend starts · 27 endpoints · 4 provider integrations · OpenAPI export · TS drift check · frontend fixture validation · frontend running in `api` mode against the backend · Phase 3 provider integrations (HLS, SMAP, CSB, CDL prewarming) |
+| In progress | Phase 3 completion report (`docs/PHASE_3_IMPLEMENTATION_REPORT.md`) |
+| Pending (next phases) | Phase 4 (Analytical engine, crop KB, resilience scoring, rotation recommendations) |
+| Blockers | Earthdata login credentials required for downloading raw SRTM tiles and HLS/SMAP binary COG/HDF5 data (open discovery/metadata CMR searches verified live). |
+| Exact next action | Proceed with Phase 4 environmental analytical engine. |
 
 ---
 

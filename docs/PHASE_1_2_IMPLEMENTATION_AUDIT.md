@@ -482,18 +482,32 @@ All genuine screenshots captured during this audit are located in `E:\MY PROJECT
 
 ## 8. PARTIALLY WORKING FEATURES (PARTIAL)
 
-1. **Crop Knowledge Base (`/crops`):** Returns 8 candidate crop names with `family: "unassigned (crop knowledge base pending)"` and `kb_version: "none"`. Evaluator operates in honesty mode without agronomic rules.
-2. **Resilience Engine (E19):** Returns contract-valid `status: "pending"` with null component scores and band `unknown`, as documented for Phase 2 prior to Phase 4 breakpoint table implementation.
-3. **Derived Climate Indicators:** GDD, heat-stress days, and reference ET₀ are marked `missing_reason: "NOT_COMPUTED"` because baseline normals and crop-specific base/cap temperatures depend on Phase 4 / Phase 5 deliverables.
-4. **Field Reprocessing Trigger:** The UI currently lacks a "Reprocess field" button; if a field job is interrupted by a server restart, the field remains `partial` until deleted and recreated.
+1. **Crop Knowledge Base (`/crops`):** [PARTIAL]
+   - **Responsible File / Function:** `backend/app/rotation/kb.py::load_crop_kb` and `backend/app/rotation/engine.py::PendingRotationEngine.evaluate_scenario`.
+   - **Status:** Evaluator operates in honest fallback mode returning 8 candidate crops with `"unassigned (crop knowledge base pending)"` and `kb_version: "none"`.
+2. **Resilience Engine (E19):** [PARTIAL]
+   - **Responsible File / Function:** `backend/app/analytics/resilience.py::PendingResilienceEngine.evaluate_field`.
+   - **Status:** Returns contract-valid `status: "pending"` with null component scores and band `"unknown"`, explicitly reserved for Phase 4 breakpoint calibration.
+3. **Derived Climate Indicators (GDD, Heat-stress, ET₀):** [PARTIAL]
+   - **Responsible File / Function:** `backend/app/processing/climate.py::aggregate_daily_series`.
+   - **Status:** Marked `missing_reason: "NOT_COMPUTED"` because baseline normals and crop-specific base/cap temperatures depend on Phase 4 / Phase 5 deliverables.
+4. **Field Reprocessing Trigger:** [PARTIAL]
+   - **Responsible File / Function:** `backend/app/api/routes.py::create_field` and `src/components/views/field-overview-view.tsx`.
+   - **Status:** Lacks a dedicated `POST /fields/{id}/reprocess` endpoint; interrupted jobs leave the field in `status: "partial"`.
 
 ---
 
-## 9. FAILED OR UNVERIFIED FEATURES
+## 9. UNVERIFIED OR DEFERRED FEATURES (NOT VERIFIED / FAILED)
 
-1. **NASA SRTM GL1 Live Download:** **CODE-VERIFIED ONLY.** Provider logic and offline tests pass, but live granule download is blocked by absence of NASA Earthdata credentials (`SOILSTICE_EARTHDATA_TOKEN`).
-2. **Crop Sequence Boundaries (CSB) Ingestion:** **NOT STARTED (PLANNED FOR PHASE 3).** CSB polygons are not yet ingested from the national dataset; fields currently use user-drawn or synthetic boundaries.
-3. **NASA HLS & SMAP Upstream Ingestion:** **NOT STARTED (PLANNED FOR PHASE 3).** Currently handled via honest `NO_DATA_SOURCE` indicators in API mode.
+1. **NASA SRTM GL1 Live Download:** [NOT VERIFIED (LIVE)] / [VERIFIED (OFFLINE)]
+   - **Responsible File / Function:** `backend/app/providers/srtm.py::SrtmClient.download_tile` and `app/processing/terrain.py::compute_slope_aspect_horn`.
+   - **Status:** Offline parser and Horn slope logic verified 100% with synthetic tiles (`tests/test_providers.py`). Live tile download is **NOT VERIFIED** due to unconfigured Earthdata login credentials (`SOILSTICE_EARTHDATA_USER` and `SOILSTICE_EARTHDATA_PASSWORD` env vars). Pipeline handles this gracefully via `missing_reason: "NOT_COMPUTED"` and `EARTHDATA_NOT_CONFIGURED` without failing the pipeline.
+2. **Crop Sequence Boundaries (CSB) Ingestion:** [NOT VERIFIED — PLANNED FOR PHASE 3]
+   - **Responsible File / Function:** Planned for `backend/app/providers/csb.py`.
+   - **Status:** CSB polygon national ingestion is scheduled for Phase 3. Fields currently use user-drawn or seeded synthetic boundaries.
+3. **NASA HLS & SMAP Raster Ingestion:** [NOT VERIFIED — PLANNED FOR PHASE 3]
+   - **Responsible File / Function:** Planned for `backend/app/providers/hls.py` and `app/providers/smap.py`.
+   - **Status:** Upstream satellite raster ingestion is scheduled for Phase 3. Currently rendered with contract-compliant `NO_DATA_SOURCE` disclosures.
 
 ---
 
