@@ -60,7 +60,7 @@ def _keys(node, prefix=""):
 def test_frontend_http_calls_exist_in_openapi():
     src = HTTP_SERVICES.read_text(encoding="utf-8")
     calls = re.findall(r'request\(\s*"(GET|POST|PUT|PATCH|DELETE)",\s*[`"]([^`"]+)[`"]', src)
-    assert len(calls) == 26  # E2–E27; the frontend services have no health call (E1)
+    assert len(calls) == 33  # E2–E27 plus 7 Phase 5 Crop KB endpoints; the frontend services have no health call (E1)
     ops = {(m.upper(), p.removeprefix("/api/v1")) for p, v in create_app().openapi()["paths"].items() for m in v}
     for method, path in calls:
         norm = re.sub(r"\$\{(\w+)\}", lambda m: "{" + {"id": "x", "farmId": "x", "scenarioId": "x", "jobId": "x"}
