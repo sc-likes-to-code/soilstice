@@ -78,7 +78,7 @@ def test_create_field_runs_full_pipeline(client):
     assert statuses["nasa_hls_vi"] == "not_integrated" and statuses["nasa_smap_spl4smgp"] == "not_integrated"
     assert {statuses[k] for k in ("usda_nrcs_ssurgo_sda", "nasa_power_daily_ag", "nasa_srtm_gl1")} == {"available"}
     assert statuses["usda_nass_cdl"] == "partial"  # 2006 out of range in the fake
-    assert profile.resilience.status == "pending" and profile.resilience.composite.score.value is None
+    assert profile.resilience.status == "computed" and profile.resilience.composite.score.value is not None
 
     summaries = client.get(f"{API}/farms/{reno_farm_id(client)}/fields").json()["data"]
     assert summaries[0]["latest_crop"]["year"] == 2010 and summaries[0]["resilience_band"] == "unknown"
@@ -94,7 +94,13 @@ def test_power_values_are_regional_context(client):
     precip = next(i for i in climate["indicators"] if i["key"] == "precip_total_season")
     assert precip["value"] == {"value": 732.0, "unit": "mm", "uncertainty": None, "missing_reason": None}  # 366 × 2
     gdd = next(i for i in climate["indicators"] if i["key"] == "gdd_season")
-    assert gdd["value"]["value"] is None and gdd["value"]["missing_reason"] == "NOT_COMPUTED"
+    assert gdd["value"]["value"] == 1464.0 and gdd["value"]["unit"] == "degC_day"
+    anom = next(i for i in climate["indicators"] if i["key"] == "precip_anomaly_pct")
+    assert anom["value"]["value"] == -3.75 and anom["value"]["unit"] == "percent"
+    heat = next(i for i in climate["indicators"] if i["key"] == "heat_stress_days")
+    assert heat["value"]["value"] == 0.0 and heat["value"]["unit"] == "day"
+    frost = next(i for i in climate["indicators"] if i["key"] == "frost_free_days")
+    assert frost["value"]["value"] == 366.0 and frost["value"]["unit"] == "day"
     sm = next(i for i in climate["indicators"] if i["key"] == "sm_rootzone_mean_season")
     assert sm["value"]["missing_reason"] == "NO_DATA_SOURCE"
 
@@ -217,7 +223,10 @@ def test_soil_terrain_crop_history_values(client):
     assert hist["years"][0]["missing_reason"] == "OUT_OF_TEMPORAL_RANGE" and hist["years"][0]["histogram"] == []
     y2007 = hist["years"][1]
     assert y2007["majority"] == {"crop_code": 24, "crop_name": "Winter Wheat"} and 0.6 < y2007["purity"] < 1
-    assert {m["value"]["missing_reason"] for m in hist["metrics"]} == {"NOT_COMPUTED"}
+    metrics = {m["key"]: m["value"]["value"] for m in hist["metrics"]}
+    assert metrics["distinct_crops"] == 2
+    assert metrics["max_monoculture_run"] == 1
+    assert metrics["rotation_shannon"] == 0.693
 
 
 def test_vegetation_indicators_resilience_evidence(client):
@@ -233,8 +242,9 @@ def test_vegetation_indicators_resilience_evidence(client):
     assert len({i["indicator_id"] for i in all_inds}) == len(all_inds)
 
     res = client.get(f"{API}/fields/{fid}/resilience").json()["data"]
-    assert res["status"] == "pending" and len(res["components"]) == 5
-    assert {c["band"] for c in res["components"]} == {"unknown"}
+    assert res["status"] == "computed" and len(res["components"]) == 5
+    assert res["composite"]["components_used"] == 4
+    assert res["composite"]["score"]["value"] is not None
 
     ev = client.get(f"{API}/fields/{fid}/evidence").json()["data"]
     assert {e["kind"] for e in ev} >= {"dataset", "method", "indicator"}

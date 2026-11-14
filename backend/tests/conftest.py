@@ -17,7 +17,7 @@ import rasterio
 from fastapi.testclient import TestClient
 from rasterio.transform import from_origin
 
-from app.analytics.resilience import PendingResilienceEngine
+from app.analytics.resilience import CalibratedResilienceEngine
 from app.config import Settings
 from app.main import create_app
 from app.processing.geometry import reproject
@@ -178,7 +178,7 @@ def settings(tmp_path) -> Settings:
 
 def make_container(settings: Settings, providers: Providers) -> Container:
     return Container(settings=settings, repos=Repositories.create(SqliteDocumentStore(":memory:")),
-                     providers=providers, kb=load_kb(None), resilience=PendingResilienceEngine(),
+                     providers=providers, kb=load_kb(None), resilience=CalibratedResilienceEngine(),
                      rotation=PendingRotationEngine(), executor=None)
 
 
