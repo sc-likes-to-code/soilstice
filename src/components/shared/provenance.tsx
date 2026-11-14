@@ -1,5 +1,5 @@
 "use client";
-import { Database, ExternalLink, FlaskConical } from "lucide-react";
+import { CheckCircle2, Clock, Database, ExternalLink, FlaskConical, HelpCircle, MapPin } from "lucide-react";
 import type { Confidence, FitBand, QualityFlag, QualityInfo, ScoreBand, SourceRef, SpatialSupport, TemporalSupport, Quantity } from "@/types/contracts";
 import { cn } from "@/lib/cn";
 import { BAND_STYLE, CONFIDENCE_LABEL, FIT_STYLE, SEVERITY_STYLE, SUPPORT_STYLE } from "@/lib/vocab";
@@ -34,7 +34,7 @@ export function SupportBadge({ spatial, className }: { spatial: SpatialSupport; 
         </span>
       }
     >
-      <Badge className={cn("border", s.bg, s.fg, s.border, className)}>
+      <Badge className={cn("border font-medium", s.bg, s.fg, s.border, className)}>
         <span className={cn("h-1.5 w-1.5 rounded-full", spatial.support_class === "F" ? "bg-forest-500" : spatial.support_class === "S" ? "bg-sky-500" : "bg-wheat-500")} />
         {label}
       </Badge>
@@ -42,10 +42,69 @@ export function SupportBadge({ spatial, className }: { spatial: SpatialSupport; 
   );
 }
 
+/** Field-supported badge (explicit green badge for field-resolved layers). */
+export function FieldSupportedBadge({ resolution = "30 m", className }: { resolution?: string; className?: string }) {
+  return (
+    <Tip content="Field-resolved spatial support: measurement or classification mapped directly to this field's boundary.">
+      <Badge className={cn("border border-forest-300 bg-forest-50 text-forest-800", className)}>
+        <MapPin className="h-3 w-3 text-forest-600" aria-hidden /> Field · {resolution}
+      </Badge>
+    </Tip>
+  );
+}
+
+/** Regional context badge (explicit badge for coarse-grid layers). */
+export function RegionalContextBadge({ resolution = "~55 km", className }: { resolution?: string; className?: string }) {
+  return (
+    <Tip content="Regional context: describes conditions in the surrounding macro-climate or regional grid cell, not an in-situ field measurement.">
+      <Badge className={cn("border border-wheat-300 bg-wheat-50 text-wheat-900", className)}>
+        <span className="h-1.5 w-1.5 rounded-full bg-wheat-600" /> Regional · {resolution}
+      </Badge>
+    </Tip>
+  );
+}
+
+/** Live provider data badge. */
+export function ProviderDataBadge({ provider, className }: { provider?: string; className?: string }) {
+  return (
+    <Badge className={cn("border border-emerald-300 bg-emerald-50 text-emerald-800 font-medium", className)} title="Verified live observation from upstream provider">
+      <CheckCircle2 className="h-3 w-3 text-emerald-600" aria-hidden /> {provider ? `${provider} live` : "Provider data"}
+    </Badge>
+  );
+}
+
+/** Synthetic demonstration badge. */
 export function SyntheticBadge({ className }: { className?: string }) {
   return (
-    <Badge className={cn("border border-clay-100 bg-clay-100/70 text-clay-600", className)} title="Synthetic demo data — not an observation">
-      <FlaskConical className="h-3 w-3" aria-hidden /> Synthetic
+    <Badge className={cn("border border-clay-200 bg-clay-100/70 text-clay-700 font-medium", className)} title="Synthetic demonstration data — not a field observation">
+      <FlaskConical className="h-3 w-3 text-clay-600" aria-hidden /> Synthetic demo
+    </Badge>
+  );
+}
+
+/** Partial coverage badge. */
+export function PartialBadge({ className }: { className?: string }) {
+  return (
+    <Badge className={cn("border border-wheat-300 bg-wheat-100 text-wheat-800 font-medium", className)} title="Partial coverage across requested years or extent">
+      <HelpCircle className="h-3 w-3 text-wheat-600" aria-hidden /> Partial
+    </Badge>
+  );
+}
+
+/** Missing data badge. */
+export function MissingBadge({ reason, className }: { reason?: string; className?: string }) {
+  return (
+    <Badge className={cn("border border-line bg-parchment/60 text-stone-500 font-medium", className)} title={reason ?? "Dataset currently missing or unavailable"}>
+      Missing
+    </Badge>
+  );
+}
+
+/** Pending ingestion badge. */
+export function PendingBadge({ className }: { className?: string }) {
+  return (
+    <Badge className={cn("border border-sky-300 bg-sky-50 text-sky-700 font-medium", className)} title="Dataset processing is scheduled or in progress">
+      <Clock className="h-3 w-3 text-sky-600" aria-hidden /> Pending
     </Badge>
   );
 }
@@ -59,13 +118,17 @@ export function SourceChip({ source, className }: { source: SourceRef; className
         <span className="block space-y-1">
           <span className="block font-semibold">{source.product}</span>
           <span className="block text-forest-200">Version {source.product_version}{source.doi ? ` · DOI ${source.doi}` : ""}</span>
-          {synthetic && <span className="block text-wheat-200">Synthetic demo value generated in Phase 1. Real ingestion arrives in Phase 3.</span>}
+          {synthetic ? (
+            <span className="block text-wheat-200">Synthetic demonstration data generated for prototype evaluation. Live observations are retrieved via USDA and NASA endpoints in API mode.</span>
+          ) : (
+            <span className="block text-emerald-300">Live observation retrieved from {source.product}.</span>
+          )}
           {source.retrieved_at && <span className="block text-forest-200">Retrieved {formatDate(source.retrieved_at, "long")}</span>}
         </span>
       }
     >
-      <Badge className={cn("border", synthetic ? "border-clay-100 bg-clay-100/50 text-clay-600" : "border-line bg-parchment/60 text-ink-soft", className)}>
-        {synthetic ? <FlaskConical className="h-3 w-3" aria-hidden /> : <Database className="h-3 w-3" aria-hidden />}
+      <Badge className={cn("border transition-colors", synthetic ? "border-clay-200 bg-clay-100/60 text-clay-700" : "border-line bg-parchment/60 text-ink-soft hover:border-line-strong", className)}>
+        {synthetic ? <FlaskConical className="h-3 w-3 text-clay-600" aria-hidden /> : <Database className="h-3 w-3 text-forest-600" aria-hidden />}
         {synthetic ? source.product.replace("Synthetic stand-in for ", "Synthetic · ") : `${source.product} ${source.product_version}`}
       </Badge>
     </Tip>
@@ -131,7 +194,7 @@ export function ScoreBandPill({ band, confidence, className }: { band: ScoreBand
   const s = BAND_STYLE[band];
   return (
     <span className={cn("inline-flex items-center gap-1.5", className)}>
-      <Badge className={cn(s.bg, s.fg)}>
+      <Badge className={cn(s.bg, s.fg, "font-semibold")}>
         <Dot className={s.dot} /> {s.label}
       </Badge>
       {confidence && <span className="text-[11px] font-medium text-stone-500">{CONFIDENCE_LABEL[confidence]}</span>}
@@ -143,7 +206,7 @@ export function FitBandPill({ band, confidence, className }: { band: FitBand; co
   const s = FIT_STYLE[band];
   return (
     <span className={cn("inline-flex items-center gap-1.5", className)}>
-      <Badge className={cn(s.bg, s.fg)}>
+      <Badge className={cn(s.bg, s.fg, "font-semibold")}>
         <Dot className={s.dot} /> {s.label}
       </Badge>
       {confidence && <span className="text-[11px] font-medium text-stone-500">{CONFIDENCE_LABEL[confidence]}</span>}
