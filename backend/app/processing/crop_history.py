@@ -11,6 +11,7 @@
 
 from __future__ import annotations
 
+import math
 from collections import Counter
 from uuid import UUID
 
@@ -42,11 +43,37 @@ from .geometry import inward_buffer_5070, reproject
 INWARD_BUFFER_M = 15.0
 LOW_PURITY = 0.6
 
-METHOD_PENDING_ROTATION = MethodRef(
-    method_id="pending_phase4", name="Not computed: rotation metrics pending", version="0",
-    description="distinct_crops, max_monoculture_run and rotation_shannon require Phase 4 decisions (which CDL "
-                "classes count as crops; handling of low-purity and double-crop years). No value until then.",
+# Non-agricultural land cover classes (USGS NLCD / CDL)
+NON_AG_LANDCOVER_CODES = {
+    0, 63, 64, 65, 81, 82, 83, 87, 88, 111, 112, 121, 122, 123, 124, 131, 141, 142, 143, 152, 190, 195,
+}
+
+# Agricultural land-use or non-crop cover classes (excluded from crop species diversity)
+AG_NON_CROP_CODES = {
+    61,   # Fallow/Idle Cropland (management state, not a crop species)
+    176,  # Grassland/Pasture (perennial forage/cover, not a cultivated annual crop)
+}
+
+# Combined set of classes excluded from crop species rotation metrics
+NON_CROP_SPECIES_CODES = NON_AG_LANDCOVER_CODES | AG_NON_CROP_CODES
+NON_AG_CODES = NON_CROP_SPECIES_CODES  # backwards-compatibility alias
+
+METHOD_DISTINCT_CROPS = MethodRef(
+    method_id="cdl_distinct_crops_count", name="Distinct agricultural crop species count", version="1",
+    description="Count of distinct agricultural crop species in the CDL 20-year history, excluding non-agricultural "
+                "cover classes and non-crop agricultural land use (fallow, idle, pasture).",
 )
+METHOD_MAX_MONOCULTURE = MethodRef(
+    method_id="cdl_max_monoculture_run", name="Longest same-crop monoculture run", version="1",
+    description="Maximum number of consecutive calendar years with the identical cultivated crop species in the CDL "
+                "sequence. Intervening fallow, pasture, non-crop cover, or missing years interrupt the run.",
+)
+METHOD_ROTATION_SHANNON = MethodRef(
+    method_id="cdl_rotation_shannon_index", name="Shannon rotation diversity index", version="1",
+    description="Shannon diversity index H' = -sum(p_i * ln(p_i)) calculated over the sequence of cultivated crop "
+                "species years.",
+)
+METHOD_PENDING_ROTATION = METHOD_ROTATION_SHANNON
 
 
 def zonal_histogram(raster_path, geom_5070: BaseGeometry) -> tuple[Counter, int, int, float]:
@@ -139,20 +166,93 @@ def build_crop_history(
     spatial = SPATIAL["usda_nass_cdl"]
     if not buffered:
         spatial = spatial.model_copy(update={"extraction_method": "zonal_polygon"})
-    metrics = [
-        EnvironmentalIndicator(
-            indicator_id=f"{field_id}:{key}:{first_year}-01-01", key=key, label=label, category="rotation",
-            value=Quantity(value=None, unit=unit, missing_reason="NOT_COMPUTED"), nature="derived", spatial=spatial,
-            temporal=TemporalSupport(resolution="P1Y", period_start=f"{first_year}-01-01",
-                                     period_end=f"{last_year}-12-31", aggregation="none",
-                                     time_standard="not_applicable"),
-            quality=QualityInfo(status="missing", missing_reason="NOT_COMPUTED"), sources=[],
-            method=METHOD_PENDING_ROTATION, input_ids=[],
-        )
-        for key, label, unit in [("distinct_crops", "Distinct crops", "count"),
-                                 ("max_monoculture_run", "Longest same-crop run", "year"),
-                                 ("rotation_shannon", "Rotation diversity (Shannon)", "unitless")]
+
+    valid_years = [y for y in years if y.missing_reason is None and y.majority.crop_code is not None]
+    ag_crop_years = [y for y in valid_years if y.majority.crop_code not in NON_CROP_SPECIES_CODES]
+    ag_crops = [y.majority.crop_code for y in ag_crop_years]
+
+    non_crop_years = [y.year for y in valid_years if y.majority.crop_code in AG_NON_CROP_CODES]
+    if non_crop_years:
+        flags.append(QualityFlag(
+            code="NON_CROP_LAND_USE_OBSERVED", severity="info",
+            message=f"{len(non_crop_years)} year(s) ({', '.join(str(y) for y in non_crop_years)}) classified as "
+                    "agricultural non-crop land use (fallow/pasture); excluded from crop species diversity.",
+        ))
+
+    distinct_val: int | None = None
+    max_run_val: int | None = None
+    shannon_val: float | None = None
+
+    if ag_crops:
+        distinct_val = len(set(ag_crops))
+
+        # Monoculture run: consecutive calendar years with identical cultivated crop species.
+        # Intervening non-crop, pasture, fallow, or missing years interrupt the run.
+        max_run = 0
+        cur_run = 0
+        prev_crop = None
+        prev_year = None
+        for y in years:
+            if y.missing_reason is not None:
+                cur_run = 0
+                prev_crop = None
+                prev_year = None
+                continue
+            c = y.majority.crop_code
+            if c is None or c in NON_CROP_SPECIES_CODES:
+                cur_run = 0
+                prev_crop = None
+                prev_year = y.year
+                continue
+            if c == prev_crop and prev_year is not None and y.year == prev_year + 1:
+                cur_run += 1
+            else:
+                cur_run = 1
+                prev_crop = c
+            prev_year = y.year
+            if cur_run > max_run:
+                max_run = cur_run
+        max_run_val = max_run
+
+        counts = Counter(ag_crops)
+        total_ag = len(ag_crops)
+        shannon = -sum((cnt / total_ag) * math.log(cnt / total_ag) for cnt in counts.values())
+        shannon_val = round(shannon, 3)
+
+    metric_specs = [
+        ("distinct_crops", "Distinct crops", "count", distinct_val, METHOD_DISTINCT_CROPS),
+        ("max_monoculture_run", "Longest same-crop run", "year", max_run_val, METHOD_MAX_MONOCULTURE),
+        ("rotation_shannon", "Rotation diversity (Shannon)", "unitless", shannon_val, METHOD_ROTATION_SHANNON),
     ]
+
+    summary_src = source_ref(
+        "usda_nass_cdl",
+        product="CDL time series",
+        version=f"{first_year}–{last_year}",
+    )
+
+    metrics = []
+    for key, label, unit, val, method in metric_specs:
+        if val is not None:
+            q = Quantity(value=float(val) if unit == "unitless" else val, unit=unit)
+            quality_info = QualityInfo(status="valid" if n_ok == len(years) else "partial",
+                                       completeness=round(completeness, 4))
+            srcs = [summary_src]
+        else:
+            reason = "INSUFFICIENT_COVERAGE" if n_ok > 0 else "UPSTREAM_ERROR"
+            q = Quantity(value=None, unit=unit, missing_reason=reason)
+            quality_info = QualityInfo(status="missing", completeness=round(completeness, 4), missing_reason=reason)
+            srcs = []
+        metrics.append(
+            EnvironmentalIndicator(
+                indicator_id=f"{field_id}:{key}:{first_year}-01-01", key=key, label=label, category="rotation",
+                value=q, nature="derived", spatial=spatial,
+                temporal=TemporalSupport(resolution="P1Y", period_start=f"{first_year}-01-01",
+                                         period_end=f"{last_year}-12-31", aggregation="none",
+                                         time_standard="not_applicable"),
+                quality=quality_info, sources=srcs, method=method, input_ids=[],
+            )
+        )
     return CropHistory(
         field_id=field_id, period=YearPeriod(start_year=first_year, end_year=last_year), years=years, metrics=metrics,
         spatial=spatial,

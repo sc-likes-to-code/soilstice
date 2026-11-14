@@ -95,15 +95,15 @@ function Climate({ c }: { c: ClimateProfile }) {
         )}
         {gdd && (
           <Card>
-            <CardHeader eyebrow="Heat accumulation" title="Cumulative growing degree days" description="Placeholder base 10 °C / cap 30 °C. Per-crop parameters come from the cited crop knowledge base (D5.6)." actions={<SupportBadge spatial={gdd.spatial} />} />
+            <CardHeader eyebrow="Heat accumulation" title="Cumulative growing degree days" description="Standard warm-season baseline (base 10 °C / cap 30 °C). Per-crop parameters come from the cited crop knowledge base." actions={<SupportBadge spatial={gdd.spatial} />} />
             <CardBody><TimeSeriesChart specs={[{ series: gdd, kind: "area", color: "#c99a3e", name: "Cumulative GDD" }]} /></CardBody>
           </Card>
         )}
         {et0 && precip && (
           <Card>
-            <CardHeader eyebrow="Water demand" title="Reference ET₀ vs precipitation" actions={<SupportBadge spatial={et0.spatial} />} />
+            <CardHeader eyebrow="Climatic water balance" title="Reference ET₀ vs precipitation" actions={<SupportBadge spatial={et0.spatial} />} />
             <CardBody>
-              <TimeSeriesChart specs={[{ series: et0, kind: "line", color: "#366645", name: "ET₀" }, { series: precip, kind: "bar", color: "#a3c19f", name: "Precipitation" }]} />
+              <TimeSeriesChart specs={[{ series: et0, kind: "line", color: "#366645", name: "Reference ET₀" }, { series: precip, kind: "bar", color: "#a3c19f", name: "Precipitation" }]} />
               <div className="mt-3"><ChartLegend items={[{ label: "Reference ET₀", color: "#366645" }, { label: "Precipitation", color: "#a3c19f" }]} /></div>
             </CardBody>
           </Card>

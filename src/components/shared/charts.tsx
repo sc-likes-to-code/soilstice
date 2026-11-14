@@ -52,14 +52,27 @@ export function TimeSeriesChart({
   const unit = specs[0] ? unitLabel(specs[0].series.unit, units) : "";
   const tickFmt = (v: string | number) => (x === "month" ? monthLabel(String(v)) : formatDate(String(v)));
 
+  const monthTicks = useMemo(() => {
+    if (x !== "month" || rows.length === 0) return undefined;
+    return rows
+      .filter((r, i) => i === 0 || r.t.slice(5, 7) !== rows[i - 1].t.slice(5, 7))
+      .map((r) => r.t);
+  }, [rows, x]);
+
   return (
     <div style={{ height }} className="w-full">
       <ResponsiveContainer width="100%" height="100%" minWidth={0}>
         <ComposedChart data={rows} margin={{ top: markers?.length ? 22 : 8, right: 8, bottom: 0, left: -8 }}>
           <CartesianGrid stroke="#e2d9c6" strokeDasharray="2 4" vertical={false} />
           <XAxis
-            dataKey="t" tickFormatter={tickFmt} tick={{ fontSize: 11, fill: "#857d6b" }} axisLine={{ stroke: "#cfc3aa" }} tickLine={false}
-            minTickGap={x === "date" ? 28 : 4} interval={x === "month" ? 0 : "preserveStartEnd"}
+            dataKey="t"
+            ticks={monthTicks}
+            tickFormatter={tickFmt}
+            tick={{ fontSize: 11, fill: "#857d6b" }}
+            axisLine={{ stroke: "#cfc3aa" }}
+            tickLine={false}
+            minTickGap={x === "date" ? 28 : 4}
+            interval={x === "month" ? 0 : "preserveStartEnd"}
           />
           <YAxis
             tick={{ fontSize: 11, fill: "#857d6b" }} axisLine={false} tickLine={false} width={48} domain={yDomain ?? ["auto", "auto"]}

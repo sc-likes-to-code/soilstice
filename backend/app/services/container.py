@@ -5,7 +5,7 @@ from __future__ import annotations
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 
-from app.analytics.resilience import PendingResilienceEngine, ResilienceEngine
+from app.analytics.resilience import CalibratedResilienceEngine, ResilienceEngine
 from app.config import Settings
 from app.providers.cdl import CdlClient
 from app.providers.hls import HlsClient
@@ -76,7 +76,7 @@ def build_container(settings: Settings, *, providers: Providers | None = None, t
         repos=repos,
         providers=providers or build_providers(settings, repos, transport),
         kb=load_kb(settings.crop_kb_dir),
-        resilience=PendingResilienceEngine(),
+        resilience=CalibratedResilienceEngine(),
         rotation=PendingRotationEngine(),
         executor=ThreadPoolExecutor(max_workers=settings.job_workers, thread_name_prefix="soilstice-job")
         if settings.job_execution == "thread" else None,

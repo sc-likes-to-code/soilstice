@@ -4,11 +4,31 @@ from __future__ import annotations
 
 import uuid
 
-from app.analytics.resilience import RULE_PENDING
+from app.analytics.resilience import (
+    RULE_CLIMATE_EXPOSURE,
+    RULE_PENDING,
+    RULE_ROTATION_DIVERSITY,
+    RULE_SOIL_WATER,
+    RULE_TERRAIN_EROSION,
+    RULE_VEGETATION_STABILITY,
+)
 from app.catalog import DATASETS, INTEGRATED
 from app.contracts import DatasetDescriptor, EvidenceItem
-from app.processing.climate import METHOD_MEAN, METHOD_SUM
-from app.processing.crop_history import METHOD_PENDING_ROTATION
+from app.processing.climate import (
+    METHOD_FAO56_ET0,
+    METHOD_FROST_FREE,
+    METHOD_HEAT_STRESS,
+    METHOD_MEAN,
+    METHOD_MODIFIED_GDD,
+    METHOD_PRECIP_ANOMALY,
+    METHOD_SUM,
+    METHOD_WATER_BALANCE,
+)
+from app.processing.crop_history import (
+    METHOD_DISTINCT_CROPS,
+    METHOD_MAX_MONOCULTURE,
+    METHOD_ROTATION_SHANNON,
+)
 from app.processing.soil import METHOD as SOIL_METHOD
 from app.processing.terrain import METHOD as TERRAIN_METHOD
 
@@ -16,7 +36,27 @@ from .container import Container
 from .environment import EnvironmentService
 
 NS = uuid.UUID("3e9d8c7b-6a5f-4e3d-2c1b-0a9f8e7d6c5b")
-METHODS = [SOIL_METHOD, TERRAIN_METHOD, METHOD_SUM, METHOD_MEAN, METHOD_PENDING_ROTATION, RULE_PENDING]
+METHODS = [
+    SOIL_METHOD,
+    TERRAIN_METHOD,
+    METHOD_SUM,
+    METHOD_MEAN,
+    METHOD_MODIFIED_GDD,
+    METHOD_PRECIP_ANOMALY,
+    METHOD_HEAT_STRESS,
+    METHOD_FROST_FREE,
+    METHOD_FAO56_ET0,
+    METHOD_WATER_BALANCE,
+    METHOD_DISTINCT_CROPS,
+    METHOD_MAX_MONOCULTURE,
+    METHOD_ROTATION_SHANNON,
+    RULE_SOIL_WATER,
+    RULE_TERRAIN_EROSION,
+    RULE_CLIMATE_EXPOSURE,
+    RULE_ROTATION_DIVERSITY,
+    RULE_VEGETATION_STABILITY,
+    RULE_PENDING,
+]
 
 
 class EvidenceService:
