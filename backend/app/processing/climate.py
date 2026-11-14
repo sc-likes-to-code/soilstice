@@ -109,6 +109,8 @@ def _missing(unit: str, reason: str) -> Quantity:
 def build_climate_profile(
     field_id: UUID, year: int, crop_code: int | None, daily: PowerDaily | None, *,
     failure_reason: str | None = None, failure_message: str | None = None,
+    smap_rootzone: dict[date, float | None] | None = None,
+    smap_surface: dict[date, float | None] | None = None,
 ) -> ClimateProfile:
     season = season_for_year(year, crop_code)
     days = _days(season.start, season.end)
@@ -120,8 +122,9 @@ def build_climate_profile(
     flags.append(QualityFlag(code="REGIONAL_CONTEXT", severity="info",
                              message="NASA POWER values describe a ~50 km (meteorology) / ~110 km (solar) grid cell "
                                      "queried at the field centroid. They are regional context, not field measurements."))
-    flags.append(QualityFlag(code="SMAP_NOT_INTEGRATED", severity="info",
-                             message="SMAP L4 soil moisture is not yet integrated; soil-moisture series are absent."))
+    flags.append(QualityFlag(code="SMAP_REGIONAL_CONTEXT", severity="info",
+                             message="SMAP L4 soil moisture is an assimilated ~9 km EASE-Grid estimate. "
+                                     "Regional context, not a field measurement."))
 
     series: list[TimeSeries] = []
     per_param_values: dict[str, list[float | None]] = {}
@@ -182,6 +185,64 @@ def build_climate_profile(
                                          aggregation="none", time_standard="LST"),
                 sources=[src], points=points, reference=None,
             ))
+
+    # SMAP L4 Root-zone soil moisture series (SPL4SMGP v008) when retrieved
+    if smap_rootzone is not None:
+        smap_src = SourceRef(
+            dataset_id="nasa_smap_spl4smgp",
+            product="SPL4SMGP",
+            product_version="008",
+            doi="10.5067/0P5494498G02",
+            documentation_url="https://nsidc.org/data/spl4smgp",
+        )
+        smap_spatial = SpatialSupport(
+            support_class="R",
+            native_resolution_m=9000.0,
+            extraction_method="containing_cell",
+            crs="EPSG:6933",
+        )
+        smap_points: list[TimeSeriesPoint] = []
+        smap_start = date(2015, 3, 31)
+        for d in days:
+            if d in smap_rootzone:
+                v = smap_rootzone[d]
+                if v is not None:
+                    smap_points.append(TimeSeriesPoint(t=d.isoformat(), value=v, quality_status="valid"))
+                else:
+                    smap_points.append(
+                        TimeSeriesPoint(t=d.isoformat(), value=None, quality_status="missing", missing_reason="FILL_VALUE")
+                    )
+            elif d < smap_start:
+                smap_points.append(
+                    TimeSeriesPoint(
+                        t=d.isoformat(), value=None, quality_status="missing", missing_reason="OUT_OF_TEMPORAL_RANGE"
+                    )
+                )
+            else:
+                smap_points.append(
+                    TimeSeriesPoint(
+                        t=d.isoformat(), value=None, quality_status="missing", missing_reason="NO_DATA_SOURCE"
+                    )
+                )
+
+        series.append(TimeSeries(
+            series_id=f"{field_id}:smap:sm_rootzone:{year}",
+            variable="sm_rootzone",
+            label="Root-zone soil moisture (0–100 cm)",
+            unit="m3_m-3",
+            nature="model",
+            spatial=smap_spatial,
+            temporal=TemporalSupport(
+                resolution="P1D",
+                period_start=season.start,
+                period_end=season.end,
+                aggregation="none",
+                time_standard="UTC",
+            ),
+            sources=[smap_src],
+            points=smap_points,
+            reference=None,
+        ))
 
     indicators: list[EnvironmentalIndicator] = []
     for key, label, category, unit, kind in CLIMATE_INDICATORS:

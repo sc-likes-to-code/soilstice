@@ -14,7 +14,9 @@ from app.contracts import (
     VegetationProfile,
 )
 from app.errors import ValidationFailed
+from app.processing.geometry import to_shapely
 from app.processing.placeholders import missing_soil, missing_terrain, missing_vegetation
+from app.processing.vegetation import build_vegetation_profile_from_stac
 
 from .container import Container
 from .fields import FieldService
@@ -58,7 +60,28 @@ class EnvironmentService:
 
     def vegetation(self, field_id, year: int, index: str = "NDVI") -> VegetationProfile:
         f = self.fields.get_field(field_id)
-        return missing_vegetation(f.field_id, year, index)
+        if year < 1980 or year > date.today().year + 1:
+            raise ValidationFailed("year is out of range.", details={"year": year})
+        key = f"{f.field_id}:{year}:{index}"
+        cached = self.repos.vegetation.get(key)
+        if cached is not None:
+            return cached
+
+        if self.ctx.providers.hls is not None:
+            geom = to_shapely(f.geometry)
+            bounds = geom.bounds
+            try:
+                scenes = self.ctx.providers.hls.search_scenes(
+                    bounds, f"{year}-01-01", f"{year}-12-31", limit=100
+                )
+                profile = build_vegetation_profile_from_stac(f.field_id, year, index, scenes)
+            except Exception:
+                profile = missing_vegetation(f.field_id, year, index)
+        else:
+            profile = missing_vegetation(f.field_id, year, index)
+
+        self.repos.vegetation.put(key, profile, parent=f.field_id)
+        return profile
 
     def indicators(self, field_id, category: str | None = None, season_year: int | None = None
                    ) -> list[EnvironmentalIndicator]:

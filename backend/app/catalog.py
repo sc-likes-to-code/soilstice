@@ -118,6 +118,16 @@ SPATIAL: dict[str, SpatialSupport] = {
                                     extraction_method="zonal_polygon_inward_buffer", crs="EPSG:5070"),
     "nasa_srtm_gl1": SpatialSupport(support_class="F", native_resolution_m=30.0, extraction_method="zonal_polygon",
                                     crs="EPSG:4326"),
+    "nasa_hls_vi": SpatialSupport(support_class="F", native_resolution_m=30.0,
+                                  extraction_method="zonal_polygon_inward_buffer", crs="EPSG:32614"),
+    "nasa_hls": SpatialSupport(support_class="F", native_resolution_m=30.0,
+                               extraction_method="zonal_polygon_inward_buffer", crs="EPSG:32614"),
+    "nasa_smap_spl4smgp": SpatialSupport(support_class="R", native_resolution_m=9000.0,
+                                         extraction_method="containing_cell", crs="EPSG:6933"),
+    "nasa_smap_spl3smp_e": SpatialSupport(support_class="R", native_resolution_m=9000.0,
+                                          extraction_method="containing_cell", crs="EPSG:6933"),
+    "usda_nass_csb": SpatialSupport(support_class="F", native_resolution_m=None,
+                                    extraction_method="vector_intersection", crs="EPSG:5070"),
 }
 
 

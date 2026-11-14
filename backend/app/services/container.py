@@ -8,8 +8,10 @@ from dataclasses import dataclass, field
 from app.analytics.resilience import PendingResilienceEngine, ResilienceEngine
 from app.config import Settings
 from app.providers.cdl import CdlClient
+from app.providers.hls import HlsClient
 from app.providers.http import EarthdataAuth, HttpAcquirer
 from app.providers.power import PowerClient
+from app.providers.smap import SmapClient
 from app.providers.srtm import SrtmClient
 from app.providers.ssurgo import SsurgoClient
 from app.repositories import Repositories, SqliteDocumentStore
@@ -23,6 +25,8 @@ class Providers:
     ssurgo: SsurgoClient
     cdl: CdlClient
     srtm: SrtmClient
+    hls: HlsClient | None = None
+    smap: SmapClient | None = None
 
 
 @dataclass
@@ -60,6 +64,8 @@ def build_providers(settings: Settings, repos: Repositories, transport=None) -> 
         cdl=CdlClient(http, download_timeout_s=settings.http_download_timeout_s),
         srtm=SrtmClient(http, settings.cache_dir / "derived", auth_factory,
                         download_timeout_s=settings.http_download_timeout_s),
+        hls=HlsClient(http, settings.cache_dir / "derived", auth_factory, timeout_s=settings.http_timeout_s),
+        smap=SmapClient(http, auth_factory, timeout_s=settings.http_timeout_s),
     )
 
 
