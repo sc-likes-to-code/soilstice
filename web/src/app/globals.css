@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+/* ───────────────────────── SOILSTICE design tokens ─────────────────────────
+   Forest greens, warm neutrals, restrained earth tones. Light theme only (Phase 1). */
+@theme {
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --color-forest-950: #0e1d15;
+  --color-forest-900: #142a1d;
+  --color-forest-800: #1d3a29;
+  --color-forest-700: #284e36;
+  --color-forest-600: #366645;
+  --color-forest-500: #4b8158;
+  --color-forest-400: #74a07a;
+  --color-forest-300: #a3c19f;
+  --color-forest-200: #cbdcc5;
+  --color-forest-100: #e3ecdd;
+  --color-forest-50: #f1f5ed;
+
+  --color-cream: #f4efe4;
+  --color-paper: #fbf8f2;
+  --color-parchment: #ece4d3;
+  --color-line: #e2d9c6;
+  --color-line-strong: #cfc3aa;
+  --color-stone-400: #a59c88;
+  --color-stone-500: #857d6b;
+  --color-stone-600: #6a6354;
+  --color-ink: #1b221d;
+  --color-ink-soft: #454b44;
+
+  --color-wheat-600: #a87a24;
+  --color-wheat-500: #c99a3e;
+  --color-wheat-200: #ecd9ab;
+  --color-wheat-100: #f6ecd4;
+  --color-clay-600: #9b4f2c;
+  --color-clay-500: #b4623a;
+  --color-clay-100: #f4e1d5;
+  --color-soil-600: #5c4234;
+  --color-soil-500: #6f5141;
+  --color-sky-600: #3e6976;
+  --color-sky-500: #4f7c8a;
+  --color-sky-100: #dde9ec;
+
+  --radius-card: 14px;
+  --shadow-card: 0 1px 0 rgba(27, 34, 29, 0.04), 0 1px 2px rgba(27, 34, 29, 0.05), 0 8px 24px -12px rgba(27, 34, 29, 0.12);
+  --shadow-lift: 0 2px 0 rgba(27, 34, 29, 0.04), 0 12px 32px -14px rgba(27, 34, 29, 0.28);
+
+  --animate-fade-up: fade-up 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes shimmer {
+    from { background-position: -400px 0; }
+    to { background-position: 400px 0; }
+  }
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  background: var(--color-cream);
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grid items must be allowed to shrink below their content's min width (prevents mobile overflow). */
+.grid > * {
+  min-width: 0;
+}
+
+/* Subtle paper grain on the app canvas */
+.canvas-grain {
+  background-image:
+    radial-gradient(rgba(111, 81, 65, 0.035) 1px, transparent 1px),
+    radial-gradient(rgba(54, 102, 69, 0.03) 1px, transparent 1px);
+  background-size: 22px 22px, 31px 31px;
+  background-position: 0 0, 11px 7px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.015em;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--color-parchment) 0%, #f3ecdf 40%, var(--color-parchment) 80%);
+  background-size: 800px 100%;
+  animation: var(--animate-shimmer);
+  border-radius: 8px;
+}
+
+.hatch {
+  background-image: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.55) 0 3px, transparent 3px 7px);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-forest-500);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* MapLibre controls, themed */
+.maplibregl-ctrl-group {
+  border-radius: 10px !important;
+  box-shadow: var(--shadow-card) !important;
+  border: 1px solid var(--color-line);
+}
+.maplibregl-ctrl-attrib {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  background: rgba(251, 248, 242, 0.85) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+@media print {
+  @page {
+    margin: 14mm 12mm;
+  }
+  html, body {
+    background: #fff !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-break {
+    break-before: page;
+  }
+  .print-avoid {
+    break-inside: avoid;
+  }
+  .print-plain {
+    box-shadow: none !important;
+    background: #fff !important;
+  }
+}

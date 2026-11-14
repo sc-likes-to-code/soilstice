@@ -1,0 +1,646 @@
+/**
+ * Synthetic profile generators. They produce contract-valid, visibly synthetic payloads.
+ * They are NOT the Phase 4 analytical engine or the Phase 5 rotation engine: any arithmetic here
+ * exists only so that synthetic charts are internally consistent. All outputs carry dataset_id "synthetic".
+ */
+import type {
+  ClimateProfile, CropCode, CropHistory, CropYear, DataCoverage, DatasetCoverage, DatasetId, EnvironmentalIndicator,
+  EvidenceItem, FactorAssessment, FitBand, IndicatorCategory, IndicatorKey, MissingReason, QualityFlag, QualityInfo,
+  Quantity, RecommendationCandidate, ResilienceComponent, ResilienceComponentKey, ResilienceProfile,
+  RotationRecommendation, ScenarioEvaluation, ScenarioYear, ScoreBand, SoilLayer, SoilProfile, SpatialSupport,
+  TemporalSupport, TerrainProfile, TimeSeries, TimeSeriesPoint, Unit, VegetationIndex, VegetationProfile,
+  VegetationScene, Confidence,
+} from "@/types/contracts";
+import { clamp, createRng, hashString, round } from "./rng";
+import {
+  CROPS, DEMO_AS_OF, ENGINE_VERSION, KB_VERSION, LATEST_CROP_YEAR, PENDING_KB_REQUIREMENT, RESILIENCE_MODEL,
+  cropName, descriptor, method, missing, q, spatialFor, synthSource, temporal,
+} from "./catalog";
+import type { MockFieldRecord } from "./world";
+
+const SYNTH_FLAG: QualityFlag = { code: "SYNTHETIC", severity: "info", message: "Synthetic demo value — not an observation." };
+
+function quality(status: QualityInfo["status"], completeness: number | null, reason: MissingReason | null = null, extra: QualityFlag[] = []): QualityInfo {
+  return { status, flags: [SYNTH_FLAG, ...extra], completeness, missing_reason: reason };
+}
+
+function indicator(
+  fieldId: string, key: IndicatorKey, label: string, category: IndicatorCategory, value: Quantity,
+  standsFor: DatasetId, spatial: SpatialSupport, temp: TemporalSupport, opts?: { reference?: Quantity | null; nature?: EnvironmentalIndicator["nature"]; methodName?: string; flags?: QualityFlag[] },
+): EnvironmentalIndicator {
+  const isMissing = value.value === null;
+  return {
+    indicator_id: `${fieldId}:${key}:${temp.period_start ?? "static"}`,
+    key, label, category, value,
+    nature: opts?.nature ?? "derived",
+    spatial, temporal: temp,
+    quality: isMissing ? quality("missing", 0, value.missing_reason, opts?.flags) : quality("valid", 1, null, opts?.flags),
+    sources: [synthSource(standsFor)],
+    method: method(`synthetic_${key}`, opts?.methodName ?? `Synthetic ${label.toLowerCase()}`, "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4."),
+    input_ids: [],
+    reference_value: opts?.reference ?? null,
+  };
+}
+
+// ───────────────────────── Climate ─────────────────────────
+const PRECIP_NORMAL: Record<string, number[]> = {
+  ks_reno: [20, 25, 55, 70, 110, 115, 90, 85, 70, 55, 35, 25],
+  ks_finney: [10, 12, 30, 40, 70, 80, 65, 60, 40, 30, 15, 12],
+};
+const TMAX = [6, 9, 15, 20, 25, 31, 34, 33, 28, 21, 13, 7];
+const TMIN = [-7, -5, 0, 5, 11, 17, 20, 19, 14, 7, 0, -5];
+const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+function monthStart(year: number, m: number) {
+  return `${year}-${String(m + 1).padStart(2, "0")}-01`;
+}
+function pt(t: string, v: number | null, reason: MissingReason | null = null): TimeSeriesPoint {
+  return { t, value: v, quality_status: v === null ? "missing" : "valid", missing_reason: v === null ? reason ?? "UPSTREAM_ERROR" : null };
+}
+
+export function climateProfile(rec: MockFieldRecord, year: number): ClimateProfile {
+  const { field, traits } = rec;
+  const fid = field.field_id;
+  const rng = createRng(`${traits.aoi}:climate:${year}`);
+  const frng = createRng(`${fid}:climate:${year}`);
+  const start = `${year}-01-01`;
+  const end = `${year}-12-31`;
+  const power = spatialFor("nasa_power_daily_ag");
+  const smap = spatialFor("nasa_smap_spl4smgp", { field_fraction_of_cell: round((field.area.value ?? 65) / 8100, 4) });
+  const normals = PRECIP_NORMAL[traits.aoi];
+  const yearFactor = rng.range(0.7, 1.3);
+  const finney = traits.aoi === "ks_finney";
+  const failed = traits.variant === "failed";
+
+  const precip: number[] = normals.map((n) => round(Math.max(0, n * yearFactor * rng.range(0.4, 1.6) * (1 + traits.climateBias)), 1));
+  const tmax = TMAX.map((t) => round(t + rng.normal(0.6, 1.4) + (finney ? 0.5 : 0), 1));
+  const tmin = TMIN.map((t) => round(t + rng.normal(0.3, 1.2) - (finney ? 2 : 0), 1));
+  // Placeholder GDD (base 10 °C, cap 30 °C) for chart consistency only — real per-crop GDD is Phase 4 (D5.6).
+  const gddMonthly = tmax.map((hi, i) => Math.max(0, (Math.min(hi, 30) + Math.max(tmin[i], 10)) / 2 - 10) * DAYS[i]);
+  const et0 = TMAX.map((t, i) => round(Math.max(15, (t + 5) * DAYS[i] * (finney ? 0.17 : 0.15) * rng.range(0.9, 1.1)), 1));
+
+  const monthly = (label: string, variable: string, unit: Unit, values: (number | null)[], standsFor: DatasetId, agg: TemporalSupport["aggregation"], ref?: number[]): TimeSeries => ({
+    series_id: `${fid}:${variable}:${year}`,
+    variable, label, unit, nature: "model",
+    spatial: power,
+    temporal: temporal("P1M", start, end, agg, "LST"),
+    sources: [synthSource(standsFor)],
+    points: values.map((v, i) => pt(monthStart(year, i), failed ? null : v, failed ? "UPSTREAM_ERROR" : null)),
+    reference: ref ? { label: "Synthetic 1991–2020 normal", period_start: "1991-01-01", period_end: "2020-12-31", points: ref.map((v, i) => pt(monthStart(year, i), v)) } : null,
+  });
+
+  let cum = 0;
+  const gddCum = gddMonthly.map((g) => round((cum += g), 0));
+
+  // SMAP L4 root-zone daily (regional context). Before 2015-03-31: out of temporal range.
+  const smPoints: TimeSeriesPoint[] = [];
+  let sm = finney ? 0.17 : 0.24;
+  const d0 = Date.UTC(year, 0, 1);
+  for (let i = 0; i < 365; i++) {
+    const t = new Date(d0 + i * 86400000).toISOString().slice(0, 10);
+    if (year < 2015 || (year === 2015 && i < 89)) { smPoints.push(pt(t, null, "OUT_OF_TEMPORAL_RANGE")); continue; }
+    const m = new Date(d0 + i * 86400000).getUTCMonth();
+    const rainChance = (precip[m] / DAYS[m]) / 9;
+    sm = sm * 0.985 + (frng.chance(rainChance) ? frng.range(0.01, 0.035) : 0) + (finney ? 0.0022 : 0.0033);
+    sm = clamp(sm, finney ? 0.08 : 0.12, finney ? 0.3 : 0.38);
+    smPoints.push(failed || frng.chance(0.03) ? pt(t, null, "UPSTREAM_ERROR") : pt(t, round(sm, 3)));
+  }
+  const smValid = smPoints.filter((p) => p.value !== null).map((p) => p.value as number);
+  const smSeries: TimeSeries = {
+    series_id: `${fid}:sm_rootzone:${year}`, variable: "sm_rootzone", label: "Root-zone soil moisture (0–100 cm)", unit: "m3_m-3",
+    nature: "model", spatial: smap, temporal: temporal("P1D", start, end, "mean", "UTC"), sources: [synthSource("nasa_smap_spl4smgp")],
+    points: smPoints, reference: null,
+  };
+
+  const total = precip.reduce((a, b) => a + b, 0);
+  const normalTotal = normals.reduce((a, b) => a + b, 0);
+  const etTotal = et0.reduce((a, b) => a + b, 0);
+  const season = temporal("season", start, end, "sum", "LST");
+  const seasonMean = temporal("season", start, end, "mean", "LST");
+  const smReason: MissingReason = year < 2015 ? "OUT_OF_TEMPORAL_RANGE" : "UPSTREAM_ERROR";
+  const val = (v: number, unit: Unit): Quantity => (failed ? missing(unit, "UPSTREAM_ERROR") : q(v, unit));
+
+  const indicators: EnvironmentalIndicator[] = [
+    indicator(fid, "precip_total_season", "Precipitation total", "climate", val(round(total, 0), "mm"), "nasa_power_daily_ag", power, season, { reference: q(normalTotal, "mm"), nature: "model" }),
+    indicator(fid, "precip_anomaly_pct", "Precipitation anomaly", "climate", val(round(((total - normalTotal) / normalTotal) * 100, 0), "percent"), "nasa_power_daily_ag", power, season),
+    indicator(fid, "gdd_season", "Growing degree days", "climate", val(round(gddCum[11], 0), "degC_day"), "nasa_power_daily_ag", power, season, { methodName: "Placeholder GDD (base 10 °C, cap 30 °C)", flags: [{ code: "GDD_PARAMS_PENDING", severity: "warning", message: "Per-crop GDD base/cap pending a cited KB entry (D5.6)." }] }),
+    indicator(fid, "heat_stress_days", "Heat-stress days (Tmax > 35 °C)", "climate", val(rng.int(finney ? 6 : 2, finney ? 34 : 22), "day"), "nasa_power_daily_ag", power, season, { flags: [{ code: "HEURISTIC_THRESHOLD", severity: "info", message: "35 °C threshold is a labelled heuristic pending citation." }] }),
+    indicator(fid, "frost_free_days", "Frost-free days", "climate", val(rng.int(finney ? 158 : 172, finney ? 178 : 198), "day"), "nasa_power_daily_ag", power, season),
+    indicator(fid, "solar_total_season", "Solar radiation total", "climate", val(round(rng.range(5900, 6500), 0), "MJ_m-2"), "nasa_power_daily_ag", { ...power, native_resolution_m: 110000 }, season),
+    indicator(fid, "rh_mean_season", "Mean relative humidity", "climate", val(round(rng.range(finney ? 52 : 60, finney ? 60 : 70), 0), "percent"), "nasa_power_daily_ag", power, seasonMean),
+    indicator(fid, "et0_total_season", "Reference ET₀ total", "water", val(round(etTotal, 0), "mm"), "nasa_power_daily_ag", power, season),
+    indicator(fid, "water_balance_season", "Water balance (P − ET₀)", "water", val(round(total - etTotal, 0), "mm"), "nasa_power_daily_ag", power, season),
+    indicator(fid, "et_actual_season", "Actual ET (OpenET)", "water", missing("mm", "NOT_COMPUTED"), "openet", spatialFor("openet"), season, { flags: [{ code: "NOT_INTEGRATED", severity: "info", message: "OpenET is a P1 dataset, not yet integrated." }] }),
+    indicator(fid, "sm_rootzone_mean_season", "Root-zone soil moisture (mean)", "soil_moisture", smValid.length ? q(round(smValid.reduce((a, b) => a + b, 0) / smValid.length, 3), "m3_m-3") : missing("m3_m-3", smReason), "nasa_smap_spl4smgp", smap, temporal("season", start, end, "mean", "UTC"), { nature: "model" }),
+    indicator(fid, "sm_rootzone_percentile", "Root-zone moisture percentile", "soil_moisture", smValid.length ? q(rng.int(8, 92), "percentile") : missing("percentile", smReason), "nasa_smap_spl4smgp", smap, temporal("season", start, end, "percentile", "UTC"), { flags: [{ code: "SHORT_CLIMATOLOGY", severity: "warning", message: "SMAP record starts 2015-03-31; percentiles rest on ~10 years." }] }),
+    indicator(fid, "sm_rootzone_dry_days", "Root-zone dry days", "soil_moisture", smValid.length ? q(rng.int(5, 70), "day") : missing("day", smReason), "nasa_smap_spl4smgp", smap, temporal("season", start, end, "count", "UTC")),
+  ];
+
+  return {
+    field_id: fid,
+    season: { label: `${year} calendar year (crop calendars pending KB)`, start, end, crop_code: null },
+    authoritative_source: { precipitation: "nasa_power_daily_ag", temperature: "nasa_power_daily_ag" },
+    indicators,
+    series: [
+      monthly("Precipitation (monthly)", "precipitation", "mm", precip, "nasa_power_daily_ag", "sum", normals),
+      monthly("Maximum temperature (monthly mean)", "tmax", "degC", tmax, "nasa_power_daily_ag", "mean", TMAX),
+      monthly("Minimum temperature (monthly mean)", "tmin", "degC", tmin, "nasa_power_daily_ag", "mean", TMIN),
+      monthly("Cumulative GDD (placeholder base 10 °C)", "gdd_cumulative", "degC_day", gddCum, "nasa_power_daily_ag", "sum"),
+      monthly("Reference ET₀ (monthly)", "et0", "mm", et0, "nasa_power_daily_ag", "sum"),
+      smSeries,
+    ],
+    quality: failed ? quality("missing", 0, "UPSTREAM_ERROR") : quality(year < 2015 ? "partial" : "valid", year < 2015 ? 0.85 : 0.97),
+  };
+}
+
+// ───────────────────────── Soil ─────────────────────────
+const TEXTURE_FRACTIONS: Record<string, [number, number, number]> = {
+  "Silt loam": [20, 64, 16], Loam: [40, 39, 21], "Silty clay loam": [10, 58, 32], "Fine sandy loam": [62, 25, 13], "Loamy fine sand": [80, 12, 8],
+};
+const AWC_BY_TEXTURE: Record<string, number> = { "Silt loam": 0.21, Loam: 0.17, "Silty clay loam": 0.19, "Fine sandy loam": 0.13, "Loamy fine sand": 0.08 };
+
+export function soilProfile(rec: MockFieldRecord): SoilProfile {
+  const { field, traits } = rec;
+  const rng = createRng(`${field.field_id}:soil`);
+  const [s0, , c0] = TEXTURE_FRACTIONS[traits.textureClass];
+  const intervals: [number, number][] = [[0, 30], [30, 100], [100, 150]];
+  const layers: SoilLayer[] = intervals.map(([top, bottom], i) => {
+    const clay = clamp(c0 + i * rng.range(3, 8) + rng.normal(0, 1.5), 3, 55);
+    const sand = clamp(s0 - i * rng.range(1, 4) + rng.normal(0, 2), 3, 92);
+    const silt = clamp(100 - clay - sand, 2, 85);
+    const ph = traits.ph + i * rng.range(0.2, 0.5);
+    const om = Math.max(0.1, traits.om * [1, 0.45, 0.2][i]);
+    const awc = clamp(AWC_BY_TEXTURE[traits.textureClass] - i * 0.015 + rng.normal(0, 0.01), 0.03, 0.25);
+    const r = (v: number, d: number, dp = 0) => q(round(v, dp), "percent", { low: round(v - d, dp), high: round(v + d, dp) });
+    return {
+      top_cm: top, bottom_cm: bottom,
+      sand_pct: r(sand, 5), silt_pct: r(silt, 5), clay_pct: r(clay, 4),
+      texture_class: i === 0 ? traits.textureClass : i === 1 && clay > 27 ? "Silty clay loam" : traits.textureClass,
+      ph_h2o: { ...q(round(ph, 1), "pH", { low: round(ph - 0.4, 1), high: round(ph + 0.4, 1) }) },
+      om_pct: q(round(om, 1), "percent", { low: round(om * 0.6, 1), high: round(om * 1.4, 1) }),
+      awc: q(round(awc, 2), "cm_cm-1"),
+    };
+  });
+  const aws100 = layers[0].awc.value! * 30 + layers[1].awc.value! * 70;
+  const aws150 = aws100 + layers[2].awc.value! * 50;
+  const sandy = traits.textureClass.includes("sand");
+  const nMu = rng.int(1, 3);
+  const shares = nMu === 1 ? [1] : nMu === 2 ? [0.72, 0.28] : [0.61, 0.27, 0.12];
+  return {
+    field_id: field.field_id,
+    layers,
+    aws_0_100: q(round(aws100, 1), "cm"),
+    aws_0_150: q(round(aws150, 1), "cm"),
+    drainage_class: { value: sandy ? "Somewhat excessively drained" : rng.chance(0.75) ? "Well drained" : "Moderately well drained", weight_share: round(shares[0] * 0.85, 2), missing_reason: null },
+    hydrologic_group: { value: sandy ? "A" : rng.pick(["B", "C", "B"]), weight_share: round(shares[0] * 0.85, 2), missing_reason: null },
+    slope_pct_ssurgo: q(round(traits.slopeMean * 0.9, 1), "percent", { low: 0, high: round(traits.slopeMean * 1.8, 1) }),
+    map_units: shares.map((share, i) => ({
+      mukey: `SYN-${1000 + (hashString(field.field_id + i) % 9000)}`,
+      muname: `Synthetic map unit ${i + 1} — ${i === 0 ? traits.textureClass.toLowerCase() : rng.pick(["loam", "silt loam", "clay loam"])}, ${i === 0 ? "0 to 1" : "1 to 3"} percent slopes`,
+      area_fraction: share,
+      major_components: [{ cokey: `SYN-C${i}`, compname: `Synthetic component ${String.fromCharCode(65 + i)}`, comppct_r: rng.int(70, 90) }],
+    })),
+    survey: [{ areasymbol: "SYN000", saverest: null }],
+    method: method("ssurgo_area_comppct_weighting", "SSURGO area × component-percent weighting", "Normative method in SOILSTICE_DATA_ARCHITECTURE §5.3.1 (values here are synthetic)."),
+    null_weight_fraction: round(rng.range(0, 0.08), 2),
+    spatial: spatialFor("usda_nrcs_ssurgo_sda"),
+    sources: [synthSource("usda_nrcs_ssurgo_sda")],
+    quality: quality("valid", 0.95),
+  };
+}
+
+// ───────────────────────── Terrain ─────────────────────────
+export function terrainProfile(rec: MockFieldRecord): TerrainProfile | null {
+  const { field, traits } = rec;
+  const rng = createRng(`${field.field_id}:terrain`);
+  const unavailable = traits.variant === "insufficient" || traits.variant === "failed";
+  const m = (v: number, unit: Unit) => (unavailable ? missing(unit, "UPSTREAM_ERROR") : q(v, unit));
+  return {
+    field_id: field.field_id,
+    elevation_mean: m(traits.elevation, "m"),
+    elevation_min: m(traits.elevation - rng.int(1, 6), "m"),
+    elevation_max: m(traits.elevation + rng.int(2, 9), "m"),
+    slope_mean_pct: m(traits.slopeMean, "percent"),
+    slope_p90_pct: m(round(traits.slopeMean * rng.range(1.6, 2.3), 1), "percent"),
+    method: method("srtm_horn_slope", "Horn slope in EPSG:5070", "Slope from SRTMGL1 reprojected to CONUS Albers, Horn 1981 kernel (values here are synthetic)."),
+    spatial: spatialFor("nasa_srtm_gl1"),
+    sources: [synthSource("nasa_srtm_gl1")],
+    quality: unavailable ? quality("missing", 0, "UPSTREAM_ERROR") : quality("valid", 1),
+  };
+}
+
+// ───────────────────────── Crop history ─────────────────────────
+export function cropHistory(rec: MockFieldRecord): CropHistory {
+  const { field, traits } = rec;
+  const rng = createRng(`${field.field_id}:cdl`);
+  const years: CropYear[] = traits.history.map((code, i) => {
+    const year = 2006 + i;
+    const purity = traits.purity[i];
+    const others = CROPS.filter((c) => c.crop_code !== code).slice(0, 2);
+    const rest = 1 - purity;
+    const edge = round(rest * rng.range(0.3, 0.6), 2);
+    const histogram = [
+      { crop_code: code, crop_name: cropName(code), area_fraction: purity },
+      { crop_code: others[0].crop_code, crop_name: others[0].name, area_fraction: round(rest - edge, 2) },
+      { crop_code: 176, crop_name: "Grassland/Pasture", area_fraction: edge },
+    ];
+    const inCsb = year >= 2018;
+    const disagree = traits.csbDisagree.includes(year);
+    return {
+      year,
+      majority: { crop_code: code, crop_name: cropName(code) },
+      purity,
+      histogram,
+      low_purity: purity < 0.6,
+      class_accuracy: null,
+      csb_crop_code: inCsb && field.source !== "user" ? (disagree ? others[0].crop_code : code) : null,
+      agrees_with_csb: inCsb && field.source !== "user" ? !disagree : null,
+      native_resolution_m: year <= 2009 ? null : 30,
+      missing_reason: null,
+      source: synthSource("usda_nass_cdl"),
+    };
+  });
+  const seq = traits.history;
+  let maxRun = 1, run = 1;
+  for (let i = 1; i < seq.length; i++) { run = seq[i] === seq[i - 1] ? run + 1 : 1; maxRun = Math.max(maxRun, run); }
+  const counts = new Map<number, number>();
+  seq.forEach((c) => counts.set(c, (counts.get(c) ?? 0) + 1));
+  const shannon = -[...counts.values()].reduce((a, n) => a + (n / seq.length) * Math.log(n / seq.length), 0);
+  const fid = field.field_id;
+  const sp = spatialFor("usda_nass_cdl");
+  const tp = temporal("P1Y", "2006-01-01", "2025-12-31", "count");
+  return {
+    field_id: fid,
+    period: { start_year: 2006, end_year: LATEST_CROP_YEAR },
+    years,
+    metrics: [
+      indicator(fid, "distinct_crops", "Distinct crops (2006–2025)", "rotation", q(counts.size, "count"), "usda_nass_cdl", sp, tp, { nature: "derived" }),
+      indicator(fid, "max_monoculture_run", "Longest same-crop run", "rotation", q(maxRun, "year"), "usda_nass_cdl", sp, tp),
+      indicator(fid, "rotation_shannon", "Rotation diversity (Shannon)", "rotation", q(round(shannon, 2), "unitless"), "usda_nass_cdl", sp, tp),
+    ],
+    spatial: sp,
+    quality: quality("valid", 1, null, years.some((y) => y.low_purity) ? [{ code: "LOW_PURITY_YEARS", severity: "warning", message: "Some years have majority-class purity below 0.6." }] : []),
+  };
+}
+
+// ───────────────────────── Vegetation ─────────────────────────
+type Curve = (doy: number) => number;
+function curveFor(code: CropCode): Curve {
+  const g = (doy: number, mu: number, sd: number) => Math.exp(-((doy - mu) ** 2) / (2 * sd * sd));
+  switch (code) {
+    case 24: return (d) => (d < 175 ? 0.24 + 0.56 * g(d, 118, 32) : 0.17);
+    case 26: case 236: return (d) => (d < 175 ? 0.24 + 0.54 * g(d, 118, 32) : 0.17 + 0.46 * g(d, 245, 24));
+    case 1: return (d) => 0.17 + 0.66 * g(d, 205, 28);
+    case 4: return (d) => 0.17 + 0.56 * g(d, 228, 25);
+    case 5: return (d) => 0.17 + 0.62 * g(d, 220, 24);
+    case 36: return (d) => (d < 80 || d > 300 ? 0.3 : 0.52 + 0.2 * Math.sin(((d - 80) / 38) * Math.PI * 2));
+    default: return () => 0.19;
+  }
+}
+const INDEX_TRANSFORM: Record<VegetationIndex, (ndvi: number) => number> = {
+  NDVI: (v) => v, EVI: (v) => v * 0.62, NDMI: (v) => v * 0.72 - 0.17, SAVI: (v) => v * 0.68, MSAVI: (v) => v * 0.66,
+  NDWI: (v) => -v * 0.7 + 0.05, NBR: (v) => v * 0.8 - 0.05, NBR2: (v) => v * 0.25, TVI: (v) => Math.sqrt(Math.max(0, v + 0.5)),
+};
+
+export function vegetationProfile(rec: MockFieldRecord, year: number, index: VegetationIndex): VegetationProfile {
+  const { field, traits } = rec;
+  const fid = field.field_id;
+  const rng = createRng(`${fid}:veg:${year}:${index}`);
+  const code = traits.history[year - 2006] ?? traits.history[traits.history.length - 1];
+  const curve = curveFor(code);
+  const sp = spatialFor("nasa_hls_vi");
+  const tf = INDEX_TRANSFORM[index];
+  const outOfRange = year < 2013;
+  const blocked = traits.variant === "failed" || traits.variant === "processing_user";
+  const cloudy = traits.variant === "cloudy" || traits.variant === "insufficient";
+  const total = Math.round(((field.area.value ?? 65) * 10000) / 900 * 0.86);
+  const scenes: VegetationScene[] = [];
+  if (!outOfRange && !blocked) {
+    for (let doy = 60 + rng.int(0, 3); doy <= 320; doy += rng.int(2, 5)) {
+      const s30 = rng.chance(0.6) && year >= 2016;
+      const r = rng.next();
+      const clear = cloudy ? (r < 0.15 ? rng.range(0.7, 0.95) : rng.range(0, 0.6)) : r < 0.55 ? rng.range(0.9, 1) : r < 0.8 ? rng.range(0.4, 0.9) : rng.range(0, 0.3);
+      const valid = Math.round(total * clear);
+      const accepted = clear >= 0.7;
+      const ndvi = clamp(curve(doy) + rng.normal(0, 0.025), -0.1, 0.95);
+      const v = round(tf(ndvi), 3);
+      const masked = total - valid;
+      const date = new Date(Date.UTC(year, 0, doy, 17, 20));
+      const tile = traits.aoi === "ks_reno" ? "T14SNH" : "T14SKH";
+      scenes.push({
+        granule_id: `SYNTHETIC.HLS-VI.${s30 ? "S30" : "L30"}.${tile}.${year}${String(doy).padStart(3, "0")}`,
+        product: "synthetic",
+        acquired_at: date.toISOString(),
+        median: valid > 0 ? v : null,
+        p10: valid > 0 ? round(v - rng.range(0.03, 0.08), 3) : null,
+        p90: valid > 0 ? round(v + rng.range(0.02, 0.06), 3) : null,
+        valid_pixels: valid,
+        total_pixels: total,
+        clear_fraction: round(clear, 2),
+        accepted,
+        mask_counts: { cloud: Math.round(masked * 0.6), cloud_adjacent: Math.round(masked * 0.25), cloud_shadow: Math.round(masked * 0.15), snow_ice: 0, water: 0 },
+        missing_reason: valid === 0 ? "QA_MASKED_CLOUD" : accepted ? null : "INSUFFICIENT_COVERAGE",
+      });
+    }
+  }
+  const acc = scenes.filter((s) => s.accepted && s.median !== null);
+  const enough = acc.length >= 6;
+  const reason: MissingReason = outOfRange ? "OUT_OF_TEMPORAL_RANGE" : blocked ? (traits.variant === "failed" ? "UPSTREAM_ERROR" : "PENDING_PROCESSING") : "INSUFFICIENT_COVERAGE";
+  const peak = enough ? acc.reduce((a, s) => ((s.median ?? -1) > (a.median ?? -1) ? s : a)) : null;
+  const thr = peak ? (peak.median! + Math.min(...acc.map((s) => s.median!))) / 2 : 0;
+  const above = acc.filter((s) => s.median! >= thr);
+  return {
+    field_id: fid,
+    year,
+    index,
+    scenes,
+    series: {
+      series_id: `${fid}:${index}:${year}`, variable: index.toLowerCase(), label: `${index} (accepted scene medians)`, unit: "unitless", nature: "derived",
+      spatial: sp, temporal: temporal("irregular", `${year}-01-01`, `${year}-12-31`, "median", "UTC"), sources: [synthSource("nasa_hls_vi")],
+      points: acc.map((s) => ({ t: s.acquired_at.slice(0, 10), value: s.median, quality_status: "valid", missing_reason: null })), reference: null,
+    },
+    phenology: {
+      peak_value: peak ? q(peak.median!, "unitless") : missing("unitless", reason),
+      peak_date: peak ? peak.acquired_at.slice(0, 10) : null,
+      greenup_date: enough && above.length ? above[0].acquired_at.slice(0, 10) : null,
+      senescence_date: enough && above.length ? above[above.length - 1].acquired_at.slice(0, 10) : null,
+      method: method("synthetic_phenology", "Placeholder phenology markers", "Highest accepted scene and half-amplitude crossings of synthetic medians. Real phenology fitting is Phase 4."),
+      gap_filled: false,
+      missing_reason: enough ? null : reason,
+    },
+    spatial: sp,
+    sources: [synthSource("nasa_hls_vi")],
+    quality: scenes.length === 0 ? quality("missing", 0, reason) : enough ? quality(cloudy ? "partial" : "valid", round(acc.length / Math.max(scenes.length, 1), 2)) : quality("partial", round(acc.length / Math.max(scenes.length, 1), 2), "INSUFFICIENT_COVERAGE", [{ code: "FEW_CLEAR_SCENES", severity: "warning", message: `Only ${acc.length} scenes passed the 70% clear-pixel rule; phenology needs ≥ 6.` }]),
+  };
+}
+
+export function vegetationIndicators(rec: MockFieldRecord, year: number): EnvironmentalIndicator[] {
+  const v = vegetationProfile(rec, year, "NDVI");
+  const n = vegetationProfile(rec, year, "NDMI");
+  const fid = rec.field.field_id;
+  const sp = spatialFor("nasa_hls_vi");
+  const tp = temporal("season", `${year}-01-01`, `${year}-12-31`, "max", "UTC");
+  const peakDoy = v.phenology.peak_date ? Math.round((Date.parse(v.phenology.peak_date) - Date.UTC(year, 0, 1)) / 86400000) + 1 : null;
+  const reason = v.phenology.missing_reason ?? "INSUFFICIENT_COVERAGE";
+  const cvRng = createRng(`${fid}:ndvicv`);
+  const insufficient = rec.traits.variant === "insufficient" || rec.traits.variant === "failed" || rec.traits.variant === "processing_user";
+  return [
+    indicator(fid, "ndvi_peak", "Peak NDVI", "vegetation", v.phenology.peak_value, "nasa_hls_vi", sp, tp),
+    indicator(fid, "ndvi_peak_doy", "Peak NDVI day of year", "vegetation", peakDoy !== null ? q(peakDoy, "day") : missing("day", reason), "nasa_hls_vi", sp, tp),
+    indicator(fid, "ndmi_peak_season", "Peak NDMI", "vegetation", n.phenology.peak_value, "nasa_hls_vi", sp, tp),
+    indicator(fid, "ndvi_peak_cv", "Peak NDVI variability (2016–2025)", "vegetation", insufficient ? missing("unitless", "INSUFFICIENT_COVERAGE") : q(round(cvRng.range(0.05, 0.24), 2), "unitless"), "nasa_hls_vi", sp, temporal("P1Y", "2016-01-01", "2025-12-31", "none", "UTC")),
+  ];
+}
+
+export function soilTerrainIndicators(rec: MockFieldRecord): EnvironmentalIndicator[] {
+  const s = soilProfile(rec);
+  const t = terrainProfile(rec);
+  const fid = rec.field.field_id;
+  const st = temporal("static", null, null, "weighted_mean");
+  const ss = spatialFor("usda_nrcs_ssurgo_sda");
+  const ts = spatialFor("nasa_srtm_gl1");
+  const tt = temporal("static", "2000-02-11", "2000-02-21", "mean");
+  const out = [
+    indicator(fid, "aws_0_150", "Available water storage 0–150 cm", "soil", s.aws_0_150, "usda_nrcs_ssurgo_sda", ss, st, { nature: "observation" }),
+    indicator(fid, "ph_0_30", "Soil pH 0–30 cm", "soil", s.layers[0].ph_h2o, "usda_nrcs_ssurgo_sda", ss, st, { nature: "observation" }),
+    indicator(fid, "om_0_30", "Organic matter 0–30 cm", "soil", s.layers[0].om_pct, "usda_nrcs_ssurgo_sda", ss, st, { nature: "observation" }),
+    indicator(fid, "clay_0_30", "Clay 0–30 cm", "soil", s.layers[0].clay_pct, "usda_nrcs_ssurgo_sda", ss, st, { nature: "observation" }),
+  ];
+  if (t) {
+    out.push(
+      indicator(fid, "slope_mean_pct", "Mean slope", "terrain", t.slope_mean_pct, "nasa_srtm_gl1", ts, tt),
+      indicator(fid, "slope_p90_pct", "Slope (90th percentile)", "terrain", t.slope_p90_pct, "nasa_srtm_gl1", ts, tt),
+      indicator(fid, "elevation_mean", "Mean elevation", "terrain", t.elevation_mean, "nasa_srtm_gl1", ts, tt, { nature: "observation" }),
+    );
+  }
+  return out;
+}
+
+// ───────────────────────── Coverage ─────────────────────────
+export function coverage(rec: MockFieldRecord, jobDone = false): DataCoverage {
+  const { field, traits } = rec;
+  const v = traits.variant;
+  const P0: DatasetId[] = ["nasa_power_daily_ag", "usda_nrcs_ssurgo_sda", "usda_nass_cdl", "usda_nass_csb", "nasa_hls_vi", "nasa_smap_spl4smgp", "nasa_srtm_gl1"];
+  const P1: DatasetId[] = ["prism_daily", "openet", "usda_nass_quickstats", "nasa_smap_spl3smp_e"];
+  const entry = (id: DatasetId): DatasetCoverage => {
+    const d = descriptor(id);
+    let status: DatasetCoverage["status"] = "available";
+    let reason: MissingReason | null = null;
+    let note: string | null = "Synthetic coverage record (Phase 1).";
+    if (d.priority !== "P0") { status = "not_integrated"; note = `${d.priority} dataset — planned, not yet integrated.`; }
+    else if (id === "usda_nass_csb") { status = "not_applicable"; note = field.source === "user" ? "User-drawn field — not a CSB polygon." : "Synthetic geometry — not a CSB polygon."; }
+    else if (v === "cloudy" && id === "nasa_hls_vi") { status = "partial"; reason = "INSUFFICIENT_COVERAGE"; note = "Cloud cover left few scenes above the 70% clear-pixel rule."; }
+    else if (v === "insufficient" && (id === "nasa_hls_vi" || id === "nasa_srtm_gl1")) { status = "missing"; reason = id === "nasa_hls_vi" ? "INSUFFICIENT_COVERAGE" : "UPSTREAM_ERROR"; }
+    else if (v === "failed" && id !== "usda_nrcs_ssurgo_sda" && id !== "usda_nass_cdl") { status = "missing"; reason = "UPSTREAM_ERROR"; note = "Synthetic processing failure."; }
+    else if (v === "processing_user" && (id === "nasa_hls_vi" || id === "nasa_smap_spl4smgp")) { status = "pending"; reason = "PENDING_PROCESSING"; note = jobDone ? "Queued for the satellite background batch (Phase 3)." : "Processing job running."; }
+    return {
+      dataset_id: id, label: d.title, priority: d.priority, status, support_class: d.support_class, native_resolution_m: d.native_resolution_m,
+      temporal_coverage: d.temporal_coverage, product_version: d.priority === "P0" && status !== "not_applicable" ? "synthetic-0" : null,
+      last_updated: status === "available" || status === "partial" ? `${DEMO_AS_OF}T09:00:00Z` : null, missing_reason: reason, note,
+    };
+  };
+  const datasets = [...P0, ...P1].map(entry);
+  const p0 = datasets.filter((x) => x.priority === "P0" && x.status !== "not_applicable");
+  const ok = p0.filter((x) => x.status === "available" || x.status === "partial").length;
+  return { field_id: field.field_id, datasets, completeness: round(ok / p0.length, 2) };
+}
+
+// ───────────────────────── Resilience ─────────────────────────
+const COMPONENT_META: [ResilienceComponentKey, string, "F" | "S" | "R", string[]][] = [
+  ["soil_water_buffer", "Soil water buffer", "F", ["aws_0_150"]],
+  ["terrain_erosion_risk", "Terrain & erosion risk", "F", ["slope_p90_pct"]],
+  ["vegetation_stability", "Vegetation stability", "F", ["ndvi_peak_cv"]],
+  ["climate_exposure", "Climate exposure", "R", ["precip_anomaly_pct", "heat_stress_days", "sm_rootzone_dry_days"]],
+  ["rotation_diversity", "Rotation diversity", "F", ["distinct_crops", "max_monoculture_run", "rotation_shannon"]],
+];
+
+export function bandFor(score: number | null): ScoreBand {
+  if (score === null) return "unknown";
+  return score < 40 ? "low" : score <= 70 ? "moderate" : "high";
+}
+
+export function resilienceProfile(rec: MockFieldRecord, uuid: () => string): ResilienceProfile {
+  const { field, traits } = rec;
+  const rng = createRng(`${field.field_id}:resilience`);
+  const v = traits.variant;
+  const disclaimers = [
+    "Synthetic demo scores — the breakpoint tables are defined in Phase 4 (SOILSTICE_DATA_ARCHITECTURE §5.10).",
+    "Scores are decision-support indicators, not agronomic prescriptions.",
+    "Components marked “Regional context” do not measure this field.",
+  ];
+  if (v === "failed" || v === "processing_user") {
+    return {
+      profile_id: uuid(), field_id: field.field_id, as_of: DEMO_AS_OF, model_version: RESILIENCE_MODEL, status: "pending",
+      composite: { score: missing("score_0_100", "PENDING_PROCESSING"), band: "unknown", confidence: "low", components_used: 0, components_total: 5 },
+      components: [], limitations: [{ code: v === "failed" ? "PROCESSING_FAILED" : "PROCESSING", severity: "warning", message: v === "failed" ? "Upstream processing failed for this synthetic field; resilience was not computed." : "Waiting for satellite datasets to finish processing." }],
+      disclaimers,
+    };
+  }
+  const unavailable: ResilienceComponentKey[] = v === "insufficient" ? ["vegetation_stability", "terrain_erosion_risk"] : [];
+  // Per-field synthetic level so the demo shows a spread of bands (not a method; Phase 4 defines scoring).
+  const level = rng.pick([30, 48, 58, 74, 84]);
+  const components: ResilienceComponent[] = COMPONENT_META.map(([key, label, support, inputs]) => {
+    const missingComp = unavailable.includes(key);
+    const score = missingComp ? null : Math.round(clamp(level + rng.normal(0, 11), 8, 97));
+    const conf: Confidence = support === "R" ? "low" : v === "cloudy" && key === "vegetation_stability" ? "medium" : "high";
+    return {
+      key, label,
+      score: score === null ? missing("score_0_100", key === "vegetation_stability" ? "INSUFFICIENT_COVERAGE" : "UPSTREAM_ERROR") : q(score, "score_0_100"),
+      band: bandFor(score),
+      support_class: support,
+      confidence: missingComp ? "low" : conf,
+      input_indicator_ids: inputs.map((k) => `${field.field_id}:${k}`),
+      explanation: missingComp
+        ? "Not scored: required inputs are unavailable for this field."
+        : `Synthetic placeholder score. In Phase 4 this component maps ${inputs.join(", ")} through a cited breakpoint table.`,
+      rule_ref: method(`resilience_${key}_breakpoints`, `${label} breakpoint table`, "Breakpoints pending (Phase 4)."),
+    };
+  });
+  const used = components.filter((c) => c.score.value !== null);
+  const enough = used.length >= 4;
+  const mean = enough ? Math.round(used.reduce((a, c) => a + (c.score.value as number), 0) / used.length) : null;
+  const order: Confidence[] = ["low", "medium", "high"];
+  const conf = used.reduce<Confidence>((lo, c) => (order.indexOf(c.confidence) < order.indexOf(lo) ? c.confidence : lo), "high");
+  const limitations: QualityFlag[] = [{ code: "REGIONAL_COMPONENT", severity: "info", message: "Climate exposure uses regional-context inputs (POWER ~55 km, SMAP 9 km)." }];
+  if (!enough) limitations.push({ code: "INSUFFICIENT_COMPONENTS", severity: "warning", message: `Only ${used.length} of 5 components are available; a composite needs at least 4.` });
+  if (v === "cloudy") limitations.push({ code: "CLOUD_LIMITED", severity: "warning", message: "Vegetation stability rests on fewer clear scenes than usual." });
+  return {
+    profile_id: uuid(), field_id: field.field_id, as_of: DEMO_AS_OF, model_version: RESILIENCE_MODEL,
+    status: enough ? "computed" : "insufficient_data",
+    composite: { score: mean === null ? missing("score_0_100", "INSUFFICIENT_COVERAGE") : q(mean, "score_0_100"), band: bandFor(mean), confidence: enough ? conf : "low", components_used: used.length, components_total: 5 },
+    components, limitations, disclaimers,
+  };
+}
+
+// ───────────────────────── Recommendations & scenarios ─────────────────────────
+const FIT_ORDER: FitBand[] = ["suitable", "marginal", "unsuitable", "unknown"];
+function worst(bands: FitBand[]): FitBand {
+  const known = bands.filter((b) => b !== "unknown");
+  if (!known.length) return "unknown";
+  return known.reduce((a, b) => (FIT_ORDER.indexOf(b) > FIT_ORDER.indexOf(a) ? b : a), "suitable");
+}
+
+export function recommendation(rec: MockFieldRecord, seasonYear: number, uuid: () => string, kbEvidence: Record<string, string>): RotationRecommendation {
+  const { field, traits } = rec;
+  const disclaimers = [
+    "Synthetic demo recommendation — the rules-based engine and cited crop knowledge base arrive in Phase 5.",
+    "Not a yield, price or profit forecast.",
+    "Factors marked “Regional context” cannot make a crop unsuitable on their own.",
+  ];
+  const base = {
+    recommendation_id: uuid(), field_id: field.field_id,
+    target_season: { label: `${seasonYear} season`, start: `${seasonYear - 1}-09-01`, end: `${seasonYear}-11-30` },
+    engine_version: ENGINE_VERSION, kb_version: KB_VERSION, generated_at: `${DEMO_AS_OF}T09:00:00Z`, disclaimers,
+  };
+  if (traits.variant === "failed" || traits.variant === "processing_user") {
+    return { ...base, status: traits.variant === "failed" ? "insufficient_data" : "pending", candidates: [], excluded: [] };
+  }
+  const soil = soilProfile(rec);
+  const terr = terrainProfile(rec);
+  const hist = traits.history;
+  const last = hist[hist.length - 1];
+  const recent = hist.slice(-5);
+  const rng = createRng(`${field.field_id}:rec:${seasonYear}`);
+  const candidates = CROPS.filter((c) => c.crop_code !== 61 && c.crop_code !== 236).map((crop) => {
+    const pick = (): FitBand => { const r = rng.next(); return r < 0.68 ? "suitable" : r < 0.93 ? "marginal" : "unsuitable"; };
+    const regional = (): FitBand => (rng.chance(0.75) ? "suitable" : "marginal");
+    const fa = (factor: FactorAssessment["factor"], band: FitBand, observed: Quantity | null, support: "F" | "S" | "R"): FactorAssessment => ({
+      factor, band, observed, requirement: PENDING_KB_REQUIREMENT, support_class: support, evidence_ids: kbEvidence[factor] ? [kbEvidence[factor]] : [],
+    });
+    const factors: FactorAssessment[] = [
+      fa("ph", pick(), soil.layers[0].ph_h2o, "F"),
+      fa("drainage", pick(), null, "F"),
+      fa("water_holding", pick(), soil.aws_0_150, "F"),
+      fa("slope", terr && terr.slope_p90_pct.value !== null ? pick() : "unknown", terr?.slope_p90_pct ?? null, "F"),
+      fa("gdd", regional(), null, "R"),
+      fa("regional_climate", regional(), null, "R"),
+      fa("rotation_history", crop.crop_code === last ? "marginal" : "suitable", null, "F"),
+    ];
+    const effects: QualityFlag[] = [];
+    if (crop.crop_code === last) effects.push({ code: "REPEATS_LAST_CROP", severity: "warning", message: `Would repeat ${LATEST_CROP_YEAR}'s crop (${cropName(last)}).` });
+    if (!recent.includes(crop.crop_code)) effects.push({ code: "NEW_IN_RECENT_HISTORY", severity: "info", message: `Not grown on this field in ${LATEST_CROP_YEAR - 4}–${LATEST_CROP_YEAR} (synthetic history).` });
+    const runOfLast = (() => { let n = 0; for (let i = hist.length - 1; i >= 0 && hist[i] === last; i--) n++; return n; })();
+    if (crop.crop_code !== last && runOfLast >= 2) effects.push({ code: "BREAKS_RUN", severity: "info", message: `Breaks a ${runOfLast}-year ${cropName(last)} run.` });
+    const overall = worst(factors.map((f) => f.band));
+    const marginal = factors.filter((f) => f.band === "marginal").length;
+    return {
+      crop, factors, effects, overall, marginal,
+      score: FIT_ORDER.indexOf(overall) * 10 + marginal - (crop.crop_code !== last ? 0.5 : 0) - (effects.some((e) => e.code === "BREAKS_RUN") ? 0.5 : 0),
+    };
+  });
+  candidates.sort((a, b) => a.score - b.score);
+  const out: RecommendationCandidate[] = candidates.slice(0, 5).map((c, i) => ({
+    rank: i + 1,
+    crop_code: c.crop.crop_code,
+    crop_name: c.crop.name,
+    overall: c.overall,
+    confidence: c.factors.some((f) => f.band === "unknown") ? "low" : c.marginal > 1 ? "low" : "medium",
+    factors: c.factors,
+    rotation_effects: c.effects,
+    reasons: [
+      `Synthetic placeholder: limiting factor is ${c.overall === "suitable" ? "none (all factors suitable)" : c.factors.find((f) => f.band === c.overall)?.factor.replace("_", " ")}.`,
+      "Cited reasons are generated by the Phase 5 rotation engine.",
+    ],
+  }));
+  return {
+    ...base,
+    status: "computed",
+    candidates: out,
+    excluded: [
+      { crop_code: 61, crop_name: "Fallow/Idle Cropland", reason: "Not offered as a crop option (fallow is evaluated inside rotation scenarios)." },
+      { crop_code: 236, crop_name: "Dbl Crop WinWht/Sorghum", reason: "Knowledge-base entry incomplete in the synthetic KB." },
+    ],
+  };
+}
+
+export function evaluateScenario(rec: MockFieldRecord, sequence: ScenarioYear[]): ScenarioEvaluation {
+  const key = `${rec.field.field_id}:${sequence.map((s) => s.crop_code).join("-")}`;
+  const rng = createRng(key);
+  const pick = (): FitBand => { const r = rng.next(); return r < 0.55 ? "suitable" : r < 0.88 ? "marginal" : "unsuitable"; };
+  const dims: ScenarioEvaluation["dimensions"] = [
+    { key: "agronomic_fit", band: pick(), explanation: "Synthetic placeholder band — per-year agronomic checks come from the Phase 5 knowledge base." },
+    { key: "rotation_benefit", band: pick(), explanation: "Synthetic placeholder band — rotation rules (predecessor effects, breaks) are Phase 5." },
+    { key: "water_risk", band: pick(), explanation: "Synthetic placeholder band — will combine crop water need with regional climate context." },
+    { key: "diversity", band: new Set(sequence.map((s) => s.crop_code)).size >= 3 ? "suitable" : new Set(sequence.map((s) => s.crop_code)).size === 2 ? "marginal" : "unsuitable", explanation: `${new Set(sequence.map((s) => s.crop_code)).size} distinct crops across ${sequence.length} years (factual count).` },
+  ];
+  const hist = rec.traits.history;
+  const yearFindings = sequence.map((s, i) => {
+    const prev = i === 0 ? hist[hist.length - 1] : sequence[i - 1].crop_code;
+    const messages: QualityFlag[] = [];
+    if (s.crop_code === prev) messages.push({ code: "REPEAT", severity: "warning", message: `Repeats the previous year's crop (${cropName(prev)}).` });
+    if (s.crop_code === 61) messages.push({ code: "FALLOW", severity: "info", message: "Fallow year." });
+    if (CROPS.find((c) => c.crop_code === s.crop_code)?.is_double_crop) messages.push({ code: "DOUBLE_CROP", severity: "info", message: "Double-crop year — two harvests in one season." });
+    if (!hist.includes(s.crop_code)) messages.push({ code: "NEW_CROP", severity: "info", message: "Not grown on this field since 2006 (synthetic history)." });
+    return { year: s.year, band: messages.some((m) => m.severity === "warning") ? "marginal" as FitBand : pick(), messages, evidence_ids: [] };
+  });
+  return {
+    engine_version: ENGINE_VERSION,
+    kb_version: KB_VERSION,
+    overall: worst(dims.map((d) => d.band)),
+    dimensions: dims,
+    year_findings: yearFindings,
+    warnings: [{ code: "SYNTHETIC_EVALUATION", severity: "warning", message: "Synthetic evaluation: bands are placeholders until the rules-based rotation engine arrives in Phase 5. Only the repeat/fallow/double-crop/new-crop notes are factual." }],
+    evaluated_at: new Date().toISOString(),
+  };
+}
+
+// ───────────────────────── Field evidence ─────────────────────────
+export function fieldEvidence(rec: MockFieldRecord, indicators: EnvironmentalIndicator[], uuid: () => string): EvidenceItem[] {
+  return indicators.map((ind) => ({
+    evidence_id: uuid(),
+    kind: "indicator",
+    title: ind.label,
+    summary: `Synthetic indicator for ${rec.field.name}. Method: ${ind.method.name}. Support: ${ind.spatial.support_class}.`,
+    field_id: rec.field.field_id,
+    dataset_id: "synthetic",
+    product_version: "synthetic-0",
+    citation: null,
+    url: null,
+    doi: null,
+    accessed_at: DEMO_AS_OF,
+    verification_status: "SYNTHETIC",
+    spatial: ind.spatial,
+    temporal: ind.temporal,
+    related_ids: [ind.indicator_id, ind.key],
+  }));
+}
