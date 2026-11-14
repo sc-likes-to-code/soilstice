@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Any
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, Query, Request
@@ -12,11 +13,15 @@ from app.contracts import (
     ClimateProfile,
     CreateFieldRequest,
     CreateFieldResponse,
+    CropEvidenceRecord,
     CropHistory,
     CropOption,
+    CropProfile,
+    CropProfileSummary,
     DataCoverage,
     DatasetDescriptor,
     Deleted,
+    DirectedRotationTransition,
     EnvironmentalIndicator,
     EvidenceItem,
     EvidenceKind,
@@ -29,6 +34,7 @@ from app.contracts import (
     FieldSummary,
     Health,
     IndicatorCategory,
+    KnowledgeBaseMetadata,
     ProcessingJob,
     ResilienceProfile,
     RotationRecommendation,
@@ -193,10 +199,59 @@ def resilience(field_id: UUID, request: Request, svc: EnvironmentService = Depen
     return ok(request, svc.resilience(field_id))
 
 
-# E20–E25 rotation
+# E20–E25 rotation & Phase 5 Crop Knowledge Base
 @router.get("/crops", response_model=ApiResponse[list[CropOption]], tags=["rotation"], operation_id="listCrops")
 def crops(request: Request, svc: RotationService = Depends(rot_svc)):
     return ok(request, svc.crops())
+
+
+@router.get("/canonical-crops", response_model=ApiResponse[list[CropProfileSummary]], tags=["rotation"],
+            operation_id="listCanonicalCrops")
+def canonical_crops(request: Request, role: str | None = None, family: str | None = None,
+                    svc: RotationService = Depends(rot_svc)):
+    return ok(request, svc.canonical_crops(role=role, family=family))
+
+
+@router.get("/crops/{crop_id}", response_model=ApiResponse[CropProfile], tags=["rotation"],
+            operation_id="getCropProfile")
+def get_crop_profile(crop_id: str, request: Request, svc: RotationService = Depends(rot_svc)):
+    return ok(request, svc.get_crop(crop_id))
+
+
+@router.get("/crops/{crop_id}/attributes", response_model=ApiResponse[dict[str, Any]], tags=["rotation"],
+            operation_id="getCropAttributes")
+def get_crop_attributes(crop_id: str, request: Request, domain: str | None = None, attribute: str | None = None,
+                        svc: RotationService = Depends(rot_svc)):
+    return ok(request, svc.get_crop_attributes(crop_id, domain, attribute))
+
+
+@router.get("/rotations", response_model=ApiResponse[DirectedRotationTransition], tags=["rotation"],
+            operation_id="getRotationCompatibility")
+def get_rotation_compatibility(
+    request: Request,
+    previous_crop: str = Query(..., description="Preceding crop ID (e.g. CRP014) or CDL code (e.g. 1)"),
+    next_crop: str = Query(..., description="Following crop ID (e.g. CRP001) or CDL code (e.g. 1)"),
+    svc: RotationService = Depends(rot_svc),
+):
+    return ok(request, svc.get_rotation(previous_crop, next_crop))
+
+
+@router.get("/rotations/matrix", response_model=ApiResponse[list[DirectedRotationTransition]], tags=["rotation"],
+            operation_id="listRotationMatrix")
+def list_rotation_matrix(request: Request, crop_id: str | None = None, svc: RotationService = Depends(rot_svc)):
+    return ok(request, svc.list_rotation_matrix(crop_id))
+
+
+@router.get("/evidence/{evidence_id}", response_model=ApiResponse[CropEvidenceRecord], tags=["evidence"],
+            operation_id="getCropEvidence")
+def get_crop_evidence(evidence_id: str, request: Request, svc: RotationService = Depends(rot_svc)):
+    return ok(request, svc.get_evidence(evidence_id))
+
+
+@router.get("/kb/metadata", response_model=ApiResponse[KnowledgeBaseMetadata], tags=["rotation"],
+            operation_id="getKbMetadata")
+def get_kb_metadata(request: Request, svc: RotationService = Depends(rot_svc)):
+    return ok(request, svc.get_kb_metadata())
 
 
 @router.get("/fields/{field_id}/recommendations", response_model=ApiResponse[RotationRecommendation],

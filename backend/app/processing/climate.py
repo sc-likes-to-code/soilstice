@@ -29,19 +29,13 @@ from app.contracts import (
     TimeSeriesPoint,
 )
 from app.providers.power import PARAMETERS, SOLAR_PARAMETERS, PowerDaily
+from app.rotation.kb import CDL_GDD_THRESHOLDS, get_crop_gdd_thresholds
 
 COMPLETENESS_MIN = 0.9  # §5.5: >= 90 % of days present, else null + completeness
 RENO_PRECIP_NORMAL_MM = 760.5  # NOAA NCEI 1991-2020 normal (Hutchinson 10 SW, KS)
 
-# Crop-specific thermal thresholds (T_base, T_cap) in °C (McMaster & Wilhelm 1997; Barger 1969)
-CROP_GDD_THRESHOLDS: dict[int | None, tuple[float, float]] = {
-    1: (10.0, 30.0),    # Corn (Maize) - Barger (1969); Gilmore & Rogers (1958)
-    24: (0.0, 25.0),    # Winter Wheat - McMaster & Wilhelm (1997)
-    4: (10.0, 35.0),    # Grain Sorghum - Vanderlip & Reeves (1972)
-    5: (10.0, 30.0),    # Soybeans - Fehr & Caviness (1977)
-    36: (5.0, 30.0),   # Alfalfa - Fick et al. (1988)
-    None: (10.0, 30.0), # Fallback standard warm-season baseline
-}
+# Authoritative crop thermal thresholds (T_base, T_cap) in °C from Crop Knowledge Base (EV0003–EV0200)
+CROP_GDD_THRESHOLDS: dict[int | None, tuple[float, float]] = CDL_GDD_THRESHOLDS
 
 METHOD_SUM = MethodRef(
     method_id="season_daily_sum", name="Season sum of daily values", version="1",
@@ -337,7 +331,7 @@ def build_climate_profile(
     daily_gdd_vals: list[float | None] = []
     gdd_points: list[TimeSeriesPoint] = []
     cum_gdd = 0.0
-    tbase, tcap = CROP_GDD_THRESHOLDS.get(crop_code, CROP_GDD_THRESHOLDS[None])
+    tbase, tcap = get_crop_gdd_thresholds(crop_code)
     for i, d in enumerate(days):
         tmax = tmax_list[i] if i < len(tmax_list) else None
         tmin = tmin_list[i] if i < len(tmin_list) else None

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from datetime import date, datetime
-from typing import Literal
+from typing import Any, Literal
 from uuid import UUID
 
 from pydantic import Field as PField
@@ -592,3 +592,103 @@ class Health(Contract):
 
 class Deleted(Contract):
     deleted: Literal[True] = True
+
+
+# ── 5.17 Crop Knowledge Base Entities (Phase 5) ──────────────────────────────
+
+
+class KnowledgeBaseMetadata(Contract):
+    dataset_name: str
+    schema_version: str
+    stage: str
+    effective_date: str
+    geographic_scope: str
+    canonical_crop_count: int
+    evidence_records_count: int
+    directed_rotation_transitions_count: int = 196
+    description: str
+    last_updated: str | None = None
+    notes: str | None = None
+
+
+class CropEvidenceRecord(Contract):
+    evidence_id: str
+    crop_ids: list[str]
+    related_domain: str
+    attribute_or_claim: str
+    recorded_value_or_summary: str | None = None
+    source_organization: str
+    source_title: str
+    author_or_institution: str
+    publication_year: int | None = None
+    publication_date: str | None = None
+    access_date: str | None = None
+    source_url_or_doi: str | None = None
+    citation_location: str | None = None
+    exact_supporting_context: str | None = None
+    geographic_scope: str | None = None
+    variety_scope: str | None = None
+    source_quality: str
+    data_availability: str | None = None
+    conditions_and_assumptions: str | None = None
+    limitations: str | None = None
+
+
+class DirectedRotationTransition(Contract):
+    preceding_crop_id: str
+    preceding_crop_name: str
+    following_crop_id: str
+    following_crop_name: str
+    compatibility_rating: str
+    is_monoculture: bool
+    monoculture_risk: str | None = None
+    synergy_mechanisms: str | None = None
+    disease_break_potential: str | None = None
+    shared_pest_disease_risks: str | None = None
+    herbicide_carryover_risks: str | None = None
+    rotational_niche: str | None = None
+    evidence_ids: list[str] = PField(default_factory=list)
+    limitations: str | None = None
+
+
+class CropProfileSummary(Contract):
+    crop_id: str
+    cdl_code: int | None = None
+    common_name: str
+    scientific_name: str
+    botanical_family: str
+    crop_group: str
+    portfolio_role: str
+    lifecycle_class: str
+    is_cover_crop: bool
+    can_serve_as_cover_crop: bool
+    commercial_harvest_feasible: bool
+    usda_plants_symbol: str | None = None
+
+
+class CropProfile(Contract):
+    crop_id: str
+    cdl_code: int | None = None
+    common_name: str
+    scientific_name: str
+    taxonomic_authority: str | None = None
+    botanical_family: str
+    crop_group: str
+    portfolio_role: str
+    lifecycle_class: str
+    is_cover_crop: bool
+    can_serve_as_cover_crop: bool
+    commercial_harvest_feasible: bool
+    usda_plants_symbol: str | None = None
+    crop_identity: dict[str, Any]
+    growing_duration: dict[str, Any]
+    temperature_requirements: dict[str, Any]
+    rainfall_requirements: dict[str, Any]
+    water_demand_and_tolerance: dict[str, Any]
+    soil_preferences: dict[str, Any]
+    root_and_nutrients: dict[str, Any]
+    nitrogen_and_biomass: dict[str, Any]
+    rotation_compatibility: dict[str, Any]
+    regional_suitability: list[dict[str, Any]]
+    evidence_ids: list[str] = PField(default_factory=list)
+

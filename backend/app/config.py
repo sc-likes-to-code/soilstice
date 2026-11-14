@@ -57,8 +57,8 @@ class Settings(BaseSettings):
     earthdata_username: str | None = None
     earthdata_password: SecretStr | None = None
 
-    # Optional crop knowledge base directory (teammate deliverable, Phase 5)
-    crop_kb_dir: Path | None = None
+    # Crop knowledge base directory (Phase 5 canonical handoff)
+    crop_kb_dir: Path | None = Path("data/backend_handoff")
 
     def default_season_year(self) -> int:
         return self.climate_default_season_year or (date.today().year - 1)

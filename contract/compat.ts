@@ -65,6 +65,11 @@ export type Checks = [
   Assert<Same<C.EvidenceItem, S["EvidenceItem"]>>,
   Assert<Same<C.FieldProfile, S["FieldProfile"]>>,
   Assert<Same<C.DatasetDescriptor, S["DatasetDescriptor"]>>,
+  Assert<Same<C.KnowledgeBaseMetadata, S["KnowledgeBaseMetadata"]>>,
+  Assert<Same<C.CropEvidenceRecord, S["CropEvidenceRecord"]>>,
+  Assert<Same<C.DirectedRotationTransition, S["DirectedRotationTransition"]>>,
+  Assert<Same<C.CropProfileSummary, S["CropProfileSummary"]>>,
+  Assert<Same<C.CropProfile, S["CropProfile"]>>,
   // Envelopes used by the frontend services
   Assert<Same<C.ApiResponse<C.Farm[]>, S["ApiResponse_list_Farm__"]>>,
   Assert<Same<C.ApiResponse<C.FieldProfile>, S["ApiResponse_FieldProfile_"]>>,
@@ -84,4 +89,6 @@ export type PathChecks = [
   paths["/api/v1/fields/{field_id}/resilience"], paths["/api/v1/crops"],
   paths["/api/v1/fields/{field_id}/recommendations"], paths["/api/v1/fields/{field_id}/scenarios"],
   paths["/api/v1/scenarios/{scenario_id}"], paths["/api/v1/fields/{field_id}/evidence"], paths["/api/v1/jobs/{job_id}"],
+  paths["/api/v1/canonical-crops"], paths["/api/v1/crops/{crop_id}"], paths["/api/v1/crops/{crop_id}/attributes"],
+  paths["/api/v1/rotations"], paths["/api/v1/rotations/matrix"], paths["/api/v1/evidence/{evidence_id}"], paths["/api/v1/kb/metadata"],
 ];

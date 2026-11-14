@@ -503,3 +503,101 @@ export interface DatasetDescriptor {
   documentation_url: string; doi: string | null; verification_status: VerificationStatus; last_verified: ISODate;
   integration_status: "integrated" | "planned";
 }
+
+// 5.17 Crop Knowledge Base Entities (Phase 5)
+export interface KnowledgeBaseMetadata {
+  dataset_name: string;
+  schema_version: string;
+  stage: string;
+  effective_date: string;
+  geographic_scope: string;
+  canonical_crop_count: number;
+  evidence_records_count: number;
+  directed_rotation_transitions_count: number;
+  description: string;
+  last_updated: string | null;
+  notes: string | null;
+}
+
+export interface CropEvidenceRecord {
+  evidence_id: string;
+  crop_ids: string[];
+  related_domain: string;
+  attribute_or_claim: string;
+  recorded_value_or_summary: string | null;
+  source_organization: string;
+  source_title: string;
+  author_or_institution: string;
+  publication_year: number | null;
+  publication_date: string | null;
+  access_date: string | null;
+  source_url_or_doi: string | null;
+  citation_location: string | null;
+  exact_supporting_context: string | null;
+  geographic_scope: string | null;
+  variety_scope: string | null;
+  source_quality: string;
+  data_availability: string | null;
+  conditions_and_assumptions: string | null;
+  limitations: string | null;
+}
+
+export interface DirectedRotationTransition {
+  preceding_crop_id: string;
+  preceding_crop_name: string;
+  following_crop_id: string;
+  following_crop_name: string;
+  compatibility_rating: string;
+  is_monoculture: boolean;
+  monoculture_risk: string | null;
+  synergy_mechanisms: string | null;
+  disease_break_potential: string | null;
+  shared_pest_disease_risks: string | null;
+  herbicide_carryover_risks: string | null;
+  rotational_niche: string | null;
+  evidence_ids: string[];
+  limitations: string | null;
+}
+
+export interface CropProfileSummary {
+  crop_id: string;
+  cdl_code: number | null;
+  common_name: string;
+  scientific_name: string;
+  botanical_family: string;
+  crop_group: string;
+  portfolio_role: string;
+  lifecycle_class: string;
+  is_cover_crop: boolean;
+  can_serve_as_cover_crop: boolean;
+  commercial_harvest_feasible: boolean;
+  usda_plants_symbol: string | null;
+}
+
+export interface CropProfile {
+  crop_id: string;
+  cdl_code: number | null;
+  common_name: string;
+  scientific_name: string;
+  taxonomic_authority: string | null;
+  botanical_family: string;
+  crop_group: string;
+  portfolio_role: string;
+  lifecycle_class: string;
+  is_cover_crop: boolean;
+  can_serve_as_cover_crop: boolean;
+  commercial_harvest_feasible: boolean;
+  usda_plants_symbol: string | null;
+  crop_identity: { [key: string]: unknown };
+  growing_duration: { [key: string]: unknown };
+  temperature_requirements: { [key: string]: unknown };
+  rainfall_requirements: { [key: string]: unknown };
+  water_demand_and_tolerance: { [key: string]: unknown };
+  soil_preferences: { [key: string]: unknown };
+  root_and_nutrients: { [key: string]: unknown };
+  nitrogen_and_biomass: { [key: string]: unknown };
+  rotation_compatibility: { [key: string]: unknown };
+  regional_suitability: { [key: string]: unknown }[];
+  evidence_ids: string[];
+}
+

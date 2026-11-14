@@ -32,6 +32,13 @@ export function createHttpServices(): Services {
     },
     rotation: {
       listCrops: () => request("GET", "/crops"),
+      listCanonicalCrops: (params) => request("GET", "/canonical-crops", { query: params }),
+      getCropProfile: (cropId) => request("GET", `/crops/${cropId}`),
+      getCropAttributes: (cropId, params) => request("GET", `/crops/${cropId}/attributes`, { query: params }),
+      getRotationCompatibility: (previousCrop, nextCrop) => request("GET", "/rotations", { query: { previous_crop: previousCrop, next_crop: nextCrop } }),
+      listRotationMatrix: (cropId) => request("GET", "/rotations/matrix", { query: cropId !== undefined ? { crop_id: cropId } : undefined }),
+      getCropEvidence: (evidenceId) => request("GET", `/evidence/${evidenceId}`),
+      getKbMetadata: () => request("GET", "/kb/metadata"),
       getCropHistory: (id) => request("GET", `/fields/${id}/crop-history`),
       getRecommendation: (id, seasonYear) => request("GET", `/fields/${id}/recommendations`, { query: { season_year: seasonYear } }),
       listScenarios: (id) => request("GET", `/fields/${id}/scenarios`),

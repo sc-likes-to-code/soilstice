@@ -1,0 +1,1652 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SOILSTICE Backend Crop Knowledge Base Schema",
+  "description": "Standardized, versioned JSON Schema governing the canonical 14 SOILSTICE crop entities, agronomic data domains, physiological disaggregations, and attribute-level evidence metadata.",
+  "version": "1.1.0-RECONCILED",
+  "type": "object",
+  "required": [
+    "metadata",
+    "crops",
+    "evidence_registry"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": [
+        "dataset_name",
+        "schema_version",
+        "stage",
+        "effective_date",
+        "geographic_scope",
+        "canonical_crop_count",
+        "evidence_records_count",
+        "description"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "dataset_name": {
+          "type": "string"
+        },
+        "schema_version": {
+          "type": "string"
+        },
+        "stage": {
+          "type": "string"
+        },
+        "effective_date": {
+          "type": "string"
+        },
+        "geographic_scope": {
+          "type": "string"
+        },
+        "canonical_crop_count": {
+          "type": "integer",
+          "enum": [
+            14
+          ]
+        },
+        "evidence_records_count": {
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        },
+        "last_updated": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "crops": {
+      "type": "array",
+      "minItems": 14,
+      "maxItems": 14,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/CropEntity"
+      }
+    },
+    "evidence_registry": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/EvidenceRecord"
+      }
+    }
+  },
+  "definitions": {
+    "QuantitativeAttribute": {
+      "type": "object",
+      "required": [
+        "value",
+        "min_value",
+        "max_value",
+        "unit",
+        "measurement_type",
+        "growth_stage",
+        "region_scope",
+        "confidence",
+        "evidence_ids",
+        "limitations"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "min_value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "max_value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "unit": {
+          "type": "string"
+        },
+        "measurement_type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "measured",
+            "reported_range",
+            "estimate",
+            "derived",
+            null
+          ]
+        },
+        "growth_stage": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "region_scope": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "confidence": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            null
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^EV[0-9]{4}$"
+          }
+        },
+        "limitations": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "QualitativeAttribute": {
+      "type": "object",
+      "required": [
+        "rating",
+        "description",
+        "measurement_type",
+        "growth_stage",
+        "region_scope",
+        "confidence",
+        "evidence_ids",
+        "limitations"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "rating": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "measurement_type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "qualitative",
+            "expert_consensus",
+            "field_observation",
+            null
+          ]
+        },
+        "growth_stage": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "region_scope": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "confidence": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            null
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^EV[0-9]{4}$"
+          }
+        },
+        "limitations": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "BooleanAttribute": {
+      "type": "object",
+      "required": [
+        "value",
+        "notes",
+        "genotype_variation_notes",
+        "measurement_type",
+        "confidence",
+        "evidence_ids",
+        "limitations"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "genotype_variation_notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "measurement_type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "measured",
+            "reported_range",
+            "estimate",
+            "qualitative",
+            "derived",
+            null
+          ]
+        },
+        "confidence": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            null
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^EV[0-9]{4}$"
+          }
+        },
+        "limitations": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "GrowthStageDefinition": {
+      "type": "object",
+      "required": [
+        "stage_name",
+        "bbch_scale_code",
+        "gdd_requirement",
+        "duration_days",
+        "description",
+        "evidence_ids"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "stage_name": {
+          "type": "string"
+        },
+        "bbch_scale_code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gdd_requirement": {
+          "$ref": "#/definitions/QuantitativeAttribute"
+        },
+        "duration_days": {
+          "$ref": "#/definitions/QuantitativeAttribute"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CriticalThermalThreshold": {
+      "type": "object",
+      "required": [
+        "stage_name",
+        "stress_type",
+        "threshold_temperature_c",
+        "physiological_mechanism",
+        "evidence_ids"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "stage_name": {
+          "type": "string"
+        },
+        "stress_type": {
+          "type": "string",
+          "enum": [
+            "heat",
+            "cold",
+            "frost"
+          ]
+        },
+        "threshold_temperature_c": {
+          "$ref": "#/definitions/QuantitativeAttribute"
+        },
+        "physiological_mechanism": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SoilTexturePreference": {
+      "type": "object",
+      "required": [
+        "texture_class",
+        "suitability_rating",
+        "notes",
+        "evidence_ids"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "texture_class": {
+          "type": "string",
+          "enum": [
+            "sand",
+            "loamy_sand",
+            "sandy_loam",
+            "loam",
+            "silt_loam",
+            "silt",
+            "sandy_clay_loam",
+            "clay_loam",
+            "silty_clay_loam",
+            "sandy_clay",
+            "silty_clay",
+            "clay"
+          ]
+        },
+        "suitability_rating": {
+          "type": "string",
+          "enum": [
+            "ideal",
+            "acceptable",
+            "marginal",
+            "unsuitable"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SoilDrainageClassPreference": {
+      "type": "object",
+      "required": [
+        "drainage_class",
+        "suitability_rating",
+        "notes",
+        "evidence_ids"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "drainage_class": {
+          "type": "string",
+          "enum": [
+            "excessively_drained",
+            "somewhat_excessively_drained",
+            "well_drained",
+            "moderately_well_drained",
+            "somewhat_poorly_drained",
+            "poorly_drained",
+            "very_poorly_drained"
+          ]
+        },
+        "suitability_rating": {
+          "type": "string",
+          "enum": [
+            "ideal",
+            "acceptable",
+            "marginal",
+            "unsuitable"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrecedingCropRelationship": {
+      "type": "object",
+      "required": [
+        "preceding_crop_id",
+        "preceding_crop_name",
+        "compatibility_rating",
+        "synergy_mechanisms",
+        "evidence_ids",
+        "limitations"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "preceding_crop_id": {
+          "type": "string",
+          "pattern": "^CRP[0-9]{3}$"
+        },
+        "preceding_crop_name": {
+          "type": "string"
+        },
+        "compatibility_rating": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "unknown",
+            "highly_compatible",
+            "compatible",
+            "caution_conditional",
+            "incompatible",
+            "prohibited",
+            null
+          ]
+        },
+        "synergy_mechanisms": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitations": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "FollowingCropRelationship": {
+      "type": "object",
+      "required": [
+        "following_crop_id",
+        "following_crop_name",
+        "compatibility_rating",
+        "synergy_mechanisms",
+        "evidence_ids",
+        "limitations"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "following_crop_id": {
+          "type": "string",
+          "pattern": "^CRP[0-9]{3}$"
+        },
+        "following_crop_name": {
+          "type": "string"
+        },
+        "compatibility_rating": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "unknown",
+            "highly_compatible",
+            "compatible",
+            "caution_conditional",
+            "incompatible",
+            "prohibited",
+            null
+          ]
+        },
+        "synergy_mechanisms": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitations": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "IncompatibleRotation": {
+      "type": "object",
+      "required": [
+        "crop_id",
+        "crop_name",
+        "relationship_direction",
+        "restriction_reason",
+        "evidence_ids",
+        "limitations"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "crop_id": {
+          "type": "string",
+          "pattern": "^CRP[0-9]{3}$"
+        },
+        "crop_name": {
+          "type": "string"
+        },
+        "relationship_direction": {
+          "type": "string",
+          "enum": [
+            "preceding",
+            "following",
+            "both"
+          ]
+        },
+        "restriction_reason": {
+          "type": "string"
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitations": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "PestDiseaseBreak": {
+      "type": "object",
+      "required": [
+        "target_pest_or_pathogen",
+        "pest_type",
+        "target_crops_benefited",
+        "break_mechanism",
+        "evidence_ids",
+        "limitations"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "target_pest_or_pathogen": {
+          "type": "string"
+        },
+        "pest_type": {
+          "type": "string",
+          "enum": [
+            "fungal",
+            "nematode",
+            "insect",
+            "viral",
+            "bacterial",
+            "weed"
+          ]
+        },
+        "target_crops_benefited": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "break_mechanism": {
+          "type": "string"
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitations": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "SharedPestRisk": {
+      "type": "object",
+      "required": [
+        "target_pest_or_pathogen",
+        "pest_type",
+        "shared_with_crop_ids",
+        "risk_mitigation",
+        "evidence_ids",
+        "limitations"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "target_pest_or_pathogen": {
+          "type": "string"
+        },
+        "pest_type": {
+          "type": "string",
+          "enum": [
+            "fungal",
+            "nematode",
+            "insect",
+            "viral",
+            "bacterial",
+            "weed"
+          ]
+        },
+        "shared_with_crop_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "risk_mitigation": {
+          "type": "string"
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitations": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "HerbicideCarryoverSensitivity": {
+      "type": "object",
+      "required": [
+        "active_ingredient",
+        "trade_name_example",
+        "epa_registration_number",
+        "minimum_plant_back_interval_months",
+        "soil_ph_restriction_threshold",
+        "label_specific_restriction",
+        "evidence_ids",
+        "limitations"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "active_ingredient": {
+          "type": "string"
+        },
+        "trade_name_example": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "epa_registration_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "minimum_plant_back_interval_months": {
+          "$ref": "#/definitions/QuantitativeAttribute"
+        },
+        "soil_ph_restriction_threshold": {
+          "$ref": "#/definitions/QuantitativeAttribute"
+        },
+        "label_specific_restriction": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitations": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "RegionalSuitabilityProfile": {
+      "type": "object",
+      "required": [
+        "region_id",
+        "region_name",
+        "states_included",
+        "adaptation_tier",
+        "production_system",
+        "typical_planting_window",
+        "typical_harvest_window",
+        "regional_limitations",
+        "evidence_ids"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "region_id": {
+          "type": "string"
+        },
+        "region_name": {
+          "type": "string"
+        },
+        "states_included": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+          }
+        },
+        "adaptation_tier": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "primary_core",
+            "secondary_adapted",
+            "marginal_niche",
+            "unadapted",
+            "unknown",
+            null
+          ]
+        },
+        "production_system": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "rainfed",
+            "irrigated",
+            "both",
+            "dryland_fallow",
+            "unknown",
+            null
+          ]
+        },
+        "typical_planting_window": {
+          "type": "object",
+          "required": [
+            "start_month_day",
+            "end_month_day",
+            "is_approximate_range"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "start_month_day": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+            },
+            "end_month_day": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+            },
+            "is_approximate_range": {
+              "type": "boolean"
+            }
+          }
+        },
+        "typical_harvest_window": {
+          "type": "object",
+          "required": [
+            "start_month_day",
+            "end_month_day",
+            "is_approximate_range"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "start_month_day": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+            },
+            "end_month_day": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+            },
+            "is_approximate_range": {
+              "type": "boolean"
+            }
+          }
+        },
+        "regional_limitations": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EvidenceRecord": {
+      "type": "object",
+      "required": [
+        "evidence_id",
+        "crop_ids",
+        "related_domain",
+        "attribute_or_claim",
+        "recorded_value_or_summary",
+        "source_organization",
+        "source_title",
+        "author_or_institution",
+        "publication_year",
+        "publication_date",
+        "access_date",
+        "source_url_or_doi",
+        "citation_location",
+        "exact_supporting_context",
+        "geographic_scope",
+        "variety_scope",
+        "source_quality",
+        "data_availability",
+        "conditions_and_assumptions",
+        "limitations"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "evidence_id": {
+          "type": "string",
+          "pattern": "^EV[0-9]{4}$"
+        },
+        "crop_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^CRP[0-9]{3}$"
+          }
+        },
+        "related_domain": {
+          "type": "string"
+        },
+        "attribute_or_claim": {
+          "type": "string"
+        },
+        "recorded_value_or_summary": {
+          "type": "string"
+        },
+        "source_organization": {
+          "type": "string"
+        },
+        "source_title": {
+          "type": "string"
+        },
+        "author_or_institution": {
+          "type": "string"
+        },
+        "publication_year": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "publication_date": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "access_date": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_url_or_doi": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "citation_location": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exact_supporting_context": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "geographic_scope": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "variety_scope": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_quality": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            null
+          ]
+        },
+        "data_availability": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "conditions_and_assumptions": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "limitations": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "CropEntity": {
+      "type": "object",
+      "required": [
+        "crop_id",
+        "crop_identity",
+        "growing_duration",
+        "temperature_requirements",
+        "rainfall_requirements",
+        "water_demand_and_tolerance",
+        "soil_preferences",
+        "root_and_nutrients",
+        "nitrogen_and_biomass",
+        "rotation_compatibility",
+        "regional_suitability"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "crop_id": {
+          "type": "string",
+          "pattern": "^CRP(00[1-9]|01[0-4])$"
+        },
+        "crop_identity": {
+          "type": "object",
+          "required": [
+            "common_name",
+            "scientific_name",
+            "taxonomic_authority",
+            "botanical_family",
+            "crop_group",
+            "portfolio_role",
+            "lifecycle_class",
+            "growth_habit",
+            "functional_roles",
+            "production_roles",
+            "can_serve_as_cover_crop",
+            "commercial_harvest_feasible",
+            "primary_harvest_products",
+            "is_cover_crop",
+            "commercial_harvest_intended",
+            "usda_plants_symbol"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "common_name": {
+              "type": "string"
+            },
+            "scientific_name": {
+              "type": "string"
+            },
+            "taxonomic_authority": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "botanical_family": {
+              "type": "string"
+            },
+            "crop_group": {
+              "type": "string"
+            },
+            "portfolio_role": {
+              "type": "string",
+              "enum": [
+                "primary_commercial",
+                "rotation_cover"
+              ]
+            },
+            "lifecycle_class": {
+              "type": "string",
+              "enum": [
+                "Annual",
+                "Biennial",
+                "Perennial"
+              ]
+            },
+            "growth_habit": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "functional_roles": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "production_roles": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "can_serve_as_cover_crop": {
+              "type": "boolean"
+            },
+            "commercial_harvest_feasible": {
+              "type": "boolean"
+            },
+            "primary_harvest_products": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "is_cover_crop": {
+              "type": "boolean"
+            },
+            "commercial_harvest_intended": {
+              "type": "boolean"
+            },
+            "usda_plants_symbol": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "growing_duration": {
+          "type": "object",
+          "required": [
+            "active_growth_duration_days",
+            "calendar_occupancy_duration_days",
+            "growing_degree_days_base_temp_c",
+            "growing_degree_days_accumulated",
+            "vernalization_required",
+            "vernalization_duration_days",
+            "photoperiod_sensitivity",
+            "growth_stages"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "active_growth_duration_days": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "calendar_occupancy_duration_days": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "growing_degree_days_base_temp_c": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "growing_degree_days_accumulated": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "vernalization_required": {
+              "$ref": "#/definitions/BooleanAttribute"
+            },
+            "vernalization_duration_days": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "photoperiod_sensitivity": {
+              "$ref": "#/definitions/QualitativeAttribute"
+            },
+            "growth_stages": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GrowthStageDefinition"
+              }
+            }
+          }
+        },
+        "temperature_requirements": {
+          "type": "object",
+          "required": [
+            "base_temperature_c",
+            "optimal_temperature_min_c",
+            "optimal_temperature_max_c",
+            "absolute_min_survival_c",
+            "absolute_max_survival_c",
+            "frost_tolerance",
+            "heat_stress_threshold_c",
+            "critical_thermal_thresholds"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "base_temperature_c": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "optimal_temperature_min_c": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "optimal_temperature_max_c": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "absolute_min_survival_c": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "absolute_max_survival_c": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "frost_tolerance": {
+              "$ref": "#/definitions/QualitativeAttribute"
+            },
+            "heat_stress_threshold_c": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "critical_thermal_thresholds": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CriticalThermalThreshold"
+              }
+            }
+          }
+        },
+        "rainfall_requirements": {
+          "type": "object",
+          "required": [
+            "seasonal_precipitation_min_mm",
+            "seasonal_precipitation_max_mm",
+            "seasonal_effective_precipitation_min_mm",
+            "seasonal_effective_precipitation_max_mm",
+            "seasonal_effective_precipitation_optimal_min_mm",
+            "seasonal_effective_precipitation_optimal_max_mm",
+            "soil_water_availability_context",
+            "irrigation_requirement_context"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "seasonal_precipitation_min_mm": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "seasonal_precipitation_max_mm": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "seasonal_effective_precipitation_min_mm": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "seasonal_effective_precipitation_max_mm": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "seasonal_effective_precipitation_optimal_min_mm": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "seasonal_effective_precipitation_optimal_max_mm": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "soil_water_availability_context": {
+              "$ref": "#/definitions/QualitativeAttribute"
+            },
+            "irrigation_requirement_context": {
+              "$ref": "#/definitions/QualitativeAttribute"
+            }
+          }
+        },
+        "water_demand_and_tolerance": {
+          "type": "object",
+          "required": [
+            "seasonal_consumptive_water_use_etc_mm",
+            "peak_daily_water_use_mm_day",
+            "net_irrigation_requirement_mm",
+            "water_use_efficiency_kg_per_m3",
+            "drought_tolerance",
+            "heat_tolerance",
+            "waterlogging_tolerance"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "seasonal_consumptive_water_use_etc_mm": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "peak_daily_water_use_mm_day": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "net_irrigation_requirement_mm": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "water_use_efficiency_kg_per_m3": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "drought_tolerance": {
+              "$ref": "#/definitions/QualitativeAttribute"
+            },
+            "heat_tolerance": {
+              "$ref": "#/definitions/QualitativeAttribute"
+            },
+            "waterlogging_tolerance": {
+              "$ref": "#/definitions/QualitativeAttribute"
+            }
+          }
+        },
+        "soil_preferences": {
+          "type": "object",
+          "required": [
+            "soil_ph_optimal_min",
+            "soil_ph_optimal_max",
+            "soil_ph_tolerated_min",
+            "soil_ph_tolerated_max",
+            "acid_soil_tolerance",
+            "alkaline_soil_tolerance",
+            "salinity_tolerance_ec_e_threshold_ds_m",
+            "salinity_yield_decline_slope_percent",
+            "salinity_tolerance_category",
+            "soil_texture_preferences",
+            "soil_drainage_class_preferences"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "soil_ph_optimal_min": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "soil_ph_optimal_max": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "soil_ph_tolerated_min": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "soil_ph_tolerated_max": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "acid_soil_tolerance": {
+              "$ref": "#/definitions/QualitativeAttribute"
+            },
+            "alkaline_soil_tolerance": {
+              "$ref": "#/definitions/QualitativeAttribute"
+            },
+            "salinity_tolerance_ec_e_threshold_ds_m": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "salinity_yield_decline_slope_percent": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "salinity_tolerance_category": {
+              "$ref": "#/definitions/QualitativeAttribute"
+            },
+            "soil_texture_preferences": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SoilTexturePreference"
+              }
+            },
+            "soil_drainage_class_preferences": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SoilDrainageClassPreference"
+              }
+            }
+          }
+        },
+        "root_and_nutrients": {
+          "type": "object",
+          "required": [
+            "effective_water_extraction_depth_cm",
+            "maximum_anatomical_root_depth_cm",
+            "root_system_architecture",
+            "compaction_alleviation_potential",
+            "nitrogen_uptake_per_unit_yield",
+            "phosphorus_removal_per_unit_yield",
+            "potassium_removal_per_unit_yield",
+            "total_seasonal_n_uptake_kg_ha",
+            "total_seasonal_p2o5_uptake_kg_ha",
+            "total_seasonal_k2o_uptake_kg_ha"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "effective_water_extraction_depth_cm": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "maximum_anatomical_root_depth_cm": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "root_system_architecture": {
+              "$ref": "#/definitions/QualitativeAttribute"
+            },
+            "compaction_alleviation_potential": {
+              "$ref": "#/definitions/QualitativeAttribute"
+            },
+            "nitrogen_uptake_per_unit_yield": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "phosphorus_removal_per_unit_yield": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "potassium_removal_per_unit_yield": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "total_seasonal_n_uptake_kg_ha": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "total_seasonal_p2o5_uptake_kg_ha": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            },
+            "total_seasonal_k2o_uptake_kg_ha": {
+              "$ref": "#/definitions/QuantitativeAttribute"
+            }
+          }
+        },
+        "nitrogen_and_biomass": {
+          "type": "object",
+          "required": [
+            "biological_nitrogen_fixation",
+            "residue_and_harvest_nitrogen_dynamics",
+            "successor_nitrogen_credit",
+            "biomass_and_soil_cover"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "biological_nitrogen_fixation": {
+              "type": "object",
+              "required": [
+                "has_symbiotic_fixation_capacity",
+                "rhizobium_symbiont_species",
+                "percent_n_derived_from_atmosphere_ndfa",
+                "total_gross_n_fixed_kg_ha",
+                "effective_fixation_conditions"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "has_symbiotic_fixation_capacity": {
+                  "$ref": "#/definitions/BooleanAttribute"
+                },
+                "rhizobium_symbiont_species": {
+                  "$ref": "#/definitions/QualitativeAttribute"
+                },
+                "percent_n_derived_from_atmosphere_ndfa": {
+                  "$ref": "#/definitions/QuantitativeAttribute"
+                },
+                "total_gross_n_fixed_kg_ha": {
+                  "$ref": "#/definitions/QuantitativeAttribute"
+                },
+                "effective_fixation_conditions": {
+                  "$ref": "#/definitions/QualitativeAttribute"
+                }
+              }
+            },
+            "residue_and_harvest_nitrogen_dynamics": {
+              "type": "object",
+              "required": [
+                "residue_nitrogen_concentration_percent",
+                "residue_nitrogen_content_kg_ha",
+                "harvested_biomass_nitrogen_export_kg_ha",
+                "net_soil_nitrogen_balance_kg_ha",
+                "nitrogen_balance_assessment"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "residue_nitrogen_concentration_percent": {
+                  "$ref": "#/definitions/QuantitativeAttribute"
+                },
+                "residue_nitrogen_content_kg_ha": {
+                  "$ref": "#/definitions/QuantitativeAttribute"
+                },
+                "harvested_biomass_nitrogen_export_kg_ha": {
+                  "$ref": "#/definitions/QuantitativeAttribute"
+                },
+                "net_soil_nitrogen_balance_kg_ha": {
+                  "$ref": "#/definitions/QuantitativeAttribute"
+                },
+                "nitrogen_balance_assessment": {
+                  "$ref": "#/definitions/QualitativeAttribute"
+                }
+              }
+            },
+            "successor_nitrogen_credit": {
+              "type": "object",
+              "required": [
+                "fertilizer_equivalent_n_credit_lb_ac",
+                "fertilizer_equivalent_n_credit_kg_ha",
+                "credit_mechanism",
+                "release_rate_timing"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "fertilizer_equivalent_n_credit_lb_ac": {
+                  "$ref": "#/definitions/QuantitativeAttribute"
+                },
+                "fertilizer_equivalent_n_credit_kg_ha": {
+                  "$ref": "#/definitions/QuantitativeAttribute"
+                },
+                "credit_mechanism": {
+                  "$ref": "#/definitions/QualitativeAttribute"
+                },
+                "release_rate_timing": {
+                  "$ref": "#/definitions/QualitativeAttribute"
+                }
+              }
+            },
+            "biomass_and_soil_cover": {
+              "type": "object",
+              "required": [
+                "aboveground_dry_matter_biomass_kg_ha",
+                "root_dry_matter_biomass_kg_ha",
+                "carbon_to_nitrogen_c_n_ratio",
+                "residue_decomposition_rate",
+                "ground_cover_rate",
+                "erosion_reduction_potential",
+                "nitrate_scavenging_efficiency"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "aboveground_dry_matter_biomass_kg_ha": {
+                  "$ref": "#/definitions/QuantitativeAttribute"
+                },
+                "root_dry_matter_biomass_kg_ha": {
+                  "$ref": "#/definitions/QuantitativeAttribute"
+                },
+                "carbon_to_nitrogen_c_n_ratio": {
+                  "$ref": "#/definitions/QuantitativeAttribute"
+                },
+                "residue_decomposition_rate": {
+                  "$ref": "#/definitions/QualitativeAttribute"
+                },
+                "ground_cover_rate": {
+                  "$ref": "#/definitions/QualitativeAttribute"
+                },
+                "erosion_reduction_potential": {
+                  "$ref": "#/definitions/QualitativeAttribute"
+                },
+                "nitrate_scavenging_efficiency": {
+                  "$ref": "#/definitions/QualitativeAttribute"
+                }
+              }
+            }
+          }
+        },
+        "rotation_compatibility": {
+          "type": "object",
+          "required": [
+            "compatible_preceding_crops",
+            "compatible_following_crops",
+            "incompatible_rotations",
+            "pest_disease_break_potential",
+            "shared_pest_disease_risks",
+            "weed_suppression_potential",
+            "herbicide_carryover_sensitivities",
+            "continuous_monoculture_penalty",
+            "cover_crop_niche"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "compatible_preceding_crops": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PrecedingCropRelationship"
+              }
+            },
+            "compatible_following_crops": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FollowingCropRelationship"
+              }
+            },
+            "incompatible_rotations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IncompatibleRotation"
+              }
+            },
+            "pest_disease_break_potential": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PestDiseaseBreak"
+              }
+            },
+            "shared_pest_disease_risks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SharedPestRisk"
+              }
+            },
+            "weed_suppression_potential": {
+              "$ref": "#/definitions/QualitativeAttribute"
+            },
+            "herbicide_carryover_sensitivities": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HerbicideCarryoverSensitivity"
+              }
+            },
+            "continuous_monoculture_penalty": {
+              "$ref": "#/definitions/QualitativeAttribute"
+            },
+            "cover_crop_niche": {
+              "$ref": "#/definitions/QualitativeAttribute"
+            }
+          }
+        },
+        "regional_suitability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegionalSuitabilityProfile"
+          }
+        }
+      }
+    }
+  }
+}

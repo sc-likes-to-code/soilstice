@@ -3,11 +3,12 @@
  * UI code depends ONLY on these interfaces (obtained via `@/services`), never on an implementation.
  */
 import type {
-  ApiResponse, ClimateProfile, CreateFieldRequest, CreateFieldResponse, CropCode, CropHistory, CropOption,
-  DataCoverage, DatasetDescriptor, EnvironmentalIndicator, EvidenceItem, EvidenceKind, Farm, FarmOverview, Field,
-  FieldProcessingStatus, FieldProfile, FieldSource, FieldSummary, IndicatorCategory, ProcessingJob,
-  ResilienceProfile, RotationRecommendation, RotationScenario, SoilProfile, TerrainProfile, UpsertScenarioRequest,
-  UUID, VegetationIndex, VegetationProfile,
+  ApiResponse, ClimateProfile, CreateFieldRequest, CreateFieldResponse, CropCode, CropEvidenceRecord,
+  CropHistory, CropOption, CropProfile, CropProfileSummary, DataCoverage, DatasetDescriptor,
+  DirectedRotationTransition, EnvironmentalIndicator, EvidenceItem, EvidenceKind, Farm, FarmOverview, Field,
+  FieldProcessingStatus, FieldProfile, FieldSource, FieldSummary, IndicatorCategory, KnowledgeBaseMetadata,
+  ProcessingJob, ResilienceProfile, RotationRecommendation, RotationScenario, SoilProfile, TerrainProfile,
+  UpsertScenarioRequest, UUID, VegetationIndex, VegetationProfile,
 } from "@/types/contracts";
 
 export interface FarmService {
@@ -37,6 +38,13 @@ export interface EnvironmentService {
 
 export interface RotationService {
   listCrops(): Promise<ApiResponse<CropOption[]>>;
+  listCanonicalCrops(params?: { role?: string; family?: string }): Promise<ApiResponse<CropProfileSummary[]>>;
+  getCropProfile(cropId: string | number): Promise<ApiResponse<CropProfile>>;
+  getCropAttributes(cropId: string | number, params?: { domain?: string; attribute?: string }): Promise<ApiResponse<Record<string, unknown>>>;
+  getRotationCompatibility(previousCrop: string | number, nextCrop: string | number): Promise<ApiResponse<DirectedRotationTransition>>;
+  listRotationMatrix(cropId?: string | number): Promise<ApiResponse<DirectedRotationTransition[]>>;
+  getCropEvidence(evidenceId: string): Promise<ApiResponse<CropEvidenceRecord>>;
+  getKbMetadata(): Promise<ApiResponse<KnowledgeBaseMetadata>>;
   getCropHistory(fieldId: UUID): Promise<ApiResponse<CropHistory>>;
   getRecommendation(fieldId: UUID, seasonYear: number): Promise<ApiResponse<RotationRecommendation>>;
   listScenarios(fieldId: UUID): Promise<ApiResponse<RotationScenario[]>>;

@@ -4,6 +4,23 @@
  */
 
 export interface paths {
+    "/api/v1/canonical-crops": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Canonical Crops */
+        get: operations["listCanonicalCrops"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/crops": {
         parameters: {
             query?: never;
@@ -21,6 +38,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/crops/{crop_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Crop Profile */
+        get: operations["getCropProfile"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/crops/{crop_id}/attributes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Crop Attributes */
+        get: operations["getCropAttributes"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/datasets": {
         parameters: {
             query?: never;
@@ -30,6 +81,23 @@ export interface paths {
         };
         /** List Datasets */
         get: operations["listDatasets"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/evidence/{evidence_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Crop Evidence */
+        get: operations["getCropEvidence"];
         put?: never;
         post?: never;
         delete?: never;
@@ -365,6 +433,57 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/kb/metadata": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Kb Metadata */
+        get: operations["getKbMetadata"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/rotations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Rotation Compatibility */
+        get: operations["getRotationCompatibility"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/rotations/matrix": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Rotation Matrix */
+        get: operations["listRotationMatrix"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/scenarios/{scenario_id}": {
         parameters: {
             query?: never;
@@ -436,9 +555,19 @@ export interface components {
             data: components["schemas"]["CreateFieldResponse"];
             meta: components["schemas"]["ResponseMeta"];
         };
+        /** ApiResponse[CropEvidenceRecord] */
+        ApiResponse_CropEvidenceRecord_: {
+            data: components["schemas"]["CropEvidenceRecord"];
+            meta: components["schemas"]["ResponseMeta"];
+        };
         /** ApiResponse[CropHistory] */
         ApiResponse_CropHistory_: {
             data: components["schemas"]["CropHistory"];
+            meta: components["schemas"]["ResponseMeta"];
+        };
+        /** ApiResponse[CropProfile] */
+        ApiResponse_CropProfile_: {
+            data: components["schemas"]["CropProfile"];
             meta: components["schemas"]["ResponseMeta"];
         };
         /** ApiResponse[DataCoverage] */
@@ -449,6 +578,11 @@ export interface components {
         /** ApiResponse[Deleted] */
         ApiResponse_Deleted_: {
             data: components["schemas"]["Deleted"];
+            meta: components["schemas"]["ResponseMeta"];
+        };
+        /** ApiResponse[DirectedRotationTransition] */
+        ApiResponse_DirectedRotationTransition_: {
+            data: components["schemas"]["DirectedRotationTransition"];
             meta: components["schemas"]["ResponseMeta"];
         };
         /** ApiResponse[FarmOverview] */
@@ -474,6 +608,11 @@ export interface components {
         /** ApiResponse[Health] */
         ApiResponse_Health_: {
             data: components["schemas"]["Health"];
+            meta: components["schemas"]["ResponseMeta"];
+        };
+        /** ApiResponse[KnowledgeBaseMetadata] */
+        ApiResponse_KnowledgeBaseMetadata_: {
+            data: components["schemas"]["KnowledgeBaseMetadata"];
             meta: components["schemas"]["ResponseMeta"];
         };
         /** ApiResponse[ProcessingJob] */
@@ -511,16 +650,36 @@ export interface components {
             data: components["schemas"]["VegetationProfile"];
             meta: components["schemas"]["ResponseMeta"];
         };
+        /** ApiResponse[dict[str, Any]] */
+        ApiResponse_dict_str__Any__: {
+            /** Data */
+            data: {
+                [key: string]: unknown;
+            };
+            meta: components["schemas"]["ResponseMeta"];
+        };
         /** ApiResponse[list[CropOption]] */
         ApiResponse_list_CropOption__: {
             /** Data */
             data: components["schemas"]["CropOption"][];
             meta: components["schemas"]["ResponseMeta"];
         };
+        /** ApiResponse[list[CropProfileSummary]] */
+        ApiResponse_list_CropProfileSummary__: {
+            /** Data */
+            data: components["schemas"]["CropProfileSummary"][];
+            meta: components["schemas"]["ResponseMeta"];
+        };
         /** ApiResponse[list[DatasetDescriptor]] */
         ApiResponse_list_DatasetDescriptor__: {
             /** Data */
             data: components["schemas"]["DatasetDescriptor"][];
+            meta: components["schemas"]["ResponseMeta"];
+        };
+        /** ApiResponse[list[DirectedRotationTransition]] */
+        ApiResponse_list_DirectedRotationTransition__: {
+            /** Data */
+            data: components["schemas"]["DirectedRotationTransition"][];
             meta: components["schemas"]["ResponseMeta"];
         };
         /** ApiResponse[list[EnvironmentalIndicator]] */
@@ -613,6 +772,49 @@ export interface components {
             field: components["schemas"]["Field"];
             job: components["schemas"]["ProcessingJob"];
         };
+        /** CropEvidenceRecord */
+        CropEvidenceRecord: {
+            /** Access Date */
+            access_date: string | null;
+            /** Attribute Or Claim */
+            attribute_or_claim: string;
+            /** Author Or Institution */
+            author_or_institution: string;
+            /** Citation Location */
+            citation_location: string | null;
+            /** Conditions And Assumptions */
+            conditions_and_assumptions: string | null;
+            /** Crop Ids */
+            crop_ids: string[];
+            /** Data Availability */
+            data_availability: string | null;
+            /** Evidence Id */
+            evidence_id: string;
+            /** Exact Supporting Context */
+            exact_supporting_context: string | null;
+            /** Geographic Scope */
+            geographic_scope: string | null;
+            /** Limitations */
+            limitations: string | null;
+            /** Publication Date */
+            publication_date: string | null;
+            /** Publication Year */
+            publication_year: number | null;
+            /** Recorded Value Or Summary */
+            recorded_value_or_summary: string | null;
+            /** Related Domain */
+            related_domain: string;
+            /** Source Organization */
+            source_organization: string;
+            /** Source Quality */
+            source_quality: string;
+            /** Source Title */
+            source_title: string;
+            /** Source Url Or Doi */
+            source_url_or_doi: string | null;
+            /** Variety Scope */
+            variety_scope: string | null;
+        };
         /** CropHistory */
         CropHistory: {
             /**
@@ -640,6 +842,104 @@ export interface components {
             kb_version: string;
             /** Name */
             name: string;
+        };
+        /** CropProfile */
+        CropProfile: {
+            /** Botanical Family */
+            botanical_family: string;
+            /** Can Serve As Cover Crop */
+            can_serve_as_cover_crop: boolean;
+            /** Cdl Code */
+            cdl_code: number | null;
+            /** Commercial Harvest Feasible */
+            commercial_harvest_feasible: boolean;
+            /** Common Name */
+            common_name: string;
+            /** Crop Group */
+            crop_group: string;
+            /** Crop Id */
+            crop_id: string;
+            /** Crop Identity */
+            crop_identity: {
+                [key: string]: unknown;
+            };
+            /** Evidence Ids */
+            evidence_ids: string[];
+            /** Growing Duration */
+            growing_duration: {
+                [key: string]: unknown;
+            };
+            /** Is Cover Crop */
+            is_cover_crop: boolean;
+            /** Lifecycle Class */
+            lifecycle_class: string;
+            /** Nitrogen And Biomass */
+            nitrogen_and_biomass: {
+                [key: string]: unknown;
+            };
+            /** Portfolio Role */
+            portfolio_role: string;
+            /** Rainfall Requirements */
+            rainfall_requirements: {
+                [key: string]: unknown;
+            };
+            /** Regional Suitability */
+            regional_suitability: {
+                [key: string]: unknown;
+            }[];
+            /** Root And Nutrients */
+            root_and_nutrients: {
+                [key: string]: unknown;
+            };
+            /** Rotation Compatibility */
+            rotation_compatibility: {
+                [key: string]: unknown;
+            };
+            /** Scientific Name */
+            scientific_name: string;
+            /** Soil Preferences */
+            soil_preferences: {
+                [key: string]: unknown;
+            };
+            /** Taxonomic Authority */
+            taxonomic_authority: string | null;
+            /** Temperature Requirements */
+            temperature_requirements: {
+                [key: string]: unknown;
+            };
+            /** Usda Plants Symbol */
+            usda_plants_symbol: string | null;
+            /** Water Demand And Tolerance */
+            water_demand_and_tolerance: {
+                [key: string]: unknown;
+            };
+        };
+        /** CropProfileSummary */
+        CropProfileSummary: {
+            /** Botanical Family */
+            botanical_family: string;
+            /** Can Serve As Cover Crop */
+            can_serve_as_cover_crop: boolean;
+            /** Cdl Code */
+            cdl_code: number | null;
+            /** Commercial Harvest Feasible */
+            commercial_harvest_feasible: boolean;
+            /** Common Name */
+            common_name: string;
+            /** Crop Group */
+            crop_group: string;
+            /** Crop Id */
+            crop_id: string;
+            /** Is Cover Crop */
+            is_cover_crop: boolean;
+            /** Lifecycle Class */
+            lifecycle_class: string;
+            /** Portfolio Role */
+            portfolio_role: string;
+            /** Scientific Name */
+            scientific_name: string;
+            /** Usda Plants Symbol */
+            usda_plants_symbol: string | null;
         };
         /** CropRef */
         CropRef: {
@@ -788,6 +1088,37 @@ export interface components {
              * @constant
              */
             deleted: true;
+        };
+        /** DirectedRotationTransition */
+        DirectedRotationTransition: {
+            /** Compatibility Rating */
+            compatibility_rating: string;
+            /** Disease Break Potential */
+            disease_break_potential: string | null;
+            /** Evidence Ids */
+            evidence_ids: string[];
+            /** Following Crop Id */
+            following_crop_id: string;
+            /** Following Crop Name */
+            following_crop_name: string;
+            /** Herbicide Carryover Risks */
+            herbicide_carryover_risks: string | null;
+            /** Is Monoculture */
+            is_monoculture: boolean;
+            /** Limitations */
+            limitations: string | null;
+            /** Monoculture Risk */
+            monoculture_risk: string | null;
+            /** Preceding Crop Id */
+            preceding_crop_id: string;
+            /** Preceding Crop Name */
+            preceding_crop_name: string;
+            /** Rotational Niche */
+            rotational_niche: string | null;
+            /** Shared Pest Disease Risks */
+            shared_pest_disease_risks: string | null;
+            /** Synergy Mechanisms */
+            synergy_mechanisms: string | null;
         };
         /** EnvironmentalIndicator */
         EnvironmentalIndicator: {
@@ -1095,6 +1426,34 @@ export interface components {
              * @enum {string}
              */
             status: "queued" | "running" | "succeeded" | "partial" | "failed";
+        };
+        /** KnowledgeBaseMetadata */
+        KnowledgeBaseMetadata: {
+            /** Canonical Crop Count */
+            canonical_crop_count: number;
+            /** Dataset Name */
+            dataset_name: string;
+            /** Description */
+            description: string;
+            /**
+             * Directed Rotation Transitions Count
+             * @default 196
+             */
+            directed_rotation_transitions_count: number;
+            /** Effective Date */
+            effective_date: string;
+            /** Evidence Records Count */
+            evidence_records_count: number;
+            /** Geographic Scope */
+            geographic_scope: string;
+            /** Last Updated */
+            last_updated: string | null;
+            /** Notes */
+            notes: string | null;
+            /** Schema Version */
+            schema_version: string;
+            /** Stage */
+            stage: string;
         };
         /** LatestCrop */
         LatestCrop: {
@@ -1824,6 +2183,83 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    listCanonicalCrops: {
+        parameters: {
+            query?: {
+                role?: string | null;
+                family?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_list_CropProfileSummary__"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Content */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
     listCrops: {
         parameters: {
             query?: never;
@@ -1898,6 +2334,161 @@ export interface operations {
             };
         };
     };
+    getCropProfile: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                crop_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_CropProfile_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Content */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    getCropAttributes: {
+        parameters: {
+            query?: {
+                domain?: string | null;
+                attribute?: string | null;
+            };
+            header?: never;
+            path: {
+                crop_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_dict_str__Any__"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Content */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
     listDatasets: {
         parameters: {
             query?: never;
@@ -1914,6 +2505,82 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ApiResponse_list_DatasetDescriptor__"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Content */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    getCropEvidence: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                evidence_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_CropEvidenceRecord_"];
                 };
             };
             /** @description Not Found */
@@ -3691,6 +4358,235 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ApiResponse_ProcessingJob_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Content */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    getKbMetadata: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_KnowledgeBaseMetadata_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Content */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    getRotationCompatibility: {
+        parameters: {
+            query: {
+                /** @description Preceding crop ID (e.g. CRP014) or CDL code (e.g. 1) */
+                previous_crop: string;
+                /** @description Following crop ID (e.g. CRP001) or CDL code (e.g. 1) */
+                next_crop: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_DirectedRotationTransition_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Content */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    listRotationMatrix: {
+        parameters: {
+            query?: {
+                crop_id?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_list_DirectedRotationTransition__"];
                 };
             };
             /** @description Not Found */

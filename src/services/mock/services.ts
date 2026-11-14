@@ -267,6 +267,26 @@ export function createMockServices(): Services {
     },
     rotation: {
       listCrops: () => respond("rotation.listCrops", () => CROPS),
+      listCanonicalCrops: () => respond("rotation.listCanonicalCrops", () => [
+        { crop_id: "CRP001", cdl_code: 1, common_name: "Corn (Maize)", scientific_name: "Zea mays L.", botanical_family: "Poaceae", crop_group: "Cereal", portfolio_role: "primary_commercial", lifecycle_class: "Annual", is_cover_crop: false, can_serve_as_cover_crop: false, commercial_harvest_feasible: true, usda_plants_symbol: "ZEMA" },
+        { crop_id: "CRP002", cdl_code: 5, common_name: "Soybean", scientific_name: "Glycine max (L.) Merr.", botanical_family: "Fabaceae", crop_group: "Legume", portfolio_role: "primary_commercial", lifecycle_class: "Annual", is_cover_crop: false, can_serve_as_cover_crop: false, commercial_harvest_feasible: true, usda_plants_symbol: "GLMA4" },
+        { crop_id: "CRP003", cdl_code: 24, common_name: "Winter Wheat", scientific_name: "Triticum aestivum L.", botanical_family: "Poaceae", crop_group: "Cereal", portfolio_role: "primary_commercial", lifecycle_class: "Annual", is_cover_crop: false, can_serve_as_cover_crop: false, commercial_harvest_feasible: true, usda_plants_symbol: "TRAE" },
+      ]),
+      getCropProfile: (cropId) => respond("rotation.getCropProfile", () => ({
+        crop_id: String(cropId), cdl_code: 1, common_name: "Corn (Maize)", scientific_name: "Zea mays L.", taxonomic_authority: "L.", botanical_family: "Poaceae", crop_group: "Cereal", portfolio_role: "primary_commercial", lifecycle_class: "Annual", is_cover_crop: false, can_serve_as_cover_crop: false, commercial_harvest_feasible: true, usda_plants_symbol: "ZEMA",
+        crop_identity: {}, growing_duration: {}, temperature_requirements: {}, rainfall_requirements: {}, water_demand_and_tolerance: {}, soil_preferences: {}, root_and_nutrients: {}, nitrogen_and_biomass: {}, rotation_compatibility: {}, regional_suitability: [], evidence_ids: ["EV0001", "EV0003"],
+      })),
+      getCropAttributes: () => respond("rotation.getCropAttributes", () => ({})),
+      getRotationCompatibility: (previousCrop, nextCrop) => respond("rotation.getRotationCompatibility", () => ({
+        preceding_crop_id: String(previousCrop), preceding_crop_name: "Preceding", following_crop_id: String(nextCrop), following_crop_name: "Following", compatibility_rating: "compatible", is_monoculture: false, monoculture_risk: null, synergy_mechanisms: "Standard rotation synergy", disease_break_potential: null, shared_pest_disease_risks: null, herbicide_carryover_risks: null, rotational_niche: null, evidence_ids: [], limitations: null,
+      })),
+      listRotationMatrix: () => respond("rotation.listRotationMatrix", () => []),
+      getCropEvidence: (evidenceId) => respond("rotation.getCropEvidence", () => ({
+        evidence_id: evidenceId, crop_ids: ["CRP001"], related_domain: "crop_identity", attribute_or_claim: "Mock Evidence", recorded_value_or_summary: "Mock summary", source_organization: "USDA", source_title: "Mock Title", author_or_institution: "USDA", publication_year: 2026, publication_date: null, access_date: "2026-11-14", source_url_or_doi: null, citation_location: null, exact_supporting_context: null, geographic_scope: "CONUS", variety_scope: null, source_quality: "high", data_availability: "Available", conditions_and_assumptions: null, limitations: null,
+      })),
+      getKbMetadata: () => respond("rotation.getKbMetadata", () => ({
+        dataset_name: "SOILSTICE Backend Crop Knowledge Base", schema_version: "1.4.1-REMEDIATED", stage: "Production", effective_date: "2026-11-14", geographic_scope: "CONUS", canonical_crop_count: 14, evidence_records_count: 212, directed_rotation_transitions_count: 196, description: "Canonical Crop KB", last_updated: null, notes: null,
+      })),
       getCropHistory: (id) => respond("rotation.getCropHistory", () => cropHistory(fieldRec(id))),
       getRecommendation: (id, seasonYear) => respond("rotation.getRecommendation", () => recommendation(fieldRec(id), seasonYear, s().world.uuid, s().kbEvidence)),
       listScenarios: (id) => respond("rotation.listScenarios", () => { fieldRec(id); return [...s().scenarios.values()].filter((x) => x.field_id === id).sort((a, b) => a.created_at.localeCompare(b.created_at)); }),

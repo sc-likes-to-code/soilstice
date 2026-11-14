@@ -1,0 +1,101 @@
+{
+  "project_name": "SOILSTICE",
+  "dataset_name": "SOILSTICE U.S. Agricultural Intelligence & Crop Rotation Knowledge Base",
+  "canonical_dataset_version": "1.4.1-REMEDIATED",
+  "freeze_timestamp": "2026-11-14T09:53:30.656821+00:00",
+  "portfolio_metrics": {
+    "canonical_crop_count": 14,
+    "evidence_records_count": 212,
+    "directed_rotation_transitions_count": 196,
+    "uniform_schema_domains_count": 11,
+    "evidence_id_range": "EV0001-EV0212",
+    "unresolved_evidence_references": 0
+  },
+  "schema_specification": {
+    "standard": "Draft-07",
+    "version_tag": "1.4.1-REMEDIATED",
+    "root_definitions_count": 16
+  },
+  "packaged_files": [
+    {
+      "relative_path": "data/crop_knowledge_base.json",
+      "size_bytes": 1160056,
+      "sha256": "907e95e3e7769bb28b68bcd9ff7812c8a71f7e527aa38c19d6f821302bb0aaf4",
+      "original_source_sha256": "907e95e3e7769bb28b68bcd9ff7812c8a71f7e527aa38c19d6f821302bb0aaf4",
+      "integrity_verified": true
+    },
+    {
+      "relative_path": "data/schema.json",
+      "size_bytes": 45492,
+      "sha256": "94ffbde1a8a2f9ac64617a4763f2ea390ab14b6b47e0675ddb3603106b6cedc3",
+      "original_source_sha256": "94ffbde1a8a2f9ac64617a4763f2ea390ab14b6b47e0675ddb3603106b6cedc3",
+      "integrity_verified": true
+    },
+    {
+      "relative_path": "data/crop_attributes.csv",
+      "size_bytes": 13960,
+      "sha256": "51bb1d2f652e532c47b6820a37a62cf12e2c7201fa82f5fe8f2a343e1abe0280",
+      "original_source_sha256": "51bb1d2f652e532c47b6820a37a62cf12e2c7201fa82f5fe8f2a343e1abe0280",
+      "integrity_verified": true
+    },
+    {
+      "relative_path": "data/crop_rotation_compatibility.csv",
+      "size_bytes": 87672,
+      "sha256": "866193f114bd6ea34b265a55952c15650eb5ac64f884ddeca73c18060dcd92ca",
+      "original_source_sha256": "866193f114bd6ea34b265a55952c15650eb5ac64f884ddeca73c18060dcd92ca",
+      "integrity_verified": true
+    },
+    {
+      "relative_path": "data/crop_evidence.csv",
+      "size_bytes": 140910,
+      "sha256": "70d37b00cd352c5809e1f8d94ac0d7ae910bd6569887450beccca949e5f66aaa",
+      "original_source_sha256": "70d37b00cd352c5809e1f8d94ac0d7ae910bd6569887450beccca949e5f66aaa",
+      "integrity_verified": true
+    },
+    {
+      "relative_path": "documentation/SOURCE_REGISTER.md",
+      "size_bytes": 16423,
+      "sha256": "cdc5e69d0f798cdd883a04978930fe6c09ba88440b8e8c8d2834b54b4650446c",
+      "original_source_sha256": "cdc5e69d0f798cdd883a04978930fe6c09ba88440b8e8c8d2834b54b4650446c",
+      "integrity_verified": true
+    },
+    {
+      "relative_path": "documentation/DATA_DICTIONARY.md",
+      "size_bytes": 30050,
+      "sha256": "3c91e12d3c78709d074f42ecfc5c5a39a0d7df1e184bb70ca8daae038e599073",
+      "original_source_sha256": "3c91e12d3c78709d074f42ecfc5c5a39a0d7df1e184bb70ca8daae038e599073",
+      "integrity_verified": true
+    },
+    {
+      "relative_path": "validation/validate_handoff.py",
+      "size_bytes": 21562,
+      "sha256": "2df49a0d559635f948440291a1aa0be394fe96c200a932ba48f769ac9febcae8",
+      "original_source_sha256": null,
+      "integrity_verified": true
+    },
+    {
+      "relative_path": "validation/file_hashes.sha256",
+      "size_bytes": 667,
+      "sha256": "29c84ba92f118b6bd332151c6d1fef53832b59b2de78a2b285a58a376cf7ab77",
+      "original_source_sha256": null,
+      "integrity_verified": true
+    }
+  ],
+  "validation_summary": {
+    "suite": "validate_handoff.py",
+    "total_checks": 10,
+    "passed_checks": 10,
+    "failed_checks": 0,
+    "overall_status": "PASS",
+    "test_execution_timestamp": "2026-11-14T09:53:30.656837+00:00"
+  },
+  "known_limitations_summary": [
+    "Legitimate null values: Cover crops and green manures (CRP012, CRP013, CRP014) have null net_soil_nitrogen_balance_kg_ha to decouple unmeasured soil organic N changes from gross fixation and recycling.",
+    "Nitrate recycling vs addition: Oilseed radish (CRP014) scavenges 100-220 kg N/ha of profile mineral nitrate (recycling); it has 0.0 kg N/ha biological N fixation and 0.0 lb N/ac additive fertilizer credit.",
+    "Mixture vs sequential rotation: Crimson clover (CRP013) and oilseed radish (CRP014) are highly synergistic in simultaneous polyculture mixtures, but sequential monoculture rotation is agronomically atypical and unstudied (rated caution_conditional).",
+    "Root depth boundaries: Effective water extraction depth (40-120 cm) must not be conflated with maximum anatomical root penetration (150-240 cm).",
+    "Disease risk vs statutory prohibition: Clubroot in brassicas is an epidemiological management risk, not a legal prohibition.",
+    "Conditional agronomic outcomes: Infiltration increases (2-3x), corn yield bumps (5-10%), and biofumigation benefits are site- and management-specific, not universal farm guarantees."
+  ],
+  "readiness_verdict": "READY WITH DOCUMENTED LIMITATIONS"
+}

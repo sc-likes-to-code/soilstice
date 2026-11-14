@@ -139,6 +139,23 @@
         "title": "ApiResponse[CreateFieldResponse]",
         "type": "object"
       },
+      "ApiResponse_CropEvidenceRecord_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/CropEvidenceRecord"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[CropEvidenceRecord]",
+        "type": "object"
+      },
       "ApiResponse_CropHistory_": {
         "additionalProperties": false,
         "properties": {
@@ -154,6 +171,23 @@
           "meta"
         ],
         "title": "ApiResponse[CropHistory]",
+        "type": "object"
+      },
+      "ApiResponse_CropProfile_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/CropProfile"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[CropProfile]",
         "type": "object"
       },
       "ApiResponse_DataCoverage_": {
@@ -188,6 +222,23 @@
           "meta"
         ],
         "title": "ApiResponse[Deleted]",
+        "type": "object"
+      },
+      "ApiResponse_DirectedRotationTransition_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/DirectedRotationTransition"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[DirectedRotationTransition]",
         "type": "object"
       },
       "ApiResponse_FarmOverview_": {
@@ -273,6 +324,23 @@
           "meta"
         ],
         "title": "ApiResponse[Health]",
+        "type": "object"
+      },
+      "ApiResponse_KnowledgeBaseMetadata_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/KnowledgeBaseMetadata"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[KnowledgeBaseMetadata]",
         "type": "object"
       },
       "ApiResponse_ProcessingJob_": {
@@ -394,6 +462,25 @@
         "title": "ApiResponse[VegetationProfile]",
         "type": "object"
       },
+      "ApiResponse_dict_str__Any__": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "additionalProperties": true,
+            "title": "Data",
+            "type": "object"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[dict[str, Any]]",
+        "type": "object"
+      },
       "ApiResponse_list_CropOption__": {
         "additionalProperties": false,
         "properties": {
@@ -415,6 +502,27 @@
         "title": "ApiResponse[list[CropOption]]",
         "type": "object"
       },
+      "ApiResponse_list_CropProfileSummary__": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/CropProfileSummary"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[list[CropProfileSummary]]",
+        "type": "object"
+      },
       "ApiResponse_list_DatasetDescriptor__": {
         "additionalProperties": false,
         "properties": {
@@ -434,6 +542,27 @@
           "meta"
         ],
         "title": "ApiResponse[list[DatasetDescriptor]]",
+        "type": "object"
+      },
+      "ApiResponse_list_DirectedRotationTransition__": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/DirectedRotationTransition"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[list[DirectedRotationTransition]]",
         "type": "object"
       },
       "ApiResponse_list_EnvironmentalIndicator__": {
@@ -783,6 +912,202 @@
         "title": "CreateFieldResponse",
         "type": "object"
       },
+      "CropEvidenceRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "access_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Date"
+          },
+          "attribute_or_claim": {
+            "title": "Attribute Or Claim",
+            "type": "string"
+          },
+          "author_or_institution": {
+            "title": "Author Or Institution",
+            "type": "string"
+          },
+          "citation_location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Citation Location"
+          },
+          "conditions_and_assumptions": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Conditions And Assumptions"
+          },
+          "crop_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Crop Ids",
+            "type": "array"
+          },
+          "data_availability": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data Availability"
+          },
+          "evidence_id": {
+            "title": "Evidence Id",
+            "type": "string"
+          },
+          "exact_supporting_context": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exact Supporting Context"
+          },
+          "geographic_scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Geographic Scope"
+          },
+          "limitations": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Limitations"
+          },
+          "publication_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Date"
+          },
+          "publication_year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Year"
+          },
+          "recorded_value_or_summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recorded Value Or Summary"
+          },
+          "related_domain": {
+            "title": "Related Domain",
+            "type": "string"
+          },
+          "source_organization": {
+            "title": "Source Organization",
+            "type": "string"
+          },
+          "source_quality": {
+            "title": "Source Quality",
+            "type": "string"
+          },
+          "source_title": {
+            "title": "Source Title",
+            "type": "string"
+          },
+          "source_url_or_doi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Url Or Doi"
+          },
+          "variety_scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variety Scope"
+          }
+        },
+        "required": [
+          "evidence_id",
+          "crop_ids",
+          "related_domain",
+          "attribute_or_claim",
+          "recorded_value_or_summary",
+          "source_organization",
+          "source_title",
+          "author_or_institution",
+          "publication_year",
+          "publication_date",
+          "access_date",
+          "source_url_or_doi",
+          "citation_location",
+          "exact_supporting_context",
+          "geographic_scope",
+          "variety_scope",
+          "source_quality",
+          "data_availability",
+          "conditions_and_assumptions",
+          "limitations"
+        ],
+        "title": "CropEvidenceRecord",
+        "type": "object"
+      },
       "CropHistory": {
         "additionalProperties": false,
         "properties": {
@@ -858,6 +1183,255 @@
           "kb_version"
         ],
         "title": "CropOption",
+        "type": "object"
+      },
+      "CropProfile": {
+        "additionalProperties": false,
+        "properties": {
+          "botanical_family": {
+            "title": "Botanical Family",
+            "type": "string"
+          },
+          "can_serve_as_cover_crop": {
+            "title": "Can Serve As Cover Crop",
+            "type": "boolean"
+          },
+          "cdl_code": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cdl Code"
+          },
+          "commercial_harvest_feasible": {
+            "title": "Commercial Harvest Feasible",
+            "type": "boolean"
+          },
+          "common_name": {
+            "title": "Common Name",
+            "type": "string"
+          },
+          "crop_group": {
+            "title": "Crop Group",
+            "type": "string"
+          },
+          "crop_id": {
+            "title": "Crop Id",
+            "type": "string"
+          },
+          "crop_identity": {
+            "additionalProperties": true,
+            "title": "Crop Identity",
+            "type": "object"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Evidence Ids",
+            "type": "array"
+          },
+          "growing_duration": {
+            "additionalProperties": true,
+            "title": "Growing Duration",
+            "type": "object"
+          },
+          "is_cover_crop": {
+            "title": "Is Cover Crop",
+            "type": "boolean"
+          },
+          "lifecycle_class": {
+            "title": "Lifecycle Class",
+            "type": "string"
+          },
+          "nitrogen_and_biomass": {
+            "additionalProperties": true,
+            "title": "Nitrogen And Biomass",
+            "type": "object"
+          },
+          "portfolio_role": {
+            "title": "Portfolio Role",
+            "type": "string"
+          },
+          "rainfall_requirements": {
+            "additionalProperties": true,
+            "title": "Rainfall Requirements",
+            "type": "object"
+          },
+          "regional_suitability": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Regional Suitability",
+            "type": "array"
+          },
+          "root_and_nutrients": {
+            "additionalProperties": true,
+            "title": "Root And Nutrients",
+            "type": "object"
+          },
+          "rotation_compatibility": {
+            "additionalProperties": true,
+            "title": "Rotation Compatibility",
+            "type": "object"
+          },
+          "scientific_name": {
+            "title": "Scientific Name",
+            "type": "string"
+          },
+          "soil_preferences": {
+            "additionalProperties": true,
+            "title": "Soil Preferences",
+            "type": "object"
+          },
+          "taxonomic_authority": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Taxonomic Authority"
+          },
+          "temperature_requirements": {
+            "additionalProperties": true,
+            "title": "Temperature Requirements",
+            "type": "object"
+          },
+          "usda_plants_symbol": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Usda Plants Symbol"
+          },
+          "water_demand_and_tolerance": {
+            "additionalProperties": true,
+            "title": "Water Demand And Tolerance",
+            "type": "object"
+          }
+        },
+        "required": [
+          "crop_id",
+          "cdl_code",
+          "common_name",
+          "scientific_name",
+          "taxonomic_authority",
+          "botanical_family",
+          "crop_group",
+          "portfolio_role",
+          "lifecycle_class",
+          "is_cover_crop",
+          "can_serve_as_cover_crop",
+          "commercial_harvest_feasible",
+          "usda_plants_symbol",
+          "crop_identity",
+          "growing_duration",
+          "temperature_requirements",
+          "rainfall_requirements",
+          "water_demand_and_tolerance",
+          "soil_preferences",
+          "root_and_nutrients",
+          "nitrogen_and_biomass",
+          "rotation_compatibility",
+          "regional_suitability",
+          "evidence_ids"
+        ],
+        "title": "CropProfile",
+        "type": "object"
+      },
+      "CropProfileSummary": {
+        "additionalProperties": false,
+        "properties": {
+          "botanical_family": {
+            "title": "Botanical Family",
+            "type": "string"
+          },
+          "can_serve_as_cover_crop": {
+            "title": "Can Serve As Cover Crop",
+            "type": "boolean"
+          },
+          "cdl_code": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cdl Code"
+          },
+          "commercial_harvest_feasible": {
+            "title": "Commercial Harvest Feasible",
+            "type": "boolean"
+          },
+          "common_name": {
+            "title": "Common Name",
+            "type": "string"
+          },
+          "crop_group": {
+            "title": "Crop Group",
+            "type": "string"
+          },
+          "crop_id": {
+            "title": "Crop Id",
+            "type": "string"
+          },
+          "is_cover_crop": {
+            "title": "Is Cover Crop",
+            "type": "boolean"
+          },
+          "lifecycle_class": {
+            "title": "Lifecycle Class",
+            "type": "string"
+          },
+          "portfolio_role": {
+            "title": "Portfolio Role",
+            "type": "string"
+          },
+          "scientific_name": {
+            "title": "Scientific Name",
+            "type": "string"
+          },
+          "usda_plants_symbol": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Usda Plants Symbol"
+          }
+        },
+        "required": [
+          "crop_id",
+          "cdl_code",
+          "common_name",
+          "scientific_name",
+          "botanical_family",
+          "crop_group",
+          "portfolio_role",
+          "lifecycle_class",
+          "is_cover_crop",
+          "can_serve_as_cover_crop",
+          "commercial_harvest_feasible",
+          "usda_plants_symbol"
+        ],
+        "title": "CropProfileSummary",
         "type": "object"
       },
       "CropRef": {
@@ -1384,6 +1958,137 @@
           "deleted"
         ],
         "title": "Deleted",
+        "type": "object"
+      },
+      "DirectedRotationTransition": {
+        "additionalProperties": false,
+        "properties": {
+          "compatibility_rating": {
+            "title": "Compatibility Rating",
+            "type": "string"
+          },
+          "disease_break_potential": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Disease Break Potential"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Evidence Ids",
+            "type": "array"
+          },
+          "following_crop_id": {
+            "title": "Following Crop Id",
+            "type": "string"
+          },
+          "following_crop_name": {
+            "title": "Following Crop Name",
+            "type": "string"
+          },
+          "herbicide_carryover_risks": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Herbicide Carryover Risks"
+          },
+          "is_monoculture": {
+            "title": "Is Monoculture",
+            "type": "boolean"
+          },
+          "limitations": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Limitations"
+          },
+          "monoculture_risk": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Monoculture Risk"
+          },
+          "preceding_crop_id": {
+            "title": "Preceding Crop Id",
+            "type": "string"
+          },
+          "preceding_crop_name": {
+            "title": "Preceding Crop Name",
+            "type": "string"
+          },
+          "rotational_niche": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rotational Niche"
+          },
+          "shared_pest_disease_risks": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shared Pest Disease Risks"
+          },
+          "synergy_mechanisms": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Synergy Mechanisms"
+          }
+        },
+        "required": [
+          "preceding_crop_id",
+          "preceding_crop_name",
+          "following_crop_id",
+          "following_crop_name",
+          "compatibility_rating",
+          "is_monoculture",
+          "monoculture_risk",
+          "synergy_mechanisms",
+          "disease_break_potential",
+          "shared_pest_disease_risks",
+          "herbicide_carryover_risks",
+          "rotational_niche",
+          "evidence_ids",
+          "limitations"
+        ],
+        "title": "DirectedRotationTransition",
         "type": "object"
       },
       "EnvironmentalIndicator": {
@@ -2360,6 +3065,85 @@
           "message"
         ],
         "title": "JobStep",
+        "type": "object"
+      },
+      "KnowledgeBaseMetadata": {
+        "additionalProperties": false,
+        "properties": {
+          "canonical_crop_count": {
+            "title": "Canonical Crop Count",
+            "type": "integer"
+          },
+          "dataset_name": {
+            "title": "Dataset Name",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "directed_rotation_transitions_count": {
+            "default": 196,
+            "title": "Directed Rotation Transitions Count",
+            "type": "integer"
+          },
+          "effective_date": {
+            "title": "Effective Date",
+            "type": "string"
+          },
+          "evidence_records_count": {
+            "title": "Evidence Records Count",
+            "type": "integer"
+          },
+          "geographic_scope": {
+            "title": "Geographic Scope",
+            "type": "string"
+          },
+          "last_updated": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Updated"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "schema_version": {
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "stage": {
+            "title": "Stage",
+            "type": "string"
+          }
+        },
+        "required": [
+          "dataset_name",
+          "schema_version",
+          "stage",
+          "effective_date",
+          "geographic_scope",
+          "canonical_crop_count",
+          "evidence_records_count",
+          "directed_rotation_transitions_count",
+          "description",
+          "last_updated",
+          "notes"
+        ],
+        "title": "KnowledgeBaseMetadata",
         "type": "object"
       },
       "LatestCrop": {
@@ -4575,6 +5359,121 @@
   },
   "openapi": "3.1.0",
   "paths": {
+    "/api/v1/canonical-crops": {
+      "get": {
+        "operationId": "listCanonicalCrops",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "role",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Role"
+            }
+          },
+          {
+            "in": "query",
+            "name": "family",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Family"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_CropProfileSummary__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Canonical Crops",
+        "tags": [
+          "rotation"
+        ]
+      }
+    },
     "/api/v1/crops": {
       "get": {
         "operationId": "listCrops",
@@ -4656,6 +5555,222 @@
         ]
       }
     },
+    "/api/v1/crops/{crop_id}": {
+      "get": {
+        "operationId": "getCropProfile",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "crop_id",
+            "required": true,
+            "schema": {
+              "title": "Crop Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_CropProfile_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Get Crop Profile",
+        "tags": [
+          "rotation"
+        ]
+      }
+    },
+    "/api/v1/crops/{crop_id}/attributes": {
+      "get": {
+        "operationId": "getCropAttributes",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "crop_id",
+            "required": true,
+            "schema": {
+              "title": "Crop Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "domain",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Domain"
+            }
+          },
+          {
+            "in": "query",
+            "name": "attribute",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Attribute"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_dict_str__Any__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Get Crop Attributes",
+        "tags": [
+          "rotation"
+        ]
+      }
+    },
     "/api/v1/datasets": {
       "get": {
         "operationId": "listDatasets",
@@ -4732,6 +5847,98 @@
           }
         },
         "summary": "List Datasets",
+        "tags": [
+          "evidence"
+        ]
+      }
+    },
+    "/api/v1/evidence/{evidence_id}": {
+      "get": {
+        "operationId": "getCropEvidence",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "evidence_id",
+            "required": true,
+            "schema": {
+              "title": "Evidence Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_CropEvidenceRecord_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Get Crop Evidence",
         "tags": [
           "evidence"
         ]
@@ -7090,6 +8297,291 @@
         "summary": "Get Job",
         "tags": [
           "fields"
+        ]
+      }
+    },
+    "/api/v1/kb/metadata": {
+      "get": {
+        "operationId": "getKbMetadata",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_KnowledgeBaseMetadata_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Get Kb Metadata",
+        "tags": [
+          "rotation"
+        ]
+      }
+    },
+    "/api/v1/rotations": {
+      "get": {
+        "operationId": "getRotationCompatibility",
+        "parameters": [
+          {
+            "description": "Preceding crop ID (e.g. CRP014) or CDL code (e.g. 1)",
+            "in": "query",
+            "name": "previous_crop",
+            "required": true,
+            "schema": {
+              "description": "Preceding crop ID (e.g. CRP014) or CDL code (e.g. 1)",
+              "title": "Previous Crop",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Following crop ID (e.g. CRP001) or CDL code (e.g. 1)",
+            "in": "query",
+            "name": "next_crop",
+            "required": true,
+            "schema": {
+              "description": "Following crop ID (e.g. CRP001) or CDL code (e.g. 1)",
+              "title": "Next Crop",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_DirectedRotationTransition_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Get Rotation Compatibility",
+        "tags": [
+          "rotation"
+        ]
+      }
+    },
+    "/api/v1/rotations/matrix": {
+      "get": {
+        "operationId": "listRotationMatrix",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "crop_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Crop Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_DirectedRotationTransition__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "List Rotation Matrix",
+        "tags": [
+          "rotation"
         ]
       }
     },
