@@ -1,0 +1,86 @@
+{
+ "name": "terrain_1b55c3d8-cef5-4eda-9c4e-02253fbfd283",
+ "model": "TerrainProfile",
+ "list": false,
+ "payload": {
+  "data": {
+   "field_id": "1b55c3d8-cef5-4eda-9c4e-02253fbfd283",
+   "elevation_mean": {
+    "value": 884,
+    "unit": "m",
+    "uncertainty": null,
+    "missing_reason": null
+   },
+   "elevation_min": {
+    "value": 881,
+    "unit": "m",
+    "uncertainty": null,
+    "missing_reason": null
+   },
+   "elevation_max": {
+    "value": 893,
+    "unit": "m",
+    "uncertainty": null,
+    "missing_reason": null
+   },
+   "slope_mean_pct": {
+    "value": 1.7,
+    "unit": "percent",
+    "uncertainty": null,
+    "missing_reason": null
+   },
+   "slope_p90_pct": {
+    "value": 3,
+    "unit": "percent",
+    "uncertainty": null,
+    "missing_reason": null
+   },
+   "method": {
+    "method_id": "srtm_horn_slope",
+    "name": "Horn slope in EPSG:5070",
+    "version": "synthetic-0",
+    "description": "Slope from SRTMGL1 reprojected to CONUS Albers, Horn 1981 kernel (values here are synthetic).",
+    "reference_url": null
+   },
+   "spatial": {
+    "support_class": "F",
+    "native_resolution_m": 30,
+    "extraction_method": "zonal_polygon",
+    "field_fraction_of_cell": null,
+    "cell_id": null,
+    "crs": "EPSG:4326"
+   },
+   "sources": [
+    {
+     "dataset_id": "synthetic",
+     "product": "Synthetic stand-in for SRTMGL1",
+     "product_version": "synthetic-0",
+     "acquisition_id": null,
+     "doi": null,
+     "documentation_url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-srtmgl1-003",
+     "retrieved_at": null
+    }
+   ],
+   "quality": {
+    "status": "valid",
+    "flags": [
+     {
+      "code": "SYNTHETIC",
+      "severity": "info",
+      "message": "Synthetic demo value — not an observation."
+     }
+    ],
+    "completeness": 1,
+    "missing_reason": null
+   }
+  },
+  "meta": {
+   "request_id": "mock-4e-mwfz5tbu",
+   "generated_at": "2026-11-14T05:38:15.355Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

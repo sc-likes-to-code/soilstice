@@ -1,0 +1,107 @@
+{
+ "name": "vegetation_46984669-4195-4ead-8d67-19c1f31451fa",
+ "model": "VegetationProfile",
+ "list": false,
+ "payload": {
+  "data": {
+   "field_id": "46984669-4195-4ead-8d67-19c1f31451fa",
+   "year": 2025,
+   "index": "NDVI",
+   "scenes": [],
+   "series": {
+    "series_id": "46984669-4195-4ead-8d67-19c1f31451fa:NDVI:2025",
+    "variable": "ndvi",
+    "label": "NDVI (accepted scene medians)",
+    "unit": "unitless",
+    "nature": "derived",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon_inward_buffer",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:32614"
+    },
+    "temporal": {
+     "resolution": "irregular",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "median",
+     "time_standard": "UTC"
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for HLSL30_VI / HLSS30_VI",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-hlsl30-vi-2.0",
+      "retrieved_at": null
+     }
+    ],
+    "points": [],
+    "reference": null
+   },
+   "phenology": {
+    "peak_value": {
+     "value": null,
+     "unit": "unitless",
+     "uncertainty": null,
+     "missing_reason": "UPSTREAM_ERROR"
+    },
+    "peak_date": null,
+    "greenup_date": null,
+    "senescence_date": null,
+    "method": {
+     "method_id": "synthetic_phenology",
+     "name": "Placeholder phenology markers",
+     "version": "synthetic-0",
+     "description": "Highest accepted scene and half-amplitude crossings of synthetic medians. Real phenology fitting is Phase 4.",
+     "reference_url": null
+    },
+    "gap_filled": false,
+    "missing_reason": "UPSTREAM_ERROR"
+   },
+   "spatial": {
+    "support_class": "F",
+    "native_resolution_m": 30,
+    "extraction_method": "zonal_polygon_inward_buffer",
+    "field_fraction_of_cell": null,
+    "cell_id": null,
+    "crs": "EPSG:32614"
+   },
+   "sources": [
+    {
+     "dataset_id": "synthetic",
+     "product": "Synthetic stand-in for HLSL30_VI / HLSS30_VI",
+     "product_version": "synthetic-0",
+     "acquisition_id": null,
+     "doi": null,
+     "documentation_url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-hlsl30-vi-2.0",
+     "retrieved_at": null
+    }
+   ],
+   "quality": {
+    "status": "missing",
+    "flags": [
+     {
+      "code": "SYNTHETIC",
+      "severity": "info",
+      "message": "Synthetic demo value — not an observation."
+     }
+    ],
+    "completeness": 0,
+    "missing_reason": "UPSTREAM_ERROR"
+   }
+  },
+  "meta": {
+   "request_id": "mock-2j-mwfz5skw",
+   "generated_at": "2026-11-14T05:38:14.384Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

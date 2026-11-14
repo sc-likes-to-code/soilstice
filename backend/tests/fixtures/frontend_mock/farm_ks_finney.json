@@ -1,0 +1,36 @@
+{
+ "name": "farm_ks_finney",
+ "model": "Farm",
+ "list": false,
+ "payload": {
+  "data": {
+   "farm_id": "d4a92591-d589-4f63-a0a3-802f1ea6bb8c",
+   "name": "Finney Demo Farm",
+   "aoi": {
+    "aoi_id": "ks_finney",
+    "label": "Finney County, Kansas",
+    "county_fips": [
+     "20055"
+    ],
+    "state": "KS"
+   },
+   "field_count": 6,
+   "total_area": {
+    "value": 335.1,
+    "unit": "ha",
+    "uncertainty": null,
+    "missing_reason": null
+   },
+   "created_at": "2026-11-01T09:00:00Z",
+   "updated_at": "2026-11-01T09:00:00Z"
+  },
+  "meta": {
+   "request_id": "mock-33-mwfz5st8",
+   "generated_at": "2026-11-14T05:38:14.684Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

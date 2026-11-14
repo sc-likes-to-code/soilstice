@@ -1,0 +1,338 @@
+{
+ "name": "soil_b2f02d36-3ebc-478d-8c4d-6b5e49e639ba",
+ "model": "SoilProfile",
+ "list": false,
+ "payload": {
+  "data": {
+   "field_id": "b2f02d36-3ebc-478d-8c4d-6b5e49e639ba",
+   "layers": [
+    {
+     "top_cm": 0,
+     "bottom_cm": 30,
+     "sand_pct": {
+      "value": 39,
+      "unit": "percent",
+      "uncertainty": {
+       "kind": "range",
+       "low": 34,
+       "high": 44,
+       "value": null,
+       "note": null
+      },
+      "missing_reason": null
+     },
+     "silt_pct": {
+      "value": 38,
+      "unit": "percent",
+      "uncertainty": {
+       "kind": "range",
+       "low": 33,
+       "high": 43,
+       "value": null,
+       "note": null
+      },
+      "missing_reason": null
+     },
+     "clay_pct": {
+      "value": 24,
+      "unit": "percent",
+      "uncertainty": {
+       "kind": "range",
+       "low": 20,
+       "high": 28,
+       "value": null,
+       "note": null
+      },
+      "missing_reason": null
+     },
+     "texture_class": "Loam",
+     "ph_h2o": {
+      "value": 6.2,
+      "unit": "pH",
+      "uncertainty": {
+       "kind": "range",
+       "low": 5.8,
+       "high": 6.6,
+       "value": null,
+       "note": null
+      },
+      "missing_reason": null
+     },
+     "om_pct": {
+      "value": 2.6,
+      "unit": "percent",
+      "uncertainty": {
+       "kind": "range",
+       "low": 1.6,
+       "high": 3.6,
+       "value": null,
+       "note": null
+      },
+      "missing_reason": null
+     },
+     "awc": {
+      "value": 0.17,
+      "unit": "cm_cm-1",
+      "uncertainty": null,
+      "missing_reason": null
+     }
+    },
+    {
+     "top_cm": 30,
+     "bottom_cm": 100,
+     "sand_pct": {
+      "value": 34,
+      "unit": "percent",
+      "uncertainty": {
+       "kind": "range",
+       "low": 29,
+       "high": 39,
+       "value": null,
+       "note": null
+      },
+      "missing_reason": null
+     },
+     "silt_pct": {
+      "value": 38,
+      "unit": "percent",
+      "uncertainty": {
+       "kind": "range",
+       "low": 33,
+       "high": 43,
+       "value": null,
+       "note": null
+      },
+      "missing_reason": null
+     },
+     "clay_pct": {
+      "value": 28,
+      "unit": "percent",
+      "uncertainty": {
+       "kind": "range",
+       "low": 24,
+       "high": 32,
+       "value": null,
+       "note": null
+      },
+      "missing_reason": null
+     },
+     "texture_class": "Silty clay loam",
+     "ph_h2o": {
+      "value": 6.4,
+      "unit": "pH",
+      "uncertainty": {
+       "kind": "range",
+       "low": 6,
+       "high": 6.8,
+       "value": null,
+       "note": null
+      },
+      "missing_reason": null
+     },
+     "om_pct": {
+      "value": 1.2,
+      "unit": "percent",
+      "uncertainty": {
+       "kind": "range",
+       "low": 0.7,
+       "high": 1.6,
+       "value": null,
+       "note": null
+      },
+      "missing_reason": null
+     },
+     "awc": {
+      "value": 0.16,
+      "unit": "cm_cm-1",
+      "uncertainty": null,
+      "missing_reason": null
+     }
+    },
+    {
+     "top_cm": 100,
+     "bottom_cm": 150,
+     "sand_pct": {
+      "value": 36,
+      "unit": "percent",
+      "uncertainty": {
+       "kind": "range",
+       "low": 31,
+       "high": 41,
+       "value": null,
+       "note": null
+      },
+      "missing_reason": null
+     },
+     "silt_pct": {
+      "value": 30,
+      "unit": "percent",
+      "uncertainty": {
+       "kind": "range",
+       "low": 25,
+       "high": 35,
+       "value": null,
+       "note": null
+      },
+      "missing_reason": null
+     },
+     "clay_pct": {
+      "value": 34,
+      "unit": "percent",
+      "uncertainty": {
+       "kind": "range",
+       "low": 30,
+       "high": 38,
+       "value": null,
+       "note": null
+      },
+      "missing_reason": null
+     },
+     "texture_class": "Loam",
+     "ph_h2o": {
+      "value": 7.1,
+      "unit": "pH",
+      "uncertainty": {
+       "kind": "range",
+       "low": 6.7,
+       "high": 7.5,
+       "value": null,
+       "note": null
+      },
+      "missing_reason": null
+     },
+     "om_pct": {
+      "value": 0.5,
+      "unit": "percent",
+      "uncertainty": {
+       "kind": "range",
+       "low": 0.3,
+       "high": 0.7,
+       "value": null,
+       "note": null
+      },
+      "missing_reason": null
+     },
+     "awc": {
+      "value": 0.13,
+      "unit": "cm_cm-1",
+      "uncertainty": null,
+      "missing_reason": null
+     }
+    }
+   ],
+   "aws_0_100": {
+    "value": 16.3,
+    "unit": "cm",
+    "uncertainty": null,
+    "missing_reason": null
+   },
+   "aws_0_150": {
+    "value": 22.8,
+    "unit": "cm",
+    "uncertainty": null,
+    "missing_reason": null
+   },
+   "drainage_class": {
+    "value": "Well drained",
+    "weight_share": 0.61,
+    "missing_reason": null
+   },
+   "hydrologic_group": {
+    "value": "C",
+    "weight_share": 0.61,
+    "missing_reason": null
+   },
+   "slope_pct_ssurgo": {
+    "value": 3.1,
+    "unit": "percent",
+    "uncertainty": {
+     "kind": "range",
+     "low": 0,
+     "high": 6.1,
+     "value": null,
+     "note": null
+    },
+    "missing_reason": null
+   },
+   "map_units": [
+    {
+     "mukey": "SYN-8076",
+     "muname": "Synthetic map unit 1 — loam, 0 to 1 percent slopes",
+     "area_fraction": 0.72,
+     "major_components": [
+      {
+       "cokey": "SYN-C0",
+       "compname": "Synthetic component A",
+       "comppct_r": 73
+      }
+     ]
+    },
+    {
+     "mukey": "SYN-9695",
+     "muname": "Synthetic map unit 2 — loam, 1 to 3 percent slopes",
+     "area_fraction": 0.28,
+     "major_components": [
+      {
+       "cokey": "SYN-C1",
+       "compname": "Synthetic component B",
+       "comppct_r": 76
+      }
+     ]
+    }
+   ],
+   "survey": [
+    {
+     "areasymbol": "SYN000",
+     "saverest": null
+    }
+   ],
+   "method": {
+    "method_id": "ssurgo_area_comppct_weighting",
+    "name": "SSURGO area × component-percent weighting",
+    "version": "synthetic-0",
+    "description": "Normative method in SOILSTICE_DATA_ARCHITECTURE §5.3.1 (values here are synthetic).",
+    "reference_url": null
+   },
+   "null_weight_fraction": 0.03,
+   "spatial": {
+    "support_class": "F",
+    "native_resolution_m": null,
+    "extraction_method": "vector_intersection",
+    "field_fraction_of_cell": null,
+    "cell_id": null,
+    "crs": "EPSG:4326"
+   },
+   "sources": [
+    {
+     "dataset_id": "synthetic",
+     "product": "Synthetic stand-in for SSURGO (SDA)",
+     "product_version": "synthetic-0",
+     "acquisition_id": null,
+     "doi": null,
+     "documentation_url": "https://sdmdataaccess.sc.egov.usda.gov/",
+     "retrieved_at": null
+    }
+   ],
+   "quality": {
+    "status": "valid",
+    "flags": [
+     {
+      "code": "SYNTHETIC",
+      "severity": "info",
+      "message": "Synthetic demo value — not an observation."
+     }
+    ],
+    "completeness": 0.95,
+    "missing_reason": null
+   }
+  },
+  "meta": {
+   "request_id": "mock-1r-mwfz5s9d",
+   "generated_at": "2026-11-14T05:38:13.969Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

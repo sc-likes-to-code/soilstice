@@ -1,0 +1,47 @@
+{
+ "name": "resilience_46984669-4195-4ead-8d67-19c1f31451fa",
+ "model": "ResilienceProfile",
+ "list": false,
+ "payload": {
+  "data": {
+   "profile_id": "53ed9824-b054-4c30-b5b8-8715029ad890",
+   "field_id": "46984669-4195-4ead-8d67-19c1f31451fa",
+   "as_of": "2026-11-01",
+   "model_version": "soilstice-resilience-0.0.0-synthetic",
+   "status": "pending",
+   "composite": {
+    "score": {
+     "value": null,
+     "unit": "score_0_100",
+     "uncertainty": null,
+     "missing_reason": "PENDING_PROCESSING"
+    },
+    "band": "unknown",
+    "confidence": "low",
+    "components_used": 0,
+    "components_total": 5
+   },
+   "components": [],
+   "limitations": [
+    {
+     "code": "PROCESSING_FAILED",
+     "severity": "warning",
+     "message": "Upstream processing failed for this synthetic field; resilience was not computed."
+    }
+   ],
+   "disclaimers": [
+    "Synthetic demo scores — the breakpoint tables are defined in Phase 4 (SOILSTICE_DATA_ARCHITECTURE §5.10).",
+    "Scores are decision-support indicators, not agronomic prescriptions.",
+    "Components marked “Regional context” do not measure this field."
+   ]
+  },
+  "meta": {
+   "request_id": "mock-2m-mwfz5sm8",
+   "generated_at": "2026-11-14T05:38:14.432Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

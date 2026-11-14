@@ -1,0 +1,3849 @@
+{
+ "name": "climate_411dd851-40e2-481b-885e-7dc029bcafcd",
+ "model": "ClimateProfile",
+ "list": false,
+ "payload": {
+  "data": {
+   "field_id": "411dd851-40e2-481b-885e-7dc029bcafcd",
+   "season": {
+    "label": "2025 calendar year (crop calendars pending KB)",
+    "start": "2025-01-01",
+    "end": "2025-12-31",
+    "crop_code": null
+   },
+   "authoritative_source": {
+    "precipitation": "nasa_power_daily_ag",
+    "temperature": "nasa_power_daily_ag"
+   },
+   "indicators": [
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:precip_total_season:2025-01-01",
+     "key": "precip_total_season",
+     "label": "Precipitation total",
+     "category": "climate",
+     "value": {
+      "value": 985,
+      "unit": "mm",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "model",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_precip_total_season",
+      "name": "Synthetic precipitation total",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": {
+      "value": 755,
+      "unit": "mm",
+      "uncertainty": null,
+      "missing_reason": null
+     }
+    },
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:precip_anomaly_pct:2025-01-01",
+     "key": "precip_anomaly_pct",
+     "label": "Precipitation anomaly",
+     "category": "climate",
+     "value": {
+      "value": 30,
+      "unit": "percent",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_precip_anomaly_pct",
+      "name": "Synthetic precipitation anomaly",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:gdd_season:2025-01-01",
+     "key": "gdd_season",
+     "label": "Growing degree days",
+     "category": "climate",
+     "value": {
+      "value": 2366,
+      "unit": "degC_day",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       },
+       {
+        "code": "GDD_PARAMS_PENDING",
+        "severity": "warning",
+        "message": "Per-crop GDD base/cap pending a cited KB entry (D5.6)."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_gdd_season",
+      "name": "Placeholder GDD (base 10 °C, cap 30 °C)",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:heat_stress_days:2025-01-01",
+     "key": "heat_stress_days",
+     "label": "Heat-stress days (Tmax > 35 °C)",
+     "category": "climate",
+     "value": {
+      "value": 18,
+      "unit": "day",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       },
+       {
+        "code": "HEURISTIC_THRESHOLD",
+        "severity": "info",
+        "message": "35 °C threshold is a labelled heuristic pending citation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_heat_stress_days",
+      "name": "Synthetic heat-stress days (tmax > 35 °c)",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:frost_free_days:2025-01-01",
+     "key": "frost_free_days",
+     "label": "Frost-free days",
+     "category": "climate",
+     "value": {
+      "value": 192,
+      "unit": "day",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_frost_free_days",
+      "name": "Synthetic frost-free days",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:solar_total_season:2025-01-01",
+     "key": "solar_total_season",
+     "label": "Solar radiation total",
+     "category": "climate",
+     "value": {
+      "value": 5946,
+      "unit": "MJ_m-2",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 110000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_solar_total_season",
+      "name": "Synthetic solar radiation total",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:rh_mean_season:2025-01-01",
+     "key": "rh_mean_season",
+     "label": "Mean relative humidity",
+     "category": "climate",
+     "value": {
+      "value": 64,
+      "unit": "percent",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "mean",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_rh_mean_season",
+      "name": "Synthetic mean relative humidity",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:et0_total_season:2025-01-01",
+     "key": "et0_total_season",
+     "label": "Reference ET₀ total",
+     "category": "water",
+     "value": {
+      "value": 1329,
+      "unit": "mm",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_et0_total_season",
+      "name": "Synthetic reference et₀ total",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:water_balance_season:2025-01-01",
+     "key": "water_balance_season",
+     "label": "Water balance (P − ET₀)",
+     "category": "water",
+     "value": {
+      "value": -344,
+      "unit": "mm",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_water_balance_season",
+      "name": "Synthetic water balance (p − et₀)",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:et_actual_season:2025-01-01",
+     "key": "et_actual_season",
+     "label": "Actual ET (OpenET)",
+     "category": "water",
+     "value": {
+      "value": null,
+      "unit": "mm",
+      "uncertainty": null,
+      "missing_reason": "NOT_COMPUTED"
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "F",
+      "native_resolution_m": 30,
+      "extraction_method": "zonal_polygon",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": null
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "missing",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       },
+       {
+        "code": "NOT_INTEGRATED",
+        "severity": "info",
+        "message": "OpenET is a P1 dataset, not yet integrated."
+       }
+      ],
+      "completeness": 0,
+      "missing_reason": "NOT_COMPUTED"
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for OpenET Collection",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://openet.gitbook.io/docs",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_et_actual_season",
+      "name": "Synthetic actual et (openet)",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:sm_rootzone_mean_season:2025-01-01",
+     "key": "sm_rootzone_mean_season",
+     "label": "Root-zone soil moisture (mean)",
+     "category": "soil_moisture",
+     "value": {
+      "value": 0.352,
+      "unit": "m3_m-3",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "model",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 9000,
+      "extraction_method": "containing_cell",
+      "field_fraction_of_cell": 0.007,
+      "cell_id": "synthetic-cell",
+      "crs": "EPSG:6933"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "mean",
+      "time_standard": "UTC"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for SPL4SMGP",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nsidc.org/data/spl4smgp",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_sm_rootzone_mean_season",
+      "name": "Synthetic root-zone soil moisture (mean)",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:sm_rootzone_percentile:2025-01-01",
+     "key": "sm_rootzone_percentile",
+     "label": "Root-zone moisture percentile",
+     "category": "soil_moisture",
+     "value": {
+      "value": 23,
+      "unit": "percentile",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 9000,
+      "extraction_method": "containing_cell",
+      "field_fraction_of_cell": 0.007,
+      "cell_id": "synthetic-cell",
+      "crs": "EPSG:6933"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "percentile",
+      "time_standard": "UTC"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       },
+       {
+        "code": "SHORT_CLIMATOLOGY",
+        "severity": "warning",
+        "message": "SMAP record starts 2015-03-31; percentiles rest on ~10 years."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for SPL4SMGP",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nsidc.org/data/spl4smgp",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_sm_rootzone_percentile",
+      "name": "Synthetic root-zone moisture percentile",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:sm_rootzone_dry_days:2025-01-01",
+     "key": "sm_rootzone_dry_days",
+     "label": "Root-zone dry days",
+     "category": "soil_moisture",
+     "value": {
+      "value": 25,
+      "unit": "day",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 9000,
+      "extraction_method": "containing_cell",
+      "field_fraction_of_cell": 0.007,
+      "cell_id": "synthetic-cell",
+      "crs": "EPSG:6933"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "count",
+      "time_standard": "UTC"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for SPL4SMGP",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nsidc.org/data/spl4smgp",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_sm_rootzone_dry_days",
+      "name": "Synthetic root-zone dry days",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    }
+   ],
+   "series": [
+    {
+     "series_id": "411dd851-40e2-481b-885e-7dc029bcafcd:precipitation:2025",
+     "variable": "precipitation",
+     "label": "Precipitation (monthly)",
+     "unit": "mm",
+     "nature": "model",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "P1M",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "points": [
+      {
+       "t": "2025-01-01",
+       "value": 16.2,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-01",
+       "value": 14.5,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-01",
+       "value": 59.7,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-01",
+       "value": 107.4,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-01",
+       "value": 157.3,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-01",
+       "value": 135,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-01",
+       "value": 132,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-01",
+       "value": 162.1,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-01",
+       "value": 49.2,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-01",
+       "value": 88.1,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-01",
+       "value": 43.2,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-01",
+       "value": 20.1,
+       "quality_status": "valid",
+       "missing_reason": null
+      }
+     ],
+     "reference": {
+      "label": "Synthetic 1991–2020 normal",
+      "period_start": "1991-01-01",
+      "period_end": "2020-12-31",
+      "points": [
+       {
+        "t": "2025-01-01",
+        "value": 20,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-02-01",
+        "value": 25,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-03-01",
+        "value": 55,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-04-01",
+        "value": 70,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-05-01",
+        "value": 110,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-06-01",
+        "value": 115,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-07-01",
+        "value": 90,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-08-01",
+        "value": 85,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-09-01",
+        "value": 70,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-10-01",
+        "value": 55,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-11-01",
+        "value": 35,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-12-01",
+        "value": 25,
+        "quality_status": "valid",
+        "missing_reason": null
+       }
+      ]
+     }
+    },
+    {
+     "series_id": "411dd851-40e2-481b-885e-7dc029bcafcd:tmax:2025",
+     "variable": "tmax",
+     "label": "Maximum temperature (monthly mean)",
+     "unit": "degC",
+     "nature": "model",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "P1M",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "mean",
+      "time_standard": "LST"
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "points": [
+      {
+       "t": "2025-01-01",
+       "value": 11.2,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-01",
+       "value": 9.7,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-01",
+       "value": 16.2,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-01",
+       "value": 20.5,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-01",
+       "value": 23.5,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-01",
+       "value": 31.1,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-01",
+       "value": 33.3,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-01",
+       "value": 31.4,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-01",
+       "value": 27.7,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-01",
+       "value": 20.4,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-01",
+       "value": 12.9,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-01",
+       "value": 9.4,
+       "quality_status": "valid",
+       "missing_reason": null
+      }
+     ],
+     "reference": {
+      "label": "Synthetic 1991–2020 normal",
+      "period_start": "1991-01-01",
+      "period_end": "2020-12-31",
+      "points": [
+       {
+        "t": "2025-01-01",
+        "value": 6,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-02-01",
+        "value": 9,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-03-01",
+        "value": 15,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-04-01",
+        "value": 20,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-05-01",
+        "value": 25,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-06-01",
+        "value": 31,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-07-01",
+        "value": 34,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-08-01",
+        "value": 33,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-09-01",
+        "value": 28,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-10-01",
+        "value": 21,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-11-01",
+        "value": 13,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-12-01",
+        "value": 7,
+        "quality_status": "valid",
+        "missing_reason": null
+       }
+      ]
+     }
+    },
+    {
+     "series_id": "411dd851-40e2-481b-885e-7dc029bcafcd:tmin:2025",
+     "variable": "tmin",
+     "label": "Minimum temperature (monthly mean)",
+     "unit": "degC",
+     "nature": "model",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "P1M",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "mean",
+      "time_standard": "LST"
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "points": [
+      {
+       "t": "2025-01-01",
+       "value": -7.8,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-01",
+       "value": -6.1,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-01",
+       "value": 0.4,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-01",
+       "value": 3.8,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-01",
+       "value": 9.2,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-01",
+       "value": 19,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-01",
+       "value": 20.1,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-01",
+       "value": 19.2,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-01",
+       "value": 14,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-01",
+       "value": 6.7,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-01",
+       "value": -0.9,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-01",
+       "value": -5.6,
+       "quality_status": "valid",
+       "missing_reason": null
+      }
+     ],
+     "reference": {
+      "label": "Synthetic 1991–2020 normal",
+      "period_start": "1991-01-01",
+      "period_end": "2020-12-31",
+      "points": [
+       {
+        "t": "2025-01-01",
+        "value": -7,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-02-01",
+        "value": -5,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-03-01",
+        "value": 0,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-04-01",
+        "value": 5,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-05-01",
+        "value": 11,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-06-01",
+        "value": 17,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-07-01",
+        "value": 20,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-08-01",
+        "value": 19,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-09-01",
+        "value": 14,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-10-01",
+        "value": 7,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-11-01",
+        "value": 0,
+        "quality_status": "valid",
+        "missing_reason": null
+       },
+       {
+        "t": "2025-12-01",
+        "value": -5,
+        "quality_status": "valid",
+        "missing_reason": null
+       }
+      ]
+     }
+    },
+    {
+     "series_id": "411dd851-40e2-481b-885e-7dc029bcafcd:gdd_cumulative:2025",
+     "variable": "gdd_cumulative",
+     "label": "Cumulative GDD (placeholder base 10 °C)",
+     "unit": "degC_day",
+     "nature": "model",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "P1M",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "points": [
+      {
+       "t": "2025-01-01",
+       "value": 19,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-01",
+       "value": 19,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-01",
+       "value": 115,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-01",
+       "value": 272,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-01",
+       "value": 481,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-01",
+       "value": 916,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-01",
+       "value": 1383,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-01",
+       "value": 1836,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-01",
+       "value": 2161,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-01",
+       "value": 2322,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-01",
+       "value": 2366,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-01",
+       "value": 2366,
+       "quality_status": "valid",
+       "missing_reason": null
+      }
+     ],
+     "reference": null
+    },
+    {
+     "series_id": "411dd851-40e2-481b-885e-7dc029bcafcd:et0:2025",
+     "variable": "et0",
+     "label": "Reference ET₀ (monthly)",
+     "unit": "mm",
+     "nature": "model",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "P1M",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "points": [
+      {
+       "t": "2025-01-01",
+       "value": 53.7,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-01",
+       "value": 55.5,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-01",
+       "value": 88,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-01",
+       "value": 103.1,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-01",
+       "value": 128,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-01",
+       "value": 151.8,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-01",
+       "value": 192.6,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-01",
+       "value": 165.9,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-01",
+       "value": 136,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-01",
+       "value": 117.9,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-01",
+       "value": 80.3,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-01",
+       "value": 56.5,
+       "quality_status": "valid",
+       "missing_reason": null
+      }
+     ],
+     "reference": null
+    },
+    {
+     "series_id": "411dd851-40e2-481b-885e-7dc029bcafcd:sm_rootzone:2025",
+     "variable": "sm_rootzone",
+     "label": "Root-zone soil moisture (0–100 cm)",
+     "unit": "m3_m-3",
+     "nature": "model",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 9000,
+      "extraction_method": "containing_cell",
+      "field_fraction_of_cell": 0.007,
+      "cell_id": "synthetic-cell",
+      "crs": "EPSG:6933"
+     },
+     "temporal": {
+      "resolution": "P1D",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "mean",
+      "time_standard": "UTC"
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for SPL4SMGP",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nsidc.org/data/spl4smgp",
+       "retrieved_at": null
+      }
+     ],
+     "points": [
+      {
+       "t": "2025-01-01",
+       "value": 0.24,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-02",
+       "value": 0.239,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-03",
+       "value": 0.239,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-04",
+       "value": 0.239,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-05",
+       "value": null,
+       "quality_status": "missing",
+       "missing_reason": "UPSTREAM_ERROR"
+      },
+      {
+       "t": "2025-01-06",
+       "value": 0.238,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-07",
+       "value": 0.238,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-08",
+       "value": 0.273,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-09",
+       "value": 0.272,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-10",
+       "value": 0.271,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-11",
+       "value": 0.27,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-12",
+       "value": 0.27,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-13",
+       "value": 0.269,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-14",
+       "value": 0.268,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-15",
+       "value": 0.267,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-16",
+       "value": 0.267,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-17",
+       "value": 0.266,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-18",
+       "value": 0.265,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-19",
+       "value": 0.265,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-20",
+       "value": 0.264,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-21",
+       "value": 0.263,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-22",
+       "value": 0.263,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-23",
+       "value": 0.262,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-24",
+       "value": 0.261,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-25",
+       "value": 0.282,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-26",
+       "value": 0.281,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-27",
+       "value": 0.28,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-28",
+       "value": 0.279,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-29",
+       "value": 0.278,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-30",
+       "value": 0.277,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-01-31",
+       "value": 0.276,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-01",
+       "value": 0.293,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-02",
+       "value": 0.292,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-03",
+       "value": 0.291,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-04",
+       "value": 0.289,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-05",
+       "value": 0.288,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-06",
+       "value": 0.287,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-07",
+       "value": 0.286,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-08",
+       "value": 0.285,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-09",
+       "value": 0.284,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-10",
+       "value": 0.283,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-11",
+       "value": 0.282,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-12",
+       "value": 0.282,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-13",
+       "value": 0.281,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-14",
+       "value": 0.291,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-15",
+       "value": 0.29,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-16",
+       "value": 0.289,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-17",
+       "value": 0.288,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-18",
+       "value": 0.287,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-19",
+       "value": 0.286,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-20",
+       "value": 0.285,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-21",
+       "value": 0.284,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-22",
+       "value": 0.283,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-23",
+       "value": 0.282,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-24",
+       "value": 0.281,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-25",
+       "value": 0.28,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-26",
+       "value": 0.279,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-27",
+       "value": 0.278,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-02-28",
+       "value": 0.277,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-01",
+       "value": 0.304,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-02",
+       "value": 0.303,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-03",
+       "value": 0.302,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-04",
+       "value": 0.301,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-05",
+       "value": 0.328,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-06",
+       "value": 0.326,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-07",
+       "value": 0.325,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-08",
+       "value": null,
+       "quality_status": "missing",
+       "missing_reason": "UPSTREAM_ERROR"
+      },
+      {
+       "t": "2025-03-09",
+       "value": 0.322,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-10",
+       "value": 0.32,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-11",
+       "value": 0.319,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-12",
+       "value": 0.317,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-13",
+       "value": 0.316,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-14",
+       "value": 0.314,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-15",
+       "value": 0.333,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-16",
+       "value": 0.352,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-17",
+       "value": 0.35,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-18",
+       "value": 0.348,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-19",
+       "value": 0.347,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-20",
+       "value": 0.359,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-21",
+       "value": 0.357,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-22",
+       "value": 0.354,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-23",
+       "value": 0.352,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-24",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-25",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-26",
+       "value": null,
+       "quality_status": "missing",
+       "missing_reason": "UPSTREAM_ERROR"
+      },
+      {
+       "t": "2025-03-27",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-28",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-29",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-30",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-03-31",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-01",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-02",
+       "value": 0.373,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-03",
+       "value": 0.371,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-04",
+       "value": 0.368,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-05",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-06",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-07",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-08",
+       "value": 0.373,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-09",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-10",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-11",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-12",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-13",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-14",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-15",
+       "value": 0.373,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-16",
+       "value": 0.371,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-17",
+       "value": 0.368,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-18",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-19",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-20",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-21",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-22",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-23",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-24",
+       "value": 0.373,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-25",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-26",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-27",
+       "value": null,
+       "quality_status": "missing",
+       "missing_reason": "UPSTREAM_ERROR"
+      },
+      {
+       "t": "2025-04-28",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-29",
+       "value": 0.373,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-04-30",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-01",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-02",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-03",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-04",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-05",
+       "value": 0.373,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-06",
+       "value": 0.371,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-07",
+       "value": null,
+       "quality_status": "missing",
+       "missing_reason": "UPSTREAM_ERROR"
+      },
+      {
+       "t": "2025-05-08",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-09",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-10",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-11",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-12",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-13",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-14",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-15",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-16",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-17",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-18",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-19",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-20",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-21",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-22",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-23",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-24",
+       "value": null,
+       "quality_status": "missing",
+       "missing_reason": "UPSTREAM_ERROR"
+      },
+      {
+       "t": "2025-05-25",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-26",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-27",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-28",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-29",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-30",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-05-31",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-01",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-02",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-03",
+       "value": 0.373,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-04",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-05",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-06",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-07",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-08",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-09",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-10",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-11",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-12",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-13",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-14",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-15",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-16",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-17",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-18",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-19",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-20",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-21",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-22",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-23",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-24",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-25",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-26",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-27",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-28",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-29",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-06-30",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-01",
+       "value": 0.373,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-02",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-03",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-04",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-05",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-06",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-07",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-08",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-09",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-10",
+       "value": null,
+       "quality_status": "missing",
+       "missing_reason": "UPSTREAM_ERROR"
+      },
+      {
+       "t": "2025-07-11",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-12",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-13",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-14",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-15",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-16",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-17",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-18",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-19",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-20",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-21",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-22",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-23",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-24",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-25",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-26",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-27",
+       "value": 0.373,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-28",
+       "value": 0.371,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-29",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-30",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-07-31",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-01",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-02",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-03",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-04",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-05",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-06",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-07",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-08",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-09",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-10",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-11",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-12",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-13",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-14",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-15",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-16",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-17",
+       "value": 0.373,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-18",
+       "value": 0.371,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-19",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-20",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-21",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-22",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-23",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-24",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-25",
+       "value": 0.373,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-26",
+       "value": 0.371,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-27",
+       "value": 0.368,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-28",
+       "value": 0.366,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-29",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-30",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-08-31",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-01",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-02",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-03",
+       "value": 0.373,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-04",
+       "value": 0.371,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-05",
+       "value": 0.368,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-06",
+       "value": 0.366,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-07",
+       "value": 0.364,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-08",
+       "value": 0.362,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-09",
+       "value": 0.36,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-10",
+       "value": 0.358,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-11",
+       "value": 0.355,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-12",
+       "value": 0.353,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-13",
+       "value": 0.351,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-14",
+       "value": 0.349,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-15",
+       "value": null,
+       "quality_status": "missing",
+       "missing_reason": "UPSTREAM_ERROR"
+      },
+      {
+       "t": "2025-09-16",
+       "value": 0.346,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-17",
+       "value": 0.344,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-18",
+       "value": 0.342,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-19",
+       "value": 0.363,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-20",
+       "value": 0.361,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-21",
+       "value": 0.359,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-22",
+       "value": 0.357,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-23",
+       "value": 0.354,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-24",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-25",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-26",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-27",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-28",
+       "value": null,
+       "quality_status": "missing",
+       "missing_reason": "UPSTREAM_ERROR"
+      },
+      {
+       "t": "2025-09-29",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-09-30",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-01",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-02",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-03",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-04",
+       "value": 0.373,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-05",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-06",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-07",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-08",
+       "value": 0.373,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-09",
+       "value": 0.371,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-10",
+       "value": 0.368,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-11",
+       "value": 0.366,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-12",
+       "value": 0.364,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-13",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-14",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-15",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-16",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-17",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-18",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-19",
+       "value": 0.373,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-20",
+       "value": 0.371,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-21",
+       "value": 0.368,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-22",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-23",
+       "value": 0.376,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-24",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-25",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-26",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-27",
+       "value": 0.373,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-28",
+       "value": 0.371,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-29",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-30",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-10-31",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-01",
+       "value": 0.373,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-02",
+       "value": 0.371,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-03",
+       "value": 0.368,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-04",
+       "value": 0.366,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-05",
+       "value": 0.364,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-06",
+       "value": 0.362,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-07",
+       "value": 0.36,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-08",
+       "value": 0.358,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-09",
+       "value": 0.355,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-10",
+       "value": 0.353,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-11",
+       "value": 0.351,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-12",
+       "value": 0.349,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-13",
+       "value": 0.348,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-14",
+       "value": 0.346,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-15",
+       "value": 0.344,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-16",
+       "value": 0.342,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-17",
+       "value": 0.34,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-18",
+       "value": 0.352,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-19",
+       "value": 0.35,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-20",
+       "value": 0.36,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-21",
+       "value": 0.358,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-22",
+       "value": 0.356,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-23",
+       "value": 0.354,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-24",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-25",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-26",
+       "value": 0.38,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-27",
+       "value": 0.378,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-28",
+       "value": 0.375,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-29",
+       "value": 0.373,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-11-30",
+       "value": 0.371,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-01",
+       "value": 0.368,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-02",
+       "value": 0.366,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-03",
+       "value": 0.364,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-04",
+       "value": 0.362,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-05",
+       "value": 0.36,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-06",
+       "value": 0.358,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-07",
+       "value": 0.355,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-08",
+       "value": 0.353,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-09",
+       "value": 0.351,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-10",
+       "value": 0.349,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-11",
+       "value": 0.348,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-12",
+       "value": 0.346,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-13",
+       "value": 0.344,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-14",
+       "value": 0.342,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-15",
+       "value": 0.34,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-16",
+       "value": 0.338,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-17",
+       "value": 0.336,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-18",
+       "value": 0.335,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-19",
+       "value": 0.333,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-20",
+       "value": 0.331,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-21",
+       "value": 0.33,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-22",
+       "value": 0.328,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-23",
+       "value": 0.326,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-24",
+       "value": 0.325,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-25",
+       "value": 0.323,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-26",
+       "value": 0.322,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-27",
+       "value": 0.32,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-28",
+       "value": 0.319,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-29",
+       "value": 0.317,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-30",
+       "value": 0.316,
+       "quality_status": "valid",
+       "missing_reason": null
+      },
+      {
+       "t": "2025-12-31",
+       "value": 0.314,
+       "quality_status": "valid",
+       "missing_reason": null
+      }
+     ],
+     "reference": null
+    }
+   ],
+   "quality": {
+    "status": "valid",
+    "flags": [
+     {
+      "code": "SYNTHETIC",
+      "severity": "info",
+      "message": "Synthetic demo value — not an observation."
+     }
+    ],
+    "completeness": 0.97,
+    "missing_reason": null
+   }
+  },
+  "meta": {
+   "request_id": "mock-a-mwfz5rnz",
+   "generated_at": "2026-11-14T05:38:13.200Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

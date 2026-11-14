@@ -1,0 +1,114 @@
+{
+ "name": "scenarios_411dd851-40e2-481b-885e-7dc029bcafcd",
+ "model": "RotationScenario",
+ "list": true,
+ "payload": {
+  "data": [
+   {
+    "scenario_id": "51726bed-ade3-4868-ad88-14189a120877",
+    "field_id": "411dd851-40e2-481b-885e-7dc029bcafcd",
+    "name": "Example: wheat → sorghum → soybeans",
+    "start_year": 2026,
+    "sequence": [
+     {
+      "year": 2026,
+      "crop_code": 24,
+      "crop_name": "Winter Wheat"
+     },
+     {
+      "year": 2027,
+      "crop_code": 4,
+      "crop_name": "Sorghum"
+     },
+     {
+      "year": 2028,
+      "crop_code": 5,
+      "crop_name": "Soybeans"
+     },
+     {
+      "year": 2029,
+      "crop_code": 24,
+      "crop_name": "Winter Wheat"
+     }
+    ],
+    "evaluation": {
+     "engine_version": "synthetic-engine-0",
+     "kb_version": "synthetic-kb-0",
+     "overall": "marginal",
+     "dimensions": [
+      {
+       "key": "agronomic_fit",
+       "band": "marginal",
+       "explanation": "Synthetic placeholder band — per-year agronomic checks come from the Phase 5 knowledge base."
+      },
+      {
+       "key": "rotation_benefit",
+       "band": "marginal",
+       "explanation": "Synthetic placeholder band — rotation rules (predecessor effects, breaks) are Phase 5."
+      },
+      {
+       "key": "water_risk",
+       "band": "marginal",
+       "explanation": "Synthetic placeholder band — will combine crop water need with regional climate context."
+      },
+      {
+       "key": "diversity",
+       "band": "suitable",
+       "explanation": "3 distinct crops across 4 years (factual count)."
+      }
+     ],
+     "year_findings": [
+      {
+       "year": 2026,
+       "band": "marginal",
+       "messages": [
+        {
+         "code": "REPEAT",
+         "severity": "warning",
+         "message": "Repeats the previous year's crop (Winter Wheat)."
+        }
+       ],
+       "evidence_ids": []
+      },
+      {
+       "year": 2027,
+       "band": "marginal",
+       "messages": [],
+       "evidence_ids": []
+      },
+      {
+       "year": 2028,
+       "band": "suitable",
+       "messages": [],
+       "evidence_ids": []
+      },
+      {
+       "year": 2029,
+       "band": "unsuitable",
+       "messages": [],
+       "evidence_ids": []
+      }
+     ],
+     "warnings": [
+      {
+       "code": "SYNTHETIC_EVALUATION",
+       "severity": "warning",
+       "message": "Synthetic evaluation: bands are placeholders until the rules-based rotation engine arrives in Phase 5. Only the repeat/fallow/double-crop/new-crop notes are factual."
+      }
+     ],
+     "evaluated_at": "2026-11-14T05:38:13.134Z"
+    },
+    "created_at": "2026-11-01T09:00:00Z",
+    "updated_at": "2026-11-01T09:00:00Z"
+   }
+  ],
+  "meta": {
+   "request_id": "mock-i-mwfz5rr5",
+   "generated_at": "2026-11-14T05:38:13.314Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

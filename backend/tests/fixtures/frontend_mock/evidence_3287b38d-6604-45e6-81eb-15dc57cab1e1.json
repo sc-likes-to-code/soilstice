@@ -1,0 +1,1402 @@
+{
+ "name": "evidence_3287b38d-6604-45e6-81eb-15dc57cab1e1",
+ "model": "EvidenceItem",
+ "list": true,
+ "payload": {
+  "data": [
+   {
+    "evidence_id": "c9ab64e1-4a45-4e58-a403-84480b6f10cf",
+    "kind": "dataset",
+    "title": "NASA POWER Daily (AG community)",
+    "summary": "NASA LaRC · POWER Daily API vv2.10.3 · P0 · support R. Not yet integrated (Phase 3).",
+    "field_id": null,
+    "dataset_id": "nasa_power_daily_ag",
+    "product_version": "v2.10.3",
+    "citation": "NASA LaRC. NASA POWER Daily (AG community) (POWER Daily API, version v2.10.3).",
+    "url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+    "doi": null,
+    "accessed_at": "2026-11-14",
+    "verification_status": "LIVE",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "nasa_power_daily_ag"
+    ]
+   },
+   {
+    "evidence_id": "30cbd476-1632-44cf-9aa0-a18a05dc060c",
+    "kind": "dataset",
+    "title": "SSURGO via Soil Data Access",
+    "summary": "USDA NRCS · SSURGO (SDA) vlive database · P0 · support F. Not yet integrated (Phase 3).",
+    "field_id": null,
+    "dataset_id": "usda_nrcs_ssurgo_sda",
+    "product_version": "live database",
+    "citation": "USDA NRCS. SSURGO via Soil Data Access (SSURGO (SDA), version live database).",
+    "url": "https://sdmdataaccess.sc.egov.usda.gov/",
+    "doi": null,
+    "accessed_at": "2026-11-14",
+    "verification_status": "LIVE",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "usda_nrcs_ssurgo_sda"
+    ]
+   },
+   {
+    "evidence_id": "c81fcdf1-17e5-4489-b8b6-e47dd2dce860",
+    "kind": "dataset",
+    "title": "Cropland Data Layer (CropScape)",
+    "summary": "USDA NASS · CDL v2006–2025 (KS) · P0 · support F. Not yet integrated (Phase 3).",
+    "field_id": null,
+    "dataset_id": "usda_nass_cdl",
+    "product_version": "2006–2025 (KS)",
+    "citation": "USDA NASS. Cropland Data Layer (CropScape) (CDL, version 2006–2025 (KS)).",
+    "url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+    "doi": null,
+    "accessed_at": "2026-11-14",
+    "verification_status": "LIVE",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "usda_nass_cdl"
+    ]
+   },
+   {
+    "evidence_id": "26e53576-1ee1-45bf-86da-02eada75c40d",
+    "kind": "dataset",
+    "title": "Crop Sequence Boundaries",
+    "summary": "USDA NASS · CSB 2018–2025 rev23 vrev23 · P0 · support F. Not yet integrated (Phase 3).",
+    "field_id": null,
+    "dataset_id": "usda_nass_csb",
+    "product_version": "rev23",
+    "citation": "USDA NASS. Crop Sequence Boundaries (CSB 2018–2025 rev23, version rev23).",
+    "url": "https://www.nass.usda.gov/research-and-science/crop-sequence-boundaries",
+    "doi": null,
+    "accessed_at": "2026-11-14",
+    "verification_status": "DOC",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "usda_nass_csb"
+    ]
+   },
+   {
+    "evidence_id": "7e191b28-32e4-4811-a158-784d4645b99c",
+    "kind": "dataset",
+    "title": "HLS Vegetation Indices (L30/S30)",
+    "summary": "NASA LP DAAC · HLSL30_VI / HLSS30_VI v2.0 · P0 · support F. Not yet integrated (Phase 3).",
+    "field_id": null,
+    "dataset_id": "nasa_hls_vi",
+    "product_version": "2.0",
+    "citation": "NASA LP DAAC. HLS Vegetation Indices (L30/S30) (HLSL30_VI / HLSS30_VI, version 2.0).",
+    "url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-hlsl30-vi-2.0",
+    "doi": "10.5067/HLS/HLSL30_VI.002",
+    "accessed_at": "2026-11-14",
+    "verification_status": "LIVE",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "nasa_hls_vi"
+    ]
+   },
+   {
+    "evidence_id": "c1fc5d16-15b4-4481-a917-18b73113afee",
+    "kind": "dataset",
+    "title": "HLS Surface Reflectance (L30/S30)",
+    "summary": "NASA LP DAAC · HLSL30 / HLSS30 v2.0 · P0 · support F. Not yet integrated (Phase 3).",
+    "field_id": null,
+    "dataset_id": "nasa_hls",
+    "product_version": "2.0",
+    "citation": "NASA LP DAAC. HLS Surface Reflectance (L30/S30) (HLSL30 / HLSS30, version 2.0).",
+    "url": "https://www.earthdata.nasa.gov/data/projects/hls",
+    "doi": null,
+    "accessed_at": "2026-11-14",
+    "verification_status": "CMR",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "nasa_hls"
+    ]
+   },
+   {
+    "evidence_id": "779f2bef-7c95-41d6-8d32-a775eb4f969b",
+    "kind": "dataset",
+    "title": "SMAP L4 Surface & Root-Zone Soil Moisture",
+    "summary": "NASA NSIDC DAAC · SPL4SMGP v008 · P0 · support R. Not yet integrated (Phase 3).",
+    "field_id": null,
+    "dataset_id": "nasa_smap_spl4smgp",
+    "product_version": "008",
+    "citation": "NASA NSIDC DAAC. SMAP L4 Surface & Root-Zone Soil Moisture (SPL4SMGP, version 008).",
+    "url": "https://nsidc.org/data/spl4smgp",
+    "doi": null,
+    "accessed_at": "2026-11-14",
+    "verification_status": "CMR",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "nasa_smap_spl4smgp"
+    ]
+   },
+   {
+    "evidence_id": "c73414d0-5e04-4c30-b52a-db7a3800357b",
+    "kind": "dataset",
+    "title": "SRTM Global 1 arc-second",
+    "summary": "NASA LP DAAC · SRTMGL1 v003 · P0 · support F. Not yet integrated (Phase 3).",
+    "field_id": null,
+    "dataset_id": "nasa_srtm_gl1",
+    "product_version": "003",
+    "citation": "NASA LP DAAC. SRTM Global 1 arc-second (SRTMGL1, version 003).",
+    "url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-srtmgl1-003",
+    "doi": "10.5067/MEaSUREs/SRTM/SRTMGL1.003",
+    "accessed_at": "2026-11-14",
+    "verification_status": "CMR",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "nasa_srtm_gl1"
+    ]
+   },
+   {
+    "evidence_id": "170b7bf0-0bdf-41ba-9721-90485a2d8a17",
+    "kind": "dataset",
+    "title": "PRISM daily climate",
+    "summary": "PRISM Group, Oregon State University · PRISM daily (4 km / 800 m) vpost-2025-10 COG · P1 · support S. Not yet integrated (Phase 3).",
+    "field_id": null,
+    "dataset_id": "prism_daily",
+    "product_version": "post-2025-10 COG",
+    "citation": "PRISM Group, Oregon State University. PRISM daily climate (PRISM daily (4 km / 800 m), version post-2025-10 COG).",
+    "url": "https://prism.oregonstate.edu/",
+    "doi": null,
+    "accessed_at": "2026-11-14",
+    "verification_status": "LIVE",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "prism_daily"
+    ]
+   },
+   {
+    "evidence_id": "951558af-25fb-4724-bb6e-d19d04da40ec",
+    "kind": "dataset",
+    "title": "OpenET Ensemble ET",
+    "summary": "OpenET consortium · OpenET Collection v2.1 · P1 · support F. Not yet integrated (Phase 3).",
+    "field_id": null,
+    "dataset_id": "openet",
+    "product_version": "2.1",
+    "citation": "OpenET consortium. OpenET Ensemble ET (OpenET Collection, version 2.1).",
+    "url": "https://openet.gitbook.io/docs",
+    "doi": null,
+    "accessed_at": "2026-11-14",
+    "verification_status": "DOC",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "openet"
+    ]
+   },
+   {
+    "evidence_id": "c2a5bd68-a510-44f3-a932-21d7f83c972f",
+    "kind": "dataset",
+    "title": "NASS Quick Stats",
+    "summary": "USDA NASS · Quick Stats API vapi_GET · P1 · support R. Not yet integrated (Phase 3).",
+    "field_id": null,
+    "dataset_id": "usda_nass_quickstats",
+    "product_version": "api_GET",
+    "citation": "USDA NASS. NASS Quick Stats (Quick Stats API, version api_GET).",
+    "url": "https://quickstats.nass.usda.gov/api",
+    "doi": null,
+    "accessed_at": "2026-11-14",
+    "verification_status": "LIVE",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "usda_nass_quickstats"
+    ]
+   },
+   {
+    "evidence_id": "f055b79e-3ca3-454e-bcbf-483e8926addf",
+    "kind": "dataset",
+    "title": "SMAP L3 Enhanced Soil Moisture",
+    "summary": "NASA NSIDC DAAC · SPL3SMP_E v006 · P1 · support R. Not yet integrated (Phase 3).",
+    "field_id": null,
+    "dataset_id": "nasa_smap_spl3smp_e",
+    "product_version": "006",
+    "citation": "NASA NSIDC DAAC. SMAP L3 Enhanced Soil Moisture (SPL3SMP_E, version 006).",
+    "url": "https://nsidc.org/data/SPL3SMP_E",
+    "doi": null,
+    "accessed_at": "2026-11-14",
+    "verification_status": "CMR",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "nasa_smap_spl3smp_e"
+    ]
+   },
+   {
+    "evidence_id": "6db35364-403a-488c-8eb5-9ff0aa158c62",
+    "kind": "dataset",
+    "title": "GPM IMERG Final daily",
+    "summary": "NASA GES DISC · GPM_3IMERGDF v07 · P2 · support R. Not yet integrated (Phase 3).",
+    "field_id": null,
+    "dataset_id": "nasa_gpm_imerg",
+    "product_version": "07",
+    "citation": "NASA GES DISC. GPM IMERG Final daily (GPM_3IMERGDF, version 07).",
+    "url": "https://catalog.data.gov/dataset/gpm-imerg-final-precipitation-l3-1-day-0-1-degree-x-0-1-degree-v07-gpm-3imergdf-at-ges-dis-f1669",
+    "doi": null,
+    "accessed_at": "2026-11-14",
+    "verification_status": "CMR",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "nasa_gpm_imerg"
+    ]
+   },
+   {
+    "evidence_id": "49ba94d7-4064-4678-9c41-c750a5fa62bf",
+    "kind": "dataset",
+    "title": "FAO GAEZ v5 crop suitability",
+    "summary": "FAO + IIASA · GAEZ v5 vv5 · P2 · support R. Not yet integrated (Phase 3).",
+    "field_id": null,
+    "dataset_id": "fao_gaez_v5",
+    "product_version": "v5",
+    "citation": "FAO + IIASA. FAO GAEZ v5 crop suitability (GAEZ v5, version v5).",
+    "url": "https://www.fao.org/gaez/en/",
+    "doi": null,
+    "accessed_at": "2026-11-14",
+    "verification_status": "DOC",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "fao_gaez_v5"
+    ]
+   },
+   {
+    "evidence_id": "c4cafc96-fe95-4d38-9fd1-715d2412fef3",
+    "kind": "method",
+    "title": "SSURGO area × component-percent weighting",
+    "summary": "Normative soil aggregation: major components, fixed depth intervals 0–30/30–100/100–150 cm, AWS from muaggatt. See SOILSTICE_DATA_ARCHITECTURE §5.3.1.",
+    "field_id": null,
+    "dataset_id": "soilstice_derived",
+    "product_version": "phase0",
+    "citation": "SOILSTICE Phase 0 architecture documents (2026-11-14).",
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-14",
+    "verification_status": "DOC",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "ssurgo_area_comppct_weighting"
+    ]
+   },
+   {
+    "evidence_id": "34748246-651f-4128-9ad1-9432a985e1bd",
+    "kind": "method",
+    "title": "Field resilience framework",
+    "summary": "Five components, absolute breakpoints (set in Phase 4), equal-weight composite when ≥4 of 5 components exist, confidence from support class. See SOILSTICE_DATA_ARCHITECTURE §5.10.",
+    "field_id": null,
+    "dataset_id": "soilstice_derived",
+    "product_version": "phase0",
+    "citation": "SOILSTICE Phase 0 architecture documents (2026-11-14).",
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-14",
+    "verification_status": "DOC",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "resilience_framework"
+    ]
+   },
+   {
+    "evidence_id": "e3975471-b8f0-409f-9c71-46184a0c3c8e",
+    "kind": "method",
+    "title": "Rotation recommendation: limiting-factor method",
+    "summary": "Each factor classed suitable/marginal/unsuitable against cited KB thresholds; worst factor wins; regional factors cannot exceed 'marginal'. See SOILSTICE_DATA_ARCHITECTURE §5.11.",
+    "field_id": null,
+    "dataset_id": "soilstice_derived",
+    "product_version": "phase0",
+    "citation": "SOILSTICE Phase 0 architecture documents (2026-11-14).",
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-14",
+    "verification_status": "DOC",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "rotation_limiting_factor"
+    ]
+   },
+   {
+    "evidence_id": "26d3fb5a-1d25-4c1e-8774-598dd03834a3",
+    "kind": "method",
+    "title": "HLS Fmask cloud-masking policy",
+    "summary": "Bits 1–3 (cloud, adjacent, shadow) masked; bits 4–5 pending confirmation (Test H-5); scenes accepted at ≥70% clear field pixels.",
+    "field_id": null,
+    "dataset_id": "soilstice_derived",
+    "product_version": "phase0",
+    "citation": "SOILSTICE Phase 0 architecture documents (2026-11-14).",
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-14",
+    "verification_status": "DOC",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "hls_fmask_policy"
+    ]
+   },
+   {
+    "evidence_id": "666e1555-2b6a-4572-9dc4-fd3b53dc971c",
+    "kind": "method",
+    "title": "Field vs regional support classes",
+    "summary": "F = field-resolved (≤100 m), S = sub-regional (≤5 km), R = regional context (>5 km). Coarse grids are never resampled to field pixels.",
+    "field_id": null,
+    "dataset_id": "soilstice_derived",
+    "product_version": "phase0",
+    "citation": "SOILSTICE Phase 0 architecture documents (2026-11-14).",
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-14",
+    "verification_status": "DOC",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "support_classes"
+    ]
+   },
+   {
+    "evidence_id": "07b2ca77-100e-474e-a797-2170a3dff3a2",
+    "kind": "kb_rule",
+    "title": "Crop KB rule: ph",
+    "summary": "Placeholder rule. The cited threshold will be added to the crop knowledge base in Phase 5; until then no agronomic claim is made.",
+    "field_id": null,
+    "dataset_id": null,
+    "product_version": "synthetic-kb-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": null,
+    "verification_status": "UNVERIFIED",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "ph"
+    ]
+   },
+   {
+    "evidence_id": "b12b3e49-55fe-463a-bcbb-8d8bfa771d39",
+    "kind": "kb_rule",
+    "title": "Crop KB rule: drainage",
+    "summary": "Placeholder rule. The cited threshold will be added to the crop knowledge base in Phase 5; until then no agronomic claim is made.",
+    "field_id": null,
+    "dataset_id": null,
+    "product_version": "synthetic-kb-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": null,
+    "verification_status": "UNVERIFIED",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "drainage"
+    ]
+   },
+   {
+    "evidence_id": "a3f2aa68-17ba-4927-9471-bf502ce37e71",
+    "kind": "kb_rule",
+    "title": "Crop KB rule: water holding",
+    "summary": "Placeholder rule. The cited threshold will be added to the crop knowledge base in Phase 5; until then no agronomic claim is made.",
+    "field_id": null,
+    "dataset_id": null,
+    "product_version": "synthetic-kb-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": null,
+    "verification_status": "UNVERIFIED",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "water_holding"
+    ]
+   },
+   {
+    "evidence_id": "f43dd19d-9f15-48c1-9843-3440c6d4c2c3",
+    "kind": "kb_rule",
+    "title": "Crop KB rule: gdd",
+    "summary": "Placeholder rule. The cited threshold will be added to the crop knowledge base in Phase 5; until then no agronomic claim is made.",
+    "field_id": null,
+    "dataset_id": null,
+    "product_version": "synthetic-kb-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": null,
+    "verification_status": "UNVERIFIED",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "gdd"
+    ]
+   },
+   {
+    "evidence_id": "34c8f961-f55a-4546-9e8e-cf149fc36a55",
+    "kind": "kb_rule",
+    "title": "Crop KB rule: slope",
+    "summary": "Placeholder rule. The cited threshold will be added to the crop knowledge base in Phase 5; until then no agronomic claim is made.",
+    "field_id": null,
+    "dataset_id": null,
+    "product_version": "synthetic-kb-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": null,
+    "verification_status": "UNVERIFIED",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "slope"
+    ]
+   },
+   {
+    "evidence_id": "09772340-5ed9-43f2-8564-a7058974f90d",
+    "kind": "kb_rule",
+    "title": "Crop KB rule: rotation history",
+    "summary": "Placeholder rule. The cited threshold will be added to the crop knowledge base in Phase 5; until then no agronomic claim is made.",
+    "field_id": null,
+    "dataset_id": null,
+    "product_version": "synthetic-kb-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": null,
+    "verification_status": "UNVERIFIED",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "rotation_history"
+    ]
+   },
+   {
+    "evidence_id": "e0300005-a21c-4cef-af4c-a5b47adde45e",
+    "kind": "kb_rule",
+    "title": "Crop KB rule: regional climate",
+    "summary": "Placeholder rule. The cited threshold will be added to the crop knowledge base in Phase 5; until then no agronomic claim is made.",
+    "field_id": null,
+    "dataset_id": null,
+    "product_version": "synthetic-kb-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": null,
+    "verification_status": "UNVERIFIED",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "regional_climate"
+    ]
+   },
+   {
+    "evidence_id": "496a204d-1925-4ba6-a771-0cce6969d8d4",
+    "kind": "indicator",
+    "title": "Precipitation total",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic precipitation total. Support: R.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 55000,
+     "extraction_method": "api_point_query",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "sum",
+     "time_standard": "LST"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:precip_total_season:2025-01-01",
+     "precip_total_season"
+    ]
+   },
+   {
+    "evidence_id": "f05aeacc-def1-4cba-b87d-04d6ed4d6845",
+    "kind": "indicator",
+    "title": "Precipitation anomaly",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic precipitation anomaly. Support: R.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 55000,
+     "extraction_method": "api_point_query",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "sum",
+     "time_standard": "LST"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:precip_anomaly_pct:2025-01-01",
+     "precip_anomaly_pct"
+    ]
+   },
+   {
+    "evidence_id": "bcff5813-c022-4e10-8c95-cf46da2b07fa",
+    "kind": "indicator",
+    "title": "Growing degree days",
+    "summary": "Synthetic indicator for Demo Field C. Method: Placeholder GDD (base 10 °C, cap 30 °C). Support: R.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 55000,
+     "extraction_method": "api_point_query",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "sum",
+     "time_standard": "LST"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:gdd_season:2025-01-01",
+     "gdd_season"
+    ]
+   },
+   {
+    "evidence_id": "62ddaeaa-da32-4f12-a098-83f93e08aaed",
+    "kind": "indicator",
+    "title": "Heat-stress days (Tmax > 35 °C)",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic heat-stress days (tmax > 35 °c). Support: R.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 55000,
+     "extraction_method": "api_point_query",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "sum",
+     "time_standard": "LST"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:heat_stress_days:2025-01-01",
+     "heat_stress_days"
+    ]
+   },
+   {
+    "evidence_id": "75e4940d-b320-4890-8b83-605f1b735e6a",
+    "kind": "indicator",
+    "title": "Frost-free days",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic frost-free days. Support: R.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 55000,
+     "extraction_method": "api_point_query",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "sum",
+     "time_standard": "LST"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:frost_free_days:2025-01-01",
+     "frost_free_days"
+    ]
+   },
+   {
+    "evidence_id": "60398a72-0449-4845-88e1-d302a32b683e",
+    "kind": "indicator",
+    "title": "Solar radiation total",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic solar radiation total. Support: R.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 110000,
+     "extraction_method": "api_point_query",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "sum",
+     "time_standard": "LST"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:solar_total_season:2025-01-01",
+     "solar_total_season"
+    ]
+   },
+   {
+    "evidence_id": "cc356926-22d1-4f1a-a201-ca1106bb8f48",
+    "kind": "indicator",
+    "title": "Mean relative humidity",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic mean relative humidity. Support: R.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 55000,
+     "extraction_method": "api_point_query",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "mean",
+     "time_standard": "LST"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:rh_mean_season:2025-01-01",
+     "rh_mean_season"
+    ]
+   },
+   {
+    "evidence_id": "c7147eb3-e314-48d3-a6d5-2477057d6130",
+    "kind": "indicator",
+    "title": "Reference ET₀ total",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic reference et₀ total. Support: R.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 55000,
+     "extraction_method": "api_point_query",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "sum",
+     "time_standard": "LST"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:et0_total_season:2025-01-01",
+     "et0_total_season"
+    ]
+   },
+   {
+    "evidence_id": "23f041a4-706c-4deb-bc93-6cce9b2c2fb0",
+    "kind": "indicator",
+    "title": "Water balance (P − ET₀)",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic water balance (p − et₀). Support: R.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 55000,
+     "extraction_method": "api_point_query",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "sum",
+     "time_standard": "LST"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:water_balance_season:2025-01-01",
+     "water_balance_season"
+    ]
+   },
+   {
+    "evidence_id": "9471608d-acdd-4074-a298-5c4e38225bc6",
+    "kind": "indicator",
+    "title": "Actual ET (OpenET)",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic actual et (openet). Support: F.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": null
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "sum",
+     "time_standard": "LST"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:et_actual_season:2025-01-01",
+     "et_actual_season"
+    ]
+   },
+   {
+    "evidence_id": "d8e47694-3fce-4cc3-aa23-3208280dd5f9",
+    "kind": "indicator",
+    "title": "Root-zone soil moisture (mean)",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic root-zone soil moisture (mean). Support: R.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 9000,
+     "extraction_method": "containing_cell",
+     "field_fraction_of_cell": 0.0065,
+     "cell_id": "synthetic-cell",
+     "crs": "EPSG:6933"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "mean",
+     "time_standard": "UTC"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:sm_rootzone_mean_season:2025-01-01",
+     "sm_rootzone_mean_season"
+    ]
+   },
+   {
+    "evidence_id": "4e13d26e-10ed-4d00-8cdb-ab601910e547",
+    "kind": "indicator",
+    "title": "Root-zone moisture percentile",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic root-zone moisture percentile. Support: R.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 9000,
+     "extraction_method": "containing_cell",
+     "field_fraction_of_cell": 0.0065,
+     "cell_id": "synthetic-cell",
+     "crs": "EPSG:6933"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "percentile",
+     "time_standard": "UTC"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:sm_rootzone_percentile:2025-01-01",
+     "sm_rootzone_percentile"
+    ]
+   },
+   {
+    "evidence_id": "29b0f0a5-ce3f-4beb-b9a2-9ec5f2144a7f",
+    "kind": "indicator",
+    "title": "Root-zone dry days",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic root-zone dry days. Support: R.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 9000,
+     "extraction_method": "containing_cell",
+     "field_fraction_of_cell": 0.0065,
+     "cell_id": "synthetic-cell",
+     "crs": "EPSG:6933"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "count",
+     "time_standard": "UTC"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:sm_rootzone_dry_days:2025-01-01",
+     "sm_rootzone_dry_days"
+    ]
+   },
+   {
+    "evidence_id": "bea849d3-d3f9-4025-a2f3-1b10fc416c2c",
+    "kind": "indicator",
+    "title": "Peak NDVI",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic peak ndvi. Support: F.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon_inward_buffer",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:32614"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "max",
+     "time_standard": "UTC"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:ndvi_peak:2025-01-01",
+     "ndvi_peak"
+    ]
+   },
+   {
+    "evidence_id": "0bab3fcb-b28d-4585-a07e-fa55e422d0f5",
+    "kind": "indicator",
+    "title": "Peak NDVI day of year",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic peak ndvi day of year. Support: F.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon_inward_buffer",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:32614"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "max",
+     "time_standard": "UTC"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:ndvi_peak_doy:2025-01-01",
+     "ndvi_peak_doy"
+    ]
+   },
+   {
+    "evidence_id": "57e4fb97-8f8b-4087-b361-e6a6bde9c649",
+    "kind": "indicator",
+    "title": "Peak NDMI",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic peak ndmi. Support: F.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon_inward_buffer",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:32614"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "max",
+     "time_standard": "UTC"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:ndmi_peak_season:2025-01-01",
+     "ndmi_peak_season"
+    ]
+   },
+   {
+    "evidence_id": "8a70251a-dc25-451b-8e37-e265d38e8f4c",
+    "kind": "indicator",
+    "title": "Peak NDVI variability (2016–2025)",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic peak ndvi variability (2016–2025). Support: F.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon_inward_buffer",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:32614"
+    },
+    "temporal": {
+     "resolution": "P1Y",
+     "period_start": "2016-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "none",
+     "time_standard": "UTC"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:ndvi_peak_cv:2016-01-01",
+     "ndvi_peak_cv"
+    ]
+   },
+   {
+    "evidence_id": "06aeb1bb-c501-48ec-be88-12050396ac39",
+    "kind": "indicator",
+    "title": "Available water storage 0–150 cm",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic available water storage 0–150 cm. Support: F.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": null,
+     "extraction_method": "vector_intersection",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "static",
+     "period_start": null,
+     "period_end": null,
+     "aggregation": "weighted_mean",
+     "time_standard": "not_applicable"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:aws_0_150:static",
+     "aws_0_150"
+    ]
+   },
+   {
+    "evidence_id": "1f1472c5-f346-4fcb-bef9-7d9264c5642a",
+    "kind": "indicator",
+    "title": "Soil pH 0–30 cm",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic soil ph 0–30 cm. Support: F.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": null,
+     "extraction_method": "vector_intersection",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "static",
+     "period_start": null,
+     "period_end": null,
+     "aggregation": "weighted_mean",
+     "time_standard": "not_applicable"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:ph_0_30:static",
+     "ph_0_30"
+    ]
+   },
+   {
+    "evidence_id": "8ca5a2af-04e7-4e53-801a-3bc124effbd5",
+    "kind": "indicator",
+    "title": "Organic matter 0–30 cm",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic organic matter 0–30 cm. Support: F.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": null,
+     "extraction_method": "vector_intersection",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "static",
+     "period_start": null,
+     "period_end": null,
+     "aggregation": "weighted_mean",
+     "time_standard": "not_applicable"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:om_0_30:static",
+     "om_0_30"
+    ]
+   },
+   {
+    "evidence_id": "2064c5a4-263b-4bcd-9d42-5caf865cb6aa",
+    "kind": "indicator",
+    "title": "Clay 0–30 cm",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic clay 0–30 cm. Support: F.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": null,
+     "extraction_method": "vector_intersection",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "static",
+     "period_start": null,
+     "period_end": null,
+     "aggregation": "weighted_mean",
+     "time_standard": "not_applicable"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:clay_0_30:static",
+     "clay_0_30"
+    ]
+   },
+   {
+    "evidence_id": "a5fcf392-d793-4d23-a259-a013253d32bf",
+    "kind": "indicator",
+    "title": "Mean slope",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic mean slope. Support: F.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "static",
+     "period_start": "2000-02-11",
+     "period_end": "2000-02-21",
+     "aggregation": "mean",
+     "time_standard": "not_applicable"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:slope_mean_pct:2000-02-11",
+     "slope_mean_pct"
+    ]
+   },
+   {
+    "evidence_id": "a4ac05e5-f933-4518-9153-b9ba612feaf0",
+    "kind": "indicator",
+    "title": "Slope (90th percentile)",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic slope (90th percentile). Support: F.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "static",
+     "period_start": "2000-02-11",
+     "period_end": "2000-02-21",
+     "aggregation": "mean",
+     "time_standard": "not_applicable"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:slope_p90_pct:2000-02-11",
+     "slope_p90_pct"
+    ]
+   },
+   {
+    "evidence_id": "a241b3c4-686e-4a28-83cd-94e369e84a87",
+    "kind": "indicator",
+    "title": "Mean elevation",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic mean elevation. Support: F.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "static",
+     "period_start": "2000-02-11",
+     "period_end": "2000-02-21",
+     "aggregation": "mean",
+     "time_standard": "not_applicable"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:elevation_mean:2000-02-11",
+     "elevation_mean"
+    ]
+   },
+   {
+    "evidence_id": "7b587ac4-05bd-4fb4-a5bc-2dae6b18c01f",
+    "kind": "indicator",
+    "title": "Distinct crops (2006–2025)",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic distinct crops (2006–2025). Support: F.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon_inward_buffer",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:5070"
+    },
+    "temporal": {
+     "resolution": "P1Y",
+     "period_start": "2006-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "count",
+     "time_standard": "not_applicable"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:distinct_crops:2006-01-01",
+     "distinct_crops"
+    ]
+   },
+   {
+    "evidence_id": "c5bc970e-bc03-4990-8079-305341a2d6c0",
+    "kind": "indicator",
+    "title": "Longest same-crop run",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic longest same-crop run. Support: F.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon_inward_buffer",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:5070"
+    },
+    "temporal": {
+     "resolution": "P1Y",
+     "period_start": "2006-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "count",
+     "time_standard": "not_applicable"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:max_monoculture_run:2006-01-01",
+     "max_monoculture_run"
+    ]
+   },
+   {
+    "evidence_id": "5159c251-f75d-4b34-bb9a-3d6fab00f822",
+    "kind": "indicator",
+    "title": "Rotation diversity (Shannon)",
+    "summary": "Synthetic indicator for Demo Field C. Method: Synthetic rotation diversity (shannon). Support: F.",
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "dataset_id": "synthetic",
+    "product_version": "synthetic-0",
+    "citation": null,
+    "url": null,
+    "doi": null,
+    "accessed_at": "2026-11-01",
+    "verification_status": "SYNTHETIC",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon_inward_buffer",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:5070"
+    },
+    "temporal": {
+     "resolution": "P1Y",
+     "period_start": "2006-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "count",
+     "time_standard": "not_applicable"
+    },
+    "related_ids": [
+     "3287b38d-6604-45e6-81eb-15dc57cab1e1:rotation_shannon:2006-01-01",
+     "rotation_shannon"
+    ]
+   }
+  ],
+  "meta": {
+   "request_id": "mock-19-mwfz5s0y",
+   "generated_at": "2026-11-14T05:38:13.669Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

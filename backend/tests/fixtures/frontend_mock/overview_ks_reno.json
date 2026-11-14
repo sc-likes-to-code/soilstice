@@ -1,0 +1,763 @@
+{
+ "name": "overview_ks_reno",
+ "model": "FarmOverview",
+ "list": false,
+ "payload": {
+  "data": {
+   "farm": {
+    "farm_id": "b6cc12fe-861f-436d-83bb-322a093e6bd4",
+    "name": "Reno Demo Farm",
+    "aoi": {
+     "aoi_id": "ks_reno",
+     "label": "Reno County, Kansas",
+     "county_fips": [
+      "20155"
+     ],
+     "state": "KS"
+    },
+    "field_count": 9,
+    "total_area": {
+     "value": 479.9,
+     "unit": "ha",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "created_at": "2026-11-01T09:00:00Z",
+    "updated_at": "2026-11-01T09:00:00Z"
+   },
+   "fields": [
+    {
+     "field_id": "411dd851-40e2-481b-885e-7dc029bcafcd",
+     "name": "Demo Field A",
+     "centroid": [
+      -98.09209,
+      37.93178
+     ],
+     "geometry": {
+      "type": "MultiPolygon",
+      "coordinates": [
+       [
+        [
+         [
+          -98.09635693214595,
+          37.92840804619856
+         ],
+         [
+          -98.08781315748469,
+          37.92840804619856
+         ],
+         [
+          -98.08781315748469,
+          37.93514719979221
+         ],
+         [
+          -98.09635693214595,
+          37.93514719979221
+         ],
+         [
+          -98.09635693214595,
+          37.92840804619856
+         ]
+        ]
+       ]
+      ]
+     },
+     "area": {
+      "value": 56.3,
+      "unit": "ha",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "source": "synthetic",
+     "processing_status": "ready",
+     "latest_crop": {
+      "year": 2025,
+      "crop_code": 24,
+      "crop_name": "Winter Wheat"
+     },
+     "resilience_band": "moderate",
+     "coverage_completeness": 1
+    },
+    {
+     "field_id": "0a66f5ad-239e-4148-9f34-7f4a8c3a78cf",
+     "name": "Demo Field B",
+     "centroid": [
+      -98.06917,
+      37.93178
+     ],
+     "geometry": {
+      "type": "MultiPolygon",
+      "coordinates": [
+       [
+        [
+         [
+          -98.07794832557852,
+          37.928467665190624
+         ],
+         [
+          -98.0603905203398,
+          37.928467665190624
+         ],
+         [
+          -98.0603905203398,
+          37.935088415738484
+         ],
+         [
+          -98.07794832557852,
+          37.935088415738484
+         ],
+         [
+          -98.07794832557852,
+          37.928467665190624
+         ]
+        ]
+       ]
+      ]
+     },
+     "area": {
+      "value": 113.6,
+      "unit": "ha",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "source": "synthetic",
+     "processing_status": "ready",
+     "latest_crop": {
+      "year": 2025,
+      "crop_code": 4,
+      "crop_name": "Sorghum"
+     },
+     "resilience_band": "moderate",
+     "coverage_completeness": 1
+    },
+    {
+     "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+     "name": "Demo Field C",
+     "centroid": [
+      -98.03708,
+      37.93178
+     ],
+     "geometry": {
+      "type": "MultiPolygon",
+      "coordinates": [
+       [
+        [
+         [
+          -98.04123056476374,
+          37.92850790343132
+         ],
+         [
+          -98.03293820021823,
+          37.92850790343132
+         ],
+         [
+          -98.03293820021823,
+          37.935048741017056
+         ],
+         [
+          -98.04123056476374,
+          37.935048741017056
+         ],
+         [
+          -98.04123056476374,
+          37.92850790343132
+         ]
+        ]
+       ]
+      ]
+     },
+     "area": {
+      "value": 53,
+      "unit": "ha",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "source": "synthetic",
+     "processing_status": "partial",
+     "latest_crop": {
+      "year": 2025,
+      "crop_code": 236,
+      "crop_name": "Dbl Crop WinWht/Sorghum"
+     },
+     "resilience_band": "high",
+     "coverage_completeness": 1
+    },
+    {
+     "field_id": "cdf4ea91-1b1a-4f5c-a3d2-4e6b9bb085c4",
+     "name": "Demo Field D",
+     "centroid": [
+      -98.09208,
+      37.94634
+     ],
+     "geometry": {
+      "type": "MultiPolygon",
+      "coordinates": [
+       [
+        [
+         [
+          -98.09633365666421,
+          37.9429853752806
+         ],
+         [
+          -98.0878346159206,
+          37.9429853752806
+         ],
+         [
+          -98.0878346159206,
+          37.9496879143207
+         ],
+         [
+          -98.09633365666421,
+          37.9496879143207
+         ],
+         [
+          -98.09633365666421,
+          37.9429853752806
+         ]
+        ]
+       ]
+      ]
+     },
+     "area": {
+      "value": 55.7,
+      "unit": "ha",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "source": "synthetic",
+     "processing_status": "ready",
+     "latest_crop": {
+      "year": 2025,
+      "crop_code": 36,
+      "crop_name": "Alfalfa"
+     },
+     "resilience_band": "moderate",
+     "coverage_completeness": 1
+    },
+    {
+     "field_id": "b2f02d36-3ebc-478d-8c4d-6b5e49e639ba",
+     "name": "Demo Field E",
+     "centroid": [
+      -98.05542,
+      37.94634
+     ],
+     "geometry": {
+      "type": "MultiPolygon",
+      "coordinates": [
+       [
+        [
+         [
+          -98.0594919032368,
+          37.94312407931997
+         ],
+         [
+          -98.05134214656927,
+          37.94312407931997
+         ],
+         [
+          -98.05134214656927,
+          37.94955115277174
+         ],
+         [
+          -98.0594919032368,
+          37.94955115277174
+         ],
+         [
+          -98.0594919032368,
+          37.94312407931997
+         ]
+        ]
+       ]
+      ]
+     },
+     "area": {
+      "value": 51.2,
+      "unit": "ha",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "source": "synthetic",
+     "processing_status": "partial",
+     "latest_crop": {
+      "year": 2025,
+      "crop_code": 24,
+      "crop_name": "Winter Wheat"
+     },
+     "resilience_band": "unknown",
+     "coverage_completeness": 0.67
+    },
+    {
+     "field_id": "e0b78e6b-7d25-434b-bea0-c569044bde56",
+     "name": "Demo Field F",
+     "centroid": [
+      -98.03708,
+      37.94468
+     ],
+     "geometry": {
+      "type": "MultiPolygon",
+      "coordinates": [
+       [
+        [
+         [
+          -98.04128716801317,
+          37.94302177379954
+         ],
+         [
+          -98.03287978577798,
+          37.94302177379954
+         ],
+         [
+          -98.03287978577798,
+          37.94633689967345
+         ],
+         [
+          -98.04128716801317,
+          37.94633689967345
+         ],
+         [
+          -98.04128716801317,
+          37.94302177379954
+         ]
+        ]
+       ]
+      ]
+     },
+     "area": {
+      "value": 27.2,
+      "unit": "ha",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "source": "synthetic",
+     "processing_status": "ready",
+     "latest_crop": {
+      "year": 2025,
+      "crop_code": 24,
+      "crop_name": "Winter Wheat"
+     },
+     "resilience_band": "high",
+     "coverage_completeness": 1
+    },
+    {
+     "field_id": "46984669-4195-4ead-8d67-19c1f31451fa",
+     "name": "Demo Field G",
+     "centroid": [
+      -98.07375,
+      37.9609
+     ],
+     "geometry": {
+      "type": "MultiPolygon",
+      "coordinates": [
+       [
+        [
+         [
+          -98.07796963226484,
+          37.957568411165724
+         ],
+         [
+          -98.06952971632239,
+          37.957568411165724
+         ],
+         [
+          -98.06952971632239,
+          37.96422300196742
+         ],
+         [
+          -98.07796963226484,
+          37.96422300196742
+         ],
+         [
+          -98.07796963226484,
+          37.957568411165724
+         ]
+        ]
+       ]
+      ]
+     },
+     "area": {
+      "value": 54.9,
+      "unit": "ha",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "source": "synthetic",
+     "processing_status": "failed",
+     "latest_crop": {
+      "year": 2025,
+      "crop_code": 1,
+      "crop_name": "Corn"
+     },
+     "resilience_band": "unknown",
+     "coverage_completeness": 0.33
+    },
+    {
+     "field_id": "51e18c11-e9e2-4961-a004-8ca63bdc25c3",
+     "name": "Demo User Field H",
+     "centroid": [
+      -98.05542,
+      37.9609
+     ],
+     "geometry": {
+      "type": "MultiPolygon",
+      "coordinates": [
+       [
+        [
+         [
+          -98.05952476345763,
+          37.957656799963
+         ],
+         [
+          -98.05130747200862,
+          37.957656799963
+         ],
+         [
+          -98.05130747200862,
+          37.96413585101723
+         ],
+         [
+          -98.05952476345763,
+          37.96413585101723
+         ],
+         [
+          -98.05952476345763,
+          37.957656799963
+         ]
+        ]
+       ]
+      ]
+     },
+     "area": {
+      "value": 52,
+      "unit": "ha",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "source": "user",
+     "processing_status": "processing",
+     "latest_crop": null,
+     "resilience_band": "unknown",
+     "coverage_completeness": 0.67
+    }
+   ],
+   "coverage_summary": [
+    {
+     "dataset_id": "nasa_power_daily_ag",
+     "fields_available": 7,
+     "fields_total": 8
+    },
+    {
+     "dataset_id": "usda_nrcs_ssurgo_sda",
+     "fields_available": 8,
+     "fields_total": 8
+    },
+    {
+     "dataset_id": "usda_nass_cdl",
+     "fields_available": 8,
+     "fields_total": 8
+    },
+    {
+     "dataset_id": "nasa_hls_vi",
+     "fields_available": 5,
+     "fields_total": 8
+    },
+    {
+     "dataset_id": "nasa_smap_spl4smgp",
+     "fields_available": 6,
+     "fields_total": 8
+    },
+    {
+     "dataset_id": "nasa_srtm_gl1",
+     "fields_available": 6,
+     "fields_total": 8
+    }
+   ],
+   "alerts": [
+    {
+     "code": "CLOUD_LIMITED",
+     "severity": "warning",
+     "message": "Demo Field C: fewer than 6 clear HLS scenes in 2025; vegetation phenology is limited."
+    },
+    {
+     "code": "INSUFFICIENT_COMPONENTS",
+     "severity": "warning",
+     "message": "Demo Field E: resilience composite withheld — only 3 of 5 components available."
+    },
+    {
+     "code": "PROCESSING_FAILED",
+     "severity": "critical",
+     "message": "Demo Field G: synthetic processing failure for terrain, climate and vegetation."
+    },
+    {
+     "code": "PROCESSING",
+     "severity": "info",
+     "message": "Demo User Field H: processing job in progress."
+    }
+   ],
+   "regional_context": [
+    {
+     "indicator_id": "ks_reno:precip_anomaly_pct:2025",
+     "key": "precip_anomaly_pct",
+     "label": "Precipitation anomaly (AOI)",
+     "category": "climate",
+     "value": {
+      "value": 30,
+      "unit": "percent",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_precip_anomaly_pct",
+      "name": "Synthetic precipitation anomaly",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "ks_reno:gdd_season:2025",
+     "key": "gdd_season",
+     "label": "Growing degree days (AOI)",
+     "category": "climate",
+     "value": {
+      "value": 2366,
+      "unit": "degC_day",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       },
+       {
+        "code": "GDD_PARAMS_PENDING",
+        "severity": "warning",
+        "message": "Per-crop GDD base/cap pending a cited KB entry (D5.6)."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_gdd_season",
+      "name": "Placeholder GDD (base 10 °C, cap 30 °C)",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "ks_reno:heat_stress_days:2025",
+     "key": "heat_stress_days",
+     "label": "Heat-stress days (Tmax > 35 °C) (AOI)",
+     "category": "climate",
+     "value": {
+      "value": 18,
+      "unit": "day",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       },
+       {
+        "code": "HEURISTIC_THRESHOLD",
+        "severity": "info",
+        "message": "35 °C threshold is a labelled heuristic pending citation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_heat_stress_days",
+      "name": "Synthetic heat-stress days (tmax > 35 °c)",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "ks_reno:sm_rootzone_percentile:2025",
+     "key": "sm_rootzone_percentile",
+     "label": "Root-zone moisture percentile (AOI)",
+     "category": "soil_moisture",
+     "value": {
+      "value": 23,
+      "unit": "percentile",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 9000,
+      "extraction_method": "containing_cell",
+      "field_fraction_of_cell": 0.007,
+      "cell_id": "synthetic-cell",
+      "crs": "EPSG:6933"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "percentile",
+      "time_standard": "UTC"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       },
+       {
+        "code": "SHORT_CLIMATOLOGY",
+        "severity": "warning",
+        "message": "SMAP record starts 2015-03-31; percentiles rest on ~10 years."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for SPL4SMGP",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nsidc.org/data/spl4smgp",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_sm_rootzone_percentile",
+      "name": "Synthetic root-zone moisture percentile",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    }
+   ]
+  },
+  "meta": {
+   "request_id": "mock-5-mwfz5rmz",
+   "generated_at": "2026-11-14T05:38:13.166Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

@@ -1,0 +1,429 @@
+{
+ "name": "fields_ks_reno",
+ "model": "FieldSummary",
+ "list": true,
+ "payload": {
+  "data": [
+   {
+    "field_id": "411dd851-40e2-481b-885e-7dc029bcafcd",
+    "name": "Demo Field A",
+    "centroid": [
+     -98.09209,
+     37.93178
+    ],
+    "geometry": {
+     "type": "MultiPolygon",
+     "coordinates": [
+      [
+       [
+        [
+         -98.09635693214595,
+         37.92840804619856
+        ],
+        [
+         -98.08781315748469,
+         37.92840804619856
+        ],
+        [
+         -98.08781315748469,
+         37.93514719979221
+        ],
+        [
+         -98.09635693214595,
+         37.93514719979221
+        ],
+        [
+         -98.09635693214595,
+         37.92840804619856
+        ]
+       ]
+      ]
+     ]
+    },
+    "area": {
+     "value": 56.3,
+     "unit": "ha",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "source": "synthetic",
+    "processing_status": "ready",
+    "latest_crop": {
+     "year": 2025,
+     "crop_code": 24,
+     "crop_name": "Winter Wheat"
+    },
+    "resilience_band": "moderate",
+    "coverage_completeness": 1
+   },
+   {
+    "field_id": "0a66f5ad-239e-4148-9f34-7f4a8c3a78cf",
+    "name": "Demo Field B",
+    "centroid": [
+     -98.06917,
+     37.93178
+    ],
+    "geometry": {
+     "type": "MultiPolygon",
+     "coordinates": [
+      [
+       [
+        [
+         -98.07794832557852,
+         37.928467665190624
+        ],
+        [
+         -98.0603905203398,
+         37.928467665190624
+        ],
+        [
+         -98.0603905203398,
+         37.935088415738484
+        ],
+        [
+         -98.07794832557852,
+         37.935088415738484
+        ],
+        [
+         -98.07794832557852,
+         37.928467665190624
+        ]
+       ]
+      ]
+     ]
+    },
+    "area": {
+     "value": 113.6,
+     "unit": "ha",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "source": "synthetic",
+    "processing_status": "ready",
+    "latest_crop": {
+     "year": 2025,
+     "crop_code": 4,
+     "crop_name": "Sorghum"
+    },
+    "resilience_band": "moderate",
+    "coverage_completeness": 1
+   },
+   {
+    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
+    "name": "Demo Field C",
+    "centroid": [
+     -98.03708,
+     37.93178
+    ],
+    "geometry": {
+     "type": "MultiPolygon",
+     "coordinates": [
+      [
+       [
+        [
+         -98.04123056476374,
+         37.92850790343132
+        ],
+        [
+         -98.03293820021823,
+         37.92850790343132
+        ],
+        [
+         -98.03293820021823,
+         37.935048741017056
+        ],
+        [
+         -98.04123056476374,
+         37.935048741017056
+        ],
+        [
+         -98.04123056476374,
+         37.92850790343132
+        ]
+       ]
+      ]
+     ]
+    },
+    "area": {
+     "value": 53,
+     "unit": "ha",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "source": "synthetic",
+    "processing_status": "partial",
+    "latest_crop": {
+     "year": 2025,
+     "crop_code": 236,
+     "crop_name": "Dbl Crop WinWht/Sorghum"
+    },
+    "resilience_band": "high",
+    "coverage_completeness": 1
+   },
+   {
+    "field_id": "cdf4ea91-1b1a-4f5c-a3d2-4e6b9bb085c4",
+    "name": "Demo Field D",
+    "centroid": [
+     -98.09208,
+     37.94634
+    ],
+    "geometry": {
+     "type": "MultiPolygon",
+     "coordinates": [
+      [
+       [
+        [
+         -98.09633365666421,
+         37.9429853752806
+        ],
+        [
+         -98.0878346159206,
+         37.9429853752806
+        ],
+        [
+         -98.0878346159206,
+         37.9496879143207
+        ],
+        [
+         -98.09633365666421,
+         37.9496879143207
+        ],
+        [
+         -98.09633365666421,
+         37.9429853752806
+        ]
+       ]
+      ]
+     ]
+    },
+    "area": {
+     "value": 55.7,
+     "unit": "ha",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "source": "synthetic",
+    "processing_status": "ready",
+    "latest_crop": {
+     "year": 2025,
+     "crop_code": 36,
+     "crop_name": "Alfalfa"
+    },
+    "resilience_band": "moderate",
+    "coverage_completeness": 1
+   },
+   {
+    "field_id": "b2f02d36-3ebc-478d-8c4d-6b5e49e639ba",
+    "name": "Demo Field E",
+    "centroid": [
+     -98.05542,
+     37.94634
+    ],
+    "geometry": {
+     "type": "MultiPolygon",
+     "coordinates": [
+      [
+       [
+        [
+         -98.0594919032368,
+         37.94312407931997
+        ],
+        [
+         -98.05134214656927,
+         37.94312407931997
+        ],
+        [
+         -98.05134214656927,
+         37.94955115277174
+        ],
+        [
+         -98.0594919032368,
+         37.94955115277174
+        ],
+        [
+         -98.0594919032368,
+         37.94312407931997
+        ]
+       ]
+      ]
+     ]
+    },
+    "area": {
+     "value": 51.2,
+     "unit": "ha",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "source": "synthetic",
+    "processing_status": "partial",
+    "latest_crop": {
+     "year": 2025,
+     "crop_code": 24,
+     "crop_name": "Winter Wheat"
+    },
+    "resilience_band": "unknown",
+    "coverage_completeness": 0.67
+   },
+   {
+    "field_id": "e0b78e6b-7d25-434b-bea0-c569044bde56",
+    "name": "Demo Field F",
+    "centroid": [
+     -98.03708,
+     37.94468
+    ],
+    "geometry": {
+     "type": "MultiPolygon",
+     "coordinates": [
+      [
+       [
+        [
+         -98.04128716801317,
+         37.94302177379954
+        ],
+        [
+         -98.03287978577798,
+         37.94302177379954
+        ],
+        [
+         -98.03287978577798,
+         37.94633689967345
+        ],
+        [
+         -98.04128716801317,
+         37.94633689967345
+        ],
+        [
+         -98.04128716801317,
+         37.94302177379954
+        ]
+       ]
+      ]
+     ]
+    },
+    "area": {
+     "value": 27.2,
+     "unit": "ha",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "source": "synthetic",
+    "processing_status": "ready",
+    "latest_crop": {
+     "year": 2025,
+     "crop_code": 24,
+     "crop_name": "Winter Wheat"
+    },
+    "resilience_band": "high",
+    "coverage_completeness": 1
+   },
+   {
+    "field_id": "46984669-4195-4ead-8d67-19c1f31451fa",
+    "name": "Demo Field G",
+    "centroid": [
+     -98.07375,
+     37.9609
+    ],
+    "geometry": {
+     "type": "MultiPolygon",
+     "coordinates": [
+      [
+       [
+        [
+         -98.07796963226484,
+         37.957568411165724
+        ],
+        [
+         -98.06952971632239,
+         37.957568411165724
+        ],
+        [
+         -98.06952971632239,
+         37.96422300196742
+        ],
+        [
+         -98.07796963226484,
+         37.96422300196742
+        ],
+        [
+         -98.07796963226484,
+         37.957568411165724
+        ]
+       ]
+      ]
+     ]
+    },
+    "area": {
+     "value": 54.9,
+     "unit": "ha",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "source": "synthetic",
+    "processing_status": "failed",
+    "latest_crop": {
+     "year": 2025,
+     "crop_code": 1,
+     "crop_name": "Corn"
+    },
+    "resilience_band": "unknown",
+    "coverage_completeness": 0.33
+   },
+   {
+    "field_id": "51e18c11-e9e2-4961-a004-8ca63bdc25c3",
+    "name": "Demo User Field H",
+    "centroid": [
+     -98.05542,
+     37.9609
+    ],
+    "geometry": {
+     "type": "MultiPolygon",
+     "coordinates": [
+      [
+       [
+        [
+         -98.05952476345763,
+         37.957656799963
+        ],
+        [
+         -98.05130747200862,
+         37.957656799963
+        ],
+        [
+         -98.05130747200862,
+         37.96413585101723
+        ],
+        [
+         -98.05952476345763,
+         37.96413585101723
+        ],
+        [
+         -98.05952476345763,
+         37.957656799963
+        ]
+       ]
+      ]
+     ]
+    },
+    "area": {
+     "value": 52,
+     "unit": "ha",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "source": "user",
+    "processing_status": "processing",
+    "latest_crop": null,
+    "resilience_band": "unknown",
+    "coverage_completeness": 0.67
+   }
+  ],
+  "meta": {
+   "request_id": "mock-6-mwfz5rn4",
+   "generated_at": "2026-11-14T05:38:13.168Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

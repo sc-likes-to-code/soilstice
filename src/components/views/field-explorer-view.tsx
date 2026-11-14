@@ -14,6 +14,7 @@ import { EmptyState, ErrorState } from "@/components/shared/state";
 import { FieldMap } from "@/components/shared/field-map";
 import { CompletenessMeter } from "@/components/shared/data-display";
 import { ScoreBandPill } from "@/components/shared/provenance";
+import { DATA_MODE } from "@/services";
 
 type Any<T> = T | "all";
 
@@ -100,7 +101,7 @@ export function FieldExplorerView() {
             selectedId={selected}
             onSelect={setSelected}
             focusId={selected}
-            caption="Schematic 1-mile grid · synthetic field geometry"
+            caption={DATA_MODE === "mock" ? "Schematic 1-mile grid · synthetic field geometry" : "Schematic 1-mile grid · field geometry from the API"}
           />
           {sel ? (
             <Card className="animate-[var(--animate-fade-up)]">

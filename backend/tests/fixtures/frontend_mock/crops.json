@@ -1,0 +1,73 @@
+{
+ "name": "crops",
+ "model": "CropOption",
+ "list": true,
+ "payload": {
+  "data": [
+   {
+    "crop_code": 24,
+    "name": "Winter Wheat",
+    "family": "Cereal (cool season)",
+    "is_double_crop": false,
+    "kb_version": "synthetic-kb-0"
+   },
+   {
+    "crop_code": 1,
+    "name": "Corn",
+    "family": "Cereal (warm season)",
+    "is_double_crop": false,
+    "kb_version": "synthetic-kb-0"
+   },
+   {
+    "crop_code": 4,
+    "name": "Sorghum",
+    "family": "Cereal (warm season)",
+    "is_double_crop": false,
+    "kb_version": "synthetic-kb-0"
+   },
+   {
+    "crop_code": 5,
+    "name": "Soybeans",
+    "family": "Legume",
+    "is_double_crop": false,
+    "kb_version": "synthetic-kb-0"
+   },
+   {
+    "crop_code": 36,
+    "name": "Alfalfa",
+    "family": "Legume (perennial forage)",
+    "is_double_crop": false,
+    "kb_version": "synthetic-kb-0"
+   },
+   {
+    "crop_code": 26,
+    "name": "Dbl Crop WinWht/Soybeans",
+    "family": "Double crop",
+    "is_double_crop": true,
+    "kb_version": "synthetic-kb-0"
+   },
+   {
+    "crop_code": 236,
+    "name": "Dbl Crop WinWht/Sorghum",
+    "family": "Double crop",
+    "is_double_crop": true,
+    "kb_version": "synthetic-kb-0"
+   },
+   {
+    "crop_code": 61,
+    "name": "Fallow/Idle Cropland",
+    "family": "Fallow",
+    "is_double_crop": false,
+    "kb_version": "synthetic-kb-0"
+   }
+  ],
+  "meta": {
+   "request_id": "mock-2-mwfz5rlo",
+   "generated_at": "2026-11-14T05:38:13.116Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

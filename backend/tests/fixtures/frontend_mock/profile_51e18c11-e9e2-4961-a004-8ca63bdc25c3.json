@@ -1,0 +1,666 @@
+{
+ "name": "profile_51e18c11-e9e2-4961-a004-8ca63bdc25c3",
+ "model": "FieldProfile",
+ "list": false,
+ "payload": {
+  "data": {
+   "field": {
+    "field_id": "51e18c11-e9e2-4961-a004-8ca63bdc25c3",
+    "farm_id": "b6cc12fe-861f-436d-83bb-322a093e6bd4",
+    "name": "Demo User Field H",
+    "geometry": {
+     "type": "MultiPolygon",
+     "coordinates": [
+      [
+       [
+        [
+         -98.05952476345763,
+         37.957656799963
+        ],
+        [
+         -98.05130747200862,
+         37.957656799963
+        ],
+        [
+         -98.05130747200862,
+         37.96413585101723
+        ],
+        [
+         -98.05952476345763,
+         37.96413585101723
+        ],
+        [
+         -98.05952476345763,
+         37.957656799963
+        ]
+       ]
+      ]
+     ]
+    },
+    "centroid": [
+     -98.05542,
+     37.9609
+    ],
+    "area": {
+     "value": 52,
+     "unit": "ha",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "state_fips": "20",
+    "county_fips": "155",
+    "source": "user",
+    "source_ref": null,
+    "csb_id": null,
+    "editable": true,
+    "processing_status": "processing",
+    "latest_job_id": "cfad4700-5010-4cc1-a747-c652d96ae453",
+    "created_at": "2026-11-01T09:00:00Z"
+   },
+   "coverage": {
+    "field_id": "51e18c11-e9e2-4961-a004-8ca63bdc25c3",
+    "datasets": [
+     {
+      "dataset_id": "nasa_power_daily_ag",
+      "label": "NASA POWER Daily (AG community)",
+      "priority": "P0",
+      "status": "available",
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "temporal_coverage": {
+       "start": "1981-01-01",
+       "end": null
+      },
+      "product_version": "synthetic-0",
+      "last_updated": "2026-11-01T09:00:00Z",
+      "missing_reason": null,
+      "note": "Synthetic coverage record (Phase 1)."
+     },
+     {
+      "dataset_id": "usda_nrcs_ssurgo_sda",
+      "label": "SSURGO via Soil Data Access",
+      "priority": "P0",
+      "status": "available",
+      "support_class": "F",
+      "native_resolution_m": null,
+      "temporal_coverage": {
+       "start": null,
+       "end": null
+      },
+      "product_version": "synthetic-0",
+      "last_updated": "2026-11-01T09:00:00Z",
+      "missing_reason": null,
+      "note": "Synthetic coverage record (Phase 1)."
+     },
+     {
+      "dataset_id": "usda_nass_cdl",
+      "label": "Cropland Data Layer (CropScape)",
+      "priority": "P0",
+      "status": "available",
+      "support_class": "F",
+      "native_resolution_m": 30,
+      "temporal_coverage": {
+       "start": "2006-01-01",
+       "end": "2025-12-31"
+      },
+      "product_version": "synthetic-0",
+      "last_updated": "2026-11-01T09:00:00Z",
+      "missing_reason": null,
+      "note": "Synthetic coverage record (Phase 1)."
+     },
+     {
+      "dataset_id": "usda_nass_csb",
+      "label": "Crop Sequence Boundaries",
+      "priority": "P0",
+      "status": "not_applicable",
+      "support_class": "F",
+      "native_resolution_m": null,
+      "temporal_coverage": {
+       "start": "2018-01-01",
+       "end": "2025-12-31"
+      },
+      "product_version": null,
+      "last_updated": null,
+      "missing_reason": null,
+      "note": "User-drawn field — not a CSB polygon."
+     },
+     {
+      "dataset_id": "nasa_hls_vi",
+      "label": "HLS Vegetation Indices (L30/S30)",
+      "priority": "P0",
+      "status": "pending",
+      "support_class": "F",
+      "native_resolution_m": 30,
+      "temporal_coverage": {
+       "start": "2013-04-11",
+       "end": null
+      },
+      "product_version": "synthetic-0",
+      "last_updated": null,
+      "missing_reason": "PENDING_PROCESSING",
+      "note": "Processing job running."
+     },
+     {
+      "dataset_id": "nasa_smap_spl4smgp",
+      "label": "SMAP L4 Surface & Root-Zone Soil Moisture",
+      "priority": "P0",
+      "status": "pending",
+      "support_class": "R",
+      "native_resolution_m": 9000,
+      "temporal_coverage": {
+       "start": "2015-03-31",
+       "end": null
+      },
+      "product_version": "synthetic-0",
+      "last_updated": null,
+      "missing_reason": "PENDING_PROCESSING",
+      "note": "Processing job running."
+     },
+     {
+      "dataset_id": "nasa_srtm_gl1",
+      "label": "SRTM Global 1 arc-second",
+      "priority": "P0",
+      "status": "available",
+      "support_class": "F",
+      "native_resolution_m": 30,
+      "temporal_coverage": {
+       "start": "2000-02-11",
+       "end": "2000-02-21"
+      },
+      "product_version": "synthetic-0",
+      "last_updated": "2026-11-01T09:00:00Z",
+      "missing_reason": null,
+      "note": "Synthetic coverage record (Phase 1)."
+     },
+     {
+      "dataset_id": "prism_daily",
+      "label": "PRISM daily climate",
+      "priority": "P1",
+      "status": "not_integrated",
+      "support_class": "S",
+      "native_resolution_m": 4000,
+      "temporal_coverage": {
+       "start": "1981-01-01",
+       "end": null
+      },
+      "product_version": null,
+      "last_updated": null,
+      "missing_reason": null,
+      "note": "P1 dataset — planned, not yet integrated."
+     },
+     {
+      "dataset_id": "openet",
+      "label": "OpenET Ensemble ET",
+      "priority": "P1",
+      "status": "not_integrated",
+      "support_class": "F",
+      "native_resolution_m": 30,
+      "temporal_coverage": {
+       "start": "2000-01-01",
+       "end": null
+      },
+      "product_version": null,
+      "last_updated": null,
+      "missing_reason": null,
+      "note": "P1 dataset — planned, not yet integrated."
+     },
+     {
+      "dataset_id": "usda_nass_quickstats",
+      "label": "NASS Quick Stats",
+      "priority": "P1",
+      "status": "not_integrated",
+      "support_class": "R",
+      "native_resolution_m": null,
+      "temporal_coverage": {
+       "start": null,
+       "end": null
+      },
+      "product_version": null,
+      "last_updated": null,
+      "missing_reason": null,
+      "note": "P1 dataset — planned, not yet integrated."
+     },
+     {
+      "dataset_id": "nasa_smap_spl3smp_e",
+      "label": "SMAP L3 Enhanced Soil Moisture",
+      "priority": "P1",
+      "status": "not_integrated",
+      "support_class": "R",
+      "native_resolution_m": 9000,
+      "temporal_coverage": {
+       "start": "2015-03-31",
+       "end": null
+      },
+      "product_version": null,
+      "last_updated": null,
+      "missing_reason": null,
+      "note": "P1 dataset — planned, not yet integrated."
+     }
+    ],
+    "completeness": 0.67
+   },
+   "soil": null,
+   "terrain": null,
+   "crop_history": null,
+   "climate_summary": [
+    {
+     "indicator_id": "51e18c11-e9e2-4961-a004-8ca63bdc25c3:precip_total_season:2025-01-01",
+     "key": "precip_total_season",
+     "label": "Precipitation total",
+     "category": "climate",
+     "value": {
+      "value": 1052,
+      "unit": "mm",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "model",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_precip_total_season",
+      "name": "Synthetic precipitation total",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": {
+      "value": 755,
+      "unit": "mm",
+      "uncertainty": null,
+      "missing_reason": null
+     }
+    },
+    {
+     "indicator_id": "51e18c11-e9e2-4961-a004-8ca63bdc25c3:precip_anomaly_pct:2025-01-01",
+     "key": "precip_anomaly_pct",
+     "label": "Precipitation anomaly",
+     "category": "climate",
+     "value": {
+      "value": 39,
+      "unit": "percent",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_precip_anomaly_pct",
+      "name": "Synthetic precipitation anomaly",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "51e18c11-e9e2-4961-a004-8ca63bdc25c3:gdd_season:2025-01-01",
+     "key": "gdd_season",
+     "label": "Growing degree days",
+     "category": "climate",
+     "value": {
+      "value": 2366,
+      "unit": "degC_day",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       },
+       {
+        "code": "GDD_PARAMS_PENDING",
+        "severity": "warning",
+        "message": "Per-crop GDD base/cap pending a cited KB entry (D5.6)."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_gdd_season",
+      "name": "Placeholder GDD (base 10 °C, cap 30 °C)",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "51e18c11-e9e2-4961-a004-8ca63bdc25c3:sm_rootzone_percentile:2025-01-01",
+     "key": "sm_rootzone_percentile",
+     "label": "Root-zone moisture percentile",
+     "category": "soil_moisture",
+     "value": {
+      "value": 23,
+      "unit": "percentile",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 9000,
+      "extraction_method": "containing_cell",
+      "field_fraction_of_cell": 0.0064,
+      "cell_id": "synthetic-cell",
+      "crs": "EPSG:6933"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "percentile",
+      "time_standard": "UTC"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       },
+       {
+        "code": "SHORT_CLIMATOLOGY",
+        "severity": "warning",
+        "message": "SMAP record starts 2015-03-31; percentiles rest on ~10 years."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for SPL4SMGP",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nsidc.org/data/spl4smgp",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_sm_rootzone_percentile",
+      "name": "Synthetic root-zone moisture percentile",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    }
+   ],
+   "vegetation_summary": [
+    {
+     "indicator_id": "51e18c11-e9e2-4961-a004-8ca63bdc25c3:ndvi_peak:2025-01-01",
+     "key": "ndvi_peak",
+     "label": "Peak NDVI",
+     "category": "vegetation",
+     "value": {
+      "value": null,
+      "unit": "unitless",
+      "uncertainty": null,
+      "missing_reason": "PENDING_PROCESSING"
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "F",
+      "native_resolution_m": 30,
+      "extraction_method": "zonal_polygon_inward_buffer",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:32614"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "max",
+      "time_standard": "UTC"
+     },
+     "quality": {
+      "status": "missing",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 0,
+      "missing_reason": "PENDING_PROCESSING"
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for HLSL30_VI / HLSS30_VI",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-hlsl30-vi-2.0",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_ndvi_peak",
+      "name": "Synthetic peak ndvi",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "51e18c11-e9e2-4961-a004-8ca63bdc25c3:ndvi_peak_doy:2025-01-01",
+     "key": "ndvi_peak_doy",
+     "label": "Peak NDVI day of year",
+     "category": "vegetation",
+     "value": {
+      "value": null,
+      "unit": "day",
+      "uncertainty": null,
+      "missing_reason": "PENDING_PROCESSING"
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "F",
+      "native_resolution_m": 30,
+      "extraction_method": "zonal_polygon_inward_buffer",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:32614"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "max",
+      "time_standard": "UTC"
+     },
+     "quality": {
+      "status": "missing",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 0,
+      "missing_reason": "PENDING_PROCESSING"
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for HLSL30_VI / HLSS30_VI",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-hlsl30-vi-2.0",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_ndvi_peak_doy",
+      "name": "Synthetic peak ndvi day of year",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    }
+   ],
+   "resilience": {
+    "profile_id": "0bc0ebd3-7ddc-4d34-a5f0-a9725e221674",
+    "field_id": "51e18c11-e9e2-4961-a004-8ca63bdc25c3",
+    "as_of": "2026-11-01",
+    "model_version": "soilstice-resilience-0.0.0-synthetic",
+    "status": "pending",
+    "composite": {
+     "score": {
+      "value": null,
+      "unit": "score_0_100",
+      "uncertainty": null,
+      "missing_reason": "PENDING_PROCESSING"
+     },
+     "band": "unknown",
+     "confidence": "low",
+     "components_used": 0,
+     "components_total": 5
+    },
+    "components": [],
+    "limitations": [
+     {
+      "code": "PROCESSING",
+      "severity": "warning",
+      "message": "Waiting for satellite datasets to finish processing."
+     }
+    ],
+    "disclaimers": [
+     "Synthetic demo scores — the breakpoint tables are defined in Phase 4 (SOILSTICE_DATA_ARCHITECTURE §5.10).",
+     "Scores are decision-support indicators, not agronomic prescriptions.",
+     "Components marked “Regional context” do not measure this field."
+    ]
+   }
+  },
+  "meta": {
+   "request_id": "mock-2r-mwfz5so2",
+   "generated_at": "2026-11-14T05:38:14.499Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

@@ -1,0 +1,1680 @@
+{
+ "name": "indicators_411dd851-40e2-481b-885e-7dc029bcafcd",
+ "model": "EnvironmentalIndicator",
+ "list": true,
+ "payload": {
+  "data": [
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:precip_total_season:2025-01-01",
+    "key": "precip_total_season",
+    "label": "Precipitation total",
+    "category": "climate",
+    "value": {
+     "value": 985,
+     "unit": "mm",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "model",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 55000,
+     "extraction_method": "api_point_query",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "sum",
+     "time_standard": "LST"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for POWER Daily API",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_precip_total_season",
+     "name": "Synthetic precipitation total",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": {
+     "value": 755,
+     "unit": "mm",
+     "uncertainty": null,
+     "missing_reason": null
+    }
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:precip_anomaly_pct:2025-01-01",
+    "key": "precip_anomaly_pct",
+    "label": "Precipitation anomaly",
+    "category": "climate",
+    "value": {
+     "value": 30,
+     "unit": "percent",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 55000,
+     "extraction_method": "api_point_query",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "sum",
+     "time_standard": "LST"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for POWER Daily API",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_precip_anomaly_pct",
+     "name": "Synthetic precipitation anomaly",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:gdd_season:2025-01-01",
+    "key": "gdd_season",
+    "label": "Growing degree days",
+    "category": "climate",
+    "value": {
+     "value": 2366,
+     "unit": "degC_day",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 55000,
+     "extraction_method": "api_point_query",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "sum",
+     "time_standard": "LST"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      },
+      {
+       "code": "GDD_PARAMS_PENDING",
+       "severity": "warning",
+       "message": "Per-crop GDD base/cap pending a cited KB entry (D5.6)."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for POWER Daily API",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_gdd_season",
+     "name": "Placeholder GDD (base 10 °C, cap 30 °C)",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:heat_stress_days:2025-01-01",
+    "key": "heat_stress_days",
+    "label": "Heat-stress days (Tmax > 35 °C)",
+    "category": "climate",
+    "value": {
+     "value": 18,
+     "unit": "day",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 55000,
+     "extraction_method": "api_point_query",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "sum",
+     "time_standard": "LST"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      },
+      {
+       "code": "HEURISTIC_THRESHOLD",
+       "severity": "info",
+       "message": "35 °C threshold is a labelled heuristic pending citation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for POWER Daily API",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_heat_stress_days",
+     "name": "Synthetic heat-stress days (tmax > 35 °c)",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:frost_free_days:2025-01-01",
+    "key": "frost_free_days",
+    "label": "Frost-free days",
+    "category": "climate",
+    "value": {
+     "value": 192,
+     "unit": "day",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 55000,
+     "extraction_method": "api_point_query",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "sum",
+     "time_standard": "LST"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for POWER Daily API",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_frost_free_days",
+     "name": "Synthetic frost-free days",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:solar_total_season:2025-01-01",
+    "key": "solar_total_season",
+    "label": "Solar radiation total",
+    "category": "climate",
+    "value": {
+     "value": 5946,
+     "unit": "MJ_m-2",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 110000,
+     "extraction_method": "api_point_query",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "sum",
+     "time_standard": "LST"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for POWER Daily API",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_solar_total_season",
+     "name": "Synthetic solar radiation total",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:rh_mean_season:2025-01-01",
+    "key": "rh_mean_season",
+    "label": "Mean relative humidity",
+    "category": "climate",
+    "value": {
+     "value": 64,
+     "unit": "percent",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 55000,
+     "extraction_method": "api_point_query",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "mean",
+     "time_standard": "LST"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for POWER Daily API",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_rh_mean_season",
+     "name": "Synthetic mean relative humidity",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:et0_total_season:2025-01-01",
+    "key": "et0_total_season",
+    "label": "Reference ET₀ total",
+    "category": "water",
+    "value": {
+     "value": 1329,
+     "unit": "mm",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 55000,
+     "extraction_method": "api_point_query",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "sum",
+     "time_standard": "LST"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for POWER Daily API",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_et0_total_season",
+     "name": "Synthetic reference et₀ total",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:water_balance_season:2025-01-01",
+    "key": "water_balance_season",
+    "label": "Water balance (P − ET₀)",
+    "category": "water",
+    "value": {
+     "value": -344,
+     "unit": "mm",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 55000,
+     "extraction_method": "api_point_query",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "sum",
+     "time_standard": "LST"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for POWER Daily API",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_water_balance_season",
+     "name": "Synthetic water balance (p − et₀)",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:et_actual_season:2025-01-01",
+    "key": "et_actual_season",
+    "label": "Actual ET (OpenET)",
+    "category": "water",
+    "value": {
+     "value": null,
+     "unit": "mm",
+     "uncertainty": null,
+     "missing_reason": "NOT_COMPUTED"
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": null
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "sum",
+     "time_standard": "LST"
+    },
+    "quality": {
+     "status": "missing",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      },
+      {
+       "code": "NOT_INTEGRATED",
+       "severity": "info",
+       "message": "OpenET is a P1 dataset, not yet integrated."
+      }
+     ],
+     "completeness": 0,
+     "missing_reason": "NOT_COMPUTED"
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for OpenET Collection",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://openet.gitbook.io/docs",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_et_actual_season",
+     "name": "Synthetic actual et (openet)",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:sm_rootzone_mean_season:2025-01-01",
+    "key": "sm_rootzone_mean_season",
+    "label": "Root-zone soil moisture (mean)",
+    "category": "soil_moisture",
+    "value": {
+     "value": 0.352,
+     "unit": "m3_m-3",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "model",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 9000,
+     "extraction_method": "containing_cell",
+     "field_fraction_of_cell": 0.007,
+     "cell_id": "synthetic-cell",
+     "crs": "EPSG:6933"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "mean",
+     "time_standard": "UTC"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for SPL4SMGP",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nsidc.org/data/spl4smgp",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_sm_rootzone_mean_season",
+     "name": "Synthetic root-zone soil moisture (mean)",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:sm_rootzone_percentile:2025-01-01",
+    "key": "sm_rootzone_percentile",
+    "label": "Root-zone moisture percentile",
+    "category": "soil_moisture",
+    "value": {
+     "value": 23,
+     "unit": "percentile",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 9000,
+     "extraction_method": "containing_cell",
+     "field_fraction_of_cell": 0.007,
+     "cell_id": "synthetic-cell",
+     "crs": "EPSG:6933"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "percentile",
+     "time_standard": "UTC"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      },
+      {
+       "code": "SHORT_CLIMATOLOGY",
+       "severity": "warning",
+       "message": "SMAP record starts 2015-03-31; percentiles rest on ~10 years."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for SPL4SMGP",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nsidc.org/data/spl4smgp",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_sm_rootzone_percentile",
+     "name": "Synthetic root-zone moisture percentile",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:sm_rootzone_dry_days:2025-01-01",
+    "key": "sm_rootzone_dry_days",
+    "label": "Root-zone dry days",
+    "category": "soil_moisture",
+    "value": {
+     "value": 25,
+     "unit": "day",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "R",
+     "native_resolution_m": 9000,
+     "extraction_method": "containing_cell",
+     "field_fraction_of_cell": 0.007,
+     "cell_id": "synthetic-cell",
+     "crs": "EPSG:6933"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "count",
+     "time_standard": "UTC"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for SPL4SMGP",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nsidc.org/data/spl4smgp",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_sm_rootzone_dry_days",
+     "name": "Synthetic root-zone dry days",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:ndvi_peak:2025-01-01",
+    "key": "ndvi_peak",
+    "label": "Peak NDVI",
+    "category": "vegetation",
+    "value": {
+     "value": 0.836,
+     "unit": "unitless",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon_inward_buffer",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:32614"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "max",
+     "time_standard": "UTC"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for HLSL30_VI / HLSS30_VI",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-hlsl30-vi-2.0",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_ndvi_peak",
+     "name": "Synthetic peak ndvi",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:ndvi_peak_doy:2025-01-01",
+    "key": "ndvi_peak_doy",
+    "label": "Peak NDVI day of year",
+    "category": "vegetation",
+    "value": {
+     "value": 111,
+     "unit": "day",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon_inward_buffer",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:32614"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "max",
+     "time_standard": "UTC"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for HLSL30_VI / HLSS30_VI",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-hlsl30-vi-2.0",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_ndvi_peak_doy",
+     "name": "Synthetic peak ndvi day of year",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:ndmi_peak_season:2025-01-01",
+    "key": "ndmi_peak_season",
+    "label": "Peak NDMI",
+    "category": "vegetation",
+    "value": {
+     "value": 0.436,
+     "unit": "unitless",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon_inward_buffer",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:32614"
+    },
+    "temporal": {
+     "resolution": "season",
+     "period_start": "2025-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "max",
+     "time_standard": "UTC"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for HLSL30_VI / HLSS30_VI",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-hlsl30-vi-2.0",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_ndmi_peak_season",
+     "name": "Synthetic peak ndmi",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:ndvi_peak_cv:2016-01-01",
+    "key": "ndvi_peak_cv",
+    "label": "Peak NDVI variability (2016–2025)",
+    "category": "vegetation",
+    "value": {
+     "value": 0.17,
+     "unit": "unitless",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon_inward_buffer",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:32614"
+    },
+    "temporal": {
+     "resolution": "P1Y",
+     "period_start": "2016-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "none",
+     "time_standard": "UTC"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for HLSL30_VI / HLSS30_VI",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-hlsl30-vi-2.0",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_ndvi_peak_cv",
+     "name": "Synthetic peak ndvi variability (2016–2025)",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:aws_0_150:static",
+    "key": "aws_0_150",
+    "label": "Available water storage 0–150 cm",
+    "category": "soil",
+    "value": {
+     "value": 16.6,
+     "unit": "cm",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "observation",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": null,
+     "extraction_method": "vector_intersection",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "static",
+     "period_start": null,
+     "period_end": null,
+     "aggregation": "weighted_mean",
+     "time_standard": "not_applicable"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for SSURGO (SDA)",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://sdmdataaccess.sc.egov.usda.gov/",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_aws_0_150",
+     "name": "Synthetic available water storage 0–150 cm",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:ph_0_30:static",
+    "key": "ph_0_30",
+    "label": "Soil pH 0–30 cm",
+    "category": "soil",
+    "value": {
+     "value": 5.9,
+     "unit": "pH",
+     "uncertainty": {
+      "kind": "range",
+      "low": 5.5,
+      "high": 6.3,
+      "value": null,
+      "note": null
+     },
+     "missing_reason": null
+    },
+    "nature": "observation",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": null,
+     "extraction_method": "vector_intersection",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "static",
+     "period_start": null,
+     "period_end": null,
+     "aggregation": "weighted_mean",
+     "time_standard": "not_applicable"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for SSURGO (SDA)",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://sdmdataaccess.sc.egov.usda.gov/",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_ph_0_30",
+     "name": "Synthetic soil ph 0–30 cm",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:om_0_30:static",
+    "key": "om_0_30",
+    "label": "Organic matter 0–30 cm",
+    "category": "soil",
+    "value": {
+     "value": 2.2,
+     "unit": "percent",
+     "uncertainty": {
+      "kind": "range",
+      "low": 1.3,
+      "high": 3.1,
+      "value": null,
+      "note": null
+     },
+     "missing_reason": null
+    },
+    "nature": "observation",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": null,
+     "extraction_method": "vector_intersection",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "static",
+     "period_start": null,
+     "period_end": null,
+     "aggregation": "weighted_mean",
+     "time_standard": "not_applicable"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for SSURGO (SDA)",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://sdmdataaccess.sc.egov.usda.gov/",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_om_0_30",
+     "name": "Synthetic organic matter 0–30 cm",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:clay_0_30:static",
+    "key": "clay_0_30",
+    "label": "Clay 0–30 cm",
+    "category": "soil",
+    "value": {
+     "value": 15,
+     "unit": "percent",
+     "uncertainty": {
+      "kind": "range",
+      "low": 11,
+      "high": 19,
+      "value": null,
+      "note": null
+     },
+     "missing_reason": null
+    },
+    "nature": "observation",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": null,
+     "extraction_method": "vector_intersection",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "static",
+     "period_start": null,
+     "period_end": null,
+     "aggregation": "weighted_mean",
+     "time_standard": "not_applicable"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for SSURGO (SDA)",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://sdmdataaccess.sc.egov.usda.gov/",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_clay_0_30",
+     "name": "Synthetic clay 0–30 cm",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:slope_mean_pct:2000-02-11",
+    "key": "slope_mean_pct",
+    "label": "Mean slope",
+    "category": "terrain",
+    "value": {
+     "value": 2.6,
+     "unit": "percent",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "static",
+     "period_start": "2000-02-11",
+     "period_end": "2000-02-21",
+     "aggregation": "mean",
+     "time_standard": "not_applicable"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for SRTMGL1",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-srtmgl1-003",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_slope_mean_pct",
+     "name": "Synthetic mean slope",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:slope_p90_pct:2000-02-11",
+    "key": "slope_p90_pct",
+    "label": "Slope (90th percentile)",
+    "category": "terrain",
+    "value": {
+     "value": 4.5,
+     "unit": "percent",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "static",
+     "period_start": "2000-02-11",
+     "period_end": "2000-02-21",
+     "aggregation": "mean",
+     "time_standard": "not_applicable"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for SRTMGL1",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-srtmgl1-003",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_slope_p90_pct",
+     "name": "Synthetic slope (90th percentile)",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:elevation_mean:2000-02-11",
+    "key": "elevation_mean",
+    "label": "Mean elevation",
+    "category": "terrain",
+    "value": {
+     "value": 454,
+     "unit": "m",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "observation",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "temporal": {
+     "resolution": "static",
+     "period_start": "2000-02-11",
+     "period_end": "2000-02-21",
+     "aggregation": "mean",
+     "time_standard": "not_applicable"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for SRTMGL1",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-srtmgl1-003",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_elevation_mean",
+     "name": "Synthetic mean elevation",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:distinct_crops:2006-01-01",
+    "key": "distinct_crops",
+    "label": "Distinct crops (2006–2025)",
+    "category": "rotation",
+    "value": {
+     "value": 5,
+     "unit": "count",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon_inward_buffer",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:5070"
+    },
+    "temporal": {
+     "resolution": "P1Y",
+     "period_start": "2006-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "count",
+     "time_standard": "not_applicable"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_distinct_crops",
+     "name": "Synthetic distinct crops (2006–2025)",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:max_monoculture_run:2006-01-01",
+    "key": "max_monoculture_run",
+    "label": "Longest same-crop run",
+    "category": "rotation",
+    "value": {
+     "value": 1,
+     "unit": "year",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon_inward_buffer",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:5070"
+    },
+    "temporal": {
+     "resolution": "P1Y",
+     "period_start": "2006-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "count",
+     "time_standard": "not_applicable"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_max_monoculture_run",
+     "name": "Synthetic longest same-crop run",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   },
+   {
+    "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:rotation_shannon:2006-01-01",
+    "key": "rotation_shannon",
+    "label": "Rotation diversity (Shannon)",
+    "category": "rotation",
+    "value": {
+     "value": 1.45,
+     "unit": "unitless",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "nature": "derived",
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon_inward_buffer",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:5070"
+    },
+    "temporal": {
+     "resolution": "P1Y",
+     "period_start": "2006-01-01",
+     "period_end": "2025-12-31",
+     "aggregation": "count",
+     "time_standard": "not_applicable"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    ],
+    "method": {
+     "method_id": "synthetic_rotation_shannon",
+     "name": "Synthetic rotation diversity (shannon)",
+     "version": "synthetic-0",
+     "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+     "reference_url": null
+    },
+    "input_ids": [],
+    "reference_value": null
+   }
+  ],
+  "meta": {
+   "request_id": "mock-e-mwfz5rpe",
+   "generated_at": "2026-11-14T05:38:13.252Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

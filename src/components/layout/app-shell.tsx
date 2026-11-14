@@ -8,6 +8,7 @@ import { useActiveFarm } from "@/hooks/active-farm";
 import { usePrefs } from "@/hooks/preferences";
 import { Select, Skeleton } from "@/components/ui/primitives";
 import { Brand } from "./brand";
+import { DATA_MODE } from "@/services";
 
 const NAV = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard, match: (p: string) => p.startsWith("/dashboard") },
@@ -76,7 +77,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </header>
       <main className="mx-auto w-full max-w-[1400px] flex-1 px-4 pb-16 pt-8 md:px-8">{children}</main>
       <footer className="no-print border-t border-line/80 py-6 text-center text-[11.5px] text-stone-500">
-        SOILSTICE · NASA Space Apps Challenge 2026 — Field Shift · Phase 1 interface with synthetic data
+        SOILSTICE · NASA Space Apps Challenge 2026 — Field Shift · {DATA_MODE === "mock" ? "Phase 1 interface with synthetic data" : "Live API data (USDA / NASA sources; see Evidence)"}
       </footer>
     </div>
   );

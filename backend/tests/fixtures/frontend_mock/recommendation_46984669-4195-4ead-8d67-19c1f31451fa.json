@@ -1,0 +1,35 @@
+{
+ "name": "recommendation_46984669-4195-4ead-8d67-19c1f31451fa",
+ "model": "RotationRecommendation",
+ "list": false,
+ "payload": {
+  "data": {
+   "recommendation_id": "3913d41c-15de-46e2-9983-ab9d71d3b93b",
+   "field_id": "46984669-4195-4ead-8d67-19c1f31451fa",
+   "target_season": {
+    "label": "2026 season",
+    "start": "2025-09-01",
+    "end": "2026-11-30"
+   },
+   "engine_version": "synthetic-engine-0",
+   "kb_version": "synthetic-kb-0",
+   "generated_at": "2026-11-01T09:00:00Z",
+   "disclaimers": [
+    "Synthetic demo recommendation — the rules-based engine and cited crop knowledge base arrive in Phase 5.",
+    "Not a yield, price or profit forecast.",
+    "Factors marked “Regional context” cannot make a crop unsuitable on their own."
+   ],
+   "status": "insufficient_data",
+   "candidates": [],
+   "excluded": []
+  },
+  "meta": {
+   "request_id": "mock-2n-mwfz5sm9",
+   "generated_at": "2026-11-14T05:38:14.433Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

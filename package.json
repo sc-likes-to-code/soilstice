@@ -8,7 +8,11 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "contract:openapi": "node contract/export-openapi.mjs",
+    "contract:gen": "openapi-typescript backend/openapi.json -o contract/openapi.gen.ts",
+    "contract:check": "npm run contract:gen && tsc -p contract",
+    "contract:fixtures": "node contract/export-fixtures.mjs"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.107.1",
@@ -26,6 +30,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
+    "openapi-typescript": "7.13.0",
     "tailwindcss": "4.3.3",
     "typescript": "^5",
     "vitest": "^5.1.0"

@@ -1,0 +1,172 @@
+{
+ "name": "resilience_e41c9973-15d2-4a46-8554-650d981d24ac",
+ "model": "ResilienceProfile",
+ "list": false,
+ "payload": {
+  "data": {
+   "profile_id": "8da99fcd-039c-4b4e-9b6c-3024ef977018",
+   "field_id": "e41c9973-15d2-4a46-8554-650d981d24ac",
+   "as_of": "2026-11-01",
+   "model_version": "soilstice-resilience-0.0.0-synthetic",
+   "status": "computed",
+   "composite": {
+    "score": {
+     "value": 66,
+     "unit": "score_0_100",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "band": "moderate",
+    "confidence": "low",
+    "components_used": 5,
+    "components_total": 5
+   },
+   "components": [
+    {
+     "key": "soil_water_buffer",
+     "label": "Soil water buffer",
+     "score": {
+      "value": 71,
+      "unit": "score_0_100",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "band": "high",
+     "support_class": "F",
+     "confidence": "high",
+     "input_indicator_ids": [
+      "e41c9973-15d2-4a46-8554-650d981d24ac:aws_0_150"
+     ],
+     "explanation": "Synthetic placeholder score. In Phase 4 this component maps aws_0_150 through a cited breakpoint table.",
+     "rule_ref": {
+      "method_id": "resilience_soil_water_buffer_breakpoints",
+      "name": "Soil water buffer breakpoint table",
+      "version": "synthetic-0",
+      "description": "Breakpoints pending (Phase 4).",
+      "reference_url": null
+     }
+    },
+    {
+     "key": "terrain_erosion_risk",
+     "label": "Terrain & erosion risk",
+     "score": {
+      "value": 70,
+      "unit": "score_0_100",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "band": "moderate",
+     "support_class": "F",
+     "confidence": "high",
+     "input_indicator_ids": [
+      "e41c9973-15d2-4a46-8554-650d981d24ac:slope_p90_pct"
+     ],
+     "explanation": "Synthetic placeholder score. In Phase 4 this component maps slope_p90_pct through a cited breakpoint table.",
+     "rule_ref": {
+      "method_id": "resilience_terrain_erosion_risk_breakpoints",
+      "name": "Terrain & erosion risk breakpoint table",
+      "version": "synthetic-0",
+      "description": "Breakpoints pending (Phase 4).",
+      "reference_url": null
+     }
+    },
+    {
+     "key": "vegetation_stability",
+     "label": "Vegetation stability",
+     "score": {
+      "value": 68,
+      "unit": "score_0_100",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "band": "moderate",
+     "support_class": "F",
+     "confidence": "high",
+     "input_indicator_ids": [
+      "e41c9973-15d2-4a46-8554-650d981d24ac:ndvi_peak_cv"
+     ],
+     "explanation": "Synthetic placeholder score. In Phase 4 this component maps ndvi_peak_cv through a cited breakpoint table.",
+     "rule_ref": {
+      "method_id": "resilience_vegetation_stability_breakpoints",
+      "name": "Vegetation stability breakpoint table",
+      "version": "synthetic-0",
+      "description": "Breakpoints pending (Phase 4).",
+      "reference_url": null
+     }
+    },
+    {
+     "key": "climate_exposure",
+     "label": "Climate exposure",
+     "score": {
+      "value": 61,
+      "unit": "score_0_100",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "band": "moderate",
+     "support_class": "R",
+     "confidence": "low",
+     "input_indicator_ids": [
+      "e41c9973-15d2-4a46-8554-650d981d24ac:precip_anomaly_pct",
+      "e41c9973-15d2-4a46-8554-650d981d24ac:heat_stress_days",
+      "e41c9973-15d2-4a46-8554-650d981d24ac:sm_rootzone_dry_days"
+     ],
+     "explanation": "Synthetic placeholder score. In Phase 4 this component maps precip_anomaly_pct, heat_stress_days, sm_rootzone_dry_days through a cited breakpoint table.",
+     "rule_ref": {
+      "method_id": "resilience_climate_exposure_breakpoints",
+      "name": "Climate exposure breakpoint table",
+      "version": "synthetic-0",
+      "description": "Breakpoints pending (Phase 4).",
+      "reference_url": null
+     }
+    },
+    {
+     "key": "rotation_diversity",
+     "label": "Rotation diversity",
+     "score": {
+      "value": 60,
+      "unit": "score_0_100",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "band": "moderate",
+     "support_class": "F",
+     "confidence": "high",
+     "input_indicator_ids": [
+      "e41c9973-15d2-4a46-8554-650d981d24ac:distinct_crops",
+      "e41c9973-15d2-4a46-8554-650d981d24ac:max_monoculture_run",
+      "e41c9973-15d2-4a46-8554-650d981d24ac:rotation_shannon"
+     ],
+     "explanation": "Synthetic placeholder score. In Phase 4 this component maps distinct_crops, max_monoculture_run, rotation_shannon through a cited breakpoint table.",
+     "rule_ref": {
+      "method_id": "resilience_rotation_diversity_breakpoints",
+      "name": "Rotation diversity breakpoint table",
+      "version": "synthetic-0",
+      "description": "Breakpoints pending (Phase 4).",
+      "reference_url": null
+     }
+    }
+   ],
+   "limitations": [
+    {
+     "code": "REGIONAL_COMPONENT",
+     "severity": "info",
+     "message": "Climate exposure uses regional-context inputs (POWER ~55 km, SMAP 9 km)."
+    }
+   ],
+   "disclaimers": [
+    "Synthetic demo scores — the breakpoint tables are defined in Phase 4 (SOILSTICE_DATA_ARCHITECTURE §5.10).",
+    "Scores are decision-support indicators, not agronomic prescriptions.",
+    "Components marked “Regional context” do not measure this field."
+   ]
+  },
+  "meta": {
+   "request_id": "mock-45-mwfz5t91",
+   "generated_at": "2026-11-14T05:38:15.253Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

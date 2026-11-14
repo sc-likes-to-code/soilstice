@@ -1,0 +1,297 @@
+{
+ "name": "datasets",
+ "model": "DatasetDescriptor",
+ "list": true,
+ "payload": {
+  "data": [
+   {
+    "dataset_id": "nasa_power_daily_ag",
+    "title": "NASA POWER Daily (AG community)",
+    "publisher": "NASA LaRC",
+    "product": "POWER Daily API",
+    "product_version": "v2.10.3",
+    "priority": "P0",
+    "support_class": "R",
+    "native_resolution_m": 55000,
+    "temporal_resolution": "P1D",
+    "temporal_coverage": {
+     "start": "1981-01-01",
+     "end": null
+    },
+    "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+    "doi": null,
+    "verification_status": "LIVE",
+    "last_verified": "2026-11-14",
+    "integration_status": "planned"
+   },
+   {
+    "dataset_id": "usda_nrcs_ssurgo_sda",
+    "title": "SSURGO via Soil Data Access",
+    "publisher": "USDA NRCS",
+    "product": "SSURGO (SDA)",
+    "product_version": "live database",
+    "priority": "P0",
+    "support_class": "F",
+    "native_resolution_m": null,
+    "temporal_resolution": "static",
+    "temporal_coverage": {
+     "start": null,
+     "end": null
+    },
+    "documentation_url": "https://sdmdataaccess.sc.egov.usda.gov/",
+    "doi": null,
+    "verification_status": "LIVE",
+    "last_verified": "2026-11-14",
+    "integration_status": "planned"
+   },
+   {
+    "dataset_id": "usda_nass_cdl",
+    "title": "Cropland Data Layer (CropScape)",
+    "publisher": "USDA NASS",
+    "product": "CDL",
+    "product_version": "2006–2025 (KS)",
+    "priority": "P0",
+    "support_class": "F",
+    "native_resolution_m": 30,
+    "temporal_resolution": "P1Y",
+    "temporal_coverage": {
+     "start": "2006-01-01",
+     "end": "2025-12-31"
+    },
+    "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+    "doi": null,
+    "verification_status": "LIVE",
+    "last_verified": "2026-11-14",
+    "integration_status": "planned"
+   },
+   {
+    "dataset_id": "usda_nass_csb",
+    "title": "Crop Sequence Boundaries",
+    "publisher": "USDA NASS",
+    "product": "CSB 2018–2025 rev23",
+    "product_version": "rev23",
+    "priority": "P0",
+    "support_class": "F",
+    "native_resolution_m": null,
+    "temporal_resolution": "P1Y",
+    "temporal_coverage": {
+     "start": "2018-01-01",
+     "end": "2025-12-31"
+    },
+    "documentation_url": "https://www.nass.usda.gov/research-and-science/crop-sequence-boundaries",
+    "doi": null,
+    "verification_status": "DOC",
+    "last_verified": "2026-11-14",
+    "integration_status": "planned"
+   },
+   {
+    "dataset_id": "nasa_hls_vi",
+    "title": "HLS Vegetation Indices (L30/S30)",
+    "publisher": "NASA LP DAAC",
+    "product": "HLSL30_VI / HLSS30_VI",
+    "product_version": "2.0",
+    "priority": "P0",
+    "support_class": "F",
+    "native_resolution_m": 30,
+    "temporal_resolution": "irregular",
+    "temporal_coverage": {
+     "start": "2013-04-11",
+     "end": null
+    },
+    "documentation_url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-hlsl30-vi-2.0",
+    "doi": "10.5067/HLS/HLSL30_VI.002",
+    "verification_status": "LIVE",
+    "last_verified": "2026-11-14",
+    "integration_status": "planned"
+   },
+   {
+    "dataset_id": "nasa_hls",
+    "title": "HLS Surface Reflectance (L30/S30)",
+    "publisher": "NASA LP DAAC",
+    "product": "HLSL30 / HLSS30",
+    "product_version": "2.0",
+    "priority": "P0",
+    "support_class": "F",
+    "native_resolution_m": 30,
+    "temporal_resolution": "irregular",
+    "temporal_coverage": {
+     "start": "2013-04-11",
+     "end": null
+    },
+    "documentation_url": "https://www.earthdata.nasa.gov/data/projects/hls",
+    "doi": null,
+    "verification_status": "CMR",
+    "last_verified": "2026-11-14",
+    "integration_status": "planned"
+   },
+   {
+    "dataset_id": "nasa_smap_spl4smgp",
+    "title": "SMAP L4 Surface & Root-Zone Soil Moisture",
+    "publisher": "NASA NSIDC DAAC",
+    "product": "SPL4SMGP",
+    "product_version": "008",
+    "priority": "P0",
+    "support_class": "R",
+    "native_resolution_m": 9000,
+    "temporal_resolution": "PT3H",
+    "temporal_coverage": {
+     "start": "2015-03-31",
+     "end": null
+    },
+    "documentation_url": "https://nsidc.org/data/spl4smgp",
+    "doi": null,
+    "verification_status": "CMR",
+    "last_verified": "2026-11-14",
+    "integration_status": "planned"
+   },
+   {
+    "dataset_id": "nasa_srtm_gl1",
+    "title": "SRTM Global 1 arc-second",
+    "publisher": "NASA LP DAAC",
+    "product": "SRTMGL1",
+    "product_version": "003",
+    "priority": "P0",
+    "support_class": "F",
+    "native_resolution_m": 30,
+    "temporal_resolution": "static",
+    "temporal_coverage": {
+     "start": "2000-02-11",
+     "end": "2000-02-21"
+    },
+    "documentation_url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-srtmgl1-003",
+    "doi": "10.5067/MEaSUREs/SRTM/SRTMGL1.003",
+    "verification_status": "CMR",
+    "last_verified": "2026-11-14",
+    "integration_status": "planned"
+   },
+   {
+    "dataset_id": "prism_daily",
+    "title": "PRISM daily climate",
+    "publisher": "PRISM Group, Oregon State University",
+    "product": "PRISM daily (4 km / 800 m)",
+    "product_version": "post-2025-10 COG",
+    "priority": "P1",
+    "support_class": "S",
+    "native_resolution_m": 4000,
+    "temporal_resolution": "P1D",
+    "temporal_coverage": {
+     "start": "1981-01-01",
+     "end": null
+    },
+    "documentation_url": "https://prism.oregonstate.edu/",
+    "doi": null,
+    "verification_status": "LIVE",
+    "last_verified": "2026-11-14",
+    "integration_status": "planned"
+   },
+   {
+    "dataset_id": "openet",
+    "title": "OpenET Ensemble ET",
+    "publisher": "OpenET consortium",
+    "product": "OpenET Collection",
+    "product_version": "2.1",
+    "priority": "P1",
+    "support_class": "F",
+    "native_resolution_m": 30,
+    "temporal_resolution": "P1M",
+    "temporal_coverage": {
+     "start": "2000-01-01",
+     "end": null
+    },
+    "documentation_url": "https://openet.gitbook.io/docs",
+    "doi": null,
+    "verification_status": "DOC",
+    "last_verified": "2026-11-14",
+    "integration_status": "planned"
+   },
+   {
+    "dataset_id": "usda_nass_quickstats",
+    "title": "NASS Quick Stats",
+    "publisher": "USDA NASS",
+    "product": "Quick Stats API",
+    "product_version": "api_GET",
+    "priority": "P1",
+    "support_class": "R",
+    "native_resolution_m": null,
+    "temporal_resolution": "P1Y",
+    "temporal_coverage": {
+     "start": null,
+     "end": null
+    },
+    "documentation_url": "https://quickstats.nass.usda.gov/api",
+    "doi": null,
+    "verification_status": "LIVE",
+    "last_verified": "2026-11-14",
+    "integration_status": "planned"
+   },
+   {
+    "dataset_id": "nasa_smap_spl3smp_e",
+    "title": "SMAP L3 Enhanced Soil Moisture",
+    "publisher": "NASA NSIDC DAAC",
+    "product": "SPL3SMP_E",
+    "product_version": "006",
+    "priority": "P1",
+    "support_class": "R",
+    "native_resolution_m": 9000,
+    "temporal_resolution": "P1D",
+    "temporal_coverage": {
+     "start": "2015-03-31",
+     "end": null
+    },
+    "documentation_url": "https://nsidc.org/data/SPL3SMP_E",
+    "doi": null,
+    "verification_status": "CMR",
+    "last_verified": "2026-11-14",
+    "integration_status": "planned"
+   },
+   {
+    "dataset_id": "nasa_gpm_imerg",
+    "title": "GPM IMERG Final daily",
+    "publisher": "NASA GES DISC",
+    "product": "GPM_3IMERGDF",
+    "product_version": "07",
+    "priority": "P2",
+    "support_class": "R",
+    "native_resolution_m": 11000,
+    "temporal_resolution": "P1D",
+    "temporal_coverage": {
+     "start": "1998-01-01",
+     "end": "2025-09-30"
+    },
+    "documentation_url": "https://catalog.data.gov/dataset/gpm-imerg-final-precipitation-l3-1-day-0-1-degree-x-0-1-degree-v07-gpm-3imergdf-at-ges-dis-f1669",
+    "doi": null,
+    "verification_status": "CMR",
+    "last_verified": "2026-11-14",
+    "integration_status": "planned"
+   },
+   {
+    "dataset_id": "fao_gaez_v5",
+    "title": "FAO GAEZ v5 crop suitability",
+    "publisher": "FAO + IIASA",
+    "product": "GAEZ v5",
+    "product_version": "v5",
+    "priority": "P2",
+    "support_class": "R",
+    "native_resolution_m": 1000,
+    "temporal_resolution": "static",
+    "temporal_coverage": {
+     "start": null,
+     "end": null
+    },
+    "documentation_url": "https://www.fao.org/gaez/en/",
+    "doi": null,
+    "verification_status": "DOC",
+    "last_verified": "2026-11-14",
+    "integration_status": "planned"
+   }
+  ],
+  "meta": {
+   "request_id": "mock-1-mwfz5rl8",
+   "generated_at": "2026-11-14T05:38:13.100Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

@@ -1,0 +1,1026 @@
+{
+ "name": "history_7608c195-b364-49a2-a293-a4be862d9eac",
+ "model": "CropHistory",
+ "list": false,
+ "payload": {
+  "data": {
+   "field_id": "7608c195-b364-49a2-a293-a4be862d9eac",
+   "period": {
+    "start_year": 2006,
+    "end_year": 2025
+   },
+   "years": [
+    {
+     "year": 2006,
+     "majority": {
+      "crop_code": 61,
+      "crop_name": "Fallow/Idle Cropland"
+     },
+     "purity": 0.94,
+     "histogram": [
+      {
+       "crop_code": 61,
+       "crop_name": "Fallow/Idle Cropland",
+       "area_fraction": 0.94
+      },
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.03
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.03
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": null,
+     "agrees_with_csb": null,
+     "native_resolution_m": null,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2007,
+     "majority": {
+      "crop_code": 24,
+      "crop_name": "Winter Wheat"
+     },
+     "purity": 0.79,
+     "histogram": [
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.79
+      },
+      {
+       "crop_code": 1,
+       "crop_name": "Corn",
+       "area_fraction": 0.1
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.11
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": null,
+     "agrees_with_csb": null,
+     "native_resolution_m": null,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2008,
+     "majority": {
+      "crop_code": 61,
+      "crop_name": "Fallow/Idle Cropland"
+     },
+     "purity": 0.76,
+     "histogram": [
+      {
+       "crop_code": 61,
+       "crop_name": "Fallow/Idle Cropland",
+       "area_fraction": 0.76
+      },
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.15
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.09
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": null,
+     "agrees_with_csb": null,
+     "native_resolution_m": null,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2009,
+     "majority": {
+      "crop_code": 24,
+      "crop_name": "Winter Wheat"
+     },
+     "purity": 0.96,
+     "histogram": [
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.96
+      },
+      {
+       "crop_code": 1,
+       "crop_name": "Corn",
+       "area_fraction": 0.02
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.02
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": null,
+     "agrees_with_csb": null,
+     "native_resolution_m": null,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2010,
+     "majority": {
+      "crop_code": 61,
+      "crop_name": "Fallow/Idle Cropland"
+     },
+     "purity": 0.89,
+     "histogram": [
+      {
+       "crop_code": 61,
+       "crop_name": "Fallow/Idle Cropland",
+       "area_fraction": 0.89
+      },
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.06
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.05
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": null,
+     "agrees_with_csb": null,
+     "native_resolution_m": 30,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2011,
+     "majority": {
+      "crop_code": 24,
+      "crop_name": "Winter Wheat"
+     },
+     "purity": 0.95,
+     "histogram": [
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.95
+      },
+      {
+       "crop_code": 1,
+       "crop_name": "Corn",
+       "area_fraction": 0.02
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.03
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": null,
+     "agrees_with_csb": null,
+     "native_resolution_m": 30,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2012,
+     "majority": {
+      "crop_code": 61,
+      "crop_name": "Fallow/Idle Cropland"
+     },
+     "purity": 0.87,
+     "histogram": [
+      {
+       "crop_code": 61,
+       "crop_name": "Fallow/Idle Cropland",
+       "area_fraction": 0.87
+      },
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.07
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.06
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": null,
+     "agrees_with_csb": null,
+     "native_resolution_m": 30,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2013,
+     "majority": {
+      "crop_code": 24,
+      "crop_name": "Winter Wheat"
+     },
+     "purity": 0.77,
+     "histogram": [
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.77
+      },
+      {
+       "crop_code": 1,
+       "crop_name": "Corn",
+       "area_fraction": 0.12
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.11
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": null,
+     "agrees_with_csb": null,
+     "native_resolution_m": 30,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2014,
+     "majority": {
+      "crop_code": 61,
+      "crop_name": "Fallow/Idle Cropland"
+     },
+     "purity": 0.68,
+     "histogram": [
+      {
+       "crop_code": 61,
+       "crop_name": "Fallow/Idle Cropland",
+       "area_fraction": 0.68
+      },
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.21
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.11
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": null,
+     "agrees_with_csb": null,
+     "native_resolution_m": 30,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2015,
+     "majority": {
+      "crop_code": 24,
+      "crop_name": "Winter Wheat"
+     },
+     "purity": 0.91,
+     "histogram": [
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.91
+      },
+      {
+       "crop_code": 1,
+       "crop_name": "Corn",
+       "area_fraction": 0.06
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.03
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": null,
+     "agrees_with_csb": null,
+     "native_resolution_m": 30,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2016,
+     "majority": {
+      "crop_code": 61,
+      "crop_name": "Fallow/Idle Cropland"
+     },
+     "purity": 0.76,
+     "histogram": [
+      {
+       "crop_code": 61,
+       "crop_name": "Fallow/Idle Cropland",
+       "area_fraction": 0.76
+      },
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.16
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.08
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": null,
+     "agrees_with_csb": null,
+     "native_resolution_m": 30,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2017,
+     "majority": {
+      "crop_code": 24,
+      "crop_name": "Winter Wheat"
+     },
+     "purity": 0.9,
+     "histogram": [
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.9
+      },
+      {
+       "crop_code": 1,
+       "crop_name": "Corn",
+       "area_fraction": 0.06
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.04
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": null,
+     "agrees_with_csb": null,
+     "native_resolution_m": 30,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2018,
+     "majority": {
+      "crop_code": 61,
+      "crop_name": "Fallow/Idle Cropland"
+     },
+     "purity": 0.9,
+     "histogram": [
+      {
+       "crop_code": 61,
+       "crop_name": "Fallow/Idle Cropland",
+       "area_fraction": 0.9
+      },
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.05
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.05
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": 61,
+     "agrees_with_csb": true,
+     "native_resolution_m": 30,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2019,
+     "majority": {
+      "crop_code": 24,
+      "crop_name": "Winter Wheat"
+     },
+     "purity": 0.77,
+     "histogram": [
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.77
+      },
+      {
+       "crop_code": 1,
+       "crop_name": "Corn",
+       "area_fraction": 0.13
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.1
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": 24,
+     "agrees_with_csb": true,
+     "native_resolution_m": 30,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2020,
+     "majority": {
+      "crop_code": 61,
+      "crop_name": "Fallow/Idle Cropland"
+     },
+     "purity": 0.95,
+     "histogram": [
+      {
+       "crop_code": 61,
+       "crop_name": "Fallow/Idle Cropland",
+       "area_fraction": 0.95
+      },
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.03
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.02
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": 61,
+     "agrees_with_csb": true,
+     "native_resolution_m": 30,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2021,
+     "majority": {
+      "crop_code": 24,
+      "crop_name": "Winter Wheat"
+     },
+     "purity": 0.97,
+     "histogram": [
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.97
+      },
+      {
+       "crop_code": 1,
+       "crop_name": "Corn",
+       "area_fraction": 0.02
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.01
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": 24,
+     "agrees_with_csb": true,
+     "native_resolution_m": 30,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2022,
+     "majority": {
+      "crop_code": 61,
+      "crop_name": "Fallow/Idle Cropland"
+     },
+     "purity": 0.76,
+     "histogram": [
+      {
+       "crop_code": 61,
+       "crop_name": "Fallow/Idle Cropland",
+       "area_fraction": 0.76
+      },
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.14
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.1
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": 24,
+     "agrees_with_csb": false,
+     "native_resolution_m": 30,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2023,
+     "majority": {
+      "crop_code": 24,
+      "crop_name": "Winter Wheat"
+     },
+     "purity": 0.77,
+     "histogram": [
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.77
+      },
+      {
+       "crop_code": 1,
+       "crop_name": "Corn",
+       "area_fraction": 0.13
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.1
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": 24,
+     "agrees_with_csb": true,
+     "native_resolution_m": 30,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2024,
+     "majority": {
+      "crop_code": 61,
+      "crop_name": "Fallow/Idle Cropland"
+     },
+     "purity": 0.83,
+     "histogram": [
+      {
+       "crop_code": 61,
+       "crop_name": "Fallow/Idle Cropland",
+       "area_fraction": 0.83
+      },
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.11
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.06
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": 61,
+     "agrees_with_csb": true,
+     "native_resolution_m": 30,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    },
+    {
+     "year": 2025,
+     "majority": {
+      "crop_code": 24,
+      "crop_name": "Winter Wheat"
+     },
+     "purity": 0.71,
+     "histogram": [
+      {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat",
+       "area_fraction": 0.71
+      },
+      {
+       "crop_code": 1,
+       "crop_name": "Corn",
+       "area_fraction": 0.2
+      },
+      {
+       "crop_code": 176,
+       "crop_name": "Grassland/Pasture",
+       "area_fraction": 0.09
+      }
+     ],
+     "low_purity": false,
+     "class_accuracy": null,
+     "csb_crop_code": 24,
+     "agrees_with_csb": true,
+     "native_resolution_m": 30,
+     "missing_reason": null,
+     "source": {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for CDL",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+      "retrieved_at": null
+     }
+    }
+   ],
+   "metrics": [
+    {
+     "indicator_id": "7608c195-b364-49a2-a293-a4be862d9eac:distinct_crops:2006-01-01",
+     "key": "distinct_crops",
+     "label": "Distinct crops (2006–2025)",
+     "category": "rotation",
+     "value": {
+      "value": 2,
+      "unit": "count",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "F",
+      "native_resolution_m": 30,
+      "extraction_method": "zonal_polygon_inward_buffer",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:5070"
+     },
+     "temporal": {
+      "resolution": "P1Y",
+      "period_start": "2006-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "count",
+      "time_standard": "not_applicable"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_distinct_crops",
+      "name": "Synthetic distinct crops (2006–2025)",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "7608c195-b364-49a2-a293-a4be862d9eac:max_monoculture_run:2006-01-01",
+     "key": "max_monoculture_run",
+     "label": "Longest same-crop run",
+     "category": "rotation",
+     "value": {
+      "value": 1,
+      "unit": "year",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "F",
+      "native_resolution_m": 30,
+      "extraction_method": "zonal_polygon_inward_buffer",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:5070"
+     },
+     "temporal": {
+      "resolution": "P1Y",
+      "period_start": "2006-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "count",
+      "time_standard": "not_applicable"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_max_monoculture_run",
+      "name": "Synthetic longest same-crop run",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "7608c195-b364-49a2-a293-a4be862d9eac:rotation_shannon:2006-01-01",
+     "key": "rotation_shannon",
+     "label": "Rotation diversity (Shannon)",
+     "category": "rotation",
+     "value": {
+      "value": 0.69,
+      "unit": "unitless",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "F",
+      "native_resolution_m": 30,
+      "extraction_method": "zonal_polygon_inward_buffer",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:5070"
+     },
+     "temporal": {
+      "resolution": "P1Y",
+      "period_start": "2006-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "count",
+      "time_standard": "not_applicable"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_rotation_shannon",
+      "name": "Synthetic rotation diversity (shannon)",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    }
+   ],
+   "spatial": {
+    "support_class": "F",
+    "native_resolution_m": 30,
+    "extraction_method": "zonal_polygon_inward_buffer",
+    "field_fraction_of_cell": null,
+    "cell_id": null,
+    "crs": "EPSG:5070"
+   },
+   "quality": {
+    "status": "valid",
+    "flags": [
+     {
+      "code": "SYNTHETIC",
+      "severity": "info",
+      "message": "Synthetic demo value — not an observation."
+     }
+    ],
+    "completeness": 1,
+    "missing_reason": null
+   }
+  },
+  "meta": {
+   "request_id": "mock-3e-mwfz5sxp",
+   "generated_at": "2026-11-14T05:38:14.845Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

@@ -1,0 +1,7291 @@
+{
+  "components": {
+    "schemas": {
+      "AOI": {
+        "additionalProperties": false,
+        "properties": {
+          "aoi_id": {
+            "enum": [
+              "ks_reno",
+              "ks_finney"
+            ],
+            "title": "Aoi Id",
+            "type": "string"
+          },
+          "county_fips": {
+            "items": {
+              "type": "string"
+            },
+            "title": "County Fips",
+            "type": "array"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "state": {
+            "const": "KS",
+            "title": "State",
+            "type": "string"
+          }
+        },
+        "required": [
+          "aoi_id",
+          "label",
+          "county_fips",
+          "state"
+        ],
+        "title": "AOI",
+        "type": "object"
+      },
+      "ApiErrorBody": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "enum": [
+              "NOT_FOUND",
+              "VALIDATION_ERROR",
+              "OUTSIDE_AOI",
+              "GEOMETRY_INVALID",
+              "FIELD_TOO_LARGE",
+              "NOT_EDITABLE",
+              "UPSTREAM_UNAVAILABLE",
+              "RATE_LIMITED",
+              "NOT_IMPLEMENTED",
+              "INTERNAL"
+            ],
+            "title": "Code",
+            "type": "string"
+          },
+          "details": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Details"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "request_id": {
+            "title": "Request Id",
+            "type": "string"
+          },
+          "retryable": {
+            "title": "Retryable",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "details",
+          "request_id",
+          "retryable"
+        ],
+        "title": "ApiErrorBody",
+        "type": "object"
+      },
+      "ApiErrorResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ApiErrorBody"
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "title": "ApiErrorResponse",
+        "type": "object"
+      },
+      "ApiResponse_ClimateProfile_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ClimateProfile"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[ClimateProfile]",
+        "type": "object"
+      },
+      "ApiResponse_CreateFieldResponse_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/CreateFieldResponse"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[CreateFieldResponse]",
+        "type": "object"
+      },
+      "ApiResponse_CropHistory_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/CropHistory"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[CropHistory]",
+        "type": "object"
+      },
+      "ApiResponse_DataCoverage_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/DataCoverage"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[DataCoverage]",
+        "type": "object"
+      },
+      "ApiResponse_Deleted_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Deleted"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[Deleted]",
+        "type": "object"
+      },
+      "ApiResponse_FarmOverview_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/FarmOverview"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[FarmOverview]",
+        "type": "object"
+      },
+      "ApiResponse_Farm_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Farm"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[Farm]",
+        "type": "object"
+      },
+      "ApiResponse_FieldProfile_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/FieldProfile"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[FieldProfile]",
+        "type": "object"
+      },
+      "ApiResponse_Field_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Field"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[Field]",
+        "type": "object"
+      },
+      "ApiResponse_Health_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Health"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[Health]",
+        "type": "object"
+      },
+      "ApiResponse_ProcessingJob_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ProcessingJob"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[ProcessingJob]",
+        "type": "object"
+      },
+      "ApiResponse_ResilienceProfile_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ResilienceProfile"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[ResilienceProfile]",
+        "type": "object"
+      },
+      "ApiResponse_RotationRecommendation_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/RotationRecommendation"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[RotationRecommendation]",
+        "type": "object"
+      },
+      "ApiResponse_RotationScenario_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/RotationScenario"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[RotationScenario]",
+        "type": "object"
+      },
+      "ApiResponse_SoilProfile_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SoilProfile"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[SoilProfile]",
+        "type": "object"
+      },
+      "ApiResponse_TerrainProfile_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/TerrainProfile"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[TerrainProfile]",
+        "type": "object"
+      },
+      "ApiResponse_VegetationProfile_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/VegetationProfile"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[VegetationProfile]",
+        "type": "object"
+      },
+      "ApiResponse_list_CropOption__": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/CropOption"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[list[CropOption]]",
+        "type": "object"
+      },
+      "ApiResponse_list_DatasetDescriptor__": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/DatasetDescriptor"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[list[DatasetDescriptor]]",
+        "type": "object"
+      },
+      "ApiResponse_list_EnvironmentalIndicator__": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/EnvironmentalIndicator"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[list[EnvironmentalIndicator]]",
+        "type": "object"
+      },
+      "ApiResponse_list_EvidenceItem__": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceItem"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[list[EvidenceItem]]",
+        "type": "object"
+      },
+      "ApiResponse_list_Farm__": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Farm"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[list[Farm]]",
+        "type": "object"
+      },
+      "ApiResponse_list_FieldSummary__": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/FieldSummary"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[list[FieldSummary]]",
+        "type": "object"
+      },
+      "ApiResponse_list_RotationScenario__": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/RotationScenario"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[list[RotationScenario]]",
+        "type": "object"
+      },
+      "AuthoritativeClimateSource": {
+        "additionalProperties": false,
+        "properties": {
+          "precipitation": {
+            "enum": [
+              "nasa_power_daily_ag",
+              "usda_nrcs_ssurgo_sda",
+              "usda_nass_cdl",
+              "usda_nass_csb",
+              "nasa_hls",
+              "nasa_hls_vi",
+              "nasa_smap_spl4smgp",
+              "nasa_srtm_gl1",
+              "prism_daily",
+              "openet",
+              "usda_nass_quickstats",
+              "nasa_smap_spl3smp_e",
+              "nasa_gpm_imerg",
+              "fao_gaez_v5",
+              "soilstice_derived",
+              "user_input",
+              "synthetic"
+            ],
+            "title": "Precipitation",
+            "type": "string"
+          },
+          "temperature": {
+            "enum": [
+              "nasa_power_daily_ag",
+              "usda_nrcs_ssurgo_sda",
+              "usda_nass_cdl",
+              "usda_nass_csb",
+              "nasa_hls",
+              "nasa_hls_vi",
+              "nasa_smap_spl4smgp",
+              "nasa_srtm_gl1",
+              "prism_daily",
+              "openet",
+              "usda_nass_quickstats",
+              "nasa_smap_spl3smp_e",
+              "nasa_gpm_imerg",
+              "fao_gaez_v5",
+              "soilstice_derived",
+              "user_input",
+              "synthetic"
+            ],
+            "title": "Temperature",
+            "type": "string"
+          }
+        },
+        "required": [
+          "precipitation",
+          "temperature"
+        ],
+        "title": "AuthoritativeClimateSource",
+        "type": "object"
+      },
+      "ClassValue": {
+        "additionalProperties": false,
+        "properties": {
+          "missing_reason": {
+            "anyOf": [
+              {
+                "enum": [
+                  "NO_DATA_SOURCE",
+                  "FILL_VALUE",
+                  "QA_MASKED_CLOUD",
+                  "QA_MASKED_SHADOW",
+                  "QA_MASKED_SNOW",
+                  "QA_LOW_QUALITY_RETRIEVAL",
+                  "INSUFFICIENT_COVERAGE",
+                  "OUT_OF_TEMPORAL_RANGE",
+                  "UPSTREAM_ERROR",
+                  "NOT_YET_PUBLISHED",
+                  "NOT_COMPUTED",
+                  "OUTSIDE_AOI",
+                  "PENDING_PROCESSING"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Missing Reason"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          },
+          "weight_share": {
+            "anyOf": [
+              {
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Weight Share"
+          }
+        },
+        "required": [
+          "value",
+          "weight_share",
+          "missing_reason"
+        ],
+        "title": "ClassValue",
+        "type": "object"
+      },
+      "ClimateProfile": {
+        "additionalProperties": false,
+        "properties": {
+          "authoritative_source": {
+            "$ref": "#/components/schemas/AuthoritativeClimateSource"
+          },
+          "field_id": {
+            "format": "uuid",
+            "title": "Field Id",
+            "type": "string"
+          },
+          "indicators": {
+            "items": {
+              "$ref": "#/components/schemas/EnvironmentalIndicator"
+            },
+            "title": "Indicators",
+            "type": "array"
+          },
+          "quality": {
+            "$ref": "#/components/schemas/QualityInfo"
+          },
+          "season": {
+            "$ref": "#/components/schemas/Season"
+          },
+          "series": {
+            "items": {
+              "$ref": "#/components/schemas/TimeSeries"
+            },
+            "title": "Series",
+            "type": "array"
+          }
+        },
+        "required": [
+          "field_id",
+          "season",
+          "authoritative_source",
+          "indicators",
+          "series",
+          "quality"
+        ],
+        "title": "ClimateProfile",
+        "type": "object"
+      },
+      "CoverageCount": {
+        "additionalProperties": false,
+        "properties": {
+          "dataset_id": {
+            "enum": [
+              "nasa_power_daily_ag",
+              "usda_nrcs_ssurgo_sda",
+              "usda_nass_cdl",
+              "usda_nass_csb",
+              "nasa_hls",
+              "nasa_hls_vi",
+              "nasa_smap_spl4smgp",
+              "nasa_srtm_gl1",
+              "prism_daily",
+              "openet",
+              "usda_nass_quickstats",
+              "nasa_smap_spl3smp_e",
+              "nasa_gpm_imerg",
+              "fao_gaez_v5",
+              "soilstice_derived",
+              "user_input",
+              "synthetic"
+            ],
+            "title": "Dataset Id",
+            "type": "string"
+          },
+          "fields_available": {
+            "title": "Fields Available",
+            "type": "integer"
+          },
+          "fields_total": {
+            "title": "Fields Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "dataset_id",
+          "fields_available",
+          "fields_total"
+        ],
+        "title": "CoverageCount",
+        "type": "object"
+      },
+      "CreateFieldRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "geometry": {
+            "$ref": "#/components/schemas/GeoJSONMultiPolygon"
+          },
+          "name": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "geometry"
+        ],
+        "title": "CreateFieldRequest",
+        "type": "object"
+      },
+      "CreateFieldResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "field": {
+            "$ref": "#/components/schemas/Field"
+          },
+          "job": {
+            "$ref": "#/components/schemas/ProcessingJob"
+          }
+        },
+        "required": [
+          "field",
+          "job"
+        ],
+        "title": "CreateFieldResponse",
+        "type": "object"
+      },
+      "CropHistory": {
+        "additionalProperties": false,
+        "properties": {
+          "field_id": {
+            "format": "uuid",
+            "title": "Field Id",
+            "type": "string"
+          },
+          "metrics": {
+            "items": {
+              "$ref": "#/components/schemas/EnvironmentalIndicator"
+            },
+            "title": "Metrics",
+            "type": "array"
+          },
+          "period": {
+            "$ref": "#/components/schemas/YearPeriod"
+          },
+          "quality": {
+            "$ref": "#/components/schemas/QualityInfo"
+          },
+          "spatial": {
+            "$ref": "#/components/schemas/SpatialSupport"
+          },
+          "years": {
+            "items": {
+              "$ref": "#/components/schemas/CropYear"
+            },
+            "title": "Years",
+            "type": "array"
+          }
+        },
+        "required": [
+          "field_id",
+          "period",
+          "years",
+          "metrics",
+          "spatial",
+          "quality"
+        ],
+        "title": "CropHistory",
+        "type": "object"
+      },
+      "CropOption": {
+        "additionalProperties": false,
+        "properties": {
+          "crop_code": {
+            "title": "Crop Code",
+            "type": "integer"
+          },
+          "family": {
+            "title": "Family",
+            "type": "string"
+          },
+          "is_double_crop": {
+            "title": "Is Double Crop",
+            "type": "boolean"
+          },
+          "kb_version": {
+            "title": "Kb Version",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "crop_code",
+          "name",
+          "family",
+          "is_double_crop",
+          "kb_version"
+        ],
+        "title": "CropOption",
+        "type": "object"
+      },
+      "CropRef": {
+        "additionalProperties": false,
+        "properties": {
+          "crop_code": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Crop Code"
+          },
+          "crop_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Crop Name"
+          }
+        },
+        "required": [
+          "crop_code",
+          "crop_name"
+        ],
+        "title": "CropRef",
+        "type": "object"
+      },
+      "CropShare": {
+        "additionalProperties": false,
+        "properties": {
+          "area_fraction": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Area Fraction",
+            "type": "number"
+          },
+          "crop_code": {
+            "title": "Crop Code",
+            "type": "integer"
+          },
+          "crop_name": {
+            "title": "Crop Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "crop_code",
+          "crop_name",
+          "area_fraction"
+        ],
+        "title": "CropShare",
+        "type": "object"
+      },
+      "CropYear": {
+        "additionalProperties": false,
+        "properties": {
+          "agrees_with_csb": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Agrees With Csb"
+          },
+          "class_accuracy": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Uncertainty"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "csb_crop_code": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Csb Crop Code"
+          },
+          "histogram": {
+            "items": {
+              "$ref": "#/components/schemas/CropShare"
+            },
+            "title": "Histogram",
+            "type": "array"
+          },
+          "low_purity": {
+            "title": "Low Purity",
+            "type": "boolean"
+          },
+          "majority": {
+            "$ref": "#/components/schemas/CropRef"
+          },
+          "missing_reason": {
+            "anyOf": [
+              {
+                "enum": [
+                  "NO_DATA_SOURCE",
+                  "FILL_VALUE",
+                  "QA_MASKED_CLOUD",
+                  "QA_MASKED_SHADOW",
+                  "QA_MASKED_SNOW",
+                  "QA_LOW_QUALITY_RETRIEVAL",
+                  "INSUFFICIENT_COVERAGE",
+                  "OUT_OF_TEMPORAL_RANGE",
+                  "UPSTREAM_ERROR",
+                  "NOT_YET_PUBLISHED",
+                  "NOT_COMPUTED",
+                  "OUTSIDE_AOI",
+                  "PENDING_PROCESSING"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Missing Reason"
+          },
+          "native_resolution_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Native Resolution M"
+          },
+          "purity": {
+            "anyOf": [
+              {
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Purity"
+          },
+          "source": {
+            "$ref": "#/components/schemas/SourceRef"
+          },
+          "year": {
+            "title": "Year",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "year",
+          "majority",
+          "purity",
+          "histogram",
+          "low_purity",
+          "class_accuracy",
+          "csb_crop_code",
+          "agrees_with_csb",
+          "native_resolution_m",
+          "missing_reason",
+          "source"
+        ],
+        "title": "CropYear",
+        "type": "object"
+      },
+      "DataCoverage": {
+        "additionalProperties": false,
+        "properties": {
+          "completeness": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Completeness",
+            "type": "number"
+          },
+          "datasets": {
+            "items": {
+              "$ref": "#/components/schemas/DatasetCoverage"
+            },
+            "title": "Datasets",
+            "type": "array"
+          },
+          "field_id": {
+            "format": "uuid",
+            "title": "Field Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "field_id",
+          "datasets",
+          "completeness"
+        ],
+        "title": "DataCoverage",
+        "type": "object"
+      },
+      "DatasetCoverage": {
+        "additionalProperties": false,
+        "properties": {
+          "dataset_id": {
+            "enum": [
+              "nasa_power_daily_ag",
+              "usda_nrcs_ssurgo_sda",
+              "usda_nass_cdl",
+              "usda_nass_csb",
+              "nasa_hls",
+              "nasa_hls_vi",
+              "nasa_smap_spl4smgp",
+              "nasa_srtm_gl1",
+              "prism_daily",
+              "openet",
+              "usda_nass_quickstats",
+              "nasa_smap_spl3smp_e",
+              "nasa_gpm_imerg",
+              "fao_gaez_v5",
+              "soilstice_derived",
+              "user_input",
+              "synthetic"
+            ],
+            "title": "Dataset Id",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "last_updated": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Updated"
+          },
+          "missing_reason": {
+            "anyOf": [
+              {
+                "enum": [
+                  "NO_DATA_SOURCE",
+                  "FILL_VALUE",
+                  "QA_MASKED_CLOUD",
+                  "QA_MASKED_SHADOW",
+                  "QA_MASKED_SNOW",
+                  "QA_LOW_QUALITY_RETRIEVAL",
+                  "INSUFFICIENT_COVERAGE",
+                  "OUT_OF_TEMPORAL_RANGE",
+                  "UPSTREAM_ERROR",
+                  "NOT_YET_PUBLISHED",
+                  "NOT_COMPUTED",
+                  "OUTSIDE_AOI",
+                  "PENDING_PROCESSING"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Missing Reason"
+          },
+          "native_resolution_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Native Resolution M"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          },
+          "priority": {
+            "enum": [
+              "P0",
+              "P1",
+              "P2"
+            ],
+            "title": "Priority",
+            "type": "string"
+          },
+          "product_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Version"
+          },
+          "status": {
+            "enum": [
+              "available",
+              "partial",
+              "missing",
+              "pending",
+              "not_applicable",
+              "not_integrated"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "support_class": {
+            "enum": [
+              "F",
+              "S",
+              "R"
+            ],
+            "title": "Support Class",
+            "type": "string"
+          },
+          "temporal_coverage": {
+            "$ref": "#/components/schemas/TemporalRange"
+          }
+        },
+        "required": [
+          "dataset_id",
+          "label",
+          "priority",
+          "status",
+          "support_class",
+          "native_resolution_m",
+          "temporal_coverage",
+          "product_version",
+          "last_updated",
+          "missing_reason",
+          "note"
+        ],
+        "title": "DatasetCoverage",
+        "type": "object"
+      },
+      "DatasetDescriptor": {
+        "additionalProperties": false,
+        "properties": {
+          "dataset_id": {
+            "enum": [
+              "nasa_power_daily_ag",
+              "usda_nrcs_ssurgo_sda",
+              "usda_nass_cdl",
+              "usda_nass_csb",
+              "nasa_hls",
+              "nasa_hls_vi",
+              "nasa_smap_spl4smgp",
+              "nasa_srtm_gl1",
+              "prism_daily",
+              "openet",
+              "usda_nass_quickstats",
+              "nasa_smap_spl3smp_e",
+              "nasa_gpm_imerg",
+              "fao_gaez_v5",
+              "soilstice_derived",
+              "user_input",
+              "synthetic"
+            ],
+            "title": "Dataset Id",
+            "type": "string"
+          },
+          "documentation_url": {
+            "title": "Documentation Url",
+            "type": "string"
+          },
+          "doi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Doi"
+          },
+          "integration_status": {
+            "enum": [
+              "integrated",
+              "planned"
+            ],
+            "title": "Integration Status",
+            "type": "string"
+          },
+          "last_verified": {
+            "format": "date",
+            "title": "Last Verified",
+            "type": "string"
+          },
+          "native_resolution_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Native Resolution M"
+          },
+          "priority": {
+            "enum": [
+              "P0",
+              "P1",
+              "P2"
+            ],
+            "title": "Priority",
+            "type": "string"
+          },
+          "product": {
+            "title": "Product",
+            "type": "string"
+          },
+          "product_version": {
+            "title": "Product Version",
+            "type": "string"
+          },
+          "publisher": {
+            "title": "Publisher",
+            "type": "string"
+          },
+          "support_class": {
+            "enum": [
+              "F",
+              "S",
+              "R"
+            ],
+            "title": "Support Class",
+            "type": "string"
+          },
+          "temporal_coverage": {
+            "$ref": "#/components/schemas/TemporalRange"
+          },
+          "temporal_resolution": {
+            "enum": [
+              "PT3H",
+              "P1D",
+              "P1M",
+              "season",
+              "P1Y",
+              "static",
+              "irregular"
+            ],
+            "title": "Temporal Resolution",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "verification_status": {
+            "enum": [
+              "LIVE",
+              "CMR",
+              "DOC",
+              "UNVERIFIED",
+              "SYNTHETIC"
+            ],
+            "title": "Verification Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "dataset_id",
+          "title",
+          "publisher",
+          "product",
+          "product_version",
+          "priority",
+          "support_class",
+          "native_resolution_m",
+          "temporal_resolution",
+          "temporal_coverage",
+          "documentation_url",
+          "doi",
+          "verification_status",
+          "last_verified",
+          "integration_status"
+        ],
+        "title": "DatasetDescriptor",
+        "type": "object"
+      },
+      "Deleted": {
+        "additionalProperties": false,
+        "properties": {
+          "deleted": {
+            "const": true,
+            "default": true,
+            "title": "Deleted",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "deleted"
+        ],
+        "title": "Deleted",
+        "type": "object"
+      },
+      "EnvironmentalIndicator": {
+        "additionalProperties": false,
+        "properties": {
+          "category": {
+            "enum": [
+              "climate",
+              "soil_moisture",
+              "vegetation",
+              "water",
+              "soil",
+              "terrain",
+              "rotation"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "indicator_id": {
+            "title": "Indicator Id",
+            "type": "string"
+          },
+          "input_ids": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Input Ids",
+            "type": "array"
+          },
+          "key": {
+            "enum": [
+              "precip_total_season",
+              "precip_anomaly_pct",
+              "gdd_season",
+              "heat_stress_days",
+              "frost_free_days",
+              "solar_total_season",
+              "rh_mean_season",
+              "et0_total_season",
+              "water_balance_season",
+              "et_actual_season",
+              "sm_rootzone_mean_season",
+              "sm_rootzone_percentile",
+              "sm_rootzone_dry_days",
+              "ndvi_peak",
+              "ndvi_peak_doy",
+              "ndvi_peak_cv",
+              "ndmi_peak_season",
+              "aws_0_150",
+              "ph_0_30",
+              "om_0_30",
+              "clay_0_30",
+              "slope_mean_pct",
+              "slope_p90_pct",
+              "elevation_mean",
+              "distinct_crops",
+              "max_monoculture_run",
+              "rotation_shannon"
+            ],
+            "title": "Key",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "method": {
+            "$ref": "#/components/schemas/MethodRef"
+          },
+          "nature": {
+            "enum": [
+              "observation",
+              "model",
+              "derived",
+              "classification",
+              "proxy_statistic"
+            ],
+            "title": "Nature",
+            "type": "string"
+          },
+          "quality": {
+            "$ref": "#/components/schemas/QualityInfo"
+          },
+          "reference_value": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Quantity"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/SourceRef"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "spatial": {
+            "$ref": "#/components/schemas/SpatialSupport"
+          },
+          "temporal": {
+            "$ref": "#/components/schemas/TemporalSupport"
+          },
+          "value": {
+            "$ref": "#/components/schemas/Quantity"
+          }
+        },
+        "required": [
+          "indicator_id",
+          "key",
+          "label",
+          "category",
+          "value",
+          "nature",
+          "spatial",
+          "temporal",
+          "quality",
+          "sources",
+          "method",
+          "input_ids",
+          "reference_value"
+        ],
+        "title": "EnvironmentalIndicator",
+        "type": "object"
+      },
+      "EvaluationDimension": {
+        "additionalProperties": false,
+        "properties": {
+          "band": {
+            "enum": [
+              "suitable",
+              "marginal",
+              "unsuitable",
+              "unknown"
+            ],
+            "title": "Band",
+            "type": "string"
+          },
+          "explanation": {
+            "title": "Explanation",
+            "type": "string"
+          },
+          "key": {
+            "enum": [
+              "agronomic_fit",
+              "rotation_benefit",
+              "water_risk",
+              "diversity"
+            ],
+            "title": "Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "band",
+          "explanation"
+        ],
+        "title": "EvaluationDimension",
+        "type": "object"
+      },
+      "EvidenceItem": {
+        "additionalProperties": false,
+        "properties": {
+          "accessed_at": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accessed At"
+          },
+          "citation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Citation"
+          },
+          "dataset_id": {
+            "anyOf": [
+              {
+                "enum": [
+                  "nasa_power_daily_ag",
+                  "usda_nrcs_ssurgo_sda",
+                  "usda_nass_cdl",
+                  "usda_nass_csb",
+                  "nasa_hls",
+                  "nasa_hls_vi",
+                  "nasa_smap_spl4smgp",
+                  "nasa_srtm_gl1",
+                  "prism_daily",
+                  "openet",
+                  "usda_nass_quickstats",
+                  "nasa_smap_spl3smp_e",
+                  "nasa_gpm_imerg",
+                  "fao_gaez_v5",
+                  "soilstice_derived",
+                  "user_input",
+                  "synthetic"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dataset Id"
+          },
+          "doi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Doi"
+          },
+          "evidence_id": {
+            "format": "uuid",
+            "title": "Evidence Id",
+            "type": "string"
+          },
+          "field_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Field Id"
+          },
+          "kind": {
+            "enum": [
+              "dataset",
+              "indicator",
+              "method",
+              "kb_rule",
+              "literature"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "product_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Version"
+          },
+          "related_ids": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Related Ids",
+            "type": "array"
+          },
+          "spatial": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SpatialSupport"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "temporal": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TemporalSupport"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "verification_status": {
+            "enum": [
+              "LIVE",
+              "CMR",
+              "DOC",
+              "UNVERIFIED",
+              "SYNTHETIC"
+            ],
+            "title": "Verification Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "evidence_id",
+          "kind",
+          "title",
+          "summary",
+          "field_id",
+          "dataset_id",
+          "product_version",
+          "citation",
+          "url",
+          "doi",
+          "accessed_at",
+          "verification_status",
+          "spatial",
+          "temporal",
+          "related_ids"
+        ],
+        "title": "EvidenceItem",
+        "type": "object"
+      },
+      "ExcludedCrop": {
+        "additionalProperties": false,
+        "properties": {
+          "crop_code": {
+            "title": "Crop Code",
+            "type": "integer"
+          },
+          "crop_name": {
+            "title": "Crop Name",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "crop_code",
+          "crop_name",
+          "reason"
+        ],
+        "title": "ExcludedCrop",
+        "type": "object"
+      },
+      "FactorAssessment": {
+        "additionalProperties": false,
+        "properties": {
+          "band": {
+            "enum": [
+              "suitable",
+              "marginal",
+              "unsuitable",
+              "unknown"
+            ],
+            "title": "Band",
+            "type": "string"
+          },
+          "evidence_ids": {
+            "default": [],
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "title": "Evidence Ids",
+            "type": "array"
+          },
+          "factor": {
+            "enum": [
+              "ph",
+              "drainage",
+              "water_holding",
+              "gdd",
+              "slope",
+              "rotation_history",
+              "regional_climate"
+            ],
+            "title": "Factor",
+            "type": "string"
+          },
+          "observed": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Quantity"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "requirement": {
+            "title": "Requirement",
+            "type": "string"
+          },
+          "support_class": {
+            "enum": [
+              "F",
+              "S",
+              "R"
+            ],
+            "title": "Support Class",
+            "type": "string"
+          }
+        },
+        "required": [
+          "factor",
+          "band",
+          "observed",
+          "requirement",
+          "support_class",
+          "evidence_ids"
+        ],
+        "title": "FactorAssessment",
+        "type": "object"
+      },
+      "Farm": {
+        "additionalProperties": false,
+        "properties": {
+          "aoi": {
+            "$ref": "#/components/schemas/AOI"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "farm_id": {
+            "format": "uuid",
+            "title": "Farm Id",
+            "type": "string"
+          },
+          "field_count": {
+            "title": "Field Count",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "total_area": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "farm_id",
+          "name",
+          "aoi",
+          "field_count",
+          "total_area",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "Farm",
+        "type": "object"
+      },
+      "FarmOverview": {
+        "additionalProperties": false,
+        "properties": {
+          "alerts": {
+            "items": {
+              "$ref": "#/components/schemas/QualityFlag"
+            },
+            "title": "Alerts",
+            "type": "array"
+          },
+          "coverage_summary": {
+            "items": {
+              "$ref": "#/components/schemas/CoverageCount"
+            },
+            "title": "Coverage Summary",
+            "type": "array"
+          },
+          "farm": {
+            "$ref": "#/components/schemas/Farm"
+          },
+          "fields": {
+            "items": {
+              "$ref": "#/components/schemas/FieldSummary"
+            },
+            "title": "Fields",
+            "type": "array"
+          },
+          "regional_context": {
+            "items": {
+              "$ref": "#/components/schemas/EnvironmentalIndicator"
+            },
+            "title": "Regional Context",
+            "type": "array"
+          }
+        },
+        "required": [
+          "farm",
+          "fields",
+          "coverage_summary",
+          "alerts",
+          "regional_context"
+        ],
+        "title": "FarmOverview",
+        "type": "object"
+      },
+      "Field": {
+        "additionalProperties": false,
+        "properties": {
+          "area": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "centroid": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Centroid",
+            "type": "array"
+          },
+          "county_fips": {
+            "title": "County Fips",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "csb_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Csb Id"
+          },
+          "editable": {
+            "title": "Editable",
+            "type": "boolean"
+          },
+          "farm_id": {
+            "format": "uuid",
+            "title": "Farm Id",
+            "type": "string"
+          },
+          "field_id": {
+            "format": "uuid",
+            "title": "Field Id",
+            "type": "string"
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/GeoJSONMultiPolygon"
+          },
+          "latest_job_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Job Id"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "processing_status": {
+            "enum": [
+              "ready",
+              "processing",
+              "partial",
+              "failed"
+            ],
+            "title": "Processing Status",
+            "type": "string"
+          },
+          "source": {
+            "enum": [
+              "csb",
+              "user",
+              "synthetic"
+            ],
+            "title": "Source",
+            "type": "string"
+          },
+          "source_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SourceRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "state_fips": {
+            "title": "State Fips",
+            "type": "string"
+          }
+        },
+        "required": [
+          "field_id",
+          "farm_id",
+          "name",
+          "geometry",
+          "centroid",
+          "area",
+          "state_fips",
+          "county_fips",
+          "source",
+          "source_ref",
+          "csb_id",
+          "editable",
+          "processing_status",
+          "latest_job_id",
+          "created_at"
+        ],
+        "title": "Field",
+        "type": "object"
+      },
+      "FieldProfile": {
+        "additionalProperties": false,
+        "properties": {
+          "climate_summary": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/EnvironmentalIndicator"
+            },
+            "title": "Climate Summary",
+            "type": "array"
+          },
+          "coverage": {
+            "$ref": "#/components/schemas/DataCoverage"
+          },
+          "crop_history": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CropHistory"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "field": {
+            "$ref": "#/components/schemas/Field"
+          },
+          "resilience": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ResilienceProfile"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "soil": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SoilProfile"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "terrain": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TerrainProfile"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "vegetation_summary": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/EnvironmentalIndicator"
+            },
+            "title": "Vegetation Summary",
+            "type": "array"
+          }
+        },
+        "required": [
+          "field",
+          "coverage",
+          "soil",
+          "terrain",
+          "crop_history",
+          "climate_summary",
+          "vegetation_summary",
+          "resilience"
+        ],
+        "title": "FieldProfile",
+        "type": "object"
+      },
+      "FieldSummary": {
+        "additionalProperties": false,
+        "properties": {
+          "area": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "centroid": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Centroid",
+            "type": "array"
+          },
+          "coverage_completeness": {
+            "anyOf": [
+              {
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coverage Completeness"
+          },
+          "field_id": {
+            "format": "uuid",
+            "title": "Field Id",
+            "type": "string"
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/GeoJSONMultiPolygon"
+          },
+          "latest_crop": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LatestCrop"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "processing_status": {
+            "enum": [
+              "ready",
+              "processing",
+              "partial",
+              "failed"
+            ],
+            "title": "Processing Status",
+            "type": "string"
+          },
+          "resilience_band": {
+            "enum": [
+              "low",
+              "moderate",
+              "high",
+              "unknown"
+            ],
+            "title": "Resilience Band",
+            "type": "string"
+          },
+          "source": {
+            "enum": [
+              "csb",
+              "user",
+              "synthetic"
+            ],
+            "title": "Source",
+            "type": "string"
+          }
+        },
+        "required": [
+          "field_id",
+          "name",
+          "centroid",
+          "geometry",
+          "area",
+          "source",
+          "processing_status",
+          "latest_crop",
+          "resilience_band",
+          "coverage_completeness"
+        ],
+        "title": "FieldSummary",
+        "type": "object"
+      },
+      "GeoJSONMultiPolygon": {
+        "additionalProperties": false,
+        "properties": {
+          "coordinates": {
+            "items": {
+              "items": {
+                "items": {
+                  "items": {
+                    "type": "number"
+                  },
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              "type": "array"
+            },
+            "title": "Coordinates",
+            "type": "array"
+          },
+          "type": {
+            "const": "MultiPolygon",
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "coordinates"
+        ],
+        "title": "GeoJSONMultiPolygon",
+        "type": "object"
+      },
+      "Health": {
+        "additionalProperties": false,
+        "properties": {
+          "contract_version": {
+            "default": "1.0.0-phase0",
+            "title": "Contract Version",
+            "type": "string"
+          },
+          "status": {
+            "const": "ok",
+            "default": "ok",
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "contract_version"
+        ],
+        "title": "Health",
+        "type": "object"
+      },
+      "JobStep": {
+        "additionalProperties": false,
+        "properties": {
+          "dataset_id": {
+            "enum": [
+              "nasa_power_daily_ag",
+              "usda_nrcs_ssurgo_sda",
+              "usda_nass_cdl",
+              "usda_nass_csb",
+              "nasa_hls",
+              "nasa_hls_vi",
+              "nasa_smap_spl4smgp",
+              "nasa_srtm_gl1",
+              "prism_daily",
+              "openet",
+              "usda_nass_quickstats",
+              "nasa_smap_spl3smp_e",
+              "nasa_gpm_imerg",
+              "fao_gaez_v5",
+              "soilstice_derived",
+              "user_input",
+              "synthetic"
+            ],
+            "title": "Dataset Id",
+            "type": "string"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message"
+          },
+          "missing_reason": {
+            "anyOf": [
+              {
+                "enum": [
+                  "NO_DATA_SOURCE",
+                  "FILL_VALUE",
+                  "QA_MASKED_CLOUD",
+                  "QA_MASKED_SHADOW",
+                  "QA_MASKED_SNOW",
+                  "QA_LOW_QUALITY_RETRIEVAL",
+                  "INSUFFICIENT_COVERAGE",
+                  "OUT_OF_TEMPORAL_RANGE",
+                  "UPSTREAM_ERROR",
+                  "NOT_YET_PUBLISHED",
+                  "NOT_COMPUTED",
+                  "OUTSIDE_AOI",
+                  "PENDING_PROCESSING"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Missing Reason"
+          },
+          "status": {
+            "enum": [
+              "queued",
+              "running",
+              "succeeded",
+              "partial",
+              "failed"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "dataset_id",
+          "status",
+          "missing_reason",
+          "message"
+        ],
+        "title": "JobStep",
+        "type": "object"
+      },
+      "LatestCrop": {
+        "additionalProperties": false,
+        "properties": {
+          "crop_code": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Crop Code"
+          },
+          "crop_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Crop Name"
+          },
+          "year": {
+            "title": "Year",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "year",
+          "crop_code",
+          "crop_name"
+        ],
+        "title": "LatestCrop",
+        "type": "object"
+      },
+      "MaskCounts": {
+        "additionalProperties": false,
+        "properties": {
+          "cloud": {
+            "title": "Cloud",
+            "type": "integer"
+          },
+          "cloud_adjacent": {
+            "title": "Cloud Adjacent",
+            "type": "integer"
+          },
+          "cloud_shadow": {
+            "title": "Cloud Shadow",
+            "type": "integer"
+          },
+          "snow_ice": {
+            "title": "Snow Ice",
+            "type": "integer"
+          },
+          "water": {
+            "title": "Water",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "cloud",
+          "cloud_adjacent",
+          "cloud_shadow",
+          "snow_ice",
+          "water"
+        ],
+        "title": "MaskCounts",
+        "type": "object"
+      },
+      "MethodRef": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "method_id": {
+            "title": "Method Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "reference_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference Url"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "method_id",
+          "name",
+          "version",
+          "description",
+          "reference_url"
+        ],
+        "title": "MethodRef",
+        "type": "object"
+      },
+      "Phenology": {
+        "additionalProperties": false,
+        "properties": {
+          "gap_filled": {
+            "title": "Gap Filled",
+            "type": "boolean"
+          },
+          "greenup_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Greenup Date"
+          },
+          "method": {
+            "$ref": "#/components/schemas/MethodRef"
+          },
+          "missing_reason": {
+            "anyOf": [
+              {
+                "enum": [
+                  "NO_DATA_SOURCE",
+                  "FILL_VALUE",
+                  "QA_MASKED_CLOUD",
+                  "QA_MASKED_SHADOW",
+                  "QA_MASKED_SNOW",
+                  "QA_LOW_QUALITY_RETRIEVAL",
+                  "INSUFFICIENT_COVERAGE",
+                  "OUT_OF_TEMPORAL_RANGE",
+                  "UPSTREAM_ERROR",
+                  "NOT_YET_PUBLISHED",
+                  "NOT_COMPUTED",
+                  "OUTSIDE_AOI",
+                  "PENDING_PROCESSING"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Missing Reason"
+          },
+          "peak_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Peak Date"
+          },
+          "peak_value": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "senescence_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Senescence Date"
+          }
+        },
+        "required": [
+          "peak_value",
+          "peak_date",
+          "greenup_date",
+          "senescence_date",
+          "method",
+          "gap_filled",
+          "missing_reason"
+        ],
+        "title": "Phenology",
+        "type": "object"
+      },
+      "ProcessingJob": {
+        "additionalProperties": false,
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "field_id": {
+            "format": "uuid",
+            "title": "Field Id",
+            "type": "string"
+          },
+          "job_id": {
+            "format": "uuid",
+            "title": "Job Id",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "queued",
+              "running",
+              "succeeded",
+              "partial",
+              "failed"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "steps": {
+            "items": {
+              "$ref": "#/components/schemas/JobStep"
+            },
+            "title": "Steps",
+            "type": "array"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "job_id",
+          "field_id",
+          "status",
+          "steps",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "ProcessingJob",
+        "type": "object"
+      },
+      "QualityFlag": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "severity": {
+            "enum": [
+              "info",
+              "warning",
+              "critical"
+            ],
+            "title": "Severity",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "severity",
+          "message"
+        ],
+        "title": "QualityFlag",
+        "type": "object"
+      },
+      "QualityInfo": {
+        "additionalProperties": false,
+        "properties": {
+          "completeness": {
+            "anyOf": [
+              {
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Completeness"
+          },
+          "flags": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/QualityFlag"
+            },
+            "title": "Flags",
+            "type": "array"
+          },
+          "missing_reason": {
+            "anyOf": [
+              {
+                "enum": [
+                  "NO_DATA_SOURCE",
+                  "FILL_VALUE",
+                  "QA_MASKED_CLOUD",
+                  "QA_MASKED_SHADOW",
+                  "QA_MASKED_SNOW",
+                  "QA_LOW_QUALITY_RETRIEVAL",
+                  "INSUFFICIENT_COVERAGE",
+                  "OUT_OF_TEMPORAL_RANGE",
+                  "UPSTREAM_ERROR",
+                  "NOT_YET_PUBLISHED",
+                  "NOT_COMPUTED",
+                  "OUTSIDE_AOI",
+                  "PENDING_PROCESSING"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Missing Reason"
+          },
+          "status": {
+            "enum": [
+              "valid",
+              "partial",
+              "flagged",
+              "missing"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "flags",
+          "completeness",
+          "missing_reason"
+        ],
+        "title": "QualityInfo",
+        "type": "object"
+      },
+      "Quantity": {
+        "additionalProperties": false,
+        "properties": {
+          "missing_reason": {
+            "anyOf": [
+              {
+                "enum": [
+                  "NO_DATA_SOURCE",
+                  "FILL_VALUE",
+                  "QA_MASKED_CLOUD",
+                  "QA_MASKED_SHADOW",
+                  "QA_MASKED_SNOW",
+                  "QA_LOW_QUALITY_RETRIEVAL",
+                  "INSUFFICIENT_COVERAGE",
+                  "OUT_OF_TEMPORAL_RANGE",
+                  "UPSTREAM_ERROR",
+                  "NOT_YET_PUBLISHED",
+                  "NOT_COMPUTED",
+                  "OUTSIDE_AOI",
+                  "PENDING_PROCESSING"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Missing Reason"
+          },
+          "uncertainty": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Uncertainty"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "unit": {
+            "enum": [
+              "mm",
+              "degC",
+              "degC_day",
+              "percent",
+              "MJ_m-2_day-1",
+              "MJ_m-2",
+              "m3_m-3",
+              "wetness_0_1",
+              "cm",
+              "cm_cm-1",
+              "m",
+              "degree",
+              "pH",
+              "ha",
+              "day",
+              "year",
+              "count",
+              "percentile",
+              "unitless",
+              "score_0_100"
+            ],
+            "title": "Unit",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "required": [
+          "value",
+          "unit",
+          "uncertainty",
+          "missing_reason"
+        ],
+        "title": "Quantity",
+        "type": "object"
+      },
+      "RecommendationCandidate": {
+        "additionalProperties": false,
+        "properties": {
+          "confidence": {
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "title": "Confidence",
+            "type": "string"
+          },
+          "crop_code": {
+            "title": "Crop Code",
+            "type": "integer"
+          },
+          "crop_name": {
+            "title": "Crop Name",
+            "type": "string"
+          },
+          "factors": {
+            "items": {
+              "$ref": "#/components/schemas/FactorAssessment"
+            },
+            "title": "Factors",
+            "type": "array"
+          },
+          "overall": {
+            "enum": [
+              "suitable",
+              "marginal",
+              "unsuitable",
+              "unknown"
+            ],
+            "title": "Overall",
+            "type": "string"
+          },
+          "rank": {
+            "minimum": 1.0,
+            "title": "Rank",
+            "type": "integer"
+          },
+          "reasons": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Reasons",
+            "type": "array"
+          },
+          "rotation_effects": {
+            "items": {
+              "$ref": "#/components/schemas/QualityFlag"
+            },
+            "title": "Rotation Effects",
+            "type": "array"
+          }
+        },
+        "required": [
+          "rank",
+          "crop_code",
+          "crop_name",
+          "overall",
+          "confidence",
+          "factors",
+          "rotation_effects",
+          "reasons"
+        ],
+        "title": "RecommendationCandidate",
+        "type": "object"
+      },
+      "ResilienceComponent": {
+        "additionalProperties": false,
+        "properties": {
+          "band": {
+            "enum": [
+              "low",
+              "moderate",
+              "high",
+              "unknown"
+            ],
+            "title": "Band",
+            "type": "string"
+          },
+          "confidence": {
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "title": "Confidence",
+            "type": "string"
+          },
+          "explanation": {
+            "title": "Explanation",
+            "type": "string"
+          },
+          "input_indicator_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Input Indicator Ids",
+            "type": "array"
+          },
+          "key": {
+            "enum": [
+              "soil_water_buffer",
+              "terrain_erosion_risk",
+              "vegetation_stability",
+              "climate_exposure",
+              "rotation_diversity"
+            ],
+            "title": "Key",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "rule_ref": {
+            "$ref": "#/components/schemas/MethodRef"
+          },
+          "score": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "support_class": {
+            "enum": [
+              "F",
+              "S",
+              "R"
+            ],
+            "title": "Support Class",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "label",
+          "score",
+          "band",
+          "support_class",
+          "confidence",
+          "input_indicator_ids",
+          "explanation",
+          "rule_ref"
+        ],
+        "title": "ResilienceComponent",
+        "type": "object"
+      },
+      "ResilienceComposite": {
+        "additionalProperties": false,
+        "properties": {
+          "band": {
+            "enum": [
+              "low",
+              "moderate",
+              "high",
+              "unknown"
+            ],
+            "title": "Band",
+            "type": "string"
+          },
+          "components_total": {
+            "const": 5,
+            "default": 5,
+            "title": "Components Total",
+            "type": "integer"
+          },
+          "components_used": {
+            "maximum": 5.0,
+            "minimum": 0.0,
+            "title": "Components Used",
+            "type": "integer"
+          },
+          "confidence": {
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "title": "Confidence",
+            "type": "string"
+          },
+          "score": {
+            "$ref": "#/components/schemas/Quantity"
+          }
+        },
+        "required": [
+          "score",
+          "band",
+          "confidence",
+          "components_used",
+          "components_total"
+        ],
+        "title": "ResilienceComposite",
+        "type": "object"
+      },
+      "ResilienceProfile": {
+        "additionalProperties": false,
+        "properties": {
+          "as_of": {
+            "format": "date",
+            "title": "As Of",
+            "type": "string"
+          },
+          "components": {
+            "items": {
+              "$ref": "#/components/schemas/ResilienceComponent"
+            },
+            "title": "Components",
+            "type": "array"
+          },
+          "composite": {
+            "$ref": "#/components/schemas/ResilienceComposite"
+          },
+          "disclaimers": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Disclaimers",
+            "type": "array"
+          },
+          "field_id": {
+            "format": "uuid",
+            "title": "Field Id",
+            "type": "string"
+          },
+          "limitations": {
+            "items": {
+              "$ref": "#/components/schemas/QualityFlag"
+            },
+            "title": "Limitations",
+            "type": "array"
+          },
+          "model_version": {
+            "title": "Model Version",
+            "type": "string"
+          },
+          "profile_id": {
+            "format": "uuid",
+            "title": "Profile Id",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "computed",
+              "insufficient_data",
+              "pending"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "profile_id",
+          "field_id",
+          "as_of",
+          "model_version",
+          "status",
+          "composite",
+          "components",
+          "limitations",
+          "disclaimers"
+        ],
+        "title": "ResilienceProfile",
+        "type": "object"
+      },
+      "ResponseMeta": {
+        "additionalProperties": false,
+        "properties": {
+          "api_version": {
+            "default": "v1",
+            "title": "Api Version",
+            "type": "string"
+          },
+          "contract_version": {
+            "default": "1.0.0-phase0",
+            "title": "Contract Version",
+            "type": "string"
+          },
+          "data_mode": {
+            "enum": [
+              "synthetic",
+              "live"
+            ],
+            "title": "Data Mode",
+            "type": "string"
+          },
+          "generated_at": {
+            "format": "date-time",
+            "title": "Generated At",
+            "type": "string"
+          },
+          "request_id": {
+            "title": "Request Id",
+            "type": "string"
+          },
+          "warnings": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/QualityFlag"
+            },
+            "title": "Warnings",
+            "type": "array"
+          }
+        },
+        "required": [
+          "request_id",
+          "generated_at",
+          "api_version",
+          "contract_version",
+          "data_mode",
+          "warnings"
+        ],
+        "title": "ResponseMeta",
+        "type": "object"
+      },
+      "RotationRecommendation": {
+        "additionalProperties": false,
+        "properties": {
+          "candidates": {
+            "items": {
+              "$ref": "#/components/schemas/RecommendationCandidate"
+            },
+            "title": "Candidates",
+            "type": "array"
+          },
+          "disclaimers": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Disclaimers",
+            "type": "array"
+          },
+          "engine_version": {
+            "title": "Engine Version",
+            "type": "string"
+          },
+          "excluded": {
+            "items": {
+              "$ref": "#/components/schemas/ExcludedCrop"
+            },
+            "title": "Excluded",
+            "type": "array"
+          },
+          "field_id": {
+            "format": "uuid",
+            "title": "Field Id",
+            "type": "string"
+          },
+          "generated_at": {
+            "format": "date-time",
+            "title": "Generated At",
+            "type": "string"
+          },
+          "kb_version": {
+            "title": "Kb Version",
+            "type": "string"
+          },
+          "recommendation_id": {
+            "format": "uuid",
+            "title": "Recommendation Id",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "computed",
+              "insufficient_data",
+              "pending"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "target_season": {
+            "$ref": "#/components/schemas/TargetSeason"
+          }
+        },
+        "required": [
+          "recommendation_id",
+          "field_id",
+          "target_season",
+          "engine_version",
+          "kb_version",
+          "status",
+          "candidates",
+          "excluded",
+          "disclaimers",
+          "generated_at"
+        ],
+        "title": "RotationRecommendation",
+        "type": "object"
+      },
+      "RotationScenario": {
+        "additionalProperties": false,
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "evaluation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ScenarioEvaluation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "field_id": {
+            "format": "uuid",
+            "title": "Field Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "scenario_id": {
+            "format": "uuid",
+            "title": "Scenario Id",
+            "type": "string"
+          },
+          "sequence": {
+            "items": {
+              "$ref": "#/components/schemas/ScenarioYear"
+            },
+            "maxItems": 8,
+            "minItems": 2,
+            "title": "Sequence",
+            "type": "array"
+          },
+          "start_year": {
+            "title": "Start Year",
+            "type": "integer"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "scenario_id",
+          "field_id",
+          "name",
+          "start_year",
+          "sequence",
+          "evaluation",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "RotationScenario",
+        "type": "object"
+      },
+      "ScenarioEvaluation": {
+        "additionalProperties": false,
+        "properties": {
+          "dimensions": {
+            "items": {
+              "$ref": "#/components/schemas/EvaluationDimension"
+            },
+            "title": "Dimensions",
+            "type": "array"
+          },
+          "engine_version": {
+            "title": "Engine Version",
+            "type": "string"
+          },
+          "evaluated_at": {
+            "format": "date-time",
+            "title": "Evaluated At",
+            "type": "string"
+          },
+          "kb_version": {
+            "title": "Kb Version",
+            "type": "string"
+          },
+          "overall": {
+            "enum": [
+              "suitable",
+              "marginal",
+              "unsuitable",
+              "unknown"
+            ],
+            "title": "Overall",
+            "type": "string"
+          },
+          "warnings": {
+            "items": {
+              "$ref": "#/components/schemas/QualityFlag"
+            },
+            "title": "Warnings",
+            "type": "array"
+          },
+          "year_findings": {
+            "items": {
+              "$ref": "#/components/schemas/YearFinding"
+            },
+            "title": "Year Findings",
+            "type": "array"
+          }
+        },
+        "required": [
+          "engine_version",
+          "kb_version",
+          "overall",
+          "dimensions",
+          "year_findings",
+          "warnings",
+          "evaluated_at"
+        ],
+        "title": "ScenarioEvaluation",
+        "type": "object"
+      },
+      "ScenarioYear": {
+        "additionalProperties": false,
+        "properties": {
+          "crop_code": {
+            "title": "Crop Code",
+            "type": "integer"
+          },
+          "crop_name": {
+            "title": "Crop Name",
+            "type": "string"
+          },
+          "year": {
+            "title": "Year",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "year",
+          "crop_code",
+          "crop_name"
+        ],
+        "title": "ScenarioYear",
+        "type": "object"
+      },
+      "ScenarioYearInput": {
+        "additionalProperties": false,
+        "properties": {
+          "crop_code": {
+            "title": "Crop Code",
+            "type": "integer"
+          },
+          "year": {
+            "title": "Year",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "year",
+          "crop_code"
+        ],
+        "title": "ScenarioYearInput",
+        "type": "object"
+      },
+      "Season": {
+        "additionalProperties": false,
+        "properties": {
+          "crop_code": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Crop Code"
+          },
+          "end": {
+            "format": "date",
+            "title": "End",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "start": {
+            "format": "date",
+            "title": "Start",
+            "type": "string"
+          }
+        },
+        "required": [
+          "label",
+          "start",
+          "end",
+          "crop_code"
+        ],
+        "title": "Season",
+        "type": "object"
+      },
+      "SoilComponentRef": {
+        "additionalProperties": false,
+        "properties": {
+          "cokey": {
+            "title": "Cokey",
+            "type": "string"
+          },
+          "compname": {
+            "title": "Compname",
+            "type": "string"
+          },
+          "comppct_r": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Comppct R"
+          }
+        },
+        "required": [
+          "cokey",
+          "compname",
+          "comppct_r"
+        ],
+        "title": "SoilComponentRef",
+        "type": "object"
+      },
+      "SoilLayer": {
+        "additionalProperties": false,
+        "properties": {
+          "awc": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "bottom_cm": {
+            "title": "Bottom Cm",
+            "type": "number"
+          },
+          "clay_pct": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "om_pct": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "ph_h2o": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "sand_pct": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "silt_pct": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "texture_class": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Texture Class"
+          },
+          "top_cm": {
+            "title": "Top Cm",
+            "type": "number"
+          }
+        },
+        "required": [
+          "top_cm",
+          "bottom_cm",
+          "sand_pct",
+          "silt_pct",
+          "clay_pct",
+          "texture_class",
+          "ph_h2o",
+          "om_pct",
+          "awc"
+        ],
+        "title": "SoilLayer",
+        "type": "object"
+      },
+      "SoilMapUnitShare": {
+        "additionalProperties": false,
+        "properties": {
+          "area_fraction": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Area Fraction",
+            "type": "number"
+          },
+          "major_components": {
+            "items": {
+              "$ref": "#/components/schemas/SoilComponentRef"
+            },
+            "title": "Major Components",
+            "type": "array"
+          },
+          "mukey": {
+            "title": "Mukey",
+            "type": "string"
+          },
+          "muname": {
+            "title": "Muname",
+            "type": "string"
+          }
+        },
+        "required": [
+          "mukey",
+          "muname",
+          "area_fraction",
+          "major_components"
+        ],
+        "title": "SoilMapUnitShare",
+        "type": "object"
+      },
+      "SoilProfile": {
+        "additionalProperties": false,
+        "properties": {
+          "aws_0_100": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "aws_0_150": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "drainage_class": {
+            "$ref": "#/components/schemas/ClassValue"
+          },
+          "field_id": {
+            "format": "uuid",
+            "title": "Field Id",
+            "type": "string"
+          },
+          "hydrologic_group": {
+            "$ref": "#/components/schemas/ClassValue"
+          },
+          "layers": {
+            "items": {
+              "$ref": "#/components/schemas/SoilLayer"
+            },
+            "title": "Layers",
+            "type": "array"
+          },
+          "map_units": {
+            "items": {
+              "$ref": "#/components/schemas/SoilMapUnitShare"
+            },
+            "title": "Map Units",
+            "type": "array"
+          },
+          "method": {
+            "$ref": "#/components/schemas/MethodRef"
+          },
+          "null_weight_fraction": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Null Weight Fraction"
+          },
+          "quality": {
+            "$ref": "#/components/schemas/QualityInfo"
+          },
+          "slope_pct_ssurgo": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/SourceRef"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "spatial": {
+            "$ref": "#/components/schemas/SpatialSupport"
+          },
+          "survey": {
+            "items": {
+              "$ref": "#/components/schemas/SurveyRef"
+            },
+            "title": "Survey",
+            "type": "array"
+          }
+        },
+        "required": [
+          "field_id",
+          "layers",
+          "aws_0_100",
+          "aws_0_150",
+          "drainage_class",
+          "hydrologic_group",
+          "slope_pct_ssurgo",
+          "map_units",
+          "survey",
+          "method",
+          "null_weight_fraction",
+          "spatial",
+          "sources",
+          "quality"
+        ],
+        "title": "SoilProfile",
+        "type": "object"
+      },
+      "SourceRef": {
+        "additionalProperties": false,
+        "properties": {
+          "acquisition_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acquisition Id"
+          },
+          "dataset_id": {
+            "enum": [
+              "nasa_power_daily_ag",
+              "usda_nrcs_ssurgo_sda",
+              "usda_nass_cdl",
+              "usda_nass_csb",
+              "nasa_hls",
+              "nasa_hls_vi",
+              "nasa_smap_spl4smgp",
+              "nasa_srtm_gl1",
+              "prism_daily",
+              "openet",
+              "usda_nass_quickstats",
+              "nasa_smap_spl3smp_e",
+              "nasa_gpm_imerg",
+              "fao_gaez_v5",
+              "soilstice_derived",
+              "user_input",
+              "synthetic"
+            ],
+            "title": "Dataset Id",
+            "type": "string"
+          },
+          "documentation_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Documentation Url"
+          },
+          "doi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Doi"
+          },
+          "product": {
+            "title": "Product",
+            "type": "string"
+          },
+          "product_version": {
+            "title": "Product Version",
+            "type": "string"
+          },
+          "retrieved_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retrieved At"
+          }
+        },
+        "required": [
+          "dataset_id",
+          "product",
+          "product_version",
+          "acquisition_id",
+          "doi",
+          "documentation_url",
+          "retrieved_at"
+        ],
+        "title": "SourceRef",
+        "type": "object"
+      },
+      "SpatialSupport": {
+        "additionalProperties": false,
+        "properties": {
+          "cell_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cell Id"
+          },
+          "crs": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Crs"
+          },
+          "extraction_method": {
+            "enum": [
+              "zonal_polygon",
+              "zonal_polygon_inward_buffer",
+              "containing_cell",
+              "api_point_query",
+              "vector_intersection",
+              "attribute_join",
+              "not_applicable"
+            ],
+            "title": "Extraction Method",
+            "type": "string"
+          },
+          "field_fraction_of_cell": {
+            "anyOf": [
+              {
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Field Fraction Of Cell"
+          },
+          "native_resolution_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Native Resolution M"
+          },
+          "support_class": {
+            "enum": [
+              "F",
+              "S",
+              "R"
+            ],
+            "title": "Support Class",
+            "type": "string"
+          }
+        },
+        "required": [
+          "support_class",
+          "native_resolution_m",
+          "extraction_method",
+          "field_fraction_of_cell",
+          "cell_id",
+          "crs"
+        ],
+        "title": "SpatialSupport",
+        "type": "object"
+      },
+      "SurveyRef": {
+        "additionalProperties": false,
+        "properties": {
+          "areasymbol": {
+            "title": "Areasymbol",
+            "type": "string"
+          },
+          "saverest": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Saverest"
+          }
+        },
+        "required": [
+          "areasymbol",
+          "saverest"
+        ],
+        "title": "SurveyRef",
+        "type": "object"
+      },
+      "TargetSeason": {
+        "additionalProperties": false,
+        "properties": {
+          "end": {
+            "format": "date",
+            "title": "End",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "start": {
+            "format": "date",
+            "title": "Start",
+            "type": "string"
+          }
+        },
+        "required": [
+          "label",
+          "start",
+          "end"
+        ],
+        "title": "TargetSeason",
+        "type": "object"
+      },
+      "TemporalRange": {
+        "additionalProperties": false,
+        "properties": {
+          "end": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start"
+          }
+        },
+        "required": [
+          "start",
+          "end"
+        ],
+        "title": "TemporalRange",
+        "type": "object"
+      },
+      "TemporalSupport": {
+        "additionalProperties": false,
+        "properties": {
+          "aggregation": {
+            "enum": [
+              "none",
+              "mean",
+              "sum",
+              "median",
+              "min",
+              "max",
+              "majority",
+              "weighted_mean",
+              "percentile",
+              "count"
+            ],
+            "title": "Aggregation",
+            "type": "string"
+          },
+          "period_end": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Period End"
+          },
+          "period_start": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Period Start"
+          },
+          "resolution": {
+            "enum": [
+              "PT3H",
+              "P1D",
+              "P1M",
+              "season",
+              "P1Y",
+              "static",
+              "irregular"
+            ],
+            "title": "Resolution",
+            "type": "string"
+          },
+          "time_standard": {
+            "enum": [
+              "UTC",
+              "LST",
+              "not_applicable"
+            ],
+            "title": "Time Standard",
+            "type": "string"
+          }
+        },
+        "required": [
+          "resolution",
+          "period_start",
+          "period_end",
+          "aggregation",
+          "time_standard"
+        ],
+        "title": "TemporalSupport",
+        "type": "object"
+      },
+      "TerrainProfile": {
+        "additionalProperties": false,
+        "properties": {
+          "elevation_max": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "elevation_mean": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "elevation_min": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "field_id": {
+            "format": "uuid",
+            "title": "Field Id",
+            "type": "string"
+          },
+          "method": {
+            "$ref": "#/components/schemas/MethodRef"
+          },
+          "quality": {
+            "$ref": "#/components/schemas/QualityInfo"
+          },
+          "slope_mean_pct": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "slope_p90_pct": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/SourceRef"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "spatial": {
+            "$ref": "#/components/schemas/SpatialSupport"
+          }
+        },
+        "required": [
+          "field_id",
+          "elevation_mean",
+          "elevation_min",
+          "elevation_max",
+          "slope_mean_pct",
+          "slope_p90_pct",
+          "method",
+          "spatial",
+          "sources",
+          "quality"
+        ],
+        "title": "TerrainProfile",
+        "type": "object"
+      },
+      "TimeSeries": {
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "nature": {
+            "enum": [
+              "observation",
+              "model",
+              "derived",
+              "classification",
+              "proxy_statistic"
+            ],
+            "title": "Nature",
+            "type": "string"
+          },
+          "points": {
+            "items": {
+              "$ref": "#/components/schemas/TimeSeriesPoint"
+            },
+            "title": "Points",
+            "type": "array"
+          },
+          "reference": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TimeSeriesReference"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "series_id": {
+            "title": "Series Id",
+            "type": "string"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/SourceRef"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "spatial": {
+            "$ref": "#/components/schemas/SpatialSupport"
+          },
+          "temporal": {
+            "$ref": "#/components/schemas/TemporalSupport"
+          },
+          "unit": {
+            "enum": [
+              "mm",
+              "degC",
+              "degC_day",
+              "percent",
+              "MJ_m-2_day-1",
+              "MJ_m-2",
+              "m3_m-3",
+              "wetness_0_1",
+              "cm",
+              "cm_cm-1",
+              "m",
+              "degree",
+              "pH",
+              "ha",
+              "day",
+              "year",
+              "count",
+              "percentile",
+              "unitless",
+              "score_0_100"
+            ],
+            "title": "Unit",
+            "type": "string"
+          },
+          "variable": {
+            "title": "Variable",
+            "type": "string"
+          }
+        },
+        "required": [
+          "series_id",
+          "variable",
+          "label",
+          "unit",
+          "nature",
+          "spatial",
+          "temporal",
+          "sources",
+          "points",
+          "reference"
+        ],
+        "title": "TimeSeries",
+        "type": "object"
+      },
+      "TimeSeriesPoint": {
+        "additionalProperties": false,
+        "properties": {
+          "missing_reason": {
+            "anyOf": [
+              {
+                "enum": [
+                  "NO_DATA_SOURCE",
+                  "FILL_VALUE",
+                  "QA_MASKED_CLOUD",
+                  "QA_MASKED_SHADOW",
+                  "QA_MASKED_SNOW",
+                  "QA_LOW_QUALITY_RETRIEVAL",
+                  "INSUFFICIENT_COVERAGE",
+                  "OUT_OF_TEMPORAL_RANGE",
+                  "UPSTREAM_ERROR",
+                  "NOT_YET_PUBLISHED",
+                  "NOT_COMPUTED",
+                  "OUTSIDE_AOI",
+                  "PENDING_PROCESSING"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Missing Reason"
+          },
+          "quality_status": {
+            "enum": [
+              "valid",
+              "partial",
+              "flagged",
+              "missing"
+            ],
+            "title": "Quality Status",
+            "type": "string"
+          },
+          "t": {
+            "title": "T",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "required": [
+          "t",
+          "value",
+          "quality_status",
+          "missing_reason"
+        ],
+        "title": "TimeSeriesPoint",
+        "type": "object"
+      },
+      "TimeSeriesReference": {
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "period_end": {
+            "format": "date",
+            "title": "Period End",
+            "type": "string"
+          },
+          "period_start": {
+            "format": "date",
+            "title": "Period Start",
+            "type": "string"
+          },
+          "points": {
+            "items": {
+              "$ref": "#/components/schemas/TimeSeriesPoint"
+            },
+            "title": "Points",
+            "type": "array"
+          }
+        },
+        "required": [
+          "label",
+          "period_start",
+          "period_end",
+          "points"
+        ],
+        "title": "TimeSeriesReference",
+        "type": "object"
+      },
+      "Uncertainty": {
+        "additionalProperties": false,
+        "properties": {
+          "high": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "High"
+          },
+          "kind": {
+            "enum": [
+              "range",
+              "std",
+              "ci95",
+              "classification_accuracy",
+              "none_provided"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "low": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Low"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "required": [
+          "kind",
+          "low",
+          "high",
+          "value",
+          "note"
+        ],
+        "title": "Uncertainty",
+        "type": "object"
+      },
+      "UpdateFarmRequest": {
+        "additionalProperties": false,
+        "description": "Body of E5 `PATCH /farms/{farm_id}` (`{name}` in API_CONTRACTS §6).",
+        "properties": {
+          "name": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "UpdateFarmRequest",
+        "type": "object"
+      },
+      "UpsertScenarioRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "sequence": {
+            "items": {
+              "$ref": "#/components/schemas/ScenarioYearInput"
+            },
+            "maxItems": 8,
+            "minItems": 2,
+            "title": "Sequence",
+            "type": "array"
+          },
+          "start_year": {
+            "title": "Start Year",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "name",
+          "start_year",
+          "sequence"
+        ],
+        "title": "UpsertScenarioRequest",
+        "type": "object"
+      },
+      "VegetationProfile": {
+        "additionalProperties": false,
+        "properties": {
+          "field_id": {
+            "format": "uuid",
+            "title": "Field Id",
+            "type": "string"
+          },
+          "index": {
+            "enum": [
+              "NDVI",
+              "EVI",
+              "NDMI",
+              "SAVI",
+              "MSAVI",
+              "NDWI",
+              "NBR",
+              "NBR2",
+              "TVI"
+            ],
+            "title": "Index",
+            "type": "string"
+          },
+          "phenology": {
+            "$ref": "#/components/schemas/Phenology"
+          },
+          "quality": {
+            "$ref": "#/components/schemas/QualityInfo"
+          },
+          "scenes": {
+            "items": {
+              "$ref": "#/components/schemas/VegetationScene"
+            },
+            "title": "Scenes",
+            "type": "array"
+          },
+          "series": {
+            "$ref": "#/components/schemas/TimeSeries"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/SourceRef"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "spatial": {
+            "$ref": "#/components/schemas/SpatialSupport"
+          },
+          "year": {
+            "title": "Year",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "field_id",
+          "year",
+          "index",
+          "scenes",
+          "series",
+          "phenology",
+          "spatial",
+          "sources",
+          "quality"
+        ],
+        "title": "VegetationProfile",
+        "type": "object"
+      },
+      "VegetationScene": {
+        "additionalProperties": false,
+        "properties": {
+          "accepted": {
+            "title": "Accepted",
+            "type": "boolean"
+          },
+          "acquired_at": {
+            "format": "date-time",
+            "title": "Acquired At",
+            "type": "string"
+          },
+          "clear_fraction": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Clear Fraction",
+            "type": "number"
+          },
+          "granule_id": {
+            "title": "Granule Id",
+            "type": "string"
+          },
+          "mask_counts": {
+            "$ref": "#/components/schemas/MaskCounts"
+          },
+          "median": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Median"
+          },
+          "missing_reason": {
+            "anyOf": [
+              {
+                "enum": [
+                  "NO_DATA_SOURCE",
+                  "FILL_VALUE",
+                  "QA_MASKED_CLOUD",
+                  "QA_MASKED_SHADOW",
+                  "QA_MASKED_SNOW",
+                  "QA_LOW_QUALITY_RETRIEVAL",
+                  "INSUFFICIENT_COVERAGE",
+                  "OUT_OF_TEMPORAL_RANGE",
+                  "UPSTREAM_ERROR",
+                  "NOT_YET_PUBLISHED",
+                  "NOT_COMPUTED",
+                  "OUTSIDE_AOI",
+                  "PENDING_PROCESSING"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Missing Reason"
+          },
+          "p10": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "P10"
+          },
+          "p90": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "P90"
+          },
+          "product": {
+            "enum": [
+              "HLSL30_VI",
+              "HLSS30_VI",
+              "HLSL30",
+              "HLSS30",
+              "synthetic"
+            ],
+            "title": "Product",
+            "type": "string"
+          },
+          "total_pixels": {
+            "title": "Total Pixels",
+            "type": "integer"
+          },
+          "valid_pixels": {
+            "title": "Valid Pixels",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "granule_id",
+          "product",
+          "acquired_at",
+          "median",
+          "p10",
+          "p90",
+          "valid_pixels",
+          "total_pixels",
+          "clear_fraction",
+          "accepted",
+          "mask_counts",
+          "missing_reason"
+        ],
+        "title": "VegetationScene",
+        "type": "object"
+      },
+      "YearFinding": {
+        "additionalProperties": false,
+        "properties": {
+          "band": {
+            "enum": [
+              "suitable",
+              "marginal",
+              "unsuitable",
+              "unknown"
+            ],
+            "title": "Band",
+            "type": "string"
+          },
+          "evidence_ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "title": "Evidence Ids",
+            "type": "array"
+          },
+          "messages": {
+            "items": {
+              "$ref": "#/components/schemas/QualityFlag"
+            },
+            "title": "Messages",
+            "type": "array"
+          },
+          "year": {
+            "title": "Year",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "year",
+          "band",
+          "messages",
+          "evidence_ids"
+        ],
+        "title": "YearFinding",
+        "type": "object"
+      },
+      "YearPeriod": {
+        "additionalProperties": false,
+        "properties": {
+          "end_year": {
+            "title": "End Year",
+            "type": "integer"
+          },
+          "start_year": {
+            "title": "Start Year",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "start_year",
+          "end_year"
+        ],
+        "title": "YearPeriod",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "SOILSTICE backend. Contract 1.0.0-phase0. All responses use the ApiResponse envelope; errors use ApiErrorResponse. Coarse products (POWER) are labelled support class R and are never presented as field measurements.",
+    "title": "SOILSTICE API",
+    "version": "0.2.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/v1/crops": {
+      "get": {
+        "operationId": "listCrops",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_CropOption__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Crops",
+        "tags": [
+          "rotation"
+        ]
+      }
+    },
+    "/api/v1/datasets": {
+      "get": {
+        "operationId": "listDatasets",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_DatasetDescriptor__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "List Datasets",
+        "tags": [
+          "evidence"
+        ]
+      }
+    },
+    "/api/v1/farms": {
+      "get": {
+        "operationId": "listFarms",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_Farm__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "List Farms",
+        "tags": [
+          "farms"
+        ]
+      }
+    },
+    "/api/v1/farms/{farm_id}": {
+      "get": {
+        "operationId": "getFarm",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "farm_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Farm Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_Farm_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Get Farm",
+        "tags": [
+          "farms"
+        ]
+      },
+      "patch": {
+        "operationId": "updateFarm",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "farm_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Farm Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFarmRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_Farm_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Update Farm",
+        "tags": [
+          "farms"
+        ]
+      }
+    },
+    "/api/v1/farms/{farm_id}/fields": {
+      "get": {
+        "operationId": "listFields",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "farm_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Farm Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "source",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "csb",
+                    "user",
+                    "synthetic"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Source"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "ready",
+                    "processing",
+                    "partial",
+                    "failed"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_FieldSummary__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "List Fields",
+        "tags": [
+          "fields"
+        ]
+      },
+      "post": {
+        "operationId": "createField",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "farm_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Farm Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFieldRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_CreateFieldResponse_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Create Field",
+        "tags": [
+          "fields"
+        ]
+      }
+    },
+    "/api/v1/farms/{farm_id}/overview": {
+      "get": {
+        "operationId": "getFarmOverview",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "farm_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Farm Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "season_year",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Season Year"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_FarmOverview_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Farm Overview",
+        "tags": [
+          "farms"
+        ]
+      }
+    },
+    "/api/v1/fields/{field_id}": {
+      "delete": {
+        "operationId": "deleteField",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Field Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_Deleted_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Delete Field",
+        "tags": [
+          "fields"
+        ]
+      },
+      "get": {
+        "operationId": "getField",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Field Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_Field_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Get Field",
+        "tags": [
+          "fields"
+        ]
+      }
+    },
+    "/api/v1/fields/{field_id}/climate": {
+      "get": {
+        "operationId": "getClimate",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Field Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "season_year",
+            "required": true,
+            "schema": {
+              "title": "Season Year",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "crop_code",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Crop Code"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_ClimateProfile_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Climate",
+        "tags": [
+          "environment"
+        ]
+      }
+    },
+    "/api/v1/fields/{field_id}/coverage": {
+      "get": {
+        "operationId": "getFieldCoverage",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Field Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_DataCoverage_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Field Coverage",
+        "tags": [
+          "fields"
+        ]
+      }
+    },
+    "/api/v1/fields/{field_id}/crop-history": {
+      "get": {
+        "operationId": "getCropHistory",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Field Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_CropHistory_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Crop History",
+        "tags": [
+          "rotation"
+        ]
+      }
+    },
+    "/api/v1/fields/{field_id}/evidence": {
+      "get": {
+        "operationId": "listEvidence",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Field Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "kind",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "dataset",
+                    "indicator",
+                    "method",
+                    "kb_rule",
+                    "literature"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Kind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "related_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Related Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_EvidenceItem__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Evidence",
+        "tags": [
+          "evidence"
+        ]
+      }
+    },
+    "/api/v1/fields/{field_id}/indicators": {
+      "get": {
+        "operationId": "getIndicators",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Field Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "climate",
+                    "soil_moisture",
+                    "vegetation",
+                    "water",
+                    "soil",
+                    "terrain",
+                    "rotation"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Category"
+            }
+          },
+          {
+            "in": "query",
+            "name": "season_year",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Season Year"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_EnvironmentalIndicator__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Indicators",
+        "tags": [
+          "environment"
+        ]
+      }
+    },
+    "/api/v1/fields/{field_id}/profile": {
+      "get": {
+        "operationId": "getFieldProfile",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Field Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "season_year",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Season Year"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_FieldProfile_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Field Profile",
+        "tags": [
+          "fields"
+        ]
+      }
+    },
+    "/api/v1/fields/{field_id}/recommendations": {
+      "get": {
+        "operationId": "getRecommendation",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Field Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "season_year",
+            "required": true,
+            "schema": {
+              "title": "Season Year",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_RotationRecommendation_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Recommendations",
+        "tags": [
+          "rotation"
+        ]
+      }
+    },
+    "/api/v1/fields/{field_id}/resilience": {
+      "get": {
+        "operationId": "getResilience",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Field Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_ResilienceProfile_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Resilience",
+        "tags": [
+          "resilience"
+        ]
+      }
+    },
+    "/api/v1/fields/{field_id}/scenarios": {
+      "get": {
+        "operationId": "listScenarios",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Field Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_RotationScenario__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "List Scenarios",
+        "tags": [
+          "rotation"
+        ]
+      },
+      "post": {
+        "operationId": "createScenario",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Field Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertScenarioRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_RotationScenario_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Create Scenario",
+        "tags": [
+          "rotation"
+        ]
+      }
+    },
+    "/api/v1/fields/{field_id}/soil": {
+      "get": {
+        "operationId": "getSoil",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Field Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_SoilProfile_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Soil",
+        "tags": [
+          "environment"
+        ]
+      }
+    },
+    "/api/v1/fields/{field_id}/terrain": {
+      "get": {
+        "operationId": "getTerrain",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Field Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_TerrainProfile_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Terrain",
+        "tags": [
+          "environment"
+        ]
+      }
+    },
+    "/api/v1/fields/{field_id}/vegetation": {
+      "get": {
+        "operationId": "getVegetation",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Field Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "year",
+            "required": true,
+            "schema": {
+              "title": "Year",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "index",
+            "required": false,
+            "schema": {
+              "default": "NDVI",
+              "enum": [
+                "NDVI",
+                "EVI",
+                "NDMI",
+                "SAVI",
+                "MSAVI",
+                "NDWI",
+                "NBR",
+                "NBR2",
+                "TVI"
+              ],
+              "title": "Index",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_VegetationProfile_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Vegetation",
+        "tags": [
+          "environment"
+        ]
+      }
+    },
+    "/api/v1/health": {
+      "get": {
+        "operationId": "health",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_Health_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Health",
+        "tags": [
+          "system"
+        ]
+      }
+    },
+    "/api/v1/jobs/{job_id}": {
+      "get": {
+        "operationId": "getJob",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "job_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Job Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_ProcessingJob_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Get Job",
+        "tags": [
+          "fields"
+        ]
+      }
+    },
+    "/api/v1/scenarios/{scenario_id}": {
+      "delete": {
+        "operationId": "deleteScenario",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "scenario_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Scenario Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_Deleted_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Delete Scenario",
+        "tags": [
+          "rotation"
+        ]
+      },
+      "put": {
+        "operationId": "updateScenario",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "scenario_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Scenario Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertScenarioRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_RotationScenario_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Update Scenario",
+        "tags": [
+          "rotation"
+        ]
+      }
+    }
+  }
+}

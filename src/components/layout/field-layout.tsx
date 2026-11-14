@@ -12,6 +12,7 @@ import { ErrorState } from "@/components/shared/state";
 import { CompletenessMeter } from "@/components/shared/data-display";
 import { SyntheticBadge } from "@/components/shared/provenance";
 import type { Field } from "@/types/contracts";
+import { DATA_MODE } from "@/services";
 
 export function useFieldId(): string {
   const p = useParams<{ fieldId: string }>();
@@ -73,7 +74,7 @@ export function FieldLayoutClient({ children }: { children: ReactNode }) {
                   <span className="font-mono text-[11.5px] tabular">{f.centroid[1].toFixed(4)}°N, {Math.abs(f.centroid[0]).toFixed(4)}°W</span>
                   <Badge className={STATUS_STYLE[f.processing_status]}>{f.processing_status}</Badge>
                   <Badge className="border border-line bg-paper text-ink-soft">{f.source === "user" ? "User-drawn" : f.source === "csb" ? "CSB polygon" : "Synthetic geometry"}</Badge>
-                  {f.source !== "csb" && <SyntheticBadge />}
+                  {DATA_MODE === "mock" && f.source !== "csb" && <SyntheticBadge />}
                 </div>
               </>
             ) : (

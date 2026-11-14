@@ -1,0 +1,76 @@
+{
+ "name": "field_474ea01b-7fdd-403c-a004-43d8c2312d17",
+ "model": "Field",
+ "list": false,
+ "payload": {
+  "data": {
+   "field_id": "474ea01b-7fdd-403c-a004-43d8c2312d17",
+   "farm_id": "d4a92591-d589-4f63-a0a3-802f1ea6bb8c",
+   "name": "Demo Field F-E",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        -100.73803245568104,
+        38.01297333802052
+       ],
+       [
+        -100.72949496393441,
+        38.01297333802052
+       ],
+       [
+        -100.72949496393441,
+        38.01969978300412
+       ],
+       [
+        -100.73803245568104,
+        38.01969978300412
+       ],
+       [
+        -100.73803245568104,
+        38.01297333802052
+       ]
+      ]
+     ]
+    ]
+   },
+   "centroid": [
+    -100.73376,
+    38.01634
+   ],
+   "area": {
+    "value": 56.1,
+    "unit": "ha",
+    "uncertainty": null,
+    "missing_reason": null
+   },
+   "state_fips": "20",
+   "county_fips": "055",
+   "source": "synthetic",
+   "source_ref": {
+    "dataset_id": "synthetic",
+    "product": "Synthetic stand-in for CSB 2018–2025 rev23",
+    "product_version": "synthetic-0",
+    "acquisition_id": null,
+    "doi": null,
+    "documentation_url": "https://www.nass.usda.gov/research-and-science/crop-sequence-boundaries",
+    "retrieved_at": null
+   },
+   "csb_id": null,
+   "editable": false,
+   "processing_status": "ready",
+   "latest_job_id": null,
+   "created_at": "2026-11-01T09:00:00Z"
+  },
+  "meta": {
+   "request_id": "mock-4m-mwfz5tev",
+   "generated_at": "2026-11-14T05:38:15.463Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

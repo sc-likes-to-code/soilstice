@@ -121,7 +121,7 @@ function AddField({ farm }: { farm: Farm }) {
 
   return (
     <Card>
-      <CardHeader eyebrow="Add field" title="Draw a field boundary" description={`Click on the map to place vertices inside ${farm.aoi.label}. Fields up to ${MAX_FIELD_HA} ha.`} actions={<SyntheticBadge />} />
+      <CardHeader eyebrow="Add field" title="Draw a field boundary" description={`Click on the map to place vertices inside ${farm.aoi.label}. Fields up to ${MAX_FIELD_HA} ha.`} actions={DATA_MODE === "mock" ? <SyntheticBadge /> : undefined} />
       <CardBody className="space-y-4">
         <div className="flex flex-wrap items-center gap-2">
           {!drawing ? (

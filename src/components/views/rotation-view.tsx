@@ -4,7 +4,7 @@ import { ArrowRight, ChevronDown, GitCompare, Pencil, Plus, Sparkles, Trash2, X 
 import type { CropHistory, CropOption, RecommendationCandidate, RotationRecommendation, RotationScenario, ScenarioEvaluation } from "@/types/contracts";
 import { useCreateScenario, useCropHistory, useCrops, useDeleteScenario, useRecommendation, useScenarios, useUpdateScenario } from "@/hooks/queries";
 import { useFieldId } from "@/components/layout/field-layout";
-import { isApiError } from "@/services";
+import { isApiError, DATA_MODE } from "@/services";
 import { cropColor, cropShort, FIT_STYLE } from "@/lib/vocab";
 import { formatDate } from "@/lib/format";
 import { cn } from "@/lib/cn";
@@ -91,7 +91,7 @@ function Recommendations({ r, onUse }: { r: RotationRecommendation; onUse: (code
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-2 text-[11.5px] text-stone-500">
-        <SyntheticBadge /> engine {r.engine_version} · KB {r.kb_version} · generated {formatDate(r.generated_at, "long")}
+        {DATA_MODE === "mock" && <SyntheticBadge />} engine {r.engine_version} · KB {r.kb_version} · generated {formatDate(r.generated_at, "long")}
       </div>
       <div className="grid items-start gap-4 lg:grid-cols-2">
         {r.candidates.map((c) => <CandidateCard key={c.crop_code} c={c} onUse={() => onUse(c.crop_code)} />)}

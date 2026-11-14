@@ -1,0 +1,2206 @@
+{
+ "name": "profile_411dd851-40e2-481b-885e-7dc029bcafcd",
+ "model": "FieldProfile",
+ "list": false,
+ "payload": {
+  "data": {
+   "field": {
+    "field_id": "411dd851-40e2-481b-885e-7dc029bcafcd",
+    "farm_id": "b6cc12fe-861f-436d-83bb-322a093e6bd4",
+    "name": "Demo Field A",
+    "geometry": {
+     "type": "MultiPolygon",
+     "coordinates": [
+      [
+       [
+        [
+         -98.09635693214595,
+         37.92840804619856
+        ],
+        [
+         -98.08781315748469,
+         37.92840804619856
+        ],
+        [
+         -98.08781315748469,
+         37.93514719979221
+        ],
+        [
+         -98.09635693214595,
+         37.93514719979221
+        ],
+        [
+         -98.09635693214595,
+         37.92840804619856
+        ]
+       ]
+      ]
+     ]
+    },
+    "centroid": [
+     -98.09209,
+     37.93178
+    ],
+    "area": {
+     "value": 56.3,
+     "unit": "ha",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "state_fips": "20",
+    "county_fips": "155",
+    "source": "synthetic",
+    "source_ref": {
+     "dataset_id": "synthetic",
+     "product": "Synthetic stand-in for CSB 2018–2025 rev23",
+     "product_version": "synthetic-0",
+     "acquisition_id": null,
+     "doi": null,
+     "documentation_url": "https://www.nass.usda.gov/research-and-science/crop-sequence-boundaries",
+     "retrieved_at": null
+    },
+    "csb_id": null,
+    "editable": false,
+    "processing_status": "ready",
+    "latest_job_id": null,
+    "created_at": "2026-11-01T09:00:00Z"
+   },
+   "coverage": {
+    "field_id": "411dd851-40e2-481b-885e-7dc029bcafcd",
+    "datasets": [
+     {
+      "dataset_id": "nasa_power_daily_ag",
+      "label": "NASA POWER Daily (AG community)",
+      "priority": "P0",
+      "status": "available",
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "temporal_coverage": {
+       "start": "1981-01-01",
+       "end": null
+      },
+      "product_version": "synthetic-0",
+      "last_updated": "2026-11-01T09:00:00Z",
+      "missing_reason": null,
+      "note": "Synthetic coverage record (Phase 1)."
+     },
+     {
+      "dataset_id": "usda_nrcs_ssurgo_sda",
+      "label": "SSURGO via Soil Data Access",
+      "priority": "P0",
+      "status": "available",
+      "support_class": "F",
+      "native_resolution_m": null,
+      "temporal_coverage": {
+       "start": null,
+       "end": null
+      },
+      "product_version": "synthetic-0",
+      "last_updated": "2026-11-01T09:00:00Z",
+      "missing_reason": null,
+      "note": "Synthetic coverage record (Phase 1)."
+     },
+     {
+      "dataset_id": "usda_nass_cdl",
+      "label": "Cropland Data Layer (CropScape)",
+      "priority": "P0",
+      "status": "available",
+      "support_class": "F",
+      "native_resolution_m": 30,
+      "temporal_coverage": {
+       "start": "2006-01-01",
+       "end": "2025-12-31"
+      },
+      "product_version": "synthetic-0",
+      "last_updated": "2026-11-01T09:00:00Z",
+      "missing_reason": null,
+      "note": "Synthetic coverage record (Phase 1)."
+     },
+     {
+      "dataset_id": "usda_nass_csb",
+      "label": "Crop Sequence Boundaries",
+      "priority": "P0",
+      "status": "not_applicable",
+      "support_class": "F",
+      "native_resolution_m": null,
+      "temporal_coverage": {
+       "start": "2018-01-01",
+       "end": "2025-12-31"
+      },
+      "product_version": null,
+      "last_updated": null,
+      "missing_reason": null,
+      "note": "Synthetic geometry — not a CSB polygon."
+     },
+     {
+      "dataset_id": "nasa_hls_vi",
+      "label": "HLS Vegetation Indices (L30/S30)",
+      "priority": "P0",
+      "status": "available",
+      "support_class": "F",
+      "native_resolution_m": 30,
+      "temporal_coverage": {
+       "start": "2013-04-11",
+       "end": null
+      },
+      "product_version": "synthetic-0",
+      "last_updated": "2026-11-01T09:00:00Z",
+      "missing_reason": null,
+      "note": "Synthetic coverage record (Phase 1)."
+     },
+     {
+      "dataset_id": "nasa_smap_spl4smgp",
+      "label": "SMAP L4 Surface & Root-Zone Soil Moisture",
+      "priority": "P0",
+      "status": "available",
+      "support_class": "R",
+      "native_resolution_m": 9000,
+      "temporal_coverage": {
+       "start": "2015-03-31",
+       "end": null
+      },
+      "product_version": "synthetic-0",
+      "last_updated": "2026-11-01T09:00:00Z",
+      "missing_reason": null,
+      "note": "Synthetic coverage record (Phase 1)."
+     },
+     {
+      "dataset_id": "nasa_srtm_gl1",
+      "label": "SRTM Global 1 arc-second",
+      "priority": "P0",
+      "status": "available",
+      "support_class": "F",
+      "native_resolution_m": 30,
+      "temporal_coverage": {
+       "start": "2000-02-11",
+       "end": "2000-02-21"
+      },
+      "product_version": "synthetic-0",
+      "last_updated": "2026-11-01T09:00:00Z",
+      "missing_reason": null,
+      "note": "Synthetic coverage record (Phase 1)."
+     },
+     {
+      "dataset_id": "prism_daily",
+      "label": "PRISM daily climate",
+      "priority": "P1",
+      "status": "not_integrated",
+      "support_class": "S",
+      "native_resolution_m": 4000,
+      "temporal_coverage": {
+       "start": "1981-01-01",
+       "end": null
+      },
+      "product_version": null,
+      "last_updated": null,
+      "missing_reason": null,
+      "note": "P1 dataset — planned, not yet integrated."
+     },
+     {
+      "dataset_id": "openet",
+      "label": "OpenET Ensemble ET",
+      "priority": "P1",
+      "status": "not_integrated",
+      "support_class": "F",
+      "native_resolution_m": 30,
+      "temporal_coverage": {
+       "start": "2000-01-01",
+       "end": null
+      },
+      "product_version": null,
+      "last_updated": null,
+      "missing_reason": null,
+      "note": "P1 dataset — planned, not yet integrated."
+     },
+     {
+      "dataset_id": "usda_nass_quickstats",
+      "label": "NASS Quick Stats",
+      "priority": "P1",
+      "status": "not_integrated",
+      "support_class": "R",
+      "native_resolution_m": null,
+      "temporal_coverage": {
+       "start": null,
+       "end": null
+      },
+      "product_version": null,
+      "last_updated": null,
+      "missing_reason": null,
+      "note": "P1 dataset — planned, not yet integrated."
+     },
+     {
+      "dataset_id": "nasa_smap_spl3smp_e",
+      "label": "SMAP L3 Enhanced Soil Moisture",
+      "priority": "P1",
+      "status": "not_integrated",
+      "support_class": "R",
+      "native_resolution_m": 9000,
+      "temporal_coverage": {
+       "start": "2015-03-31",
+       "end": null
+      },
+      "product_version": null,
+      "last_updated": null,
+      "missing_reason": null,
+      "note": "P1 dataset — planned, not yet integrated."
+     }
+    ],
+    "completeness": 1
+   },
+   "soil": {
+    "field_id": "411dd851-40e2-481b-885e-7dc029bcafcd",
+    "layers": [
+     {
+      "top_cm": 0,
+      "bottom_cm": 30,
+      "sand_pct": {
+       "value": 59,
+       "unit": "percent",
+       "uncertainty": {
+        "kind": "range",
+        "low": 54,
+        "high": 64,
+        "value": null,
+        "note": null
+       },
+       "missing_reason": null
+      },
+      "silt_pct": {
+       "value": 26,
+       "unit": "percent",
+       "uncertainty": {
+        "kind": "range",
+        "low": 21,
+        "high": 31,
+        "value": null,
+        "note": null
+       },
+       "missing_reason": null
+      },
+      "clay_pct": {
+       "value": 15,
+       "unit": "percent",
+       "uncertainty": {
+        "kind": "range",
+        "low": 11,
+        "high": 19,
+        "value": null,
+        "note": null
+       },
+       "missing_reason": null
+      },
+      "texture_class": "Fine sandy loam",
+      "ph_h2o": {
+       "value": 5.9,
+       "unit": "pH",
+       "uncertainty": {
+        "kind": "range",
+        "low": 5.5,
+        "high": 6.3,
+        "value": null,
+        "note": null
+       },
+       "missing_reason": null
+      },
+      "om_pct": {
+       "value": 2.2,
+       "unit": "percent",
+       "uncertainty": {
+        "kind": "range",
+        "low": 1.3,
+        "high": 3.1,
+        "value": null,
+        "note": null
+       },
+       "missing_reason": null
+      },
+      "awc": {
+       "value": 0.13,
+       "unit": "cm_cm-1",
+       "uncertainty": null,
+       "missing_reason": null
+      }
+     },
+     {
+      "top_cm": 30,
+      "bottom_cm": 100,
+      "sand_pct": {
+       "value": 55,
+       "unit": "percent",
+       "uncertainty": {
+        "kind": "range",
+        "low": 50,
+        "high": 60,
+        "value": null,
+        "note": null
+       },
+       "missing_reason": null
+      },
+      "silt_pct": {
+       "value": 28,
+       "unit": "percent",
+       "uncertainty": {
+        "kind": "range",
+        "low": 23,
+        "high": 33,
+        "value": null,
+        "note": null
+       },
+       "missing_reason": null
+      },
+      "clay_pct": {
+       "value": 17,
+       "unit": "percent",
+       "uncertainty": {
+        "kind": "range",
+        "low": 13,
+        "high": 21,
+        "value": null,
+        "note": null
+       },
+       "missing_reason": null
+      },
+      "texture_class": "Fine sandy loam",
+      "ph_h2o": {
+       "value": 6.3,
+       "unit": "pH",
+       "uncertainty": {
+        "kind": "range",
+        "low": 5.9,
+        "high": 6.7,
+        "value": null,
+        "note": null
+       },
+       "missing_reason": null
+      },
+      "om_pct": {
+       "value": 1,
+       "unit": "percent",
+       "uncertainty": {
+        "kind": "range",
+        "low": 0.6,
+        "high": 1.4,
+        "value": null,
+        "note": null
+       },
+       "missing_reason": null
+      },
+      "awc": {
+       "value": 0.11,
+       "unit": "cm_cm-1",
+       "uncertainty": null,
+       "missing_reason": null
+      }
+     },
+     {
+      "top_cm": 100,
+      "bottom_cm": 150,
+      "sand_pct": {
+       "value": 54,
+       "unit": "percent",
+       "uncertainty": {
+        "kind": "range",
+        "low": 49,
+        "high": 59,
+        "value": null,
+        "note": null
+       },
+       "missing_reason": null
+      },
+      "silt_pct": {
+       "value": 27,
+       "unit": "percent",
+       "uncertainty": {
+        "kind": "range",
+        "low": 22,
+        "high": 32,
+        "value": null,
+        "note": null
+       },
+       "missing_reason": null
+      },
+      "clay_pct": {
+       "value": 19,
+       "unit": "percent",
+       "uncertainty": {
+        "kind": "range",
+        "low": 15,
+        "high": 23,
+        "value": null,
+        "note": null
+       },
+       "missing_reason": null
+      },
+      "texture_class": "Fine sandy loam",
+      "ph_h2o": {
+       "value": 6.7,
+       "unit": "pH",
+       "uncertainty": {
+        "kind": "range",
+        "low": 6.3,
+        "high": 7.1,
+        "value": null,
+        "note": null
+       },
+       "missing_reason": null
+      },
+      "om_pct": {
+       "value": 0.4,
+       "unit": "percent",
+       "uncertainty": {
+        "kind": "range",
+        "low": 0.3,
+        "high": 0.6,
+        "value": null,
+        "note": null
+       },
+       "missing_reason": null
+      },
+      "awc": {
+       "value": 0.1,
+       "unit": "cm_cm-1",
+       "uncertainty": null,
+       "missing_reason": null
+      }
+     }
+    ],
+    "aws_0_100": {
+     "value": 11.6,
+     "unit": "cm",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "aws_0_150": {
+     "value": 16.6,
+     "unit": "cm",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "drainage_class": {
+     "value": "Somewhat excessively drained",
+     "weight_share": 0.61,
+     "missing_reason": null
+    },
+    "hydrologic_group": {
+     "value": "A",
+     "weight_share": 0.61,
+     "missing_reason": null
+    },
+    "slope_pct_ssurgo": {
+     "value": 2.3,
+     "unit": "percent",
+     "uncertainty": {
+      "kind": "range",
+      "low": 0,
+      "high": 4.7,
+      "value": null,
+      "note": null
+     },
+     "missing_reason": null
+    },
+    "map_units": [
+     {
+      "mukey": "SYN-9465",
+      "muname": "Synthetic map unit 1 — fine sandy loam, 0 to 1 percent slopes",
+      "area_fraction": 0.72,
+      "major_components": [
+       {
+        "cokey": "SYN-C0",
+        "compname": "Synthetic component A",
+        "comppct_r": 90
+       }
+      ]
+     },
+     {
+      "mukey": "SYN-7846",
+      "muname": "Synthetic map unit 2 — loam, 1 to 3 percent slopes",
+      "area_fraction": 0.28,
+      "major_components": [
+       {
+        "cokey": "SYN-C1",
+        "compname": "Synthetic component B",
+        "comppct_r": 74
+       }
+      ]
+     }
+    ],
+    "survey": [
+     {
+      "areasymbol": "SYN000",
+      "saverest": null
+     }
+    ],
+    "method": {
+     "method_id": "ssurgo_area_comppct_weighting",
+     "name": "SSURGO area × component-percent weighting",
+     "version": "synthetic-0",
+     "description": "Normative method in SOILSTICE_DATA_ARCHITECTURE §5.3.1 (values here are synthetic).",
+     "reference_url": null
+    },
+    "null_weight_fraction": 0.08,
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": null,
+     "extraction_method": "vector_intersection",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for SSURGO (SDA)",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://sdmdataaccess.sc.egov.usda.gov/",
+      "retrieved_at": null
+     }
+    ],
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 0.95,
+     "missing_reason": null
+    }
+   },
+   "terrain": {
+    "field_id": "411dd851-40e2-481b-885e-7dc029bcafcd",
+    "elevation_mean": {
+     "value": 454,
+     "unit": "m",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "elevation_min": {
+     "value": 448,
+     "unit": "m",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "elevation_max": {
+     "value": 461,
+     "unit": "m",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "slope_mean_pct": {
+     "value": 2.6,
+     "unit": "percent",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "slope_p90_pct": {
+     "value": 4.5,
+     "unit": "percent",
+     "uncertainty": null,
+     "missing_reason": null
+    },
+    "method": {
+     "method_id": "srtm_horn_slope",
+     "name": "Horn slope in EPSG:5070",
+     "version": "synthetic-0",
+     "description": "Slope from SRTMGL1 reprojected to CONUS Albers, Horn 1981 kernel (values here are synthetic).",
+     "reference_url": null
+    },
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:4326"
+    },
+    "sources": [
+     {
+      "dataset_id": "synthetic",
+      "product": "Synthetic stand-in for SRTMGL1",
+      "product_version": "synthetic-0",
+      "acquisition_id": null,
+      "doi": null,
+      "documentation_url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-srtmgl1-003",
+      "retrieved_at": null
+     }
+    ],
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    }
+   },
+   "crop_history": {
+    "field_id": "411dd851-40e2-481b-885e-7dc029bcafcd",
+    "period": {
+     "start_year": 2006,
+     "end_year": 2025
+    },
+    "years": [
+     {
+      "year": 2006,
+      "majority": {
+       "crop_code": 5,
+       "crop_name": "Soybeans"
+      },
+      "purity": 0.69,
+      "histogram": [
+       {
+        "crop_code": 5,
+        "crop_name": "Soybeans",
+        "area_fraction": 0.69
+       },
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.18
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.13
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": null,
+      "agrees_with_csb": null,
+      "native_resolution_m": null,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2007,
+      "majority": {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat"
+      },
+      "purity": 0.8,
+      "histogram": [
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.8
+       },
+       {
+        "crop_code": 1,
+        "crop_name": "Corn",
+        "area_fraction": 0.11
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.09
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": null,
+      "agrees_with_csb": null,
+      "native_resolution_m": null,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2008,
+      "majority": {
+       "crop_code": 4,
+       "crop_name": "Sorghum"
+      },
+      "purity": 0.92,
+      "histogram": [
+       {
+        "crop_code": 4,
+        "crop_name": "Sorghum",
+        "area_fraction": 0.92
+       },
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.04
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.04
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": null,
+      "agrees_with_csb": null,
+      "native_resolution_m": null,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2009,
+      "majority": {
+       "crop_code": 5,
+       "crop_name": "Soybeans"
+      },
+      "purity": 0.77,
+      "histogram": [
+       {
+        "crop_code": 5,
+        "crop_name": "Soybeans",
+        "area_fraction": 0.77
+       },
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.12
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.11
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": null,
+      "agrees_with_csb": null,
+      "native_resolution_m": null,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2010,
+      "majority": {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat"
+      },
+      "purity": 0.83,
+      "histogram": [
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.83
+       },
+       {
+        "crop_code": 1,
+        "crop_name": "Corn",
+        "area_fraction": 0.08
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.09
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": null,
+      "agrees_with_csb": null,
+      "native_resolution_m": 30,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2011,
+      "majority": {
+       "crop_code": 4,
+       "crop_name": "Sorghum"
+      },
+      "purity": 0.96,
+      "histogram": [
+       {
+        "crop_code": 4,
+        "crop_name": "Sorghum",
+        "area_fraction": 0.96
+       },
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.02
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.02
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": null,
+      "agrees_with_csb": null,
+      "native_resolution_m": 30,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2012,
+      "majority": {
+       "crop_code": 5,
+       "crop_name": "Soybeans"
+      },
+      "purity": 0.96,
+      "histogram": [
+       {
+        "crop_code": 5,
+        "crop_name": "Soybeans",
+        "area_fraction": 0.96
+       },
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.02
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.02
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": null,
+      "agrees_with_csb": null,
+      "native_resolution_m": 30,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2013,
+      "majority": {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat"
+      },
+      "purity": 0.56,
+      "histogram": [
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.56
+       },
+       {
+        "crop_code": 1,
+        "crop_name": "Corn",
+        "area_fraction": 0.28
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.16
+       }
+      ],
+      "low_purity": true,
+      "class_accuracy": null,
+      "csb_crop_code": null,
+      "agrees_with_csb": null,
+      "native_resolution_m": 30,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2014,
+      "majority": {
+       "crop_code": 236,
+       "crop_name": "Dbl Crop WinWht/Sorghum"
+      },
+      "purity": 0.71,
+      "histogram": [
+       {
+        "crop_code": 236,
+        "crop_name": "Dbl Crop WinWht/Sorghum",
+        "area_fraction": 0.71
+       },
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.14
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.15
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": null,
+      "agrees_with_csb": null,
+      "native_resolution_m": 30,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2015,
+      "majority": {
+       "crop_code": 5,
+       "crop_name": "Soybeans"
+      },
+      "purity": 0.78,
+      "histogram": [
+       {
+        "crop_code": 5,
+        "crop_name": "Soybeans",
+        "area_fraction": 0.78
+       },
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.11
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.11
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": null,
+      "agrees_with_csb": null,
+      "native_resolution_m": 30,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2016,
+      "majority": {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat"
+      },
+      "purity": 0.68,
+      "histogram": [
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.68
+       },
+       {
+        "crop_code": 1,
+        "crop_name": "Corn",
+        "area_fraction": 0.14
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.18
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": null,
+      "agrees_with_csb": null,
+      "native_resolution_m": 30,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2017,
+      "majority": {
+       "crop_code": 4,
+       "crop_name": "Sorghum"
+      },
+      "purity": 0.84,
+      "histogram": [
+       {
+        "crop_code": 4,
+        "crop_name": "Sorghum",
+        "area_fraction": 0.84
+       },
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.08
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.08
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": null,
+      "agrees_with_csb": null,
+      "native_resolution_m": 30,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2018,
+      "majority": {
+       "crop_code": 26,
+       "crop_name": "Dbl Crop WinWht/Soybeans"
+      },
+      "purity": 0.83,
+      "histogram": [
+       {
+        "crop_code": 26,
+        "crop_name": "Dbl Crop WinWht/Soybeans",
+        "area_fraction": 0.83
+       },
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.1
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.07
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": 26,
+      "agrees_with_csb": true,
+      "native_resolution_m": 30,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2019,
+      "majority": {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat"
+      },
+      "purity": 0.7,
+      "histogram": [
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.7
+       },
+       {
+        "crop_code": 1,
+        "crop_name": "Corn",
+        "area_fraction": 0.2
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.1
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": 24,
+      "agrees_with_csb": true,
+      "native_resolution_m": 30,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2020,
+      "majority": {
+       "crop_code": 4,
+       "crop_name": "Sorghum"
+      },
+      "purity": 0.73,
+      "histogram": [
+       {
+        "crop_code": 4,
+        "crop_name": "Sorghum",
+        "area_fraction": 0.73
+       },
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.18
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.09
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": 4,
+      "agrees_with_csb": true,
+      "native_resolution_m": 30,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2021,
+      "majority": {
+       "crop_code": 5,
+       "crop_name": "Soybeans"
+      },
+      "purity": 0.76,
+      "histogram": [
+       {
+        "crop_code": 5,
+        "crop_name": "Soybeans",
+        "area_fraction": 0.76
+       },
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.1
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.14
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": 5,
+      "agrees_with_csb": true,
+      "native_resolution_m": 30,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2022,
+      "majority": {
+       "crop_code": 26,
+       "crop_name": "Dbl Crop WinWht/Soybeans"
+      },
+      "purity": 0.68,
+      "histogram": [
+       {
+        "crop_code": 26,
+        "crop_name": "Dbl Crop WinWht/Soybeans",
+        "area_fraction": 0.68
+       },
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.15
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.17
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": 26,
+      "agrees_with_csb": true,
+      "native_resolution_m": 30,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2023,
+      "majority": {
+       "crop_code": 4,
+       "crop_name": "Sorghum"
+      },
+      "purity": 0.85,
+      "histogram": [
+       {
+        "crop_code": 4,
+        "crop_name": "Sorghum",
+        "area_fraction": 0.85
+       },
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.07
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.08
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": 4,
+      "agrees_with_csb": true,
+      "native_resolution_m": 30,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2024,
+      "majority": {
+       "crop_code": 5,
+       "crop_name": "Soybeans"
+      },
+      "purity": 0.9,
+      "histogram": [
+       {
+        "crop_code": 5,
+        "crop_name": "Soybeans",
+        "area_fraction": 0.9
+       },
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.07
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.03
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": 5,
+      "agrees_with_csb": true,
+      "native_resolution_m": 30,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     },
+     {
+      "year": 2025,
+      "majority": {
+       "crop_code": 24,
+       "crop_name": "Winter Wheat"
+      },
+      "purity": 0.71,
+      "histogram": [
+       {
+        "crop_code": 24,
+        "crop_name": "Winter Wheat",
+        "area_fraction": 0.71
+       },
+       {
+        "crop_code": 1,
+        "crop_name": "Corn",
+        "area_fraction": 0.17
+       },
+       {
+        "crop_code": 176,
+        "crop_name": "Grassland/Pasture",
+        "area_fraction": 0.12
+       }
+      ],
+      "low_purity": false,
+      "class_accuracy": null,
+      "csb_crop_code": 24,
+      "agrees_with_csb": true,
+      "native_resolution_m": 30,
+      "missing_reason": null,
+      "source": {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for CDL",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+       "retrieved_at": null
+      }
+     }
+    ],
+    "metrics": [
+     {
+      "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:distinct_crops:2006-01-01",
+      "key": "distinct_crops",
+      "label": "Distinct crops (2006–2025)",
+      "category": "rotation",
+      "value": {
+       "value": 5,
+       "unit": "count",
+       "uncertainty": null,
+       "missing_reason": null
+      },
+      "nature": "derived",
+      "spatial": {
+       "support_class": "F",
+       "native_resolution_m": 30,
+       "extraction_method": "zonal_polygon_inward_buffer",
+       "field_fraction_of_cell": null,
+       "cell_id": null,
+       "crs": "EPSG:5070"
+      },
+      "temporal": {
+       "resolution": "P1Y",
+       "period_start": "2006-01-01",
+       "period_end": "2025-12-31",
+       "aggregation": "count",
+       "time_standard": "not_applicable"
+      },
+      "quality": {
+       "status": "valid",
+       "flags": [
+        {
+         "code": "SYNTHETIC",
+         "severity": "info",
+         "message": "Synthetic demo value — not an observation."
+        }
+       ],
+       "completeness": 1,
+       "missing_reason": null
+      },
+      "sources": [
+       {
+        "dataset_id": "synthetic",
+        "product": "Synthetic stand-in for CDL",
+        "product_version": "synthetic-0",
+        "acquisition_id": null,
+        "doi": null,
+        "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+        "retrieved_at": null
+       }
+      ],
+      "method": {
+       "method_id": "synthetic_distinct_crops",
+       "name": "Synthetic distinct crops (2006–2025)",
+       "version": "synthetic-0",
+       "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+       "reference_url": null
+      },
+      "input_ids": [],
+      "reference_value": null
+     },
+     {
+      "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:max_monoculture_run:2006-01-01",
+      "key": "max_monoculture_run",
+      "label": "Longest same-crop run",
+      "category": "rotation",
+      "value": {
+       "value": 1,
+       "unit": "year",
+       "uncertainty": null,
+       "missing_reason": null
+      },
+      "nature": "derived",
+      "spatial": {
+       "support_class": "F",
+       "native_resolution_m": 30,
+       "extraction_method": "zonal_polygon_inward_buffer",
+       "field_fraction_of_cell": null,
+       "cell_id": null,
+       "crs": "EPSG:5070"
+      },
+      "temporal": {
+       "resolution": "P1Y",
+       "period_start": "2006-01-01",
+       "period_end": "2025-12-31",
+       "aggregation": "count",
+       "time_standard": "not_applicable"
+      },
+      "quality": {
+       "status": "valid",
+       "flags": [
+        {
+         "code": "SYNTHETIC",
+         "severity": "info",
+         "message": "Synthetic demo value — not an observation."
+        }
+       ],
+       "completeness": 1,
+       "missing_reason": null
+      },
+      "sources": [
+       {
+        "dataset_id": "synthetic",
+        "product": "Synthetic stand-in for CDL",
+        "product_version": "synthetic-0",
+        "acquisition_id": null,
+        "doi": null,
+        "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+        "retrieved_at": null
+       }
+      ],
+      "method": {
+       "method_id": "synthetic_max_monoculture_run",
+       "name": "Synthetic longest same-crop run",
+       "version": "synthetic-0",
+       "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+       "reference_url": null
+      },
+      "input_ids": [],
+      "reference_value": null
+     },
+     {
+      "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:rotation_shannon:2006-01-01",
+      "key": "rotation_shannon",
+      "label": "Rotation diversity (Shannon)",
+      "category": "rotation",
+      "value": {
+       "value": 1.45,
+       "unit": "unitless",
+       "uncertainty": null,
+       "missing_reason": null
+      },
+      "nature": "derived",
+      "spatial": {
+       "support_class": "F",
+       "native_resolution_m": 30,
+       "extraction_method": "zonal_polygon_inward_buffer",
+       "field_fraction_of_cell": null,
+       "cell_id": null,
+       "crs": "EPSG:5070"
+      },
+      "temporal": {
+       "resolution": "P1Y",
+       "period_start": "2006-01-01",
+       "period_end": "2025-12-31",
+       "aggregation": "count",
+       "time_standard": "not_applicable"
+      },
+      "quality": {
+       "status": "valid",
+       "flags": [
+        {
+         "code": "SYNTHETIC",
+         "severity": "info",
+         "message": "Synthetic demo value — not an observation."
+        }
+       ],
+       "completeness": 1,
+       "missing_reason": null
+      },
+      "sources": [
+       {
+        "dataset_id": "synthetic",
+        "product": "Synthetic stand-in for CDL",
+        "product_version": "synthetic-0",
+        "acquisition_id": null,
+        "doi": null,
+        "documentation_url": "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html",
+        "retrieved_at": null
+       }
+      ],
+      "method": {
+       "method_id": "synthetic_rotation_shannon",
+       "name": "Synthetic rotation diversity (shannon)",
+       "version": "synthetic-0",
+       "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+       "reference_url": null
+      },
+      "input_ids": [],
+      "reference_value": null
+     }
+    ],
+    "spatial": {
+     "support_class": "F",
+     "native_resolution_m": 30,
+     "extraction_method": "zonal_polygon_inward_buffer",
+     "field_fraction_of_cell": null,
+     "cell_id": null,
+     "crs": "EPSG:5070"
+    },
+    "quality": {
+     "status": "valid",
+     "flags": [
+      {
+       "code": "SYNTHETIC",
+       "severity": "info",
+       "message": "Synthetic demo value — not an observation."
+      },
+      {
+       "code": "LOW_PURITY_YEARS",
+       "severity": "warning",
+       "message": "Some years have majority-class purity below 0.6."
+      }
+     ],
+     "completeness": 1,
+     "missing_reason": null
+    }
+   },
+   "climate_summary": [
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:precip_total_season:2025-01-01",
+     "key": "precip_total_season",
+     "label": "Precipitation total",
+     "category": "climate",
+     "value": {
+      "value": 985,
+      "unit": "mm",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "model",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_precip_total_season",
+      "name": "Synthetic precipitation total",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": {
+      "value": 755,
+      "unit": "mm",
+      "uncertainty": null,
+      "missing_reason": null
+     }
+    },
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:precip_anomaly_pct:2025-01-01",
+     "key": "precip_anomaly_pct",
+     "label": "Precipitation anomaly",
+     "category": "climate",
+     "value": {
+      "value": 30,
+      "unit": "percent",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_precip_anomaly_pct",
+      "name": "Synthetic precipitation anomaly",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:gdd_season:2025-01-01",
+     "key": "gdd_season",
+     "label": "Growing degree days",
+     "category": "climate",
+     "value": {
+      "value": 2366,
+      "unit": "degC_day",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 55000,
+      "extraction_method": "api_point_query",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:4326"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "sum",
+      "time_standard": "LST"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       },
+       {
+        "code": "GDD_PARAMS_PENDING",
+        "severity": "warning",
+        "message": "Per-crop GDD base/cap pending a cited KB entry (D5.6)."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for POWER Daily API",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_gdd_season",
+      "name": "Placeholder GDD (base 10 °C, cap 30 °C)",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:sm_rootzone_percentile:2025-01-01",
+     "key": "sm_rootzone_percentile",
+     "label": "Root-zone moisture percentile",
+     "category": "soil_moisture",
+     "value": {
+      "value": 23,
+      "unit": "percentile",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "R",
+      "native_resolution_m": 9000,
+      "extraction_method": "containing_cell",
+      "field_fraction_of_cell": 0.007,
+      "cell_id": "synthetic-cell",
+      "crs": "EPSG:6933"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "percentile",
+      "time_standard": "UTC"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       },
+       {
+        "code": "SHORT_CLIMATOLOGY",
+        "severity": "warning",
+        "message": "SMAP record starts 2015-03-31; percentiles rest on ~10 years."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for SPL4SMGP",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://nsidc.org/data/spl4smgp",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_sm_rootzone_percentile",
+      "name": "Synthetic root-zone moisture percentile",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    }
+   ],
+   "vegetation_summary": [
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:ndvi_peak:2025-01-01",
+     "key": "ndvi_peak",
+     "label": "Peak NDVI",
+     "category": "vegetation",
+     "value": {
+      "value": 0.836,
+      "unit": "unitless",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "F",
+      "native_resolution_m": 30,
+      "extraction_method": "zonal_polygon_inward_buffer",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:32614"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "max",
+      "time_standard": "UTC"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for HLSL30_VI / HLSS30_VI",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-hlsl30-vi-2.0",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_ndvi_peak",
+      "name": "Synthetic peak ndvi",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    },
+    {
+     "indicator_id": "411dd851-40e2-481b-885e-7dc029bcafcd:ndvi_peak_doy:2025-01-01",
+     "key": "ndvi_peak_doy",
+     "label": "Peak NDVI day of year",
+     "category": "vegetation",
+     "value": {
+      "value": 111,
+      "unit": "day",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "nature": "derived",
+     "spatial": {
+      "support_class": "F",
+      "native_resolution_m": 30,
+      "extraction_method": "zonal_polygon_inward_buffer",
+      "field_fraction_of_cell": null,
+      "cell_id": null,
+      "crs": "EPSG:32614"
+     },
+     "temporal": {
+      "resolution": "season",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "aggregation": "max",
+      "time_standard": "UTC"
+     },
+     "quality": {
+      "status": "valid",
+      "flags": [
+       {
+        "code": "SYNTHETIC",
+        "severity": "info",
+        "message": "Synthetic demo value — not an observation."
+       }
+      ],
+      "completeness": 1,
+      "missing_reason": null
+     },
+     "sources": [
+      {
+       "dataset_id": "synthetic",
+       "product": "Synthetic stand-in for HLSL30_VI / HLSS30_VI",
+       "product_version": "synthetic-0",
+       "acquisition_id": null,
+       "doi": null,
+       "documentation_url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-hlsl30-vi-2.0",
+       "retrieved_at": null
+      }
+     ],
+     "method": {
+      "method_id": "synthetic_ndvi_peak_doy",
+      "name": "Synthetic peak ndvi day of year",
+      "version": "synthetic-0",
+      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
+      "reference_url": null
+     },
+     "input_ids": [],
+     "reference_value": null
+    }
+   ],
+   "resilience": {
+    "profile_id": "8b965c98-726c-4309-bcb6-e5c2ddcf7403",
+    "field_id": "411dd851-40e2-481b-885e-7dc029bcafcd",
+    "as_of": "2026-11-01",
+    "model_version": "soilstice-resilience-0.0.0-synthetic",
+    "status": "computed",
+    "composite": {
+     "score": {
+      "value": 52,
+      "unit": "score_0_100",
+      "uncertainty": null,
+      "missing_reason": null
+     },
+     "band": "moderate",
+     "confidence": "low",
+     "components_used": 5,
+     "components_total": 5
+    },
+    "components": [
+     {
+      "key": "soil_water_buffer",
+      "label": "Soil water buffer",
+      "score": {
+       "value": 45,
+       "unit": "score_0_100",
+       "uncertainty": null,
+       "missing_reason": null
+      },
+      "band": "moderate",
+      "support_class": "F",
+      "confidence": "high",
+      "input_indicator_ids": [
+       "411dd851-40e2-481b-885e-7dc029bcafcd:aws_0_150"
+      ],
+      "explanation": "Synthetic placeholder score. In Phase 4 this component maps aws_0_150 through a cited breakpoint table.",
+      "rule_ref": {
+       "method_id": "resilience_soil_water_buffer_breakpoints",
+       "name": "Soil water buffer breakpoint table",
+       "version": "synthetic-0",
+       "description": "Breakpoints pending (Phase 4).",
+       "reference_url": null
+      }
+     },
+     {
+      "key": "terrain_erosion_risk",
+      "label": "Terrain & erosion risk",
+      "score": {
+       "value": 52,
+       "unit": "score_0_100",
+       "uncertainty": null,
+       "missing_reason": null
+      },
+      "band": "moderate",
+      "support_class": "F",
+      "confidence": "high",
+      "input_indicator_ids": [
+       "411dd851-40e2-481b-885e-7dc029bcafcd:slope_p90_pct"
+      ],
+      "explanation": "Synthetic placeholder score. In Phase 4 this component maps slope_p90_pct through a cited breakpoint table.",
+      "rule_ref": {
+       "method_id": "resilience_terrain_erosion_risk_breakpoints",
+       "name": "Terrain & erosion risk breakpoint table",
+       "version": "synthetic-0",
+       "description": "Breakpoints pending (Phase 4).",
+       "reference_url": null
+      }
+     },
+     {
+      "key": "vegetation_stability",
+      "label": "Vegetation stability",
+      "score": {
+       "value": 42,
+       "unit": "score_0_100",
+       "uncertainty": null,
+       "missing_reason": null
+      },
+      "band": "moderate",
+      "support_class": "F",
+      "confidence": "high",
+      "input_indicator_ids": [
+       "411dd851-40e2-481b-885e-7dc029bcafcd:ndvi_peak_cv"
+      ],
+      "explanation": "Synthetic placeholder score. In Phase 4 this component maps ndvi_peak_cv through a cited breakpoint table.",
+      "rule_ref": {
+       "method_id": "resilience_vegetation_stability_breakpoints",
+       "name": "Vegetation stability breakpoint table",
+       "version": "synthetic-0",
+       "description": "Breakpoints pending (Phase 4).",
+       "reference_url": null
+      }
+     },
+     {
+      "key": "climate_exposure",
+      "label": "Climate exposure",
+      "score": {
+       "value": 68,
+       "unit": "score_0_100",
+       "uncertainty": null,
+       "missing_reason": null
+      },
+      "band": "moderate",
+      "support_class": "R",
+      "confidence": "low",
+      "input_indicator_ids": [
+       "411dd851-40e2-481b-885e-7dc029bcafcd:precip_anomaly_pct",
+       "411dd851-40e2-481b-885e-7dc029bcafcd:heat_stress_days",
+       "411dd851-40e2-481b-885e-7dc029bcafcd:sm_rootzone_dry_days"
+      ],
+      "explanation": "Synthetic placeholder score. In Phase 4 this component maps precip_anomaly_pct, heat_stress_days, sm_rootzone_dry_days through a cited breakpoint table.",
+      "rule_ref": {
+       "method_id": "resilience_climate_exposure_breakpoints",
+       "name": "Climate exposure breakpoint table",
+       "version": "synthetic-0",
+       "description": "Breakpoints pending (Phase 4).",
+       "reference_url": null
+      }
+     },
+     {
+      "key": "rotation_diversity",
+      "label": "Rotation diversity",
+      "score": {
+       "value": 51,
+       "unit": "score_0_100",
+       "uncertainty": null,
+       "missing_reason": null
+      },
+      "band": "moderate",
+      "support_class": "F",
+      "confidence": "high",
+      "input_indicator_ids": [
+       "411dd851-40e2-481b-885e-7dc029bcafcd:distinct_crops",
+       "411dd851-40e2-481b-885e-7dc029bcafcd:max_monoculture_run",
+       "411dd851-40e2-481b-885e-7dc029bcafcd:rotation_shannon"
+      ],
+      "explanation": "Synthetic placeholder score. In Phase 4 this component maps distinct_crops, max_monoculture_run, rotation_shannon through a cited breakpoint table.",
+      "rule_ref": {
+       "method_id": "resilience_rotation_diversity_breakpoints",
+       "name": "Rotation diversity breakpoint table",
+       "version": "synthetic-0",
+       "description": "Breakpoints pending (Phase 4).",
+       "reference_url": null
+      }
+     }
+    ],
+    "limitations": [
+     {
+      "code": "REGIONAL_COMPONENT",
+      "severity": "info",
+      "message": "Climate exposure uses regional-context inputs (POWER ~55 km, SMAP 9 km)."
+     }
+    ],
+    "disclaimers": [
+     "Synthetic demo scores — the breakpoint tables are defined in Phase 4 (SOILSTICE_DATA_ARCHITECTURE §5.10).",
+     "Scores are decision-support indicators, not agronomic prescriptions.",
+     "Components marked “Regional context” do not measure this field."
+    ]
+   }
+  },
+  "meta": {
+   "request_id": "mock-8-mwfz5rnl",
+   "generated_at": "2026-11-14T05:38:13.189Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}

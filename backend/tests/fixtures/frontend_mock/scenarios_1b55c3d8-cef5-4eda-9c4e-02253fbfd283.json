@@ -1,0 +1,16 @@
+{
+ "name": "scenarios_1b55c3d8-cef5-4eda-9c4e-02253fbfd283",
+ "model": "RotationScenario",
+ "list": true,
+ "payload": {
+  "data": [],
+  "meta": {
+   "request_id": "mock-4k-mwfz5ted",
+   "generated_at": "2026-11-14T05:38:15.445Z",
+   "api_version": "v1",
+   "contract_version": "1.0.0-phase0",
+   "data_mode": "synthetic",
+   "warnings": []
+  }
+ }
+}
