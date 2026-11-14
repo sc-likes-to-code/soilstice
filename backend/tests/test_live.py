@@ -14,8 +14,10 @@ from shapely.geometry import box
 from app.processing.climate import build_climate_profile
 from app.processing.soil import aggregate_soil
 from app.providers.cdl import CdlClient
+from app.providers.hls import HlsClient
 from app.providers.http import EarthdataAuth, HttpAcquirer
 from app.providers.power import PowerClient
+from app.providers.smap import SmapClient
 from app.providers.srtm import SrtmClient
 from app.providers.ssurgo import SsurgoClient
 
@@ -53,3 +55,23 @@ def test_live_cdl_county_file(http):
 def test_live_srtm(http, tmp_path):
     c = SrtmClient(http, tmp_path, lambda: EarthdataAuth(token=os.environ["SOILSTICE_EARTHDATA_TOKEN"]))
     assert c.tiles_for_bounds(SQUARE.bounds)
+
+
+def test_live_hls_cmr_stac_search(http, tmp_path):
+    client = HlsClient(http, tmp_path)
+    scenes = client.search_scenes(SQUARE.bounds, "2024-06-01", "2024-06-30", limit=10)
+    assert len(scenes) > 0
+    s = scenes[0]
+    assert s.granule_id.startswith("HLS")
+    assert "Fmask" in s.assets
+
+
+def test_live_smap_cmr_search(http):
+    client = SmapClient(http)
+    granules = client.search_granules(SQUARE.bounds, "2024-06-01", "2024-06-03", limit=10)
+    assert len(granules) > 0
+    g = granules[0]
+    assert "SMAP_L4_SM" in g.title
+    assert "SPL4SMGP" in g.h5_url
+    assert g.h5_url.endswith(".h5")
+
