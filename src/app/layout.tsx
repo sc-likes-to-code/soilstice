@@ -58,11 +58,12 @@ export const metadata: Metadata = {
       "SOILSTICE transforms NASA Earth observations, USDA soil surveys and historical crop records into explainable field intelligence for smarter, climate-resilient agricultural decisions.",
     images: [
       {
-        url: "/og-image-v2.png",
+        url: "https://soilstice.vercel.app/og-image-whatsapp-v1.jpg",
+        secureUrl: "https://soilstice.vercel.app/og-image-whatsapp-v1.jpg",
         width: 1200,
         height: 630,
         alt: "SOILSTICE — Field Resilience Intelligence | Satellite-Powered Agricultural Intelligence",
-        type: "image/png",
+        type: "image/jpeg",
       },
     ],
   },
@@ -71,7 +72,7 @@ export const metadata: Metadata = {
     title: "SOILSTICE — Field Resilience Intelligence",
     description:
       "SOILSTICE transforms NASA Earth observations, USDA soil surveys and historical crop records into explainable field intelligence for smarter, climate-resilient agricultural decisions.",
-    images: ["/og-image-v2.png"],
+    images: ["https://soilstice.vercel.app/og-image-whatsapp-v1.jpg"],
     creator: "@soilstice",
     site: "@soilstice",
   },
