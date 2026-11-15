@@ -68,9 +68,10 @@ describe("mock services — contract invariants", () => {
     expect(veg2011.scenes).toHaveLength(0);
     expect(veg2011.phenology.peak_value.value).toBeNull();
     expect(veg2011.phenology.missing_reason).toBe("OUT_OF_TEMPORAL_RANGE");
-    const et = clim2012.indicators.find((i) => i.key === "et_actual_season")!;
-    expect(et.value.value).toBeNull();
-    expect(et.value.missing_reason).toBe("NOT_COMPUTED");
+    const et = clim2012.indicators.find((i) => i.key === "et_actual_season");
+    expect(et).toBeUndefined();
+    const et0 = clim2012.indicators.find((i) => i.key === "et0_total_season")!;
+    expect(et0.value.value).not.toBeNull();
   });
 
   it("covers the required fixture states (full, partial, processing, failed, insufficient)", async () => {
@@ -83,7 +84,7 @@ describe("mock services — contract invariants", () => {
     expect(st.has("computed") && st.has("insufficient_data") && st.has("pending")).toBe(true);
     const insufficient = res.find((r) => r.data.status === "insufficient_data")!.data;
     expect(insufficient.composite.score.value).toBeNull();
-    expect(insufficient.composite.components_used).toBeLessThan(4);
+    expect(insufficient.composite.components_used).toBeLessThan(3);
   });
 
   it("is deterministic for a given seed", async () => {

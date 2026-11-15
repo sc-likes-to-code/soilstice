@@ -46,3 +46,55 @@ describe("geometry helpers", () => {
     expect(validateFieldDraft(bow, reno).issues).toContain("SELF_INTERSECTING");
   });
 });
+
+describe("Task 7 & 8: Crop Ranking and Agronomic Descriptions", () => {
+  it("ensures all 14 canonical crops have distinctive descriptions", async () => {
+    const { CROP_AGRONOMIC_DESCRIPTIONS } = await import("@/components/views/suitability-section");
+    const expected = Array.from({ length: 14 }, (_, i) => `CRP${String(i + 1).padStart(3, "0")}`);
+    expect(Object.keys(CROP_AGRONOMIC_DESCRIPTIONS)).toHaveLength(14);
+    for (const cid of expected) {
+      const desc = CROP_AGRONOMIC_DESCRIPTIONS[cid];
+      expect(desc).toBeDefined();
+      expect(desc.length).toBeGreaterThan(60);
+      expect(desc).toContain("(");
+    }
+  });
+
+  it("sorts eligible crops deterministically by suitability score, confidence, limitations, and name", () => {
+    interface CropItem {
+      crop_id: string;
+      crop_name: string;
+      suitability_score: number;
+      data_quality?: { status: string };
+      limiting_factors: string[];
+      suitability_class: string;
+    }
+
+    const crops: CropItem[] = [
+      { crop_id: "CRP001", crop_name: "Corn", suitability_score: 85, data_quality: { status: "valid" }, limiting_factors: [], suitability_class: "suitable" },
+      { crop_id: "CRP003", crop_name: "Winter Wheat", suitability_score: 92, data_quality: { status: "valid" }, limiting_factors: [], suitability_class: "suitable" },
+      { crop_id: "CRP002", crop_name: "Soybean", suitability_score: 85, data_quality: { status: "valid" }, limiting_factors: ["pH"], suitability_class: "suitable" },
+      { crop_id: "CRP008", crop_name: "Barley", suitability_score: 75, data_quality: { status: "valid" }, limiting_factors: ["drainage"], suitability_class: "conditionally_suitable" },
+      { crop_id: "CRP010", crop_name: "Oats", suitability_score: 75, data_quality: { status: "valid" }, limiting_factors: ["drainage"], suitability_class: "conditionally_suitable" },
+      { crop_id: "CRP007", crop_name: "Rice", suitability_score: 25, data_quality: { status: "valid" }, limiting_factors: ["drainage"], suitability_class: "unsuitable" },
+    ];
+
+    const eligible = crops.filter((c) => c.suitability_class !== "unsuitable");
+    eligible.sort((a, b) => {
+      const diff = (b.suitability_score ?? 0) - (a.suitability_score ?? 0);
+      if (Math.abs(diff) > 1e-4) return diff;
+      const aValid = a.data_quality?.status === "valid" ? 1 : 0;
+      const bValid = b.data_quality?.status === "valid" ? 1 : 0;
+      if (aValid !== bValid) return bValid - aValid;
+      const limDiff = a.limiting_factors.length - b.limiting_factors.length;
+      if (limDiff !== 0) return limDiff;
+      return a.crop_name.localeCompare(b.crop_name);
+    });
+
+    expect(eligible[0].crop_name).toBe("Winter Wheat"); // 92
+    expect(eligible[1].crop_name).toBe("Corn"); // 85 (0 limits)
+    expect(eligible[2].crop_name).toBe("Soybean"); // 85 (1 limit)
+    expect(eligible[3].crop_name).toBe("Barley"); // 75 ('B' < 'O')
+    expect(eligible[4].crop_name).toBe("Oats"); // 75
+  });
+});

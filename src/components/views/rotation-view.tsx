@@ -240,8 +240,20 @@ function CandidateCard({ c, onUse }: { c: RecommendationCandidate; onUse: () => 
   const [open, setOpen] = useState(c.rank === 1);
   const s = FIT_STYLE[c.overall];
   const photo = CROP_PHOTOS[c.crop_code];
+  const isRank1 = c.rank === 1;
+  const isRank2 = c.rank === 2;
+  const isRank3 = c.rank === 3;
+
   return (
-    <Card className={cn("overflow-hidden", c.rank === 1 && "ring-1 ring-forest-300 shadow-md")}>
+    <Card
+      className={cn(
+        "overflow-hidden transition-all",
+        isRank1 && "border-amber-300 ring-2 ring-amber-300/70 shadow-lg bg-gradient-to-b from-amber-50/25 to-transparent",
+        isRank2 && "border-slate-300 ring-1 ring-slate-300/80 shadow-md bg-gradient-to-b from-slate-50/20 to-transparent",
+        isRank3 && "border-orange-300 ring-1 ring-orange-300/80 shadow-md bg-gradient-to-b from-orange-50/20 to-transparent",
+        c.rank > 3 && "border-line shadow-xs"
+      )}
+    >
       <div className="flex items-start gap-4 p-5">
         <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl border border-line shadow-inner">
           {photo ? (
@@ -254,12 +266,37 @@ function CandidateCard({ c, onUse }: { c: RecommendationCandidate; onUse: () => 
               #{c.rank}
             </div>
           )}
-          <span className="absolute bottom-0 right-0 rounded-tl-md bg-forest-950/80 px-1.5 py-0.5 font-mono text-[10px] font-bold text-white backdrop-blur-xs">
+          <span
+            className={cn(
+              "absolute bottom-0 right-0 rounded-tl-md px-1.5 py-0.5 font-mono text-[10px] font-bold backdrop-blur-xs",
+              isRank1 && "bg-amber-600 text-white",
+              isRank2 && "bg-slate-700 text-white",
+              isRank3 && "bg-orange-700 text-white",
+              c.rank > 3 && "bg-forest-950/80 text-white"
+            )}
+          >
             #{c.rank}
           </span>
         </div>
         <div className="min-w-0 flex-1">
-          <p className="font-display text-[20px] leading-tight text-ink">{c.crop_name}</p>
+          <div className="flex items-center gap-2">
+            <p className="font-display text-[20px] leading-tight text-ink">{c.crop_name}</p>
+            {isRank1 && (
+              <span className="rounded-full bg-amber-100 border border-amber-300 px-2 py-0.5 text-[10px] font-bold text-amber-900 uppercase tracking-wider">
+                Rank #1 Top Match
+              </span>
+            )}
+            {isRank2 && (
+              <span className="rounded-full bg-slate-200 border border-slate-300 px-2 py-0.5 text-[10px] font-bold text-slate-800 uppercase tracking-wider">
+                Rank #2
+              </span>
+            )}
+            {isRank3 && (
+              <span className="rounded-full bg-orange-100 border border-orange-300 px-2 py-0.5 text-[10px] font-bold text-orange-900 uppercase tracking-wider">
+                Rank #3
+              </span>
+            )}
+          </div>
           <div className="mt-1.5">
             <FitBandPill band={c.overall} confidence={c.confidence} />
           </div>

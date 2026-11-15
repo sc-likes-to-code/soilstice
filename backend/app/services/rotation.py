@@ -362,10 +362,21 @@ class RotationService:
                 "rotation_effects": rot_effects,
                 "reasons": reasons,
                 "score": score,
+                "limiting_count": len(crop_eval.limiting_factors),
                 "is_repeat": (cdl_code == last_crop_code),
             })
 
-        candidates.sort(key=lambda c: (1 if c["is_repeat"] else 0, -c["score"]))
+        # Explicit ranking by Phase 6 suitability score descending with deterministic tie-breaking (Task 8)
+        conf_weight = {"high": 3, "medium": 2, "low": 1}
+        candidates.sort(
+            key=lambda c: (
+                -c["score"],  # 1. Primary: Suitability score descending
+                -conf_weight.get(c["confidence"], 0),  # 2. Tie-break: Higher data confidence first
+                c["limiting_count"],  # 3. Tie-break: Fewer limiting factors first
+                1 if c["is_repeat"] else 0,  # 4. Tie-break: Non-repeat before repeat
+                c["crop_name"],  # 5. Tie-break: Alphabetical by crop name
+            )
+        )
 
         from app.contracts import RecommendationCandidate, TargetSeason
         from datetime import date
@@ -380,7 +391,7 @@ class RotationService:
                 rotation_effects=c["rotation_effects"],
                 reasons=c["reasons"],
             )
-            for i, c in enumerate(candidates[:6])
+            for i, c in enumerate(candidates)
         ]
 
         rec_id = uuid.uuid5(uuid.NAMESPACE_DNS, f"{f.field_id}:{season_year}:rec")

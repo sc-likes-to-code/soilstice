@@ -131,9 +131,7 @@ export function climateProfile(rec: MockFieldRecord, year: number): ClimateProfi
     indicator(fid, "rh_mean_season", "Mean relative humidity", "climate", val(round(rng.range(finney ? 52 : 60, finney ? 60 : 70), 0), "percent"), "nasa_power_daily_ag", power, seasonMean),
     indicator(fid, "et0_total_season", "Reference ET₀ total", "water", val(round(etTotal, 0), "mm"), "nasa_power_daily_ag", power, season),
     indicator(fid, "water_balance_season", "Water balance (P − ET₀)", "water", val(round(total - etTotal, 0), "mm"), "nasa_power_daily_ag", power, season),
-    indicator(fid, "et_actual_season", "Actual ET (OpenET)", "water", missing("mm", "NOT_COMPUTED"), "openet", spatialFor("openet"), season, { flags: [{ code: "NOT_INTEGRATED", severity: "info", message: "OpenET is a P1 dataset, not yet integrated." }] }),
     indicator(fid, "sm_rootzone_mean_season", "Root-zone soil moisture (mean)", "soil_moisture", smValid.length ? q(round(smValid.reduce((a, b) => a + b, 0) / smValid.length, 3), "m3_m-3") : missing("m3_m-3", smReason), "nasa_smap_spl4smgp", smap, temporal("season", start, end, "mean", "UTC"), { nature: "model" }),
-    indicator(fid, "sm_rootzone_percentile", "Root-zone moisture percentile", "soil_moisture", smValid.length ? q(rng.int(8, 92), "percentile") : missing("percentile", smReason), "nasa_smap_spl4smgp", smap, temporal("season", start, end, "percentile", "UTC"), { flags: [{ code: "SHORT_CLIMATOLOGY", severity: "warning", message: "SMAP record starts 2015-03-31; percentiles rest on ~10 years." }] }),
     indicator(fid, "sm_rootzone_dry_days", "Root-zone dry days", "soil_moisture", smValid.length ? q(rng.int(5, 70), "day") : missing("day", smReason), "nasa_smap_spl4smgp", smap, temporal("season", start, end, "count", "UTC")),
   ];
 
@@ -418,39 +416,52 @@ export function soilTerrainIndicators(rec: MockFieldRecord): EnvironmentalIndica
 }
 
 // ───────────────────────── Coverage ─────────────────────────
-export function coverage(rec: MockFieldRecord, jobDone = false): DataCoverage {
+export function coverage(rec: MockFieldRecord, jobDone: boolean = true): DataCoverage {
   const { field, traits } = rec;
   const v = traits.variant;
-  const P0: DatasetId[] = ["nasa_power_daily_ag", "usda_nrcs_ssurgo_sda", "usda_nass_cdl", "usda_nass_csb", "nasa_hls_vi", "nasa_smap_spl4smgp", "nasa_srtm_gl1"];
-  const P1: DatasetId[] = ["prism_daily", "openet", "usda_nass_quickstats", "nasa_smap_spl3smp_e"];
+  const P0: DatasetId[] = ["meteomatics", "nasa_power_daily_ag", "usda_nrcs_ssurgo_sda", "usda_nass_cdl", "nasa_srtm_gl1"];
   const entry = (id: DatasetId): DatasetCoverage => {
     const d = descriptor(id);
     let status: DatasetCoverage["status"] = "available";
     let reason: MissingReason | null = null;
-    let note: string | null = "Synthetic coverage record (Phase 1).";
-    if (d.priority !== "P0") { status = "not_integrated"; note = `${d.priority} dataset — planned, not yet integrated.`; }
-    else if (id === "usda_nass_csb") { status = "not_applicable"; note = field.source === "user" ? "User-drawn field — not a CSB polygon." : "Synthetic geometry — not a CSB polygon."; }
-    else if (v === "cloudy" && id === "nasa_hls_vi") { status = "partial"; reason = "INSUFFICIENT_COVERAGE"; note = "Cloud cover left few scenes above the 70% clear-pixel rule."; }
-    else if (v === "insufficient" && (id === "nasa_hls_vi" || id === "nasa_srtm_gl1")) { status = "missing"; reason = id === "nasa_hls_vi" ? "INSUFFICIENT_COVERAGE" : "UPSTREAM_ERROR"; }
-    else if (v === "failed" && id !== "usda_nrcs_ssurgo_sda" && id !== "usda_nass_cdl") { status = "missing"; reason = "UPSTREAM_ERROR"; note = "Synthetic processing failure."; }
-    else if (v === "processing_user" && (id === "nasa_hls_vi" || id === "nasa_smap_spl4smgp")) { status = "pending"; reason = "PENDING_PROCESSING"; note = jobDone ? "Queued for the satellite background batch (Phase 3)." : "Processing job running."; }
+    let note: string | null = "Operational dataset integrated.";
+    if (!jobDone) {
+      status = "missing";
+      reason = "UPSTREAM_ERROR";
+      note = "Processing job in progress.";
+    } else if (v === "insufficient" && id === "nasa_srtm_gl1") {
+      status = "missing";
+      reason = "UPSTREAM_ERROR";
+    } else if (v === "failed" && id !== "usda_nrcs_ssurgo_sda" && id !== "usda_nass_cdl") {
+      status = "missing";
+      reason = "UPSTREAM_ERROR";
+      note = "Synthetic processing failure.";
+    }
+    const isAvail = status === "available" || (status as string) === "partial";
     return {
       dataset_id: id, label: d.title, priority: d.priority, status, support_class: d.support_class, native_resolution_m: d.native_resolution_m,
-      temporal_coverage: d.temporal_coverage, product_version: d.priority === "P0" && status !== "not_applicable" ? "synthetic-0" : null,
-      last_updated: status === "available" || status === "partial" ? `${DEMO_AS_OF}T09:00:00Z` : null, missing_reason: reason, note,
+      temporal_coverage: d.temporal_coverage, product_version: "synthetic-0",
+      last_updated: isAvail ? `${DEMO_AS_OF}T09:00:00Z` : null, missing_reason: reason, note,
     };
   };
-  const datasets = [...P0, ...P1].map(entry);
-  const p0 = datasets.filter((x) => x.priority === "P0" && x.status !== "not_applicable");
+  const datasets = P0.map(entry).filter(
+    (x) =>
+      x.status !== "not_applicable" &&
+      x.status !== "not_integrated" &&
+      x.dataset_id !== "nasa_hls_vi" &&
+      x.dataset_id !== "nasa_hls" &&
+      !x.label.toLowerCase().includes("ndvi") &&
+      !x.label.toLowerCase().includes("ndmi")
+  );
+  const p0 = datasets.filter((x) => x.priority === "P0");
   const ok = p0.filter((x) => x.status === "available" || x.status === "partial").length;
-  return { field_id: field.field_id, datasets, completeness: round(ok / p0.length, 2) };
+  return { field_id: field.field_id, datasets, completeness: p0.length ? round(ok / p0.length, 2) : 0 };
 }
 
 // ───────────────────────── Resilience ─────────────────────────
 const COMPONENT_META: [ResilienceComponentKey, string, "F" | "S" | "R", string[]][] = [
   ["soil_water_buffer", "Soil water buffer", "F", ["aws_0_150"]],
   ["terrain_erosion_risk", "Terrain & erosion risk", "F", ["slope_p90_pct"]],
-  ["vegetation_stability", "Vegetation stability", "F", ["ndvi_peak_cv"]],
   ["climate_exposure", "Climate exposure", "R", ["precip_anomaly_pct", "heat_stress_days", "sm_rootzone_dry_days"]],
   ["rotation_diversity", "Rotation diversity", "F", ["distinct_crops", "max_monoculture_run", "rotation_shannon"]],
 ];
@@ -472,21 +483,21 @@ export function resilienceProfile(rec: MockFieldRecord, uuid: () => string): Res
   if (v === "failed" || v === "processing_user") {
     return {
       profile_id: uuid(), field_id: field.field_id, as_of: DEMO_AS_OF, model_version: RESILIENCE_MODEL, status: "pending",
-      composite: { score: missing("score_0_100", "PENDING_PROCESSING"), band: "unknown", confidence: "low", components_used: 0, components_total: 5 },
+      composite: { score: missing("score_0_100", "PENDING_PROCESSING"), band: "unknown", confidence: "low", components_used: 0, components_total: 4 },
       components: [], limitations: [{ code: v === "failed" ? "PROCESSING_FAILED" : "PROCESSING", severity: "warning", message: v === "failed" ? "Upstream processing failed for this synthetic field; resilience was not computed." : "Waiting for satellite datasets to finish processing." }],
       disclaimers,
     };
   }
-  const unavailable: ResilienceComponentKey[] = v === "insufficient" ? ["vegetation_stability", "terrain_erosion_risk"] : [];
+  const unavailable: ResilienceComponentKey[] = v === "insufficient" ? ["terrain_erosion_risk", "rotation_diversity"] : [];
   // Per-field synthetic level so the demo shows a spread of bands (not a method; Phase 4 defines scoring).
   const level = rng.pick([30, 48, 58, 74, 84]);
   const components: ResilienceComponent[] = COMPONENT_META.map(([key, label, support, inputs]) => {
     const missingComp = unavailable.includes(key);
     const score = missingComp ? null : Math.round(clamp(level + rng.normal(0, 11), 8, 97));
-    const conf: Confidence = support === "R" ? "low" : v === "cloudy" && key === "vegetation_stability" ? "medium" : "high";
+    const conf: Confidence = support === "R" ? "low" : "high";
     return {
       key, label,
-      score: score === null ? missing("score_0_100", key === "vegetation_stability" ? "INSUFFICIENT_COVERAGE" : "UPSTREAM_ERROR") : q(score, "score_0_100"),
+      score: score === null ? missing("score_0_100", "UPSTREAM_ERROR") : q(score, "score_0_100"),
       band: bandFor(score),
       support_class: support,
       confidence: missingComp ? "low" : conf,
@@ -498,17 +509,16 @@ export function resilienceProfile(rec: MockFieldRecord, uuid: () => string): Res
     };
   });
   const used = components.filter((c) => c.score.value !== null);
-  const enough = used.length >= 4;
+  const enough = used.length >= 3;
   const mean = enough ? Math.round(used.reduce((a, c) => a + (c.score.value as number), 0) / used.length) : null;
   const order: Confidence[] = ["low", "medium", "high"];
   const conf = used.reduce<Confidence>((lo, c) => (order.indexOf(c.confidence) < order.indexOf(lo) ? c.confidence : lo), "high");
   const limitations: QualityFlag[] = [{ code: "REGIONAL_COMPONENT", severity: "info", message: "Climate exposure uses regional-context inputs (POWER ~55 km, SMAP 9 km)." }];
-  if (!enough) limitations.push({ code: "INSUFFICIENT_COMPONENTS", severity: "warning", message: `Only ${used.length} of 5 components are available; a composite needs at least 4.` });
-  if (v === "cloudy") limitations.push({ code: "CLOUD_LIMITED", severity: "warning", message: "Vegetation stability rests on fewer clear scenes than usual." });
+  if (!enough) limitations.push({ code: "INSUFFICIENT_COMPONENTS", severity: "warning", message: `Only ${used.length} of 4 components are available; a composite needs at least 3.` });
   return {
     profile_id: uuid(), field_id: field.field_id, as_of: DEMO_AS_OF, model_version: RESILIENCE_MODEL,
     status: enough ? "computed" : "insufficient_data",
-    composite: { score: mean === null ? missing("score_0_100", "INSUFFICIENT_COVERAGE") : q(mean, "score_0_100"), band: bandFor(mean), confidence: enough ? conf : "low", components_used: used.length, components_total: 5 },
+    composite: { score: mean === null ? missing("score_0_100", "INSUFFICIENT_COVERAGE") : q(mean, "score_0_100"), band: bandFor(mean), confidence: enough ? conf : "low", components_used: used.length, components_total: 4 },
     components, limitations, disclaimers,
   };
 }
@@ -651,6 +661,23 @@ export function fieldEvidence(rec: MockFieldRecord, indicators: EnvironmentalInd
 }
 
 // ───────────────────────── Phase 6: Field Suitability ─────────────────────────
+export const CROP_AGRONOMIC_DESCRIPTIONS: Record<string, string> = {
+  CRP001: "Corn (Zea mays L.) is a warm-season annual C4 cereal requiring 1,167–1,556 GDD (Tbase 10°C, Tcap 30°C) and 500–800 mm water. Highly productive on fertile, well-drained loams with pH 6.0–6.8. Heavy user of nitrogen and soil moisture, with vulnerability to heat and drought stress during silking.",
+  CRP002: "Soybean (Glycine max (L.) Merr.) is a warm-season annual legume requiring 1,000–1,450 GDD (Tbase 10°C) and 450–700 mm water. Fixes atmospheric nitrogen via Bradyrhizobium (70–140 kg N/ha) on soils with pH 6.0–6.8. Critical cash oilseed and break crop following corn or winter wheat; sensitive to high-pH chlorosis and waterlogging.",
+  CRP003: "Winter Wheat (Triticum aestivum L.) is a cool-season annual cereal requiring vernalization (4–8 weeks at 0–7°C), 1,800–2,400 GDD (Tbase 0°C), and 350–550 mm water. Excellent winter ground cover and erosion barrier on soils with pH 6.0–7.0. Foundational high-plains cash cereal with moderate drought and cold tolerance.",
+  CRP004: "Spring Wheat (Triticum aestivum L.) is a cool-season non-vernalizing annual cereal requiring 1,150–1,400 GDD (Tbase 0°C) and 250–500 mm water on well-drained soils with pH 6.0–7.0. Fast-maturing spring cash grain and flexible replant option; sensitive to high temperatures (>32°C) during flowering.",
+  CRP005: "Grain Sorghum (Sorghum bicolor (L.) Moench) is a warm-season C4 grain requiring 944–1,333 GDD (Tbase 10°C) and 350–500 mm water on diverse soils with pH 5.5–7.8. Exemplary dryland cash crop with exceptional drought and heat tolerance via waxy leaf cuticles; ideal low-moisture break crop following wheat.",
+  CRP006: "Cotton (Gossypium hirsutum L.) is a warm-season perennial grown as an annual fiber crop requiring 1,167–1,444 GDD (Tbase 15.6°C, Tcap 32°C) and 500–750 mm water. Requires deep well-drained loam (pH 6.0–7.0) and >180 frost-free days. Deep taproot aids subsoil moisture capture; sensitive to chilling injury and standing water.",
+  CRP007: "Rice (Oryza sativa L.) is a semi-aquatic warm-season annual cereal requiring 1,167–1,556 GDD (Tbase 10°C) and 900–1,200 mm seasonal water. Adapted to poorly drained lowlands and claypan soils (pH 5.5–6.8) under flooding; agronomically unsuitable on well-drained upland fields without impoundments.",
+  CRP008: "Barley (Hordeum vulgare L.) is a cool-season annual small grain requiring 1,100–1,600 GDD (Tbase 0°C) and 300–450 mm water on well-drained loams (pH 6.0–7.5). Short growing cycle allows early harvest; exhibits highest salinity and drought tolerance among small grains, but poor tolerance to waterlogged soils.",
+  CRP009: "Cereal Rye (Secale cereale L.) is an exceptionally cold-hardy cool-season annual grass germinating near 1°C, requiring 900–1,400 GDD and 300–450 mm water. Thrives across marginal, acidic (pH 4.5–7.5) sandy soils. Premier cover crop offering massive biomass, weed suppression, and aggressive nitrate scavenging.",
+  CRP010: "Oats (Avena sativa L.) is a cool-season annual cereal requiring 1,300–1,700 GDD (Tbase 4.4°C) and 350–500 mm water on soils with pH 6.0–7.0. Reliable non-winterhardy cover and nurse crop for alfalfa; rapid autumn biomass establishment and effective surface nutrient scavenging.",
+  CRP011: "Alfalfa (Medicago sativa L.) is a perennial deep-rooted legume forage requiring 2,200–3,500 GDD across multiple cuts and 600–1,000 mm water on deep well-drained soils (pH 6.5–7.5). Fixes extensive nitrogen (150–250 kg N/ha/yr) and breaks subsoils via deep taproots; requires a 1–2 year rotational break due to autotoxicity.",
+  CRP012: "Hairy Vetch (Vicia villosa Roth) is a winter-hardy annual legume cover crop requiring 1,100–1,600 GDD and 350–600 mm water on soils with pH 5.5–7.5. Fixes substantial atmospheric nitrogen (90–180 kg N/ha) released quickly to subsequent summer crops; outstanding winter-survival among annual legumes.",
+  CRP013: "Crimson Clover (Trifolium incarnatum L.) is a cool-season annual legume cover crop requiring 1,000–1,500 GDD and 500–800 mm water on well-drained soils (pH 6.0–7.0). Rapid spring biomass development, moderate nitrogen fixation (70–140 kg N/ha), and early pollinator forage; easily terminated before summer planting.",
+  CRP014: "Oilseed Radish (Raphanus sativus L. var. oleiferus) is a specialty brassica cover crop requiring 600–1,000 GDD and 300–500 mm water on medium soils with pH 6.0–7.5. Aggressive tuberous taproot performs biological subsoiling to alleviate plow pan compaction and scavenges up to 150–220 kg N/ha of residual nitrate; reliably winter-kills below -6°C.",
+};
+
 const CANONICAL_CROPS_SPEC = [
   { id: "CRP001", name: "Corn (Maize)", cdl: 1, family: "Poaceae", role: "primary_cash_grain", cover: false, ph: [6.0, 6.8, 5.5, 7.8], gdd: [1167, 1556], p: [400, 1000] },
   { id: "CRP002", name: "Soybean", cdl: 5, family: "Fabaceae", role: "primary_cash_grain", cover: false, ph: [6.0, 6.8, 5.8, 7.5], gdd: [1000, 1450], p: [400, 950] },
@@ -841,12 +868,24 @@ export function fieldSuitability(rec: MockFieldRecord, seasonYear = 2026): Field
       spatial_support: { support_class: "F", native_resolution_m: 30, extraction_method: "vector_intersection", field_fraction_of_cell: null, cell_id: null, crs: "EPSG:4326" },
       temporal_support: { resolution: "season", period_start: `${seasonYear}-01-01`, period_end: `${seasonYear}-12-31`, aggregation: "mean", time_standard: "UTC" },
       evidence_ids: ["EV0001", "EV0003", "EV0008"],
-      explanation: `${spec.name} is classified as ${sClass.replace("_", " ")}. ${limiting.length ? `Constrained by: ${limiting.join("; ")}` : "High environmental compatibility."}`,
+      explanation: `${spec.name} is classified as ${sClass.replace("_", " ")}.\n\n${CROP_AGRONOMIC_DESCRIPTIONS[spec.id] ?? ""}${limiting.length ? `\n\nIdentified limitations (${limiting.length}):\n${limiting.map((l) => `• ${l}`).join("\n")}` : "\n\nFavorable conditions: High environmental compatibility."}`,
       limitations: [
         "Synthetic decision-support demonstration value.",
         "Does not guarantee commercial emergence or yield.",
       ],
     };
+  });
+
+  // Sort eligible crops by Phase 6 suitability score descending with deterministic tie-breaking (Task 8)
+  crops.sort((a, b) => {
+    const aUnsuitable = a.suitability_class === "unsuitable" ? 1 : 0;
+    const bUnsuitable = b.suitability_class === "unsuitable" ? 1 : 0;
+    if (aUnsuitable !== bUnsuitable) return aUnsuitable - bUnsuitable;
+    const scoreDiff = (b.suitability_score ?? 0) - (a.suitability_score ?? 0);
+    if (Math.abs(scoreDiff) > 1e-4) return scoreDiff;
+    const limDiff = a.limiting_factors.length - b.limiting_factors.length;
+    if (limDiff !== 0) return limDiff;
+    return a.crop_name.localeCompare(b.crop_name);
   });
 
   return {

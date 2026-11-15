@@ -182,12 +182,12 @@ export function createMockServices(): Services {
         recs.forEach((r) => {
           const n = r.field.name;
           if (r.traits.variant === "cloudy") alerts.push({ code: "CLOUD_LIMITED", severity: "warning", message: `${n}: fewer than 6 clear HLS scenes in ${seasonYear}; vegetation phenology is limited.` });
-          if (r.traits.variant === "insufficient") alerts.push({ code: "INSUFFICIENT_COMPONENTS", severity: "warning", message: `${n}: resilience composite withheld — only 3 of 5 components available.` });
+          if (r.traits.variant === "insufficient") alerts.push({ code: "INSUFFICIENT_COMPONENTS", severity: "warning", message: `${n}: resilience composite withheld — fewer than 3 of 4 components available.` });
           if (r.traits.variant === "failed") alerts.push({ code: "PROCESSING_FAILED", severity: "critical", message: `${n}: synthetic processing failure for terrain, climate and vegetation.` });
           if (r.field.processing_status === "processing") alerts.push({ code: "PROCESSING", severity: "info", message: `${n}: processing job in progress.` });
         });
         const ref = recs.find((r) => r.traits.variant === "full") ?? recs[0];
-        const regional = ref ? climateProfile(ref, seasonYear).indicators.filter((i) => ["precip_anomaly_pct", "gdd_season", "sm_rootzone_percentile", "heat_stress_days"].includes(i.key)).map((i) => ({ ...i, indicator_id: `${farm.aoi.aoi_id}:${i.key}:${seasonYear}`, label: `${i.label} (AOI)` })) : [];
+        const regional = ref ? climateProfile(ref, seasonYear).indicators.filter((i) => ["precip_anomaly_pct", "gdd_season", "heat_stress_days"].includes(i.key)).map((i) => ({ ...i, indicator_id: `${farm.aoi.aoi_id}:${i.key}:${seasonYear}`, label: `${i.label} (AOI)` })) : [];
         return { farm, fields, coverage_summary, alerts, regional_context: regional };
       }),
     },
@@ -244,7 +244,7 @@ export function createMockServices(): Services {
           soil: userPending ? null : soilProfile(rec),
           terrain: userPending ? null : terrainProfile(rec),
           crop_history: userPending ? null : cropHistory(rec),
-          climate_summary: v === "failed" ? [] : clim.indicators.filter((i) => ["precip_total_season", "precip_anomaly_pct", "gdd_season", "sm_rootzone_percentile"].includes(i.key)),
+          climate_summary: v === "failed" ? [] : clim.indicators.filter((i) => ["precip_total_season", "precip_anomaly_pct", "gdd_season"].includes(i.key)),
           vegetation_summary: vegetationIndicators(rec, seasonYear).filter((i) => i.key === "ndvi_peak" || i.key === "ndvi_peak_doy"),
           resilience: resilienceProfile(rec, s().world.uuid),
         };
