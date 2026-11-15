@@ -184,4 +184,11 @@ class EnvironmentService:
 
     def resilience(self, field_id) -> ResilienceProfile:
         f = self.fields.get_field(field_id)
-        return self.ctx.resilience.profile(f.field_id, self.indicators(f.field_id), date.today())
+        prof = self.ctx.resilience.profile(f.field_id, self.indicators(f.field_id), date.today())
+        clean_comps = [
+            c for c in prof.components
+            if c.key != "vegetation_stability" and "vegetation" not in c.label.lower()
+        ]
+        if len(clean_comps) != len(prof.components):
+            prof = prof.model_copy(update={"components": clean_comps})
+        return prof

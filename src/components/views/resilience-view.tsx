@@ -43,7 +43,12 @@ function Resilience({ r, fieldId }: { r: ResilienceProfile; fieldId: string }) {
   if (r.status === "pending") {
     return <EmptyState icon={<ShieldCheck className="h-6 w-6" />} title="Resilience analysis not yet computed" description={r.limitations.map((l) => l.message).join(" ") || "Waiting for input datasets."} />;
   }
-  const missing = r.components.filter((c) => c.score.value === null);
+  const components = r.components.filter(
+    (c) => c.key !== "vegetation_stability" && !c.label.toLowerCase().includes("vegetation")
+  );
+  const missing = components.filter((c) => c.score.value === null);
+  const componentsUsed = components.filter((c) => c.score.value !== null).length;
+  const componentsTotal = r.composite.components_total ?? 4;
   return (
     <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
       <div className="space-y-6">
@@ -57,12 +62,12 @@ function Resilience({ r, fieldId }: { r: ResilienceProfile; fieldId: string }) {
                   <div className="absolute inset-x-0 bottom-1 font-display text-[44px] leading-none text-ink"><QuantityValue q={r.composite.score} unitClassName="text-[14px]" /></div>
                 </div>
                 <ScoreBandPill className="mt-3" band={r.composite.band} confidence={r.composite.confidence} />
-                <p className="mt-3 text-[12.5px] text-ink-soft">Equal-weight mean of {r.composite.components_used} of {r.composite.components_total} components. Bands: low &lt; 40 · moderate 40–70 · high &gt; 70.</p>
+                <p className="mt-3 text-[12.5px] text-ink-soft">Equal-weight mean of {componentsUsed} of {componentsTotal} components. Bands: low &lt; 40 · moderate 40–70 · high &gt; 70.</p>
               </div>
             ) : (
               <div className="rounded-xl border border-wheat-200 bg-wheat-100/50 p-4 text-[13px] leading-relaxed text-ink-soft">
                 <p className="font-display text-[18px] text-ink">Composite withheld</p>
-                <p className="mt-1">{r.composite.components_used} of {r.composite.components_total ?? 4} components are available; the framework needs at least 3. Missing: {missing.map((m) => m.label).join(", ")}.</p>
+                <p className="mt-1">{componentsUsed} of {componentsTotal} components are available; the framework needs at least 3.{missing.length > 0 ? ` Missing: ${missing.map((m) => m.label).join(", ")}.` : ""}</p>
               </div>
             )}
           </CardBody>
@@ -82,7 +87,7 @@ function Resilience({ r, fieldId }: { r: ResilienceProfile; fieldId: string }) {
       <Card>
         <CardHeader eyebrow="Components" title="Why this field scores the way it does" description="Each component maps its inputs through a documented breakpoint table. Regional components carry low confidence by design." />
         <CardBody className="space-y-3">
-          {r.components.map((c) => (
+          {components.map((c) => (
             <ComponentRow key={c.key} c={c} open={open === c.key} onToggle={() => setOpen(open === c.key ? null : c.key)} fieldId={fieldId} />
           ))}
         </CardBody>
@@ -92,6 +97,9 @@ function Resilience({ r, fieldId }: { r: ResilienceProfile; fieldId: string }) {
 }
 
 function ComponentRow({ c, open, onToggle, fieldId }: { c: ResilienceComponent; open: boolean; onToggle: () => void; fieldId: string }) {
+  if (c.key === "vegetation_stability" || c.label.toLowerCase().includes("vegetation")) {
+    return null;
+  }
   const v = c.score.value;
   const s = SUPPORT_STYLE[c.support_class];
   return (
