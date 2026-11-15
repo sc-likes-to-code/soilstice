@@ -72,11 +72,11 @@ def test_create_field_runs_full_pipeline(client):
 
     profile = FieldProfile.model_validate(client.get(f"{API}/fields/{fid}/profile").json()["data"])
     assert profile.soil and profile.terrain and profile.crop_history
-    assert profile.coverage.completeness == 0.625  # 8 applicable P0 rows (5 available/partial including meteomatics)
+    assert profile.coverage.completeness == 1.0  # 5 active integrated P0 datasets (all available/partial)
     statuses = {d.dataset_id: d.status for d in profile.coverage.datasets}
-    assert statuses["usda_nass_csb"] == "not_applicable"
-    assert statuses["nasa_hls_vi"] == "not_integrated" and statuses["nasa_smap_spl4smgp"] == "not_integrated"
-    assert {statuses[k] for k in ("usda_nrcs_ssurgo_sda", "nasa_power_daily_ag", "nasa_srtm_gl1")} == {"available"}
+    assert "usda_nass_csb" not in statuses  # not_applicable filtered out
+    assert "nasa_hls_vi" not in statuses  # NDVI/NDMI globally removed
+    assert {statuses[k] for k in ("usda_nrcs_ssurgo_sda", "nasa_power_daily_ag", "nasa_srtm_gl1", "meteomatics")} == {"available"}
     assert statuses["usda_nass_cdl"] == "partial"  # 2006 out of range in the fake
     assert profile.resilience.status == "computed" and profile.resilience.composite.score.value is not None
 
@@ -242,7 +242,7 @@ def test_vegetation_indicators_resilience_evidence(client):
     assert len({i["indicator_id"] for i in all_inds}) == len(all_inds)
 
     res = client.get(f"{API}/fields/{fid}/resilience").json()["data"]
-    assert res["status"] == "computed" and len(res["components"]) == 5
+    assert res["status"] == "computed" and len(res["components"]) == 4
     assert res["composite"]["components_used"] == 4
     assert res["composite"]["score"]["value"] is not None
 

@@ -106,10 +106,7 @@ CLIMATE_INDICATORS: list[tuple[str, str, str, str, tuple]] = [
     ("frost_free_days", "Frost-free days", "climate", "day", ("frost_free",)),
     ("et0_total_season", "Reference ET₀ total", "water", "mm", ("et0",)),
     ("water_balance_season", "Climatic water balance (P − ET₀)", "water", "mm", ("water_balance",)),
-    ("et_actual_season", "Actual ET (OpenET)", "water", "mm", ("no_source", "openet")),
     ("sm_rootzone_mean_season", "Root-zone soil moisture (season mean)", "soil_moisture", "m3_m-3",
-     ("no_source", "nasa_smap_spl4smgp")),
-    ("sm_rootzone_percentile", "Root-zone soil moisture percentile", "soil_moisture", "percentile",
      ("no_source", "nasa_smap_spl4smgp")),
     ("sm_rootzone_dry_days", "Root-zone dry days", "soil_moisture", "day", ("no_source", "nasa_smap_spl4smgp")),
 ]

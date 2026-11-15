@@ -61,7 +61,17 @@ export function IndicatorCard({ indicator, className, size = "md" }: { indicator
 
 /** Per-dataset coverage table (UI_ARCHITECTURE §3.3). */
 export function CoverageTable({ coverage, condensed }: { coverage: DataCoverage; condensed?: boolean }) {
-  const rows = condensed ? coverage.datasets.filter((d) => d.priority === "P0") : coverage.datasets;
+  // Filter out not_applicable, not_integrated, and globally remove NDVI/NDMI entries (Tasks 1 & 2)
+  const activeDatasets = coverage.datasets.filter(
+    (d) =>
+      d.status !== "not_applicable" &&
+      d.status !== "not_integrated" &&
+      d.dataset_id !== "nasa_hls_vi" &&
+      d.dataset_id !== "nasa_hls" &&
+      !d.label.toLowerCase().includes("ndvi") &&
+      !d.label.toLowerCase().includes("ndmi")
+  );
+  const rows = condensed ? activeDatasets.filter((d) => d.priority === "P0") : activeDatasets;
   return (
     <div className="overflow-x-auto">
       <table className="w-full min-w-[520px] text-left text-[12.5px]">

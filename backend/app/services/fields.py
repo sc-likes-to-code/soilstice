@@ -33,8 +33,7 @@ from .pipeline import JobRunner, new_job
 
 FARM_NAMESPACE = uuid.UUID("8a4f2b6e-1c3d-4e5f-9a7b-3c2d1e0f9a8b")
 COVERAGE_DATASETS = [
-    "meteomatics", "nasa_power_daily_ag", "usda_nrcs_ssurgo_sda", "usda_nass_cdl", "usda_nass_csb", "nasa_hls_vi", "nasa_hls",
-    "nasa_smap_spl4smgp", "nasa_srtm_gl1", "prism_daily", "openet", "usda_nass_quickstats", "nasa_smap_spl3smp_e",
+    "meteomatics", "nasa_power_daily_ag", "usda_nrcs_ssurgo_sda", "usda_nass_cdl", "nasa_srtm_gl1",
 ]
 
 
@@ -190,17 +189,17 @@ class FieldService:
         states = {s.dataset_id: s for s in self.repos.dataset_states.list(parent=str(f.field_id))}
         rows: list[DatasetCoverage] = []
         for ds in COVERAGE_DATASETS:
+            # Globally remove NDVI / NDMI datasets from Data Coverage
+            if ds in ("nasa_hls_vi", "nasa_hls"):
+                continue
             d = descriptor(ds)
             base = dict(dataset_id=ds, label=d.title, priority=d.priority, support_class=d.support_class,
                         native_resolution_m=d.native_resolution_m)
+            # Remove Not Applicable and Not Integrated entries from Data Coverage
             if ds == "usda_nass_csb" and f.source != "csb":
-                rows.append(DatasetCoverage(**base, status="not_applicable", temporal_coverage=d.temporal_coverage,
-                                            product_version=d.product_version,
-                                            note="User-drawn field: CSB applies only to CSB-sourced fields."))
+                continue
             elif ds not in INTEGRATED:
-                rows.append(DatasetCoverage(**base, status="not_integrated", temporal_coverage=d.temporal_coverage,
-                                            product_version=d.product_version, missing_reason="NO_DATA_SOURCE",
-                                            note=f"{d.priority} dataset planned; not yet integrated."))
+                continue
             else:
                 st = states.get(ds)
                 if st is None:
@@ -218,9 +217,10 @@ class FieldService:
                         product_version=st.product_version or d.product_version, last_updated=st.updated_at,
                         missing_reason=st.missing_reason if st.state != "available" else None,
                         note=st.message))
-        p0 = [r for r in rows if r.priority == "P0" and r.status != "not_applicable"]
+        active_rows = [r for r in rows if r.status not in ("not_applicable", "not_integrated")]
+        p0 = [r for r in active_rows if r.priority == "P0"]
         done = sum(r.status in ("available", "partial") for r in p0)
-        return DataCoverage(field_id=f.field_id, datasets=rows, completeness=round(done / len(p0), 4) if p0 else 0.0)
+        return DataCoverage(field_id=f.field_id, datasets=active_rows, completeness=round(done / len(p0), 4) if p0 else 0.0)
 
     def get_coverage(self, field_id) -> DataCoverage:
         return self.coverage(self.get_field(field_id))

@@ -1,24 +1,23 @@
 "use client";
 import { useState } from "react";
-import { CloudRain, Droplets, Leaf, Mountain } from "lucide-react";
-import type { ClimateProfile, SoilProfile, TerrainProfile, TimeSeries, VegetationIndex, VegetationProfile } from "@/types/contracts";
-import { useClimate, useSoil, useTerrain, useVegetation } from "@/hooks/queries";
+import { CloudRain, Droplets, Mountain } from "lucide-react";
+import type { ClimateProfile, SoilProfile, TerrainProfile, TimeSeries } from "@/types/contracts";
+import { useClimate, useSoil, useTerrain } from "@/hooks/queries";
 import { useFieldId } from "@/components/layout/field-layout";
-import { formatDate, missingText, pct } from "@/lib/format";
+import { pct } from "@/lib/format";
 import { DATASET_SHORT } from "@/lib/vocab";
 import { cn } from "@/lib/cn";
-import { Badge, Card, CardBody, CardHeader, Segmented, Select, Skeleton } from "@/components/ui/primitives";
+import { Badge, Card, CardBody, CardHeader, Select, Skeleton } from "@/components/ui/primitives";
 import { EmptyState, ErrorState, StateBoundary } from "@/components/shared/state";
 import { IndicatorCard } from "@/components/shared/data-display";
 import { ChartLegend, TimeSeriesChart } from "@/components/shared/charts";
-import { FlagList, QualityIndicator, QuantityValue, SourceList, SupportBadge } from "@/components/shared/provenance";
+import { QualityIndicator, QuantityValue, SourceList, SupportBadge } from "@/components/shared/provenance";
 import { LATEST_SEASON, seasonOptions } from "./common";
 
-type Tab = "climate" | "moisture" | "vegetation" | "soil";
-const TABS: { value: Tab; label: string; icon: typeof Leaf }[] = [
+type Tab = "climate" | "moisture" | "soil";
+const TABS: { value: Tab; label: string; icon: typeof Mountain }[] = [
   { value: "climate", label: "Climate", icon: CloudRain },
   { value: "moisture", label: "Soil moisture", icon: Droplets },
-  { value: "vegetation", label: "Vegetation", icon: Leaf },
   { value: "soil", label: "Soil & terrain", icon: Mountain },
 ];
 
@@ -46,7 +45,6 @@ export function EnvironmentView() {
       </div>
       {tab === "climate" && <ClimateTab fieldId={fieldId} season={season} />}
       {tab === "moisture" && <MoistureTab fieldId={fieldId} season={season} />}
-      {tab === "vegetation" && <VegetationTab fieldId={fieldId} season={season} />}
       {tab === "soil" && <SoilTerrainTab fieldId={fieldId} />}
     </div>
   );
@@ -250,97 +248,6 @@ function MoistureTab({ fieldId, season }: { fieldId: string; season: number }) {
         );
       }}
     </StateBoundary>
-  );
-}
-
-const INDEXES: VegetationIndex[] = ["NDVI", "EVI", "NDMI"];
-
-function VegetationTab({ fieldId, season }: { fieldId: string; season: number }) {
-  const [index, setIndex] = useState<VegetationIndex>("NDVI");
-  const q = useVegetation(fieldId, season, index);
-  return (
-    <div className="space-y-4">
-      <Segmented label="Vegetation index" value={index} onChange={setIndex} options={INDEXES.map((i) => ({ value: i, label: i }))} />
-      <StateBoundary query={q} skeleton={sk}>{(v) => <Vegetation v={v} />}</StateBoundary>
-    </div>
-  );
-}
-
-function Vegetation({ v }: { v: VegetationProfile }) {
-  const isRegional = v.phenology.method.method_id.includes("meteomatics") || v.sources.some((s) => s.dataset_id === "meteomatics");
-  const accepted = v.scenes.filter((s) => s.accepted).length;
-  const ph = v.phenology;
-  if (v.scenes.length === 0) {
-    return <EmptyState title={`No ${v.index} scenes for ${v.year}`} description={missingText(v.quality.missing_reason)} />;
-  }
-  const allPoints = {
-    ...v.series,
-    series_id: v.series.series_id + ":all",
-    label: "All scenes (incl. rejected)",
-    points: v.scenes.map((s) => ({ t: s.acquired_at.slice(0, 10), value: s.median, quality_status: s.accepted ? ("valid" as const) : ("flagged" as const), missing_reason: s.missing_reason })),
-  };
-  const markers = [ph.greenup_date && { t: ph.greenup_date, label: "Green-up", color: "#4b8158" }, ph.peak_date && { t: ph.peak_date, label: "Peak", color: "#1d3a29" }, ph.senescence_date && { t: ph.senescence_date, label: "Senescence", color: "#a87a24" }].filter(Boolean) as { t: string; label: string; color: string }[];
-  return (
-    <div className="space-y-6">
-      {isRegional && (
-        <div className="flex items-start gap-3 rounded-xl border border-wheat-200 bg-wheat-100/60 p-4 text-[13px] leading-relaxed text-ink-soft">
-          <Leaf className="mt-0.5 h-4 w-4 shrink-0 text-wheat-600" aria-hidden />
-          <p>
-            <strong className="text-ink">Regional vegetation indicator (Support Class R).</strong> Meteomatics regional NDVI (sat_ndvi:idx) provides macro-scale greenness context (~9 km). It is not field-level 30 m HLS imagery. The Canopy Temporal Stability Model and field-scale phenological half-amplitude transitions remain intentionally unavailable.
-          </p>
-        </div>
-      )}
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <MiniStat label={`Peak ${v.index}`} value={<QuantityValue q={ph.peak_value} />} sub={ph.peak_date ? formatDate(ph.peak_date, "long") : missingText(ph.missing_reason)} />
-        <MiniStat label="Green-up" value={ph.greenup_date ? formatDate(ph.greenup_date, "long") : "Unavailable (Regional)"} sub={ph.greenup_date ? "Half-amplitude crossing" : "Regional macro-scale"} />
-        <MiniStat label="Senescence" value={ph.senescence_date ? formatDate(ph.senescence_date, "long") : "Unavailable (Regional)"} sub={ph.senescence_date ? "Half-amplitude crossing" : "Regional macro-scale"} />
-        <MiniStat label={isRegional ? "Observed timesteps" : "Accepted scenes"} value={`${accepted} / ${v.scenes.length}`} sub={isRegional ? "Valid daily retrievals" : "≥ 70% clear field pixels"} />
-      </div>
-      {v.quality.flags.length > 0 && <FlagList flags={v.quality.flags} />}
-      <Card>
-        <CardHeader
-          eyebrow={isRegional ? "Meteomatics · Regional sat_ndvi:idx" : "HLS-VI · L30 + S30"}
-          title={isRegional ? `Regional NDVI through the ${v.year} season` : `${v.index} through the ${v.year} season`}
-          description={isRegional ? "Regional daily satellite vegetation greenness time series." : "Accepted scenes form the line; rejected (cloud-limited) scenes appear as faint points."}
-          actions={<><SupportBadge spatial={v.spatial} /><SourceList sources={v.sources} /></>}
-        />
-        <CardBody>
-          <TimeSeriesChart x="date" height={300} markers={markers} specs={[{ series: allPoints, kind: "scatter", color: "#cfc3aa", name: "All scenes" }, { series: v.series, kind: "line", color: "#366645", name: "Accepted scenes", connect: true }]} />
-          <div className="mt-3"><ChartLegend items={[{ label: "Accepted scene median", color: "#366645" }, { label: "All scenes", color: "#cfc3aa" }]} /></div>
-          <p className="mt-2 text-[11.5px] text-stone-500">{ph.method.name}: {ph.method.description}</p>
-        </CardBody>
-      </Card>
-      <Card>
-        <CardHeader
-          eyebrow={isRegional ? "Observation log" : "Scene log"}
-          title={isRegional ? "Meteomatics satellite NDVI observations" : "Every scene, with cloud-mask accounting"}
-          description={isRegional ? "Daily regional retrievals mapped to field centroid." : "Fmask bits 1–3 (cloud, adjacent, shadow) are masked; scenes need ≥ 70% clear field pixels."}
-        />
-        <CardBody className="pt-2">
-          <div className="max-h-[360px] overflow-auto">
-            <table className="w-full min-w-[640px] text-left text-[12px]">
-              <thead className="sticky top-0 bg-paper">
-                <tr className="border-b border-line text-[10.5px] uppercase tracking-[0.12em] text-stone-500">
-                  <th className="py-2 pr-3 font-semibold">Date</th><th className="py-2 pr-3 font-semibold">Granule</th><th className="py-2 pr-3 font-semibold">Median</th><th className="py-2 pr-3 font-semibold">Clear</th><th className="py-2 pr-3 font-semibold">Masked (cloud / adj. / shadow)</th><th className="py-2 font-semibold">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {v.scenes.map((s) => (
-                  <tr key={s.granule_id} className="border-b border-line/50">
-                    <td className="py-1.5 pr-3 tabular">{formatDate(s.acquired_at, "long")}</td>
-                    <td className="py-1.5 pr-3 font-mono text-[10.5px] text-stone-500">{s.granule_id.replace("SYNTHETIC.", "")}</td>
-                    <td className="py-1.5 pr-3 tabular">{s.median === null ? "—" : s.median.toFixed(3)}</td>
-                    <td className="py-1.5 pr-3"><span className="inline-flex items-center gap-2"><span className="h-1.5 w-12 overflow-hidden rounded-full bg-parchment"><span className={cn("block h-full", s.accepted ? "bg-forest-500" : "bg-wheat-500")} style={{ width: `${s.clear_fraction * 100}%` }} /></span><span className="tabular">{pct(s.clear_fraction)}</span></span></td>
-                    <td className="py-1.5 pr-3 tabular text-stone-500">{s.mask_counts.cloud} / {s.mask_counts.cloud_adjacent} / {s.mask_counts.cloud_shadow}</td>
-                    <td className="py-1.5">{s.accepted ? <Badge className="bg-forest-100 text-forest-800">Accepted</Badge> : <Badge className="bg-wheat-100 text-wheat-600">{s.missing_reason === "QA_MASKED_CLOUD" ? "Cloud" : "Rejected"}</Badge>}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </CardBody>
-      </Card>
-    </div>
   );
 }
 
