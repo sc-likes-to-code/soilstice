@@ -13,9 +13,13 @@ from pathlib import Path
 
 import numpy as np
 import pytest
-import rasterio
 from fastapi.testclient import TestClient
-from rasterio.transform import from_origin
+try:
+    import rasterio
+    from rasterio.transform import from_origin
+except ImportError:
+    rasterio = None  # type: ignore
+    from_origin = None  # type: ignore
 
 from app.analytics.resilience import CalibratedResilienceEngine
 from app.config import Settings

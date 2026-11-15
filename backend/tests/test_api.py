@@ -261,10 +261,11 @@ def test_every_response_validates_against_contract_models(client):
     fid = create_reno_field(client).json()["data"]["field"]["field_id"]
     schema_paths = create_app().openapi()["paths"]
     gets = [p for p, v in schema_paths.items() if "get" in v]
-    assert len(gets) == 28
+    assert len(gets) == 30
     for path in [
         f"/fields/{fid}/profile",
         f"/fields/{fid}/coverage",
+        f"/fields/{fid}/suitability",
         "/datasets",
         "/crops",
         "/canonical-crops",
