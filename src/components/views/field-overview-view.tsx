@@ -94,12 +94,12 @@ function Overview({ p }: { p: FieldProfile }) {
           <CardHeader
             eyebrow={`Season ${LATEST_SEASON}`}
             title={<span className="inline-flex items-center gap-2"><Leaf className="h-4 w-4 text-forest-500" /> Environment at a glance</span>}
-            description="Climate indicators are regional context; vegetation indicators are field-resolved."
+            description="Climate and environmental indicators for the selected season."
             actions={<Link href={`${base}/environment`} className="inline-flex items-center gap-1 text-[12.5px] font-semibold text-forest-700">Environmental Intelligence <ArrowRight className="h-3.5 w-3.5" /></Link>}
           />
           <CardBody className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {[...p.climate_summary, ...p.vegetation_summary].map((i) => <IndicatorCard key={i.indicator_id} indicator={i} size="sm" />)}
-            {p.climate_summary.length + p.vegetation_summary.length === 0 && <div className="sm:col-span-3"><Unavailable dataset="nasa_power_daily_ag" p={p} /></div>}
+            {p.climate_summary.map((i) => <IndicatorCard key={i.indicator_id} indicator={i} size="sm" />)}
+            {p.climate_summary.length === 0 && <div className="sm:col-span-3"><Unavailable dataset="nasa_power_daily_ag" p={p} /></div>}
           </CardBody>
         </Card>
       </div>
@@ -122,7 +122,7 @@ function Overview({ p }: { p: FieldProfile }) {
                 <p className="mt-2 text-[12.5px] text-ink-soft">{res.composite.components_used} of {res.composite.components_total} components · model {res.model_version}</p>
               </div>
             ) : (
-              <EmptyState title={res?.status === "insufficient_data" ? "Insufficient data" : "Not computed yet"} description={res?.limitations.map((l) => l.message).join(" ") || "Resilience needs at least 4 of 5 components."} />
+              <EmptyState title={res?.status === "insufficient_data" ? "Insufficient data" : "Not computed yet"} description={res?.limitations.map((l) => l.message).join(" ") || "Resilience needs at least 3 of 4 components."} />
             )}
             <Link href={`${base}/resilience`} className="mt-4 inline-flex items-center gap-1 text-[12.5px] font-semibold text-forest-700">View component breakdown <ArrowRight className="h-3.5 w-3.5" /></Link>
           </CardBody>

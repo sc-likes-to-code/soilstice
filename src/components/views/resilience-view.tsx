@@ -62,7 +62,7 @@ function Resilience({ r, fieldId }: { r: ResilienceProfile; fieldId: string }) {
             ) : (
               <div className="rounded-xl border border-wheat-200 bg-wheat-100/50 p-4 text-[13px] leading-relaxed text-ink-soft">
                 <p className="font-display text-[18px] text-ink">Composite withheld</p>
-                <p className="mt-1">{r.composite.components_used} of 5 components are available; the framework needs at least 4. Missing: {missing.map((m) => m.label).join(", ")}.</p>
+                <p className="mt-1">{r.composite.components_used} of {r.composite.components_total ?? 4} components are available; the framework needs at least 3. Missing: {missing.map((m) => m.label).join(", ")}.</p>
               </div>
             )}
           </CardBody>

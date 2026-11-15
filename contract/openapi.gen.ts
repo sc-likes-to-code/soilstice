@@ -1957,10 +1957,9 @@ export interface components {
             band: "low" | "moderate" | "high" | "unknown";
             /**
              * Components Total
-             * @default 5
-             * @constant
+             * @default 4
              */
-            components_total: 5;
+            components_total: number;
             /** Components Used */
             components_used: number;
             /**

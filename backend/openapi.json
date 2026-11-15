@@ -4315,8 +4315,7 @@
             "type": "string"
           },
           "components_total": {
-            "const": 5,
-            "default": 5,
+            "default": 4,
             "title": "Components Total",
             "type": "integer"
           },

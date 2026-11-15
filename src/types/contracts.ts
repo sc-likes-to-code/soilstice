@@ -397,7 +397,7 @@ export interface ResilienceProfile {
   as_of: ISODate;
   model_version: string;
   status: "computed" | "insufficient_data" | "pending";
-  composite: { score: Quantity; band: ScoreBand; confidence: Confidence; components_used: number; components_total: 5 };
+  composite: { score: Quantity; band: ScoreBand; confidence: Confidence; components_used: number; components_total: number };
   components: ResilienceComponent[];
   limitations: QualityFlag[];
   disclaimers: string[];

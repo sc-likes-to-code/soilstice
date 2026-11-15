@@ -205,7 +205,7 @@ def test_calibrated_resilience_quorum_met():
     prof = engine.profile(fid, inds, date(2026, 11, 14))
     assert prof.status == "computed"
     assert prof.composite.components_used == 4
-    assert prof.composite.components_total == 5
+    assert prof.composite.components_total == 4
     assert prof.composite.score.value is not None
     assert 60.0 < prof.composite.score.value < 85.0
     assert prof.composite.band in ("moderate", "high")

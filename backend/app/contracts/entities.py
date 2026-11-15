@@ -394,7 +394,7 @@ class ResilienceComposite(Contract):
     band: ScoreBand
     confidence: Confidence
     components_used: int = PField(ge=0, le=5)
-    components_total: Literal[5] = 5
+    components_total: int = 4
 
 
 class ResilienceProfile(Contract):

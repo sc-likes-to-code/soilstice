@@ -32,7 +32,6 @@ COMPONENTS = [
     ("terrain_erosion_risk", "Terrain erosion risk", "F", ["slope_p90_pct"]),
     ("climate_exposure", "Climate exposure", "R", ["precip_anomaly_pct", "heat_stress_days"]),
     ("rotation_diversity", "Rotation diversity", "F", ["distinct_crops", "max_monoculture_run", "rotation_shannon"]),
-    ("vegetation_stability", "Vegetation stability", "F", ["ndvi_peak_cv"]),
 ]
 
 RULE_SOIL_WATER = MethodRef(
@@ -72,7 +71,7 @@ DISCLAIMERS = [
     "not empirically calibrated outcome models or agronomic prescriptions.",
     "Components marked support class R (e.g. Climate Exposure) describe regional context and do not measure "
     "field-level variation.",
-    "Composite resilience requires a minimum quorum of 4 valid components; fields missing required inputs are labeled "
+    "Composite resilience requires a minimum quorum of 3 valid components (out of 4); fields missing required inputs are labeled "
     "insufficient_data rather than assigned fabricated scores.",
 ]
 
@@ -240,34 +239,12 @@ class AgronomicBreakpointResilienceEngine:
             explanation=expl_rot, rule_ref=RULE_ROTATION_DIVERSITY,
         ))
 
-        # 5. Vegetation Stability (ndvi_peak_cv)
-        ndvi_cv = val_map.get("ndvi_peak_cv")
-        if ndvi_cv is not None:
-            # <=0.08 -> 100; 0.15 -> 75; 0.25 -> 45; >=0.40 -> 10
-            score_veg = round(_interpolate(ndvi_cv, [(0.08, 100.0), (0.15, 75.0), (0.25, 45.0), (0.40, 10.0)]), 1)
-            band_veg = _band(score_veg)
-            conf_veg = "high"
-            expl_veg = f"Peak NDVI interannual CV of {ndvi_cv:.3f} indicates {band_veg} canopy buffering stability."
-            q_veg = Quantity(value=score_veg, unit="score_0_100")
-        else:
-            band_veg = "unknown"
-            conf_veg = "low"
-            expl_veg = "Vegetation stability unavailable: requires field-scale 30 m HLS time series; regional NDVI is not substituted."
-            q_veg = Quantity(value=None, unit="score_0_100", missing_reason="NOT_COMPUTED")
-
-        components.append(ResilienceComponent(
-            key="vegetation_stability", label="Vegetation stability", score=q_veg, band=band_veg,
-            support_class="F", confidence=conf_veg,
-            input_indicator_ids=[id_map["ndvi_peak_cv"]] if "ndvi_peak_cv" in id_map else [],
-            explanation=expl_veg, rule_ref=RULE_VEGETATION_STABILITY,
-        ))
-
-        # Composite Quorum Rule: >= 4 of 5 components must be valid
+        # Composite Quorum Rule: >= 3 of 4 components must be valid
         valid_comps = [c for c in components if c.score.value is not None]
         n_valid = len(valid_comps)
         limitations: list[QualityFlag] = []
 
-        if n_valid >= 4:
+        if n_valid >= 3:
             comp_score = round(sum(c.score.value for c in valid_comps) / n_valid, 1)  # type: ignore[arg-type]
             comp_band = _band(comp_score)
             comp_conf = "low" if any(c.confidence == "low" for c in valid_comps) else "high"
@@ -280,7 +257,7 @@ class AgronomicBreakpointResilienceEngine:
             status = "insufficient_data"
             limitations.append(QualityFlag(
                 code="QUORUM_NOT_MET", severity="warning",
-                message=f"Only {n_valid} of 5 resilience components have valid observations (minimum quorum is 4). "
+                message=f"Only {n_valid} of 4 resilience components have valid observations (minimum quorum is 3). "
                         "Composite resilience is withheld to maintain scientific integrity.",
             ))
 
