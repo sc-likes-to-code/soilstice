@@ -39,7 +39,13 @@ class Settings(BaseSettings):
     cache_dir: Path = BACKEND_ROOT / ".cache"
 
     # HTTP / CORS
-    cors_origins: list[str] = ["http://localhost:3000", "http://localhost:3100", "http://localhost:3101"]
+    cors_origins: list[str] = [
+    "http://localhost:3000",
+    "http://localhost:3100",
+    "http://localhost:3101",
+    "https://soilstice-web.vercel.app",
+    "https://soilstice.vercel.app",
+]
     rate_limit_writes_per_minute: int = 60
 
     # Processing
