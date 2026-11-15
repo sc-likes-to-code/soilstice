@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+Allow: /evidence
+Allow: /fields
+Allow: /dashboard
+Disallow: /api/
+Disallow: /settings
+
+User-agent: Googlebot
+Allow: /
+Allow: /evidence
+Allow: /fields
+Allow: /dashboard
+Disallow: /api/
+Disallow: /settings
+
+Host: https://soilstice.vercel.app
+Sitemap: https://soilstice.vercel.app/sitemap.xml

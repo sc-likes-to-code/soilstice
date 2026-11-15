@@ -98,7 +98,7 @@ const DATASET_MATRIX = [
     coverage: "2013 – present",
     status: "staged",
     statusLabel: "Phase 3 Ingestion",
-    role: "Time-series NDVI, EVI2, green-up and peak biomass phenology",
+    role: "High-resolution surface reflectance, canopy green-up and phenology",
   },
 ];
 
