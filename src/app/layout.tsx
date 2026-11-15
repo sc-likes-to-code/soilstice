@@ -10,6 +10,15 @@ const plexMono = IBM_Plex_Mono({ variable: "--font-plex-mono", subsets: ["latin"
 export const metadata: Metadata = {
   title: { default: "SOILSTICE — Field resilience intelligence", template: "%s · SOILSTICE" },
   description: "Field-level agricultural intelligence from NASA Earth observation and USDA data: environment, crop history, resilience and explainable rotation options.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "32x32" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
 };
 
 const HIDE_SCROLLBAR_CSS = `
