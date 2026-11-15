@@ -14,6 +14,8 @@ from app.contracts import (
     QualityInfo,
     Quantity,
     SoilLayer,
+    SoilMoistureDepthMetric,
+    SoilMoistureProfile,
     SoilProfile,
     SpatialSupport,
     TemporalSupport,
@@ -72,4 +74,41 @@ def missing_vegetation(field_id: UUID, year: int, index: str) -> VegetationProfi
                           sources=[source_ref("nasa_hls_vi")], points=[], reference=None),
         phenology=Phenology(peak_value=_q("unitless", reason), method=method, gap_filled=False, missing_reason=reason),
         spatial=spatial, sources=[], quality=_quality(reason, "HLS-VI is not yet integrated; no scenes are available."),
+    )
+
+
+def missing_soil_moisture(field_id: UUID, year: int, reason: str, message: str | None = None) -> SoilMoistureProfile:
+    def _d_metric(label: str, cm: float, param: str) -> SoilMoistureDepthMetric:
+        return SoilMoistureDepthMetric(
+            depth_label=label,
+            depth_cm=cm,
+            parameter=param,
+            mean=_q("m3_m-3", reason),
+            variability_cv=None,
+            min=_q("m3_m-3", reason),
+            max=_q("m3_m-3", reason),
+            valid_observations=0,
+            missing_observations=0,
+        )
+
+    return SoilMoistureProfile(
+        field_id=field_id,
+        season_year=year,
+        as_of=date.today(),
+        surface_sm=_d_metric("surface", -5.0, "volumetric_soil_water_-5cm:m3m3"),
+        shallow_sm=_d_metric("shallow", -15.0, "volumetric_soil_water_-15cm:m3m3"),
+        middepth_sm=_d_metric("middepth", -50.0, "volumetric_soil_water_-50cm:m3m3"),
+        deep_sm=_d_metric("deep", -150.0, "volumetric_soil_water_-150cm:m3m3"),
+        rootzone_sm_composite=_q("m3_m-3", reason),
+        rootzone_dry_days=_q("day", reason),
+        series=[],
+        metrics=[],
+        spatial=SpatialSupport(
+            support_class="R",
+            native_resolution_m=None,
+            extraction_method="api_point_query",
+            crs="EPSG:4326",
+        ),
+        sources=[source_ref("meteomatics", product="Meteomatics Mix Model", version="v3.0")],
+        quality=_quality(reason, message),
     )

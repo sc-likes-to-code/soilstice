@@ -157,8 +157,8 @@ class AgronomicBreakpointResilienceEngine:
         else:
             band_ter = "unknown"
             conf_ter = "low"
-            expl_ter = "Terrain slope uncomputed: SRTM extraction requires Earthdata Login credentials."
-            q_ter = Quantity(value=None, unit="score_0_100", missing_reason="NOT_COMPUTED")
+            expl_ter = "Terrain erosion hazard unavailable: elevation spatial resolution inadequate for field-scale slope P90 derivation."
+            q_ter = Quantity(value=None, unit="score_0_100", missing_reason="INSUFFICIENT_COVERAGE")
 
         components.append(ResilienceComponent(
             key="terrain_erosion_risk", label="Terrain erosion risk", score=q_ter, band=band_ter,
@@ -252,7 +252,7 @@ class AgronomicBreakpointResilienceEngine:
         else:
             band_veg = "unknown"
             conf_veg = "low"
-            expl_veg = "Vegetation stability uncomputed: HLS raster extraction requires Earthdata Login credentials."
+            expl_veg = "Vegetation stability unavailable: requires field-scale 30 m HLS time series; regional NDVI is not substituted."
             q_veg = Quantity(value=None, unit="score_0_100", missing_reason="NOT_COMPUTED")
 
         components.append(ResilienceComponent(

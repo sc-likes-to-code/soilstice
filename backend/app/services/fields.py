@@ -33,7 +33,7 @@ from .pipeline import JobRunner, new_job
 
 FARM_NAMESPACE = uuid.UUID("8a4f2b6e-1c3d-4e5f-9a7b-3c2d1e0f9a8b")
 COVERAGE_DATASETS = [
-    "nasa_power_daily_ag", "usda_nrcs_ssurgo_sda", "usda_nass_cdl", "usda_nass_csb", "nasa_hls_vi", "nasa_hls",
+    "meteomatics", "nasa_power_daily_ag", "usda_nrcs_ssurgo_sda", "usda_nass_cdl", "usda_nass_csb", "nasa_hls_vi", "nasa_hls",
     "nasa_smap_spl4smgp", "nasa_srtm_gl1", "prism_daily", "openet", "usda_nass_quickstats", "nasa_smap_spl3smp_e",
 ]
 
@@ -107,10 +107,9 @@ class FieldService:
         if n_proc:
             alerts.append(QualityFlag(code="FIELDS_PROCESSING", severity="info",
                                       message=f"{n_proc} field(s) are still processing."))
-        if not self.ctx.settings.earthdata_configured:
+        if not self.ctx.settings.meteomatics_configured and not self.ctx.settings.earthdata_configured:
             alerts.append(QualityFlag(code="EARTHDATA_NOT_CONFIGURED", severity="warning",
-                                      message="NASA Earthdata credentials are not configured; SRTM terrain cannot be "
-                                              "acquired."))
+                                      message="Neither Meteomatics nor NASA Earthdata credentials are configured; terrain elevation and soil moisture cannot be acquired."))
         if not fields:
             alerts.append(QualityFlag(code="NO_FIELDS", severity="info",
                                       message="No fields yet. Draw a field in Settings to start real-data processing."))
@@ -158,6 +157,21 @@ class FieldService:
         JobRunner(self.ctx).submit(job)
         return CreateFieldResponse(field=self.repos.fields.get(str(field_id)) or field,
                                    job=self.repos.jobs.get(str(job.job_id)) or job)
+
+    def reprocess_field(self, field_id) -> CreateFieldResponse:
+        f = self.get_field(field_id)
+        job = new_job(f.field_id)
+        updated_field = f.model_copy(update={
+            "processing_status": "processing",
+            "latest_job_id": job.job_id,
+        })
+        self.repos.fields.put(str(f.field_id), updated_field, parent=f.farm_id)
+        self.repos.jobs.put(str(job.job_id), job, parent=str(f.field_id))
+        JobRunner(self.ctx).submit(job)
+        return CreateFieldResponse(
+            field=self.repos.fields.get(str(f.field_id)) or updated_field,
+            job=self.repos.jobs.get(str(job.job_id)) or job,
+        )
 
     def delete_field(self, field_id) -> None:
         f = self.get_field(field_id)

@@ -15,6 +15,7 @@ export const ENGINE_VERSION = "synthetic-engine-0";
 export const RESILIENCE_MODEL = "soilstice-resilience-0.0.0-synthetic";
 
 export const DATASETS: DatasetDescriptor[] = [
+  d("meteomatics", "Meteomatics Environmental API", "Meteomatics AG", "Meteomatics API (Mix)", "v3.0", "P0", "R", 1000, "PT1H", "2010-01-01", null, "https://www.meteomatics.com/en/api/", null, "LIVE"),
   d("nasa_power_daily_ag", "NASA POWER Daily (AG community)", "NASA LaRC", "POWER Daily API", "v2.10.3", "P0", "R", 55000, "P1D", "1981-01-01", null, "https://power.larc.nasa.gov/docs/services/api/temporal/daily/", null, "LIVE"),
   d("usda_nrcs_ssurgo_sda", "SSURGO via Soil Data Access", "USDA NRCS", "SSURGO (SDA)", "live database", "P0", "F", null, "static", null, null, "https://sdmdataaccess.sc.egov.usda.gov/", null, "LIVE"),
   d("usda_nass_cdl", "Cropland Data Layer (CropScape)", "USDA NASS", "CDL", "2006–2025 (KS)", "P0", "F", 30, "P1Y", "2006-01-01", "2025-12-31", "https://nassgeodata.gmu.edu/CropScape/devhelp/getexamples.html", null, "LIVE"),

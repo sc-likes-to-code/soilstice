@@ -11,12 +11,14 @@ Calculations:
 from __future__ import annotations
 
 from collections.abc import Sequence
-from datetime import date
+from datetime import UTC, date, datetime
 from uuid import UUID
 
 import numpy as np
+from shapely.geometry.base import BaseGeometry
 
 from app.catalog import source_ref
+from app.logging import get_logger
 from app.contracts import (
     MaskCounts,
     MethodRef,
@@ -33,6 +35,9 @@ from app.contracts import (
     VegetationScene,
 )
 from app.providers.hls import HlsStacScene
+from app.providers.meteomatics import MeteomaticsClient
+
+log = get_logger("processing.vegetation")
 
 HLS_SPATIAL = SpatialSupport(
     support_class="F",
@@ -259,3 +264,180 @@ def build_vegetation_profile_from_stac(
         sources=[source_ref("nasa_hls_vi"), source_ref("nasa_hls")],
         quality=quality,
     )
+
+
+METHOD_METEOMATICS_NDVI = MethodRef(
+    method_id="meteomatics_regional_ndvi",
+    name="Meteomatics Regional Satellite NDVI",
+    version="1.0",
+    description="Regional context satellite NDVI (sat_ndvi:idx) from Meteomatics blend model. "
+                "Represents regional canopy greenness indicators (support class R); not field-scale 30 m HLS imagery.",
+    reference_url="https://www.meteomatics.com/en/api/",
+)
+
+
+def build_regional_ndvi_profile_from_meteomatics(
+    field_id: UUID,
+    geom: BaseGeometry,
+    year: int,
+    client: MeteomaticsClient,
+) -> VegetationProfile:
+    """Fetch regional NDVI time series from Meteomatics (sat_ndvi:idx) and build VegetationProfile."""
+    centroid = geom.centroid
+    lat, lon = centroid.y, centroid.x
+    start_d = date(year, 1, 1)
+    end_d = min(date(year, 12, 31), date.today())
+
+    # Query time series
+    try:
+        raw_dict = client.query_time_series(
+            lat=lat,
+            lon=lon,
+            start=start_d,
+            end=end_d,
+            step="P1D",
+            parameters=["sat_ndvi:idx"],
+            model="mix",
+        )
+    except Exception as exc:
+        log.warning("Meteomatics sat_ndvi query unavailable for location (%.4f, %.4f): %s", lat, lon, exc)
+        raw_dict = {}
+
+    obs_list = raw_dict.get("sat_ndvi:idx", [])
+    scenes: list[VegetationScene] = []
+    points: list[TimeSeriesPoint] = []
+    valid_vals: list[float] = []
+
+    for obs in obs_list:
+        v = obs.value
+        # NDVI valid range: -1.0 to +1.0
+        is_valid = v is not None and -1.0 <= v <= 1.0
+        v_clean = round(float(v), 4) if is_valid else None
+        d_str = obs.timestamp.strftime("%Y-%m-%d")
+
+        if is_valid and v_clean is not None:
+            valid_vals.append(v_clean)
+
+        points.append(
+            TimeSeriesPoint(
+                t=d_str,
+                value=v_clean,
+                quality_status="valid" if is_valid else "missing",
+                missing_reason=None if is_valid else "INSUFFICIENT_COVERAGE",
+            )
+        )
+
+        scenes.append(
+            VegetationScene(
+                granule_id=f"METEOMATICS.SAT_NDVI.{d_str}",
+                product="meteomatics_sat_ndvi",
+                acquired_at=obs.timestamp,
+                median=v_clean,
+                p10=v_clean,
+                p90=v_clean,
+                valid_pixels=1 if is_valid else 0,
+                total_pixels=1,
+                clear_fraction=1.0 if is_valid else 0.0,
+                accepted=is_valid,
+                mask_counts=MaskCounts(cloud=0 if is_valid else 1, cloud_adjacent=0, cloud_shadow=0, snow_ice=0, water=0),
+                missing_reason=None if is_valid else "INSUFFICIENT_COVERAGE",
+            )
+        )
+
+    # Calculate regional peak NDVI
+    if valid_vals:
+        max_v = max(valid_vals)
+        peak_idx = valid_vals.index(max_v)
+        # Find matching date
+        valid_scenes = [s for s in scenes if s.accepted and s.median is not None]
+        peak_d = valid_scenes[peak_idx].acquired_at.date() if peak_idx < len(valid_scenes) else None
+        phenology = Phenology(
+            peak_value=Quantity(value=max_v, unit="unitless"),
+            peak_date=peak_d,
+            greenup_date=None,  # Do not infer precise dates from regional observations
+            senescence_date=None,
+            method=METHOD_METEOMATICS_NDVI,
+            gap_filled=False,
+            missing_reason=None,
+        )
+    else:
+        phenology = Phenology(
+            peak_value=Quantity(value=None, unit="unitless", missing_reason="INSUFFICIENT_COVERAGE"),
+            peak_date=None,
+            greenup_date=None,
+            senescence_date=None,
+            method=METHOD_METEOMATICS_NDVI,
+            gap_filled=False,
+            missing_reason="INSUFFICIENT_COVERAGE",
+        )
+
+    spatial_support = SpatialSupport(
+        support_class="R",
+        native_resolution_m=None,
+        extraction_method="api_point_query",
+        crs="EPSG:4326",
+    )
+
+    series_id = f"{field_id}:meteomatics:ndvi:{year}"
+    series = TimeSeries(
+        series_id=series_id,
+        variable="ndvi",
+        label="Regional NDVI (Meteomatics sat_ndvi:idx)",
+        unit="unitless",
+        nature="derived",
+        spatial=spatial_support,
+        temporal=TemporalSupport(
+            resolution="P1D",
+            period_start=start_d,
+            period_end=end_d,
+            aggregation="mean",
+            time_standard="UTC",
+        ),
+        sources=[source_ref("meteomatics", product="Meteomatics Satellite NDVI", version="v3.0")],
+        points=points,
+        reference=None,
+    )
+
+    expected = max((end_d - start_d).days + 1, 1)
+    completeness = len(valid_vals) / expected if expected else 0.0
+
+    if valid_vals:
+        flags = [
+            QualityFlag(
+                code="REGIONAL_VEGETATION_CONTEXT",
+                severity="info",
+                message="NDVI is derived from Meteomatics sat_ndvi:idx providing regional greenness context (support class R). "
+                        "This is not field-level 30 m HLS imagery. Canopy stability model remains withheld.",
+            )
+        ]
+        status = "valid" if completeness >= 0.8 else "partial"
+        missing_reason = None
+    else:
+        flags = [
+            QualityFlag(
+                code="REGIONAL_VEGETATION_UNAVAILABLE",
+                severity="info",
+                message="Meteomatics sat_ndvi:idx regional satellite product is unavailable for this location (outside observation domain 90°E–180°E). "
+                        "Regional vegetation context is marked unavailable.",
+            )
+        ]
+        status = "missing"
+        missing_reason = "OUTSIDE_AOI"
+
+    return VegetationProfile(
+        field_id=field_id,
+        year=year,
+        index="NDVI",
+        scenes=scenes,
+        series=series,
+        phenology=phenology,
+        spatial=spatial_support,
+        sources=[source_ref("meteomatics", product="Meteomatics Satellite NDVI", version="v3.0")],
+        quality=QualityInfo(
+            status=status,
+            flags=flags,
+            completeness=round(completeness, 3),
+            missing_reason=missing_reason,
+        ),
+    )
+

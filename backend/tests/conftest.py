@@ -186,9 +186,101 @@ def make_container(settings: Settings, providers: Providers) -> Container:
                      rotation=PendingRotationEngine(), executor=None)
 
 
+class FakeMeteomatics:
+    dataset_id = "meteomatics"
+
+    def __init__(self, configured: bool = True):
+        self.configured = configured
+
+    def test_connection(self, lat: float = 37.95, lon: float = -98.05) -> dict:
+        if not self.configured:
+            return {"ok": False, "category": "missing_credentials", "status_code": None, "error": "Credentials missing"}
+        return {"ok": True, "category": "success", "status_code": 200, "sample": {"elevation:m": 465.0}}
+
+    def query_point(self, lat: float, lon: float, timestamp: datetime, parameters: list[str], model: str = "mix") -> dict:
+        if not self.configured:
+            raise ProviderNotConfigured("Meteomatics credentials not configured.")
+        res = {}
+        for p in parameters:
+            if p == "volumetric_soil_water_-5cm:m3m3":
+                res[p] = 0.31
+            elif p == "volumetric_soil_water_-15cm:m3m3":
+                res[p] = 0.32
+            elif p == "volumetric_soil_water_-50cm:m3m3":
+                res[p] = 0.38
+            elif p == "volumetric_soil_water_-150cm:m3m3":
+                res[p] = 0.25
+            elif p == "elevation:m":
+                res[p] = 465.0
+            elif p == "sat_ndvi:idx":
+                res[p] = 0.65
+            else:
+                res[p] = 20.0
+        return res
+
+    def query_time_series(self, lat: float, lon: float, start: date, end: date, step: str = "P1D", parameters: list[str] | None = None, model: str = "mix") -> dict:
+        if not self.configured:
+            raise ProviderNotConfigured("Meteomatics credentials not configured.")
+        import math
+        from app.providers.meteomatics import TimeSeriesObservation
+        days = (end - start).days + 1
+        out = {}
+        for p in (parameters or []):
+            obs = []
+            for i in range(days):
+                t = datetime(start.year, start.month, start.day, 12, 0, tzinfo=UTC) + timedelta(days=i)
+                if p == "volumetric_soil_water_-5cm:m3m3":
+                    val = 0.31 + 0.02 * math.sin(i / 10.0)
+                elif p == "volumetric_soil_water_-15cm:m3m3":
+                    val = 0.32 + 0.015 * math.sin(i / 10.0)
+                elif p == "volumetric_soil_water_-50cm:m3m3":
+                    val = 0.38 + 0.01 * math.sin(i / 10.0)
+                elif p == "volumetric_soil_water_-150cm:m3m3":
+                    val = 0.25
+                elif p == "sat_ndvi:idx":
+                    val = 0.45 + 0.25 * math.sin(i / 30.0)
+                elif p == "elevation:m":
+                    val = 465.0
+                else:
+                    val = 15.0
+                obs.append(TimeSeriesObservation(timestamp=t, value=round(val, 4), valid=True))
+            out[p] = obs
+        return out
+
+    def query_grid(
+        self,
+        bounds: tuple[float, float, float, float],
+        res_lat: float,
+        res_lon: float,
+        timestamp: datetime | date | str,
+        parameters: list[str],
+        model: str = "mix",
+    ) -> dict[str, list]:
+        if not self.configured:
+            raise ProviderNotConfigured("Meteomatics credentials not configured.")
+        from app.providers.meteomatics import GridPoint
+        w, s, e, n = bounds
+        lats = np.arange(s, n + res_lat * 0.5, res_lat)
+        lons = np.arange(w, e + res_lon * 0.5, res_lon)
+        out = {}
+        for p in parameters:
+            points = []
+            for i, la in enumerate(lats):
+                for j, lo in enumerate(lons):
+                    points.append(GridPoint(lat=float(la), lon=float(lo), value=float(460.0 + i * 1.5 + j * 0.5), valid=True))
+            out[p] = points
+        return out
+
+
 @pytest.fixture
 def fake_providers(tmp_path) -> Providers:
-    return Providers(power=FakePower(), ssurgo=FakeSsurgo(), cdl=FakeCdl(tmp_path), srtm=FakeSrtm(tmp_path))
+    return Providers(
+        power=FakePower(),
+        ssurgo=FakeSsurgo(),
+        cdl=FakeCdl(tmp_path),
+        srtm=FakeSrtm(tmp_path),
+        meteomatics=FakeMeteomatics(),
+    )
 
 
 @pytest.fixture

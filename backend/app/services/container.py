@@ -10,6 +10,7 @@ from app.config import Settings
 from app.providers.cdl import CdlClient
 from app.providers.hls import HlsClient
 from app.providers.http import EarthdataAuth, HttpAcquirer
+from app.providers.meteomatics import MeteomaticsClient
 from app.providers.power import PowerClient
 from app.providers.smap import SmapClient
 from app.providers.srtm import SrtmClient
@@ -26,6 +27,7 @@ class Providers:
     ssurgo: SsurgoClient
     cdl: CdlClient
     srtm: SrtmClient
+    meteomatics: MeteomaticsClient | None = None
     hls: HlsClient | None = None
     smap: SmapClient | None = None
 
@@ -64,12 +66,19 @@ def build_providers(settings: Settings, repos: Repositories, transport=None) -> 
             password=settings.earthdata_password.get_secret_value() if settings.earthdata_password else None,
         )
 
+    def meteomatics_auth() -> tuple[str | None, str | None]:
+        return (
+            settings.meteomatics_username,
+            settings.meteomatics_password.get_secret_value() if settings.meteomatics_password else None,
+        )
+
     return Providers(
         power=PowerClient(http),
         ssurgo=SsurgoClient(http),
         cdl=CdlClient(http, download_timeout_s=settings.http_download_timeout_s),
         srtm=SrtmClient(http, settings.cache_dir / "derived", auth_factory,
                         download_timeout_s=settings.http_download_timeout_s),
+        meteomatics=MeteomaticsClient(http, meteomatics_auth, timeout_s=settings.http_timeout_s),
         hls=HlsClient(http, settings.cache_dir / "derived", auth_factory, timeout_s=settings.http_timeout_s),
         smap=SmapClient(http, auth_factory, timeout_s=settings.http_timeout_s),
     )

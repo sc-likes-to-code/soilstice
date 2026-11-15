@@ -10,6 +10,7 @@ from app.contracts import (
     Field,
     ProcessingJob,
     RotationScenario,
+    SoilMoistureProfile,
     SoilProfile,
     TerrainProfile,
     VegetationProfile,
@@ -33,6 +34,7 @@ class Repositories:
     acquisitions: ModelRepository[AcquisitionRecord]
     scenarios: ModelRepository[RotationScenario]
     vegetation: ModelRepository[VegetationProfile]
+    soil_moisture: ModelRepository[SoilMoistureProfile]
 
     @classmethod
     def create(cls, store: DocumentStore) -> Repositories:
@@ -49,12 +51,13 @@ class Repositories:
             acquisitions=ModelRepository(store, "acquisitions", AcquisitionRecord),
             scenarios=ModelRepository(store, "scenarios", RotationScenario),
             vegetation=ModelRepository(store, "vegetation", VegetationProfile),
+            soil_moisture=ModelRepository(store, "soil_moisture", SoilMoistureProfile),
         )
 
     def delete_field_data(self, field_id: str) -> None:
         """Cascade delete of everything keyed to a field (stored with parent=field_id or id=field_id)."""
         self.store.delete_children(str(field_id))
-        for repo in (self.soil, self.terrain, self.crop_history, self.vegetation):
+        for repo in (self.soil, self.terrain, self.crop_history, self.vegetation, self.soil_moisture):
             repo.delete(str(field_id))
         self.fields.delete(str(field_id))
 

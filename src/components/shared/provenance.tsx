@@ -244,7 +244,7 @@ export function FlagList({ flags, hideSynthetic = true, className }: { flags: Qu
 }
 
 export function TemporalText({ t }: { t: TemporalSupport }) {
-  const res: Record<TemporalSupport["resolution"], string> = { PT3H: "3-hourly", P1D: "daily", P1M: "monthly", season: "season", P1Y: "annual", static: "static", irregular: "per scene" };
+  const res: Record<TemporalSupport["resolution"], string> = { PT1H: "hourly", PT3H: "3-hourly", P1D: "daily", P1M: "monthly", season: "season", P1Y: "annual", static: "static", irregular: "per scene" };
   const period = t.period_start ? `${formatDate(t.period_start, "month")}${t.period_end ? ` – ${formatDate(t.period_end, "month")}` : ""}` : "";
   return (
     <span className="text-[11.5px] text-stone-500">

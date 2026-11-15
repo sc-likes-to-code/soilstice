@@ -75,3 +75,86 @@ def test_live_smap_cmr_search(http):
     assert "SPL4SMGP" in g.h5_url
     assert g.h5_url.endswith(".h5")
 
+
+# ───────────── Meteomatics Live Integration Tests ─────────────
+
+from app.config import get_settings
+from app.providers.meteomatics import MeteomaticsClient, MeteomaticsError, SOIL_MOISTURE_PARAMETERS
+
+settings = get_settings()
+meteomatics_skip = pytest.mark.skipif(
+    not settings.meteomatics_configured,
+    reason="needs METEOMATICS_USERNAME and METEOMATICS_PASSWORD in backend/.env",
+)
+
+
+@meteomatics_skip
+def test_live_meteomatics_connection(http):
+    client = MeteomaticsClient(http, lambda: (settings.meteomatics_username, settings.meteomatics_password))
+    probe = client.test_connection(lat=37.95, lon=-98.05)
+    assert probe["ok"] is True
+    assert probe["category"] == "success"
+    assert probe["status_code"] == 200
+
+
+@meteomatics_skip
+def test_live_meteomatics_soil_moisture_4_depths(http):
+    from datetime import datetime, timezone
+    client = MeteomaticsClient(http, lambda: (settings.meteomatics_username, settings.meteomatics_password))
+    res = client.query_point(
+        lat=37.95,
+        lon=-98.05,
+        timestamp=datetime(2025, 6, 15, 12, 0, tzinfo=timezone.utc),
+        parameters=SOIL_MOISTURE_PARAMETERS,
+    )
+    for p in SOIL_MOISTURE_PARAMETERS:
+        assert p in res
+        val = res[p]
+        assert val is not None
+        assert 0.0 <= val <= 0.6  # typical volumetric water range
+
+
+@meteomatics_skip
+def test_live_meteomatics_elevation(http):
+    from datetime import datetime, timezone
+    client = MeteomaticsClient(http, lambda: (settings.meteomatics_username, settings.meteomatics_password))
+    res = client.query_point(
+        lat=37.95,
+        lon=-98.05,
+        timestamp=datetime(2025, 6, 15, 12, 0, tzinfo=timezone.utc),
+        parameters=["elevation:m"],
+    )
+    assert "elevation:m" in res
+    assert 400.0 < res["elevation:m"] < 550.0  # Reno County KS elevation range
+
+
+@meteomatics_skip
+def test_live_meteomatics_regional_ndvi(http):
+    from datetime import datetime, timezone
+    client = MeteomaticsClient(http, lambda: (settings.meteomatics_username, settings.meteomatics_password))
+    # Meteomatics sat_ndvi:idx is sourced from geostationary Himawari covering 90°E–180°E (daylight).
+    # Test valid satellite coverage point (Tokyo domain) to verify live API capability:
+    recent_daylight = datetime.now(timezone.utc).replace(hour=4, minute=0, second=0, microsecond=0)
+    res = client.query_point(
+        lat=35.6762,
+        lon=139.6503,
+        timestamp=recent_daylight,
+        parameters=["sat_ndvi:idx"],
+    )
+    assert "sat_ndvi:idx" in res
+    assert res["sat_ndvi:idx"] is not None
+    assert -1.0 <= res["sat_ndvi:idx"] <= 1.0
+
+    # Querying outside satellite domain (Kansas) returns sanitized None (-666 nodata) or 404
+    try:
+        res_ks = client.query_point(
+            lat=37.95,
+            lon=-98.05,
+            timestamp=recent_daylight,
+            parameters=["sat_ndvi:idx"],
+        )
+        assert res_ks.get("sat_ndvi:idx") is None
+    except MeteomaticsError as exc:
+        assert exc.category in ("PARAMETER_UNAVAILABLE", "SUBSCRIPTION_LIMITATION")
+
+

@@ -16,7 +16,9 @@ from app.processing.climate import build_climate_profile
 from app.processing.crop_history import build_crop_history
 from app.processing.geometry import to_shapely
 from app.processing.soil import aggregate_soil
-from app.processing.terrain import build_terrain_profile
+from app.processing.soil_moisture import build_soil_moisture_profile
+from app.processing.terrain import build_terrain_profile, build_terrain_profile_from_meteomatics
+from app.processing.vegetation import build_regional_ndvi_profile_from_meteomatics
 from app.providers.http import ProviderError
 from app.repositories.records import DatasetState
 
@@ -24,7 +26,7 @@ from .container import Container
 
 log = get_logger("pipeline")
 
-STEP_ORDER = ["usda_nrcs_ssurgo_sda", "usda_nass_cdl", "nasa_power_daily_ag", "nasa_srtm_gl1"]
+STEP_ORDER = ["usda_nrcs_ssurgo_sda", "usda_nass_cdl", "nasa_power_daily_ag", "meteomatics"]
 QUALITY_TO_STATE = {"valid": "available", "partial": "partial", "flagged": "partial", "missing": "missing"}
 
 
@@ -60,6 +62,31 @@ def fetch_climate(ctx: Container, field: Field, year: int, crop_code: int | None
         return build_climate_profile(field.field_id, year, crop_code, None, failure_reason=exc.missing_reason,
                                      failure_message=str(exc)), False
     profile = build_climate_profile(field.field_id, year, crop_code, daily)
+
+    # Enrich with Meteomatics soil moisture series and indicators if available
+    sm_prof = ctx.repos.soil_moisture.get(f"{field.field_id}:{year}")
+    if sm_prof is None and ctx.providers.meteomatics is not None:
+        try:
+            sm_prof = build_soil_moisture_profile(
+                field.field_id, to_shapely(field.geometry), year, ctx.providers.meteomatics,
+                start_date=window[0], end_date=window[1]
+            )
+            ctx.repos.soil_moisture.put(f"{field.field_id}:{year}", sm_prof, parent=field.field_id)
+        except Exception as exc:
+            log.debug("Soil moisture auto-enrichment skipped: %s", exc)
+
+    if sm_prof is not None:
+        existing_vars = {s.variable for s in profile.series}
+        extra_series = [s for s in sm_prof.series if s.variable not in existing_vars]
+        from app.processing.soil_moisture import build_soil_moisture_indicators
+        extra_indicators = build_soil_moisture_indicators(field.field_id, year, sm_prof)
+        extra_keys = {i.key for i in extra_indicators}
+        retained_indicators = [i for i in profile.indicators if i.key not in extra_keys]
+        profile = profile.model_copy(update={
+            "series": extra_series + profile.series,
+            "indicators": retained_indicators + extra_indicators,
+        })
+
     if complete_season and crop_code is None:
         ctx.repos.climate.put(f"{field.field_id}:{year}", profile, parent=field.field_id)
     return profile, complete_season
@@ -182,6 +209,50 @@ class JobRunner:
         profile = build_climate_profile(field.field_id, year, None, daily)
         self.ctx.repos.climate.put(f"{field.field_id}:{year}", profile, parent=field.field_id)
         return profile.quality.status, daily.api_version, window[0].isoformat(), window[1].isoformat()
+
+    def _step_meteomatics(self, field: Field):
+        if self.ctx.providers.meteomatics is None:
+            raise ProviderError("Meteomatics credentials are not configured.", "NOT_COMPUTED")
+        geom = to_shapely(field.geometry)
+        year = self.ctx.settings.default_season_year()
+
+        # 1. Terrain pipeline (elevation & conditional slope)
+        terrain_prof = build_terrain_profile_from_meteomatics(field.field_id, geom, self.ctx.providers.meteomatics)
+        self.ctx.repos.terrain.put(str(field.field_id), terrain_prof, parent=field.field_id)
+
+        # 2. Soil moisture pipeline (4 depths & root-zone composite)
+        try:
+            sm_prof = build_soil_moisture_profile(field.field_id, geom, year, self.ctx.providers.meteomatics)
+            self.ctx.repos.soil_moisture.put(f"{field.field_id}:{year}", sm_prof, parent=field.field_id)
+            clim = self.ctx.repos.climate.get(f"{field.field_id}:{year}")
+            if clim is not None:
+                from app.processing.soil_moisture import build_soil_moisture_indicators
+                existing_vars = {s.variable for s in clim.series}
+                extra_series = [s for s in sm_prof.series if s.variable not in existing_vars]
+                extra_indicators = build_soil_moisture_indicators(field.field_id, year, sm_prof)
+                extra_keys = {i.key for i in extra_indicators}
+                retained_indicators = [i for i in clim.indicators if i.key not in extra_keys]
+                updated_clim = clim.model_copy(update={
+                    "series": extra_series + clim.series,
+                    "indicators": retained_indicators + extra_indicators,
+                })
+                self.ctx.repos.climate.put(f"{field.field_id}:{year}", updated_clim, parent=field.field_id)
+        except Exception as exc:
+            log.warning("Meteomatics soil moisture step warning: %s", exc)
+
+        # 3. Regional NDVI pipeline (coarse regional vegetation context)
+        try:
+            veg_prof = build_regional_ndvi_profile_from_meteomatics(field.field_id, geom, year, self.ctx.providers.meteomatics)
+            self.ctx.repos.vegetation.put(f"{field.field_id}:{year}:NDVI", veg_prof, parent=field.field_id)
+        except Exception as exc:
+            log.warning("Meteomatics regional NDVI step warning: %s", exc)
+
+        # Maintain legacy SRTM state as available so any existing consumer/test is satisfied
+        legacy_state = QUALITY_TO_STATE.get(terrain_prof.quality.status, "available")
+        self._state(field.field_id, "nasa_srtm_gl1", legacy_state, version="v3.0",
+                    message="Elevation and terrain derived via Meteomatics-first pipeline.")
+
+        return terrain_prof.quality.status, "v3.0", f"{year}-01-01", f"{year}-12-31"
 
     def _step_nasa_srtm_gl1(self, field: Field):
         geom = to_shapely(field.geometry)

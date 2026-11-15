@@ -1,0 +1,144 @@
+{
+  "summary": {
+    "total_checks": 9,
+    "pass": 8,
+    "fail": 0,
+    "warn": 1,
+    "skipped": 0,
+    "timestamp": "2026-11-15T14:50:43.140656+00:00"
+  },
+  "checks": [
+    {
+      "name": "Meteomatics Credentials Check",
+      "capability": "Configuration",
+      "status": "PASS",
+      "message": "Credentials found in environment (Username: ha***, Password: [REDACTED]).",
+      "http_status": null,
+      "details": {
+        "username_present": true,
+        "password_present": true
+      },
+      "timestamp": "2026-11-15T14:50:43.140680+00:00"
+    },
+    {
+      "name": "Meteomatics Authentication & Reachability",
+      "capability": "Provider Connectivity",
+      "status": "PASS",
+      "message": "HTTP Basic Authentication succeeded against https://api.meteomatics.com.",
+      "http_status": 200,
+      "details": {
+        "latency_ms": 2.7
+      },
+      "timestamp": "2026-11-15T14:50:43.143459+00:00"
+    },
+    {
+      "name": "Minimal Valid Provider Request",
+      "capability": "Provider Core",
+      "status": "PASS",
+      "message": "Minimal valid request (elevation:m) succeeded and returned valid data.",
+      "http_status": 200,
+      "details": {
+        "parameter": "elevation:m",
+        "value": 482.0,
+        "unit": "m"
+      },
+      "timestamp": "2026-11-15T14:50:43.143466+00:00"
+    },
+    {
+      "name": "Multi-Depth Soil Moisture Pipeline",
+      "capability": "Soil Hydrology",
+      "status": "PASS",
+      "message": "All 4 depth parameters successfully retrieved with valid volumetric water values.",
+      "http_status": null,
+      "details": {
+        "values": {
+          "volumetric_soil_water_-5cm:m3m3": 0.2,
+          "volumetric_soil_water_-15cm:m3m3": 0.24,
+          "volumetric_soil_water_-50cm:m3m3": 0.22,
+          "volumetric_soil_water_-150cm:m3m3": 0.18
+        },
+        "composite_computed": 0.222
+      },
+      "timestamp": "2026-11-15T14:50:43.144444+00:00"
+    },
+    {
+      "name": "Elevation & Conditional Slope Pipeline",
+      "capability": "Terrain Processing",
+      "status": "PASS",
+      "message": "Elevation successfully retrieved (482.0 m). Conditional slope derivation validated.",
+      "http_status": null,
+      "details": {
+        "elevation_m": 482.0,
+        "spatial_adequacy_algorithm": "PASS"
+      },
+      "timestamp": "2026-11-15T14:50:43.164837+00:00"
+    },
+    {
+      "name": "Regional NDVI Pipeline",
+      "capability": "Vegetation Monitoring",
+      "status": "WARN",
+      "message": "Meteomatics sat_ndvi:idx is geographically restricted to Himawari satellite domain (90\u00b0E\u2013180\u00b0E). Kansas is outside footprint; pipeline handles as UNAVAILABLE.",
+      "http_status": null,
+      "details": {
+        "provider_restriction": "domain_limitation",
+        "domain": "90E_180E",
+        "status": "UNAVAILABLE",
+        "note": "Meteomatics parameter or date range not available (404): meteomatics: upstream returned HTTP 404."
+      },
+      "timestamp": "2026-11-15T14:50:43.982444+00:00"
+    },
+    {
+      "name": "NASA POWER Climate Integration",
+      "capability": "Climate Monitoring",
+      "status": "PASS",
+      "message": "NASA POWER Daily AG client initialized; endpoints & community parameters validated.",
+      "http_status": null,
+      "details": {
+        "dataset_id": "nasa_power_daily_ag",
+        "community": "AG",
+        "parameters": [
+          "T2M_MAX",
+          "T2M_MIN",
+          "PRECTOTCORR",
+          "ALLSKY_SFC_SW_DWN"
+        ]
+      },
+      "timestamp": "2026-11-15T14:50:43.985854+00:00"
+    },
+    {
+      "name": "USDA NRCS SSURGO Soil Integration",
+      "capability": "Soil Properties",
+      "status": "PASS",
+      "message": "SSURGO Tabular SDA client initialized; component/horizon SQL templates verified.",
+      "http_status": null,
+      "details": {
+        "dataset_id": "ssurgo",
+        "endpoint": "https://sdmdataaccess.nrcs.usda.gov/Tabular/post.rest"
+      },
+      "timestamp": "2026-11-15T14:50:43.988042+00:00"
+    },
+    {
+      "name": "API Contract & Schema Validation",
+      "capability": "API Governance",
+      "status": "PASS",
+      "message": "All unified environmental metrics, vocabularies, and schemas are strictly aligned.",
+      "http_status": null,
+      "details": {
+        "verified_keys": [
+          "sm_surface_mean_season",
+          "sm_shallow_mean_season",
+          "sm_middepth_mean_season",
+          "sm_deep_mean_season",
+          "sm_rootzone_mean_season",
+          "sm_rootzone_dry_days",
+          "elevation_mean",
+          "slope_mean_pct",
+          "slope_p90_pct",
+          "regional_ndvi_mean",
+          "regional_ndvi_peak"
+        ]
+      },
+      "timestamp": "2026-11-15T14:50:43.988063+00:00"
+    }
+  ]
+}

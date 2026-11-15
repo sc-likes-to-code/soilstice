@@ -479,6 +479,23 @@
         "title": "ApiResponse[RotationScenario]",
         "type": "object"
       },
+      "ApiResponse_SoilMoistureProfile_": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SoilMoistureProfile"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ApiResponse[SoilMoistureProfile]",
+        "type": "object"
+      },
       "ApiResponse_SoilProfile_": {
         "additionalProperties": false,
         "properties": {
@@ -743,6 +760,7 @@
         "properties": {
           "precipitation": {
             "enum": [
+              "meteomatics",
               "nasa_power_daily_ag",
               "usda_nrcs_ssurgo_sda",
               "usda_nass_cdl",
@@ -766,6 +784,7 @@
           },
           "temperature": {
             "enum": [
+              "meteomatics",
               "nasa_power_daily_ag",
               "usda_nrcs_ssurgo_sda",
               "usda_nass_cdl",
@@ -956,6 +975,7 @@
         "properties": {
           "dataset_id": {
             "enum": [
+              "meteomatics",
               "nasa_power_daily_ag",
               "usda_nrcs_ssurgo_sda",
               "usda_nass_cdl",
@@ -1927,6 +1947,7 @@
         "properties": {
           "dataset_id": {
             "enum": [
+              "meteomatics",
               "nasa_power_daily_ag",
               "usda_nrcs_ssurgo_sda",
               "usda_nass_cdl",
@@ -2078,6 +2099,7 @@
         "properties": {
           "dataset_id": {
             "enum": [
+              "meteomatics",
               "nasa_power_daily_ag",
               "usda_nrcs_ssurgo_sda",
               "usda_nass_cdl",
@@ -2173,6 +2195,7 @@
           },
           "temporal_resolution": {
             "enum": [
+              "PT1H",
               "PT3H",
               "P1D",
               "P1M",
@@ -2410,10 +2433,18 @@
               "sm_rootzone_mean_season",
               "sm_rootzone_percentile",
               "sm_rootzone_dry_days",
+              "sm_rootzone_cv",
+              "sm_surface_mean_season",
+              "sm_shallow_mean_season",
+              "sm_middepth_mean_season",
+              "sm_deep_mean_season",
+              "sm_rootzone_composite_season",
               "ndvi_peak",
               "ndvi_peak_doy",
               "ndvi_peak_cv",
               "ndmi_peak_season",
+              "regional_ndvi_mean",
+              "regional_ndvi_peak",
               "aws_0_150",
               "ph_0_30",
               "om_0_30",
@@ -2421,6 +2452,9 @@
               "slope_mean_pct",
               "slope_p90_pct",
               "elevation_mean",
+              "elevation_min",
+              "elevation_max",
+              "elevation_range",
               "distinct_crops",
               "max_monoculture_run",
               "rotation_shannon"
@@ -2560,6 +2594,7 @@
             "anyOf": [
               {
                 "enum": [
+                  "meteomatics",
                   "nasa_power_daily_ag",
                   "usda_nrcs_ssurgo_sda",
                   "usda_nass_cdl",
@@ -3474,6 +3509,7 @@
         "properties": {
           "dataset_id": {
             "enum": [
+              "meteomatics",
               "nasa_power_daily_ag",
               "usda_nrcs_ssurgo_sda",
               "usda_nass_cdl",
@@ -3743,6 +3779,51 @@
           "reference_url"
         ],
         "title": "MethodRef",
+        "type": "object"
+      },
+      "MetricCoverage": {
+        "additionalProperties": false,
+        "properties": {
+          "coverage_fraction": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coverage Fraction"
+          },
+          "expected_observations": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected Observations"
+          },
+          "valid_observations": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valid Observations"
+          }
+        },
+        "required": [
+          "valid_observations",
+          "expected_observations",
+          "coverage_fraction"
+        ],
+        "title": "MetricCoverage",
         "type": "object"
       },
       "Phenology": {
@@ -4033,6 +4114,7 @@
               "MJ_m-2_day-1",
               "MJ_m-2",
               "m3_m-3",
+              "m3/m3",
               "wetness_0_1",
               "cm",
               "cm_cm-1",
@@ -4800,6 +4882,159 @@
         "title": "SoilMapUnitShare",
         "type": "object"
       },
+      "SoilMoistureDepthMetric": {
+        "additionalProperties": false,
+        "properties": {
+          "depth_cm": {
+            "title": "Depth Cm",
+            "type": "number"
+          },
+          "depth_label": {
+            "title": "Depth Label",
+            "type": "string"
+          },
+          "max": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Quantity"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "mean": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "min": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Quantity"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "missing_observations": {
+            "title": "Missing Observations",
+            "type": "integer"
+          },
+          "parameter": {
+            "title": "Parameter",
+            "type": "string"
+          },
+          "valid_observations": {
+            "title": "Valid Observations",
+            "type": "integer"
+          },
+          "variability_cv": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Quantity"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "depth_label",
+          "depth_cm",
+          "parameter",
+          "mean",
+          "variability_cv",
+          "min",
+          "max",
+          "valid_observations",
+          "missing_observations"
+        ],
+        "title": "SoilMoistureDepthMetric",
+        "type": "object"
+      },
+      "SoilMoistureProfile": {
+        "additionalProperties": false,
+        "properties": {
+          "as_of": {
+            "format": "date",
+            "title": "As Of",
+            "type": "string"
+          },
+          "deep_sm": {
+            "$ref": "#/components/schemas/SoilMoistureDepthMetric"
+          },
+          "field_id": {
+            "format": "uuid",
+            "title": "Field Id",
+            "type": "string"
+          },
+          "metrics": {
+            "items": {
+              "$ref": "#/components/schemas/UnifiedEnvironmentalMetric"
+            },
+            "title": "Metrics",
+            "type": "array"
+          },
+          "middepth_sm": {
+            "$ref": "#/components/schemas/SoilMoistureDepthMetric"
+          },
+          "quality": {
+            "$ref": "#/components/schemas/QualityInfo"
+          },
+          "rootzone_dry_days": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "rootzone_sm_composite": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "season_year": {
+            "title": "Season Year",
+            "type": "integer"
+          },
+          "series": {
+            "items": {
+              "$ref": "#/components/schemas/TimeSeries"
+            },
+            "title": "Series",
+            "type": "array"
+          },
+          "shallow_sm": {
+            "$ref": "#/components/schemas/SoilMoistureDepthMetric"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/SourceRef"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "spatial": {
+            "$ref": "#/components/schemas/SpatialSupport"
+          },
+          "surface_sm": {
+            "$ref": "#/components/schemas/SoilMoistureDepthMetric"
+          }
+        },
+        "required": [
+          "field_id",
+          "season_year",
+          "as_of",
+          "surface_sm",
+          "shallow_sm",
+          "middepth_sm",
+          "deep_sm",
+          "rootzone_sm_composite",
+          "rootzone_dry_days",
+          "series",
+          "metrics",
+          "quality",
+          "spatial",
+          "sources"
+        ],
+        "title": "SoilMoistureProfile",
+        "type": "object"
+      },
       "SoilProfile": {
         "additionalProperties": false,
         "properties": {
@@ -4908,6 +5143,7 @@
           },
           "dataset_id": {
             "enum": [
+              "meteomatics",
               "nasa_power_daily_ag",
               "usda_nrcs_ssurgo_sda",
               "usda_nass_cdl",
@@ -5370,6 +5606,7 @@
           },
           "resolution": {
             "enum": [
+              "PT1H",
               "PT3H",
               "P1D",
               "P1M",
@@ -5517,6 +5754,7 @@
               "MJ_m-2_day-1",
               "MJ_m-2",
               "m3_m-3",
+              "m3/m3",
               "wetness_0_1",
               "cm",
               "cm_cm-1",
@@ -5740,6 +5978,171 @@
         "title": "Uncertainty",
         "type": "object"
       },
+      "UnifiedEnvironmentalMetric": {
+        "additionalProperties": false,
+        "properties": {
+          "aggregation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": "field_area_mean",
+            "title": "Aggregation"
+          },
+          "confidence": {
+            "anyOf": [
+              {
+                "enum": [
+                  "low",
+                  "medium",
+                  "high"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Confidence"
+          },
+          "coverage": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MetricCoverage"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Limitations",
+            "type": "array"
+          },
+          "metric": {
+            "title": "Metric",
+            "type": "string"
+          },
+          "observed_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observed At"
+          },
+          "parameter": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parameter"
+          },
+          "provider": {
+            "default": "meteomatics",
+            "title": "Provider",
+            "type": "string"
+          },
+          "requested_grid_spacing": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Requested Grid Spacing"
+          },
+          "source_type": {
+            "default": "modelled_environmental_data",
+            "title": "Source Type",
+            "type": "string"
+          },
+          "spatial_resolution_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Spatial Resolution M"
+          },
+          "status": {
+            "enum": [
+              "available",
+              "partial",
+              "insufficient_coverage",
+              "unavailable",
+              "disabled"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "temporal_resolution": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Temporal Resolution"
+          },
+          "unit": {
+            "title": "Unit",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "required": [
+          "metric",
+          "value",
+          "unit",
+          "status",
+          "provider",
+          "parameter",
+          "source_type",
+          "spatial_resolution_m",
+          "requested_grid_spacing",
+          "temporal_resolution",
+          "aggregation",
+          "coverage",
+          "confidence",
+          "limitations",
+          "observed_at"
+        ],
+        "title": "UnifiedEnvironmentalMetric",
+        "type": "object"
+      },
       "UpdateFarmRequest": {
         "additionalProperties": false,
         "description": "Body of E5 `PATCH /farms/{farm_id}` (`{name}` in API_CONTRACTS §6).",
@@ -5946,7 +6349,8 @@
               "HLSS30_VI",
               "HLSL30",
               "HLSS30",
-              "synthetic"
+              "synthetic",
+              "meteomatics_sat_ndvi"
             ],
             "title": "Product",
             "type": "string"
@@ -6123,7 +6527,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -6204,7 +6608,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -6296,7 +6700,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -6420,7 +6824,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -6501,7 +6905,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -6593,7 +6997,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -6674,7 +7078,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -6767,7 +7171,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -6868,7 +7272,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -7004,7 +7408,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -7105,7 +7509,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -7214,7 +7618,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -7307,7 +7711,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -7398,7 +7802,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -7516,7 +7920,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -7609,7 +8013,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -7702,7 +8106,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -7834,7 +8238,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -7968,7 +8372,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -8077,7 +8481,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -8179,7 +8583,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -8215,6 +8619,192 @@
         "summary": "Recommendations",
         "tags": [
           "rotation"
+        ]
+      }
+    },
+    "/api/v1/fields/{field_id}/refresh": {
+      "post": {
+        "operationId": "refreshField",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Field Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_CreateFieldResponse_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Refresh Field",
+        "tags": [
+          "fields"
+        ]
+      }
+    },
+    "/api/v1/fields/{field_id}/reprocess": {
+      "post": {
+        "operationId": "reprocessField",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Field Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_CreateFieldResponse_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Refresh Field",
+        "tags": [
+          "fields"
         ]
       }
     },
@@ -8272,7 +8862,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -8375,7 +8965,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -8478,7 +9068,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -8571,7 +9161,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -8672,7 +9262,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -8765,7 +9355,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -8799,6 +9389,115 @@
           }
         },
         "summary": "Soil",
+        "tags": [
+          "environment"
+        ]
+      }
+    },
+    "/api/v1/fields/{field_id}/soil-moisture": {
+      "get": {
+        "operationId": "getSoilMoisture",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Field Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "season_year",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Season Year"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_SoilMoistureProfile_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "summary": "Soil Moisture",
         "tags": [
           "environment"
         ]
@@ -8874,7 +9573,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -8992,7 +9691,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -9085,7 +9784,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -9208,7 +9907,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -9289,7 +9988,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -9382,7 +10081,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -9463,7 +10162,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -9568,7 +10267,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -9667,7 +10366,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -9760,7 +10459,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {
@@ -9861,7 +10560,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "429": {
             "content": {

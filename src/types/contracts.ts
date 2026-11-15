@@ -25,6 +25,7 @@ export type MissingReason =
   | "UPSTREAM_ERROR" | "NOT_YET_PUBLISHED" | "NOT_COMPUTED" | "OUTSIDE_AOI" | "PENDING_PROCESSING";
 
 export type DatasetId =
+  | "meteomatics"
   | "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb"
   | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1"
   | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e"
@@ -35,13 +36,13 @@ export type ExtractionMethod =
   | "zonal_polygon" | "zonal_polygon_inward_buffer" | "containing_cell" | "api_point_query"
   | "vector_intersection" | "attribute_join" | "not_applicable";
 
-export type TemporalResolution = "PT3H" | "P1D" | "P1M" | "season" | "P1Y" | "static" | "irregular";
+export type TemporalResolution = "PT1H" | "PT3H" | "P1D" | "P1M" | "season" | "P1Y" | "static" | "irregular";
 export type Aggregation =
   | "none" | "mean" | "sum" | "median" | "min" | "max" | "majority" | "weighted_mean" | "percentile" | "count";
 export type TimeStandard = "UTC" | "LST" | "not_applicable";
 
 export type Unit =
-  | "mm" | "degC" | "degC_day" | "percent" | "MJ_m-2_day-1" | "MJ_m-2" | "m3_m-3" | "wetness_0_1"
+  | "mm" | "degC" | "degC_day" | "percent" | "MJ_m-2_day-1" | "MJ_m-2" | "m3_m-3" | "m3/m3" | "wetness_0_1"
   | "cm" | "cm_cm-1" | "m" | "degree" | "pH" | "ha" | "day" | "year" | "count"
   | "percentile" | "unitless" | "score_0_100";
 
@@ -51,10 +52,11 @@ export type IndicatorKey =
   | "precip_total_season" | "precip_anomaly_pct" | "gdd_season" | "heat_stress_days"
   | "frost_free_days" | "solar_total_season" | "rh_mean_season"
   | "et0_total_season" | "water_balance_season" | "et_actual_season"
-  | "sm_rootzone_mean_season" | "sm_rootzone_percentile" | "sm_rootzone_dry_days"
-  | "ndvi_peak" | "ndvi_peak_doy" | "ndvi_peak_cv" | "ndmi_peak_season"
+  | "sm_rootzone_mean_season" | "sm_rootzone_percentile" | "sm_rootzone_dry_days" | "sm_rootzone_cv"
+  | "sm_surface_mean_season" | "sm_shallow_mean_season" | "sm_middepth_mean_season" | "sm_deep_mean_season" | "sm_rootzone_composite_season"
+  | "ndvi_peak" | "ndvi_peak_doy" | "ndvi_peak_cv" | "ndmi_peak_season" | "regional_ndvi_mean" | "regional_ndvi_peak"
   | "aws_0_150" | "ph_0_30" | "om_0_30" | "clay_0_30"
-  | "slope_mean_pct" | "slope_p90_pct" | "elevation_mean"
+  | "slope_mean_pct" | "slope_p90_pct" | "elevation_mean" | "elevation_min" | "elevation_max" | "elevation_range"
   | "distinct_crops" | "max_monoculture_run" | "rotation_shannon";
 
 export type CropCode = number;
@@ -307,7 +309,7 @@ export type VegetationIndex = "NDVI" | "EVI" | "NDMI" | "SAVI" | "MSAVI" | "NDWI
 export interface MaskCounts { cloud: number; cloud_adjacent: number; cloud_shadow: number; snow_ice: number; water: number; }
 export interface VegetationScene {
   granule_id: string;
-  product: "HLSL30_VI" | "HLSS30_VI" | "HLSL30" | "HLSS30" | "synthetic";
+  product: "HLSL30_VI" | "HLSS30_VI" | "HLSL30" | "HLSS30" | "synthetic" | "meteomatics_sat_ndvi";
   acquired_at: ISODateTime;
   median: number | null; p10: number | null; p90: number | null;
   valid_pixels: number; total_pixels: number;
@@ -733,5 +735,65 @@ export interface FieldSuitabilityResponse {
   crops: CropSuitabilityAssessment[];
   disclaimers: string[];
 }
+
+// ── 5.19 Unified Environmental Metric Contract (Section 10) ──────────────────
+
+export type MetricStatus = "available" | "partial" | "insufficient_coverage" | "unavailable" | "disabled";
+
+export interface MetricCoverage {
+  valid_observations: number | null;
+  expected_observations: number | null;
+  coverage_fraction: number | null;
+}
+
+export interface UnifiedEnvironmentalMetric {
+  metric: string;
+  value: number | null;
+  unit: string;
+  status: MetricStatus;
+  provider: string;
+  parameter: string | null;
+  source_type: string;
+  spatial_resolution_m: number | null;
+  requested_grid_spacing: string | null;
+  temporal_resolution: string | null;
+  aggregation: string | null;
+  coverage: MetricCoverage | null;
+  confidence: Confidence | null;
+  limitations: string[];
+  observed_at: string | null;
+}
+
+// ── 5.20 Soil Moisture Profile (Meteomatics 4-Depth Pipeline) ────────────────
+
+export interface SoilMoistureDepthMetric {
+  depth_label: string;
+  depth_cm: number;
+  parameter: string;
+  mean: Quantity;
+  variability_cv: Quantity | null;
+  min: Quantity | null;
+  max: Quantity | null;
+  valid_observations: number;
+  missing_observations: number;
+}
+
+export interface SoilMoistureProfile {
+  field_id: UUID;
+  season_year: number;
+  as_of: string;
+  surface_sm: SoilMoistureDepthMetric;
+  shallow_sm: SoilMoistureDepthMetric;
+  middepth_sm: SoilMoistureDepthMetric;
+  deep_sm: SoilMoistureDepthMetric;
+  rootzone_sm_composite: Quantity;
+  rootzone_dry_days: Quantity;
+  series: TimeSeries[];
+  metrics: UnifiedEnvironmentalMetric[];
+  quality: QualityInfo;
+  spatial: SpatialSupport;
+  sources: SourceRef[];
+}
+
 
 

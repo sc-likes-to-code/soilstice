@@ -108,6 +108,7 @@ class HttpAcquirer:
         *,
         params: dict[str, Any] | None = None,
         json_body: Any = None,
+        headers: dict[str, str] | None = None,
         timeout: float | None = None,
         cache: bool = True,
         auth: EarthdataAuth | None = None,
@@ -125,7 +126,7 @@ class HttpAcquirer:
         last_exc: Exception | None = None
         while True:
             try:
-                resp = self._send(method, url, params, json_body, timeout or self.timeout_s, auth)
+                resp = self._send(method, url, params, json_body, timeout or self.timeout_s, auth, headers)
                 status = resp.status_code
                 if status in accept_status:
                     return self._store(dataset_id, url, params, resp, key, cache)
@@ -148,18 +149,20 @@ class HttpAcquirer:
             self._sleep(delay)
             attempt += 1
 
-    def _send(self, method, url, params, json_body, timeout, auth) -> httpx.Response:
+    def _send(self, method, url, params, json_body, timeout, auth, extra_headers=None) -> httpx.Response:
         """Manual redirect loop so Earthdata basic auth is only ever sent to urs.earthdata.nasa.gov."""
         with self._client(timeout) as client:
             req_url, req_params, hops = url, params, 0
-            headers = auth.initial_headers() if auth else {}
+            headers = dict(extra_headers or {})
+            if auth:
+                headers.update(auth.initial_headers())
             while True:
                 resp = client.request(method if hops == 0 else "GET", req_url, params=req_params,
                                       json=json_body if hops == 0 else None, headers=headers)
                 if resp.status_code in (301, 302, 303, 307, 308) and "location" in resp.headers and hops < 10:
                     nxt = resp.url.join(resp.headers["location"])
                     req_url, req_params, hops = str(nxt), None, hops + 1
-                    headers = auth.headers_for(nxt.host) if auth else {}
+                    headers = auth.headers_for(nxt.host) if auth else dict(extra_headers or {})
                     continue
                 return resp
 

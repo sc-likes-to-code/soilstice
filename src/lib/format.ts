@@ -5,7 +5,7 @@ export type UnitSystem = "metric" | "us";
 
 const METRIC_LABEL: Record<Unit, string> = {
   mm: "mm", degC: "°C", degC_day: "°C·d", percent: "%", "MJ_m-2_day-1": "MJ m⁻² d⁻¹", "MJ_m-2": "MJ m⁻²",
-  "m3_m-3": "m³ m⁻³", wetness_0_1: "(0–1)", cm: "cm", "cm_cm-1": "cm cm⁻¹", m: "m", degree: "°", pH: "", ha: "ha",
+  "m3_m-3": "m³ m⁻³", "m3/m3": "m³/m³", wetness_0_1: "(0–1)", cm: "cm", "cm_cm-1": "cm cm⁻¹", m: "m", degree: "°", pH: "", ha: "ha",
   day: "days", year: "yr", count: "", percentile: "th pct", unitless: "", score_0_100: "/ 100",
 };
 
@@ -27,7 +27,7 @@ function convert(value: number, unit: Unit, system: UnitSystem): Converted {
 function decimals(unit: Unit, v: number, system: UnitSystem): number {
   if (system === "us" && (unit === "mm" || unit === "cm")) return Math.abs(v) < 10 ? 2 : 1;
   switch (unit) {
-    case "m3_m-3": case "cm_cm-1": case "wetness_0_1": return 2;
+    case "m3_m-3": case "m3/m3": case "cm_cm-1": case "wetness_0_1": return 2;
     case "unitless": return Math.abs(v) < 10 ? 2 : 1;
     case "pH": return 1;
     case "count": case "day": case "year": case "percentile": case "score_0_100": case "degC_day": case "MJ_m-2": return 0;

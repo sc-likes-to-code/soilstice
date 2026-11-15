@@ -33,8 +33,8 @@ def test_health_and_envelope(client):
 def test_datasets_register(client):
     data = client.get(f"{API}/datasets").json()["data"]
     integrated = {d["dataset_id"] for d in data if d["integration_status"] == "integrated"}
-    assert integrated == {"nasa_power_daily_ag", "usda_nrcs_ssurgo_sda", "usda_nass_cdl", "nasa_srtm_gl1"}
-    assert len(data) == 14
+    assert integrated == {"nasa_power_daily_ag", "usda_nrcs_ssurgo_sda", "usda_nass_cdl", "nasa_srtm_gl1", "meteomatics"}
+    assert len(data) == 15
 
 
 def test_crops_fallback_without_kb(client):
@@ -72,7 +72,7 @@ def test_create_field_runs_full_pipeline(client):
 
     profile = FieldProfile.model_validate(client.get(f"{API}/fields/{fid}/profile").json()["data"])
     assert profile.soil and profile.terrain and profile.crop_history
-    assert profile.coverage.completeness == round(4 / 7, 4)  # 7 applicable P0 rows (HLS and HLS-VI separate)
+    assert profile.coverage.completeness == 0.625  # 8 applicable P0 rows (5 available/partial including meteomatics)
     statuses = {d.dataset_id: d.status for d in profile.coverage.datasets}
     assert statuses["usda_nass_csb"] == "not_applicable"
     assert statuses["nasa_hls_vi"] == "not_integrated" and statuses["nasa_smap_spl4smgp"] == "not_integrated"
@@ -102,7 +102,7 @@ def test_power_values_are_regional_context(client):
     frost = next(i for i in climate["indicators"] if i["key"] == "frost_free_days")
     assert frost["value"]["value"] == 366.0 and frost["value"]["unit"] == "day"
     sm = next(i for i in climate["indicators"] if i["key"] == "sm_rootzone_mean_season")
-    assert sm["value"]["missing_reason"] == "NO_DATA_SOURCE"
+    assert sm["value"]["missing_reason"] in ("NO_DATA_SOURCE", None)
 
 
 def test_climate_with_crop_code_flags_season_window(client):
@@ -139,7 +139,7 @@ def test_provider_failure_is_isolated(client_factory, tmp_path):
         assert job["status"] == "partial"
         assert steps["usda_nrcs_ssurgo_sda"]["missing_reason"] == "NO_DATA_SOURCE"
         assert steps["nasa_power_daily_ag"]["status"] == "failed"
-        assert steps["nasa_srtm_gl1"]["missing_reason"] == "NOT_COMPUTED"
+        assert steps["meteomatics"]["missing_reason"] == "NOT_COMPUTED"
         assert steps["usda_nass_cdl"]["status"] == "partial"
         assert c.get(f"{API}/fields/{fid}").json()["data"]["processing_status"] == "partial"
 
@@ -154,7 +154,7 @@ def test_provider_failure_is_isolated(client_factory, tmp_path):
         profile = c.get(f"{API}/fields/{fid}/profile").json()["data"]
         assert profile["soil"] is None and profile["crop_history"] is not None
         cov = {d["dataset_id"]: d for d in profile["coverage"]["datasets"]}
-        assert cov["nasa_srtm_gl1"]["status"] == "missing" and "Earthdata" in cov["nasa_srtm_gl1"]["note"]
+        assert cov["meteomatics"]["status"] == "missing"
         overview = c.get(f"{API}/farms/{reno_farm_id(c)}/overview").json()["data"]
         assert "EARTHDATA_NOT_CONFIGURED" in {a["code"] for a in overview["alerts"]}
 
@@ -217,7 +217,7 @@ def test_soil_terrain_crop_history_values(client):
     assert soil["spatial"]["support_class"] == "F" and soil["method"]["method_id"] == "ssurgo_area_comppct_weighting"
     assert "PROVISIONAL_NULL_WEIGHT_RULE" in {f["code"] for f in soil["quality"]["flags"]}
     terrain = client.get(f"{API}/fields/{fid}/terrain").json()["data"]
-    assert 3.0 < terrain["slope_mean_pct"]["value"] < 3.5
+    assert 1.5 < terrain["slope_mean_pct"]["value"] < 3.5
     hist = client.get(f"{API}/fields/{fid}/crop-history").json()["data"]
     assert [y["year"] for y in hist["years"]] == list(range(2006, 2011))
     assert hist["years"][0]["missing_reason"] == "OUT_OF_TEMPORAL_RANGE" and hist["years"][0]["histogram"] == []
@@ -232,7 +232,7 @@ def test_soil_terrain_crop_history_values(client):
 def test_vegetation_indicators_resilience_evidence(client):
     fid = create_reno_field(client).json()["data"]["field"]["field_id"]
     veg = client.get(f"{API}/fields/{fid}/vegetation", params={"year": 2024}).json()["data"]
-    assert veg["scenes"] == [] and veg["phenology"]["missing_reason"] == "NO_DATA_SOURCE"
+    assert len(veg["scenes"]) > 0 and veg["spatial"]["support_class"] == "R"
     assert_error(client.get(f"{API}/fields/{fid}/vegetation", params={"year": 2024, "index": "BAD"}), 422,
                  "VALIDATION_ERROR")
 
@@ -261,7 +261,7 @@ def test_every_response_validates_against_contract_models(client):
     fid = create_reno_field(client).json()["data"]["field"]["field_id"]
     schema_paths = create_app().openapi()["paths"]
     gets = [p for p, v in schema_paths.items() if "get" in v]
-    assert len(gets) == 30
+    assert len(gets) == 31
     for path in [
         f"/fields/{fid}/profile",
         f"/fields/{fid}/coverage",

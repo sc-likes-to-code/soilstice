@@ -313,6 +313,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/fields/{field_id}/refresh": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Refresh Field */
+        post: operations["refreshField"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/fields/{field_id}/reprocess": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Refresh Field */
+        post: operations["reprocessField"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/fields/{field_id}/resilience": {
         parameters: {
             query?: never;
@@ -391,6 +425,23 @@ export interface paths {
         };
         /** Soil */
         get: operations["getSoil"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/fields/{field_id}/soil-moisture": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Soil Moisture */
+        get: operations["getSoilMoisture"];
         put?: never;
         post?: never;
         delete?: never;
@@ -723,6 +774,11 @@ export interface components {
             data: components["schemas"]["RotationScenario"];
             meta: components["schemas"]["ResponseMeta"];
         };
+        /** ApiResponse[SoilMoistureProfile] */
+        ApiResponse_SoilMoistureProfile_: {
+            data: components["schemas"]["SoilMoistureProfile"];
+            meta: components["schemas"]["ResponseMeta"];
+        };
         /** ApiResponse[SoilProfile] */
         ApiResponse_SoilProfile_: {
             data: components["schemas"]["SoilProfile"];
@@ -806,12 +862,12 @@ export interface components {
              * Precipitation
              * @enum {string}
              */
-            precipitation: "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic";
+            precipitation: "meteomatics" | "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic";
             /**
              * Temperature
              * @enum {string}
              */
-            temperature: "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic";
+            temperature: "meteomatics" | "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic";
         };
         /** ClassValue */
         ClassValue: {
@@ -860,7 +916,7 @@ export interface components {
              * Dataset Id
              * @enum {string}
              */
-            dataset_id: "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic";
+            dataset_id: "meteomatics" | "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic";
             /** Fields Available */
             fields_available: number;
             /** Fields Total */
@@ -1148,7 +1204,7 @@ export interface components {
              * Dataset Id
              * @enum {string}
              */
-            dataset_id: "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic";
+            dataset_id: "meteomatics" | "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic";
             /** Label */
             label: string;
             /** Last Updated */
@@ -1184,7 +1240,7 @@ export interface components {
              * Dataset Id
              * @enum {string}
              */
-            dataset_id: "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic";
+            dataset_id: "meteomatics" | "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic";
             /** Documentation Url */
             documentation_url: string;
             /** Doi */
@@ -1222,7 +1278,7 @@ export interface components {
              * Temporal Resolution
              * @enum {string}
              */
-            temporal_resolution: "PT3H" | "P1D" | "P1M" | "season" | "P1Y" | "static" | "irregular";
+            temporal_resolution: "PT1H" | "PT3H" | "P1D" | "P1M" | "season" | "P1Y" | "static" | "irregular";
             /** Title */
             title: string;
             /**
@@ -1289,7 +1345,7 @@ export interface components {
              * Key
              * @enum {string}
              */
-            key: "precip_total_season" | "precip_anomaly_pct" | "gdd_season" | "heat_stress_days" | "frost_free_days" | "solar_total_season" | "rh_mean_season" | "et0_total_season" | "water_balance_season" | "et_actual_season" | "sm_rootzone_mean_season" | "sm_rootzone_percentile" | "sm_rootzone_dry_days" | "ndvi_peak" | "ndvi_peak_doy" | "ndvi_peak_cv" | "ndmi_peak_season" | "aws_0_150" | "ph_0_30" | "om_0_30" | "clay_0_30" | "slope_mean_pct" | "slope_p90_pct" | "elevation_mean" | "distinct_crops" | "max_monoculture_run" | "rotation_shannon";
+            key: "precip_total_season" | "precip_anomaly_pct" | "gdd_season" | "heat_stress_days" | "frost_free_days" | "solar_total_season" | "rh_mean_season" | "et0_total_season" | "water_balance_season" | "et_actual_season" | "sm_rootzone_mean_season" | "sm_rootzone_percentile" | "sm_rootzone_dry_days" | "sm_rootzone_cv" | "sm_surface_mean_season" | "sm_shallow_mean_season" | "sm_middepth_mean_season" | "sm_deep_mean_season" | "sm_rootzone_composite_season" | "ndvi_peak" | "ndvi_peak_doy" | "ndvi_peak_cv" | "ndmi_peak_season" | "regional_ndvi_mean" | "regional_ndvi_peak" | "aws_0_150" | "ph_0_30" | "om_0_30" | "clay_0_30" | "slope_mean_pct" | "slope_p90_pct" | "elevation_mean" | "elevation_min" | "elevation_max" | "elevation_range" | "distinct_crops" | "max_monoculture_run" | "rotation_shannon";
             /** Label */
             label: string;
             method: components["schemas"]["MethodRef"];
@@ -1328,7 +1384,7 @@ export interface components {
             /** Citation */
             citation: string | null;
             /** Dataset Id */
-            dataset_id: ("nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic") | null;
+            dataset_id: ("meteomatics" | "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic") | null;
             /** Doi */
             doi: string | null;
             /**
@@ -1666,7 +1722,7 @@ export interface components {
              * Dataset Id
              * @enum {string}
              */
-            dataset_id: "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic";
+            dataset_id: "meteomatics" | "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic";
             /** Message */
             message: string | null;
             /** Missing Reason */
@@ -1739,6 +1795,15 @@ export interface components {
             reference_url: string | null;
             /** Version */
             version: string;
+        };
+        /** MetricCoverage */
+        MetricCoverage: {
+            /** Coverage Fraction */
+            coverage_fraction: number | null;
+            /** Expected Observations */
+            expected_observations: number | null;
+            /** Valid Observations */
+            valid_observations: number | null;
         };
         /** Phenology */
         Phenology: {
@@ -1823,7 +1888,7 @@ export interface components {
              * Unit
              * @enum {string}
              */
-            unit: "mm" | "degC" | "degC_day" | "percent" | "MJ_m-2_day-1" | "MJ_m-2" | "m3_m-3" | "wetness_0_1" | "cm" | "cm_cm-1" | "m" | "degree" | "pH" | "ha" | "day" | "year" | "count" | "percentile" | "unitless" | "score_0_100";
+            unit: "mm" | "degC" | "degC_day" | "percent" | "MJ_m-2_day-1" | "MJ_m-2" | "m3_m-3" | "m3/m3" | "wetness_0_1" | "cm" | "cm_cm-1" | "m" | "degree" | "pH" | "ha" | "day" | "year" | "count" | "percentile" | "unitless" | "score_0_100";
             /** Value */
             value: number | null;
         };
@@ -2128,6 +2193,52 @@ export interface components {
             /** Muname */
             muname: string;
         };
+        /** SoilMoistureDepthMetric */
+        SoilMoistureDepthMetric: {
+            /** Depth Cm */
+            depth_cm: number;
+            /** Depth Label */
+            depth_label: string;
+            max: components["schemas"]["Quantity"] | null;
+            mean: components["schemas"]["Quantity"];
+            min: components["schemas"]["Quantity"] | null;
+            /** Missing Observations */
+            missing_observations: number;
+            /** Parameter */
+            parameter: string;
+            /** Valid Observations */
+            valid_observations: number;
+            variability_cv: components["schemas"]["Quantity"] | null;
+        };
+        /** SoilMoistureProfile */
+        SoilMoistureProfile: {
+            /**
+             * As Of
+             * Format: date
+             */
+            as_of: string;
+            deep_sm: components["schemas"]["SoilMoistureDepthMetric"];
+            /**
+             * Field Id
+             * Format: uuid
+             */
+            field_id: string;
+            /** Metrics */
+            metrics: components["schemas"]["UnifiedEnvironmentalMetric"][];
+            middepth_sm: components["schemas"]["SoilMoistureDepthMetric"];
+            quality: components["schemas"]["QualityInfo"];
+            rootzone_dry_days: components["schemas"]["Quantity"];
+            rootzone_sm_composite: components["schemas"]["Quantity"];
+            /** Season Year */
+            season_year: number;
+            /** Series */
+            series: components["schemas"]["TimeSeries"][];
+            shallow_sm: components["schemas"]["SoilMoistureDepthMetric"];
+            /** Sources */
+            sources: components["schemas"]["SourceRef"][];
+            spatial: components["schemas"]["SpatialSupport"];
+            surface_sm: components["schemas"]["SoilMoistureDepthMetric"];
+        };
         /** SoilProfile */
         SoilProfile: {
             aws_0_100: components["schemas"]["Quantity"];
@@ -2162,7 +2273,7 @@ export interface components {
              * Dataset Id
              * @enum {string}
              */
-            dataset_id: "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic";
+            dataset_id: "meteomatics" | "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic";
             /** Documentation Url */
             documentation_url: string | null;
             /** Doi */
@@ -2301,7 +2412,7 @@ export interface components {
              * Resolution
              * @enum {string}
              */
-            resolution: "PT3H" | "P1D" | "P1M" | "season" | "P1Y" | "static" | "irregular";
+            resolution: "PT1H" | "PT3H" | "P1D" | "P1M" | "season" | "P1Y" | "static" | "irregular";
             /**
              * Time Standard
              * @enum {string}
@@ -2348,7 +2459,7 @@ export interface components {
              * Unit
              * @enum {string}
              */
-            unit: "mm" | "degC" | "degC_day" | "percent" | "MJ_m-2_day-1" | "MJ_m-2" | "m3_m-3" | "wetness_0_1" | "cm" | "cm_cm-1" | "m" | "degree" | "pH" | "ha" | "day" | "year" | "count" | "percentile" | "unitless" | "score_0_100";
+            unit: "mm" | "degC" | "degC_day" | "percent" | "MJ_m-2_day-1" | "MJ_m-2" | "m3_m-3" | "m3/m3" | "wetness_0_1" | "cm" | "cm_cm-1" | "m" | "degree" | "pH" | "ha" | "day" | "year" | "count" | "percentile" | "unitless" | "score_0_100";
             /** Variable */
             variable: string;
         };
@@ -2403,6 +2514,50 @@ export interface components {
             low: number | null;
             /** Note */
             note: string | null;
+            /** Value */
+            value: number | null;
+        };
+        /** UnifiedEnvironmentalMetric */
+        UnifiedEnvironmentalMetric: {
+            /**
+             * Aggregation
+             * @default field_area_mean
+             */
+            aggregation: string | null;
+            /** Confidence */
+            confidence: ("low" | "medium" | "high") | null;
+            coverage: components["schemas"]["MetricCoverage"] | null;
+            /** Limitations */
+            limitations: string[];
+            /** Metric */
+            metric: string;
+            /** Observed At */
+            observed_at: string | null;
+            /** Parameter */
+            parameter: string | null;
+            /**
+             * Provider
+             * @default meteomatics
+             */
+            provider: string;
+            /** Requested Grid Spacing */
+            requested_grid_spacing: string | null;
+            /**
+             * Source Type
+             * @default modelled_environmental_data
+             */
+            source_type: string;
+            /** Spatial Resolution M */
+            spatial_resolution_m: number | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "available" | "partial" | "insufficient_coverage" | "unavailable" | "disabled";
+            /** Temporal Resolution */
+            temporal_resolution: string | null;
+            /** Unit */
+            unit: string;
             /** Value */
             value: number | null;
         };
@@ -2472,7 +2627,7 @@ export interface components {
              * Product
              * @enum {string}
              */
-            product: "HLSL30_VI" | "HLSS30_VI" | "HLSL30" | "HLSS30" | "synthetic";
+            product: "HLSL30_VI" | "HLSS30_VI" | "HLSL30" | "HLSS30" | "synthetic" | "meteomatics_sat_ndvi";
             /** Total Pixels */
             total_pixels: number;
             /** Valid Pixels */
@@ -2547,7 +2702,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -2621,7 +2776,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -2697,7 +2852,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -2776,7 +2931,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -2850,7 +3005,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -2926,7 +3081,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -3000,7 +3155,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -3076,7 +3231,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -3156,7 +3311,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -3235,7 +3390,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -3315,7 +3470,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -3393,7 +3548,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -3469,7 +3624,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -3545,7 +3700,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -3624,7 +3779,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -3700,7 +3855,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -3776,7 +3931,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -3855,7 +4010,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -3934,7 +4089,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -4012,7 +4167,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -4090,7 +4245,159 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    refreshField: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                field_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_CreateFieldResponse_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Content */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    reprocessField: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                field_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_CreateFieldResponse_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -4166,7 +4473,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -4246,7 +4553,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -4326,7 +4633,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -4402,7 +4709,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -4482,7 +4789,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -4558,7 +4865,85 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    getSoilMoisture: {
+        parameters: {
+            query?: {
+                season_year?: number | null;
+            };
+            header?: never;
+            path: {
+                field_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_SoilMoistureProfile_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -4636,7 +5021,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -4715,7 +5100,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -4791,7 +5176,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -4870,7 +5255,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -4944,7 +5329,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -5020,7 +5405,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -5094,7 +5479,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -5173,7 +5558,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -5249,7 +5634,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -5329,7 +5714,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;
@@ -5405,7 +5790,7 @@ export interface operations {
                     "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
-            /** @description Unprocessable Entity */
+            /** @description Unprocessable Content */
             422: {
                 headers: {
                     [name: string]: unknown;

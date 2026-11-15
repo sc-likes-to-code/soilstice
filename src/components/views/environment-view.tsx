@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { CloudRain, Droplets, Leaf, Mountain } from "lucide-react";
-import type { ClimateProfile, SoilProfile, TerrainProfile, VegetationIndex, VegetationProfile } from "@/types/contracts";
+import type { ClimateProfile, SoilProfile, TerrainProfile, TimeSeries, VegetationIndex, VegetationProfile } from "@/types/contracts";
 import { useClimate, useSoil, useTerrain, useVegetation } from "@/hooks/queries";
 import { useFieldId } from "@/components/layout/field-layout";
 import { formatDate, missingText, pct } from "@/lib/format";
@@ -122,29 +122,127 @@ function MoistureTab({ fieldId, season }: { fieldId: string; season: number }) {
   return (
     <StateBoundary query={q} skeleton={sk}>
       {(c) => {
-        const sm = c.series.find((x) => x.variable === "sm_rootzone");
-        const inds = c.indicators.filter((i) => i.category === "soil_moisture");
-        const valid = sm?.points.filter((p) => p.value !== null).length ?? 0;
+        const smSurface = c.series.find((x) => x.variable === "sm_surface");
+        const smShallow = c.series.find((x) => x.variable === "sm_shallow");
+        const smRoot = c.series.find((x) => x.variable === "sm_rootzone");
+        const smDeep = c.series.find((x) => x.variable === "sm_deep");
+
+        const isMeteomatics = c.indicators.some((i) => i.sources.some((s) => s.dataset_id === "meteomatics")) ||
+          c.series.some((s) => s.sources.some((src) => src.dataset_id === "meteomatics"));
+
+        const smIndicators = c.indicators.filter((i) => i.category === "soil_moisture");
+        const indMap = new Map(smIndicators.map((i) => [i.indicator_id.split(":").pop() ?? "", i]));
+
+        const surfInd = indMap.get("sm_surface_mean_season");
+        const shallowInd = indMap.get("sm_shallow_mean_season");
+        const rootInd = indMap.get("sm_middepth_mean_season") ?? indMap.get("sm_rootzone_mean_season");
+        const deepInd = indMap.get("sm_deep_mean_season");
+        const compInd = indMap.get("sm_rootzone_composite_season") ?? indMap.get("sm_rootzone_mean_season");
+        const cvInd = indMap.get("sm_rootzone_cv");
+        const dryInd = indMap.get("sm_dry_days_count") ?? indMap.get("sm_rootzone_dry_days");
+
+        const depthSpecs = [
+          smSurface && { series: smSurface, kind: "line" as const, color: "#789dbc", name: "Surface (-5 cm)" },
+          smShallow && { series: smShallow, kind: "line" as const, color: "#4f7c8a", name: "Shallow (-15 cm)" },
+          smRoot && { series: smRoot, kind: "line" as const, color: "#2d5466", name: "Root-zone (-50 cm)" },
+          smDeep && { series: smDeep, kind: "line" as const, color: "#193240", name: "Deep drainage (-150 cm)" },
+        ].filter(Boolean) as { series: TimeSeries; kind: "line" | "area"; color: string; name: string }[];
+
+        const primarySeries = smRoot ?? smSurface;
+        const valid = primarySeries?.points.filter((p) => p.value !== null).length ?? 0;
+
         return (
           <div className="space-y-6">
             <div className="flex items-start gap-3 rounded-xl border border-wheat-200 bg-wheat-100/60 p-4 text-[13px] leading-relaxed text-ink-soft">
               <Droplets className="mt-0.5 h-4 w-4 shrink-0 text-wheat-600" aria-hidden />
-              <p><strong className="text-ink">Regional context — not a field measurement.</strong> SMAP L4 soil moisture is a 9 km model-assimilated estimate. One grid cell is about 8,100 ha; this field covers roughly {sm?.spatial.field_fraction_of_cell !== null && sm ? pct(sm.spatial.field_fraction_of_cell, 1) : "—"} of it.</p>
+              <div>
+                <p>
+                  <strong className="text-ink">
+                    {isMeteomatics ? "Meteomatics Multi-Depth Soil Moisture Model (~9 km)." : "Regional context — not a field measurement."}
+                  </strong>{" "}
+                  {isMeteomatics
+                    ? "ECMWF-assimilated continuous volumetric soil water content across 4 standard soil layers (-5 cm, -15 cm, -50 cm, -150 cm). Depth-weighted root-zone integration applies a 0.10 / 0.20 / 0.70 profile composite."
+                    : `SMAP L4 soil moisture is a 9 km model-assimilated estimate. One grid cell is about 8,100 ha; this field covers roughly ${primarySeries?.spatial.field_fraction_of_cell !== null && primarySeries ? pct(primarySeries.spatial.field_fraction_of_cell, 1) : "—"} of it.`}
+                </p>
+              </div>
             </div>
-            <div className="grid gap-3 sm:grid-cols-3">{inds.map((i) => <IndicatorCard key={i.indicator_id} indicator={i} size="sm" />)}</div>
-            {sm && (
+
+            {/* 4 Standard Depths + Composite Cards */}
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+              <MiniStat
+                label="Surface (-5 cm)"
+                value={surfInd?.value ? <QuantityValue q={surfInd.value} /> : "—"}
+                sub="Mean volumetric water (m³/m³)"
+              />
+              <MiniStat
+                label="Shallow (-15 cm)"
+                value={shallowInd?.value ? <QuantityValue q={shallowInd.value} /> : "—"}
+                sub="Mean volumetric water (m³/m³)"
+              />
+              <MiniStat
+                label="Mid-depth (-50 cm)"
+                value={rootInd?.value ? <QuantityValue q={rootInd.value} /> : "—"}
+                sub="Root-zone core layer"
+              />
+              <MiniStat
+                label="Deep (-150 cm)"
+                value={deepInd?.value ? <QuantityValue q={deepInd.value} /> : "—"}
+                sub="Sub-root drainage boundary"
+              />
+              <MiniStat
+                label="Root Composite"
+                value={compInd?.value ? <QuantityValue q={compInd.value} /> : "—"}
+                sub="0.10·S + 0.20·M + 0.70·D"
+              />
+            </div>
+
+            {/* Additional Indicators */}
+            {smIndicators.length > 0 && (
+              <div>
+                <h3 className="mb-3 font-display text-[16px] text-ink">Moisture dynamics & risk indicators</h3>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  {cvInd && <IndicatorCard indicator={cvInd} size="sm" />}
+                  {dryInd && <IndicatorCard indicator={dryInd} size="sm" />}
+                  {smIndicators.filter((i) => ![
+                    "sm_surface_mean_season", "sm_shallow_mean_season", "sm_rootzone_mean_season",
+                    "sm_deep_mean_season", "sm_rootzone_composite_season", "sm_rootzone_cv", "sm_dry_days_count", "sm_rootzone_dry_days",
+                  ].includes(i.indicator_id.split(":").pop() ?? "")).map((i) => (
+                    <IndicatorCard key={i.indicator_id} indicator={i} size="sm" />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Time Series Multi-Depth Chart */}
+            {primarySeries && (
               <Card>
-                <CardHeader eyebrow="SMAP L4 · SPL4SMGP" title="Daily root-zone soil moisture (0–100 cm)" description="Gaps are missing retrievals, shown as breaks — never as zero." actions={<><SupportBadge spatial={sm.spatial} /><SourceList sources={sm.sources} /></>} />
+                <CardHeader
+                  eyebrow={isMeteomatics ? "Meteomatics · Multi-Depth Hydrology" : "SMAP L4 · SPL4SMGP"}
+                  title="Daily volumetric soil water time series"
+                  description={isMeteomatics ? "Continuous time series across four soil depths. Gaps appear as breaks, never zeros." : "Daily root-zone soil moisture (0–100 cm)."}
+                  actions={<><SupportBadge spatial={primarySeries.spatial} /><SourceList sources={primarySeries.sources} /></>}
+                />
                 <CardBody>
                   {valid === 0 ? (
                     <EmptyState
                       title="No soil-moisture observations for this season"
-                      description="SMAP L4 9 km root-zone soil moisture is planned for future integration (Earthdata NSIDC provider). Soil moisture dynamics currently rely on SSURGO Available Water Storage (AWS)."
+                      description="Soil moisture time series is not yet available for this season range."
                     />
                   ) : (
-                    <TimeSeriesChart x="date" height={280} specs={[{ series: sm, kind: "area", color: "#4f7c8a", name: "Root-zone SM" }]} />
+                    <>
+                      <TimeSeriesChart
+                        x="date"
+                        height={300}
+                        specs={depthSpecs.length > 0 ? depthSpecs : [{ series: primarySeries, kind: "area", color: "#4f7c8a", name: "Soil moisture" }]}
+                      />
+                      <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+                        <ChartLegend
+                          items={depthSpecs.length > 0 ? depthSpecs.map((s) => ({ label: s.name, color: s.color })) : [{ label: "Root-zone SM", color: "#4f7c8a" }]}
+                        />
+                        <p className="text-[11.5px] text-stone-500">{valid} observations in season · UTC</p>
+                      </div>
+                    </>
                   )}
-                  <p className="mt-2 text-[11.5px] text-stone-500">{valid} of {sm.points.length} days with values · UTC days</p>
                 </CardBody>
               </Card>
             )}
@@ -169,6 +267,7 @@ function VegetationTab({ fieldId, season }: { fieldId: string; season: number })
 }
 
 function Vegetation({ v }: { v: VegetationProfile }) {
+  const isRegional = v.phenology.method.method_id.includes("meteomatics") || v.sources.some((s) => s.dataset_id === "meteomatics");
   const accepted = v.scenes.filter((s) => s.accepted).length;
   const ph = v.phenology;
   if (v.scenes.length === 0) {
@@ -183,15 +282,28 @@ function Vegetation({ v }: { v: VegetationProfile }) {
   const markers = [ph.greenup_date && { t: ph.greenup_date, label: "Green-up", color: "#4b8158" }, ph.peak_date && { t: ph.peak_date, label: "Peak", color: "#1d3a29" }, ph.senescence_date && { t: ph.senescence_date, label: "Senescence", color: "#a87a24" }].filter(Boolean) as { t: string; label: string; color: string }[];
   return (
     <div className="space-y-6">
+      {isRegional && (
+        <div className="flex items-start gap-3 rounded-xl border border-wheat-200 bg-wheat-100/60 p-4 text-[13px] leading-relaxed text-ink-soft">
+          <Leaf className="mt-0.5 h-4 w-4 shrink-0 text-wheat-600" aria-hidden />
+          <p>
+            <strong className="text-ink">Regional vegetation indicator (Support Class R).</strong> Meteomatics regional NDVI (sat_ndvi:idx) provides macro-scale greenness context (~9 km). It is not field-level 30 m HLS imagery. The Canopy Temporal Stability Model and field-scale phenological half-amplitude transitions remain intentionally unavailable.
+          </p>
+        </div>
+      )}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <MiniStat label={`Peak ${v.index}`} value={<QuantityValue q={ph.peak_value} />} sub={ph.peak_date ? formatDate(ph.peak_date, "long") : missingText(ph.missing_reason)} />
-        <MiniStat label="Green-up" value={formatDate(ph.greenup_date, "long")} sub="Half-amplitude crossing" />
-        <MiniStat label="Senescence" value={formatDate(ph.senescence_date, "long")} sub="Half-amplitude crossing" />
-        <MiniStat label="Accepted scenes" value={`${accepted} / ${v.scenes.length}`} sub="≥ 70% clear field pixels" />
+        <MiniStat label="Green-up" value={ph.greenup_date ? formatDate(ph.greenup_date, "long") : "Unavailable (Regional)"} sub={ph.greenup_date ? "Half-amplitude crossing" : "Regional macro-scale"} />
+        <MiniStat label="Senescence" value={ph.senescence_date ? formatDate(ph.senescence_date, "long") : "Unavailable (Regional)"} sub={ph.senescence_date ? "Half-amplitude crossing" : "Regional macro-scale"} />
+        <MiniStat label={isRegional ? "Observed timesteps" : "Accepted scenes"} value={`${accepted} / ${v.scenes.length}`} sub={isRegional ? "Valid daily retrievals" : "≥ 70% clear field pixels"} />
       </div>
       {v.quality.flags.length > 0 && <FlagList flags={v.quality.flags} />}
       <Card>
-        <CardHeader eyebrow="HLS-VI · L30 + S30" title={`${v.index} through the ${v.year} season`} description="Accepted scenes form the line; rejected (cloud-limited) scenes appear as faint points." actions={<><SupportBadge spatial={v.spatial} /><SourceList sources={v.sources} /></>} />
+        <CardHeader
+          eyebrow={isRegional ? "Meteomatics · Regional sat_ndvi:idx" : "HLS-VI · L30 + S30"}
+          title={isRegional ? `Regional NDVI through the ${v.year} season` : `${v.index} through the ${v.year} season`}
+          description={isRegional ? "Regional daily satellite vegetation greenness time series." : "Accepted scenes form the line; rejected (cloud-limited) scenes appear as faint points."}
+          actions={<><SupportBadge spatial={v.spatial} /><SourceList sources={v.sources} /></>}
+        />
         <CardBody>
           <TimeSeriesChart x="date" height={300} markers={markers} specs={[{ series: allPoints, kind: "scatter", color: "#cfc3aa", name: "All scenes" }, { series: v.series, kind: "line", color: "#366645", name: "Accepted scenes", connect: true }]} />
           <div className="mt-3"><ChartLegend items={[{ label: "Accepted scene median", color: "#366645" }, { label: "All scenes", color: "#cfc3aa" }]} /></div>
@@ -199,7 +311,11 @@ function Vegetation({ v }: { v: VegetationProfile }) {
         </CardBody>
       </Card>
       <Card>
-        <CardHeader eyebrow="Scene log" title="Every scene, with cloud-mask accounting" description="Fmask bits 1–3 (cloud, adjacent, shadow) are masked; scenes need ≥ 70% clear field pixels." />
+        <CardHeader
+          eyebrow={isRegional ? "Observation log" : "Scene log"}
+          title={isRegional ? "Meteomatics satellite NDVI observations" : "Every scene, with cloud-mask accounting"}
+          description={isRegional ? "Daily regional retrievals mapped to field centroid." : "Fmask bits 1–3 (cloud, adjacent, shadow) are masked; scenes need ≥ 70% clear field pixels."}
+        />
         <CardBody className="pt-2">
           <div className="max-h-[360px] overflow-auto">
             <table className="w-full min-w-[640px] text-left text-[12px]">
@@ -306,18 +422,33 @@ function Soil({ s }: { s: SoilProfile }) {
 }
 
 function Terrain({ t }: { t: TerrainProfile }) {
+  const isMeteomatics = t.sources.some((s) => s.dataset_id === "meteomatics") || t.method.method_id.includes("meteomatics");
+  const slopeWithheld = t.slope_p90_pct.value === null || t.slope_p90_pct.missing_reason !== null;
+
   return (
     <Card>
-      <CardHeader eyebrow="SRTM GL1 · 30 m" title="Terrain" description={t.method.description} actions={<><SupportBadge spatial={t.spatial} /><SourceList sources={t.sources} /><QualityIndicator quality={t.quality} /></>} />
-      <CardBody className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-        <MiniStat label="Mean elevation" value={<QuantityValue q={t.elevation_mean} />} />
-        <MiniStat label="Min elevation" value={<QuantityValue q={t.elevation_min} />} />
-        <MiniStat label="Max elevation" value={<QuantityValue q={t.elevation_max} />} />
-        <MiniStat label="Mean slope" value={<QuantityValue q={t.slope_mean_pct} />} />
-        <MiniStat label="Slope p90" value={<QuantityValue q={t.slope_p90_pct} />} />
+      <CardHeader
+        eyebrow={isMeteomatics ? "Meteomatics · Elevation Model" : "SRTM GL1 · 30 m"}
+        title="Terrain & Elevation"
+        description={t.method.description}
+        actions={<><SupportBadge spatial={t.spatial} /><SourceList sources={t.sources} /><QualityIndicator quality={t.quality} /></>}
+      />
+      <CardBody className="space-y-4">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          <MiniStat label="Mean elevation" value={<QuantityValue q={t.elevation_mean} />} />
+          <MiniStat label="Min elevation" value={<QuantityValue q={t.elevation_min} />} />
+          <MiniStat label="Max elevation" value={<QuantityValue q={t.elevation_max} />} />
+          <MiniStat label="Mean slope" value={<QuantityValue q={t.slope_mean_pct} />} />
+          <MiniStat label="Slope p90" value={<QuantityValue q={t.slope_p90_pct} />} />
+        </div>
+        {slopeWithheld && (
+          <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-[12.5px] text-amber-900">
+            <span className="font-semibold">Conditional Slope Derivation:</span> Slope and 90th percentile slope are withheld when spatial grid resolution is inadequate for robust slope modeling (&lt; 9 field points or flat spatial variance). Erosion hazard scoring is accordingly withheld.
+          </div>
+        )}
         {t.quality.status === "missing" && (
           <p className="text-[12.5px] text-stone-600 sm:col-span-2 lg:col-span-5">
-            <span className="font-semibold text-clay-700">SRTM Data Unavailable:</span> NASA Earthdata Login credentials (SOILSTICE_EARTHDATA_TOKEN) required to fetch SRTM GL1 30m elevation rasters.
+            <span className="font-semibold text-clay-700">Terrain Data Unavailable:</span> {t.quality.missing_reason ?? "Elevation model unavailable."}
           </p>
         )}
       </CardBody>

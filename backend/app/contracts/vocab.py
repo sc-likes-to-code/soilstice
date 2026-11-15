@@ -31,6 +31,7 @@ MissingReason = Literal[
     "UPSTREAM_ERROR", "NOT_YET_PUBLISHED", "NOT_COMPUTED", "OUTSIDE_AOI", "PENDING_PROCESSING",
 ]
 DatasetId = Literal[
+    "meteomatics",
     "nasa_power_daily_ag", "usda_nrcs_ssurgo_sda", "usda_nass_cdl", "usda_nass_csb",
     "nasa_hls", "nasa_hls_vi", "nasa_smap_spl4smgp", "nasa_srtm_gl1",
     "prism_daily", "openet", "usda_nass_quickstats", "nasa_smap_spl3smp_e",
@@ -40,11 +41,11 @@ ExtractionMethod = Literal[
     "zonal_polygon", "zonal_polygon_inward_buffer", "containing_cell", "api_point_query",
     "vector_intersection", "attribute_join", "not_applicable",
 ]
-TemporalResolution = Literal["PT3H", "P1D", "P1M", "season", "P1Y", "static", "irregular"]
+TemporalResolution = Literal["PT1H", "PT3H", "P1D", "P1M", "season", "P1Y", "static", "irregular"]
 Aggregation = Literal["none", "mean", "sum", "median", "min", "max", "majority", "weighted_mean", "percentile", "count"]
 TimeStandard = Literal["UTC", "LST", "not_applicable"]
 Unit = Literal[
-    "mm", "degC", "degC_day", "percent", "MJ_m-2_day-1", "MJ_m-2", "m3_m-3", "wetness_0_1",
+    "mm", "degC", "degC_day", "percent", "MJ_m-2_day-1", "MJ_m-2", "m3_m-3", "m3/m3", "wetness_0_1",
     "cm", "cm_cm-1", "m", "degree", "pH", "ha", "day", "year", "count",
     "percentile", "unitless", "score_0_100",
 ]
@@ -52,10 +53,11 @@ IndicatorCategory = Literal["climate", "soil_moisture", "vegetation", "water", "
 IndicatorKey = Literal[
     "precip_total_season", "precip_anomaly_pct", "gdd_season", "heat_stress_days", "frost_free_days",
     "solar_total_season", "rh_mean_season", "et0_total_season", "water_balance_season", "et_actual_season",
-    "sm_rootzone_mean_season", "sm_rootzone_percentile", "sm_rootzone_dry_days",
-    "ndvi_peak", "ndvi_peak_doy", "ndvi_peak_cv", "ndmi_peak_season",
+    "sm_rootzone_mean_season", "sm_rootzone_percentile", "sm_rootzone_dry_days", "sm_rootzone_cv",
+    "sm_surface_mean_season", "sm_shallow_mean_season", "sm_middepth_mean_season", "sm_deep_mean_season", "sm_rootzone_composite_season",
+    "ndvi_peak", "ndvi_peak_doy", "ndvi_peak_cv", "ndmi_peak_season", "regional_ndvi_mean", "regional_ndvi_peak",
     "aws_0_150", "ph_0_30", "om_0_30", "clay_0_30",
-    "slope_mean_pct", "slope_p90_pct", "elevation_mean",
+    "slope_mean_pct", "slope_p90_pct", "elevation_mean", "elevation_min", "elevation_max", "elevation_range",
     "distinct_crops", "max_monoculture_run", "rotation_shannon",
 ]
 CropCode = int

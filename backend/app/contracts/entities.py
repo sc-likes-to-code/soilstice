@@ -262,7 +262,7 @@ class MaskCounts(Contract):
 
 class VegetationScene(Contract):
     granule_id: str
-    product: Literal["HLSL30_VI", "HLSS30_VI", "HLSL30", "HLSS30", "synthetic"]
+    product: Literal["HLSL30_VI", "HLSS30_VI", "HLSL30", "HLSS30", "synthetic", "meteomatics_sat_ndvi"]
     acquired_at: datetime
     median: float | None = None
     p10: float | None = None
@@ -833,5 +833,67 @@ class FieldSuitabilityResponse(Contract):
     summary: SuitabilitySummaryCounts
     crops: list[CropSuitabilityAssessment]
     disclaimers: list[str]
+
+
+# ── 5.19 Unified Environmental Metric Contract (Section 10) ──────────────────
+
+MetricStatus = Literal["available", "partial", "insufficient_coverage", "unavailable", "disabled"]
+
+
+class MetricCoverage(Contract):
+    valid_observations: int | None = None
+    expected_observations: int | None = None
+    coverage_fraction: float | None = None
+
+
+class UnifiedEnvironmentalMetric(Contract):
+    metric: str
+    value: float | None = None
+    unit: str
+    status: MetricStatus
+    provider: str = "meteomatics"
+    parameter: str | None = None
+    source_type: str = "modelled_environmental_data"
+    spatial_resolution_m: float | None = None
+    requested_grid_spacing: str | None = None
+    temporal_resolution: str | None = None
+    aggregation: str | None = "field_area_mean"
+    coverage: MetricCoverage | None = None
+    confidence: Confidence | None = None
+    limitations: list[str] = PField(default_factory=list)
+    observed_at: datetime | None = None
+
+
+# ── 5.20 Soil Moisture Profile (Meteomatics 4-Depth Pipeline) ────────────────
+
+
+class SoilMoistureDepthMetric(Contract):
+    depth_label: str
+    depth_cm: float
+    parameter: str
+    mean: Quantity
+    variability_cv: Quantity | None = None
+    min: Quantity | None = None
+    max: Quantity | None = None
+    valid_observations: int
+    missing_observations: int
+
+
+class SoilMoistureProfile(Contract):
+    field_id: UUID
+    season_year: int
+    as_of: date
+    surface_sm: SoilMoistureDepthMetric
+    shallow_sm: SoilMoistureDepthMetric
+    middepth_sm: SoilMoistureDepthMetric
+    deep_sm: SoilMoistureDepthMetric
+    rootzone_sm_composite: Quantity
+    rootzone_dry_days: Quantity
+    series: list[TimeSeries] = PField(default_factory=list)
+    metrics: list[UnifiedEnvironmentalMetric] = PField(default_factory=list)
+    quality: QualityInfo
+    spatial: SpatialSupport
+    sources: list[SourceRef]
+
 
 

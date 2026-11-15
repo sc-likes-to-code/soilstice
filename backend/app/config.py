@@ -10,16 +10,22 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Literal
 
-from pydantic import Field, SecretStr
+from pydantic import AliasChoices, Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BACKEND_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = BACKEND_ROOT.parent
 
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_prefix="SOILSTICE_",
-        env_file=BACKEND_ROOT / ".env",
+        env_file=(
+            BACKEND_ROOT / ".env",
+            PROJECT_ROOT / ".env.local",
+            PROJECT_ROOT / ".env",
+            BACKEND_ROOT / ".env.local",
+        ),
         env_file_encoding="utf-8",
         extra="ignore",
     )
@@ -57,6 +63,16 @@ class Settings(BaseSettings):
     earthdata_username: str | None = None
     earthdata_password: SecretStr | None = None
 
+    # Credentials (Meteomatics) — Primary provider for soil moisture, elevation, conditional terrain, and regional NDVI.
+    meteomatics_username: str | None = Field(
+        default=None,
+        validation_alias=AliasChoices("METEOMATICS_USERNAME", "SOILSTICE_METEOMATICS_USERNAME"),
+    )
+    meteomatics_password: SecretStr | None = Field(
+        default=None,
+        validation_alias=AliasChoices("METEOMATICS_PASSWORD", "SOILSTICE_METEOMATICS_PASSWORD"),
+    )
+
     # Crop knowledge base directory (Phase 5 canonical handoff)
     crop_kb_dir: Path | None = Path("data/backend_handoff")
 
@@ -67,6 +83,12 @@ class Settings(BaseSettings):
     def earthdata_configured(self) -> bool:
         return self.earthdata_token is not None or (
             self.earthdata_username is not None and self.earthdata_password is not None
+        )
+
+    @property
+    def meteomatics_configured(self) -> bool:
+        return bool(
+            self.meteomatics_username and self.meteomatics_password and self.meteomatics_password.get_secret_value()
         )
 
 

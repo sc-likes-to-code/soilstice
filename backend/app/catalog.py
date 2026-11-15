@@ -22,7 +22,7 @@ LAST_VERIFIED = date(2026, 11, 14)
 
 # Datasets with a provider module in app/providers (Phase 2, first real-data increment).
 INTEGRATED: frozenset[str] = frozenset(
-    {"nasa_power_daily_ag", "usda_nrcs_ssurgo_sda", "usda_nass_cdl", "nasa_srtm_gl1"}
+    {"nasa_power_daily_ag", "usda_nrcs_ssurgo_sda", "usda_nass_cdl", "nasa_srtm_gl1", "meteomatics"}
 )
 
 
@@ -49,6 +49,8 @@ def _d(dataset_id, title, publisher, product, version, priority, support, res, t
 
 
 DATASETS: list[DatasetDescriptor] = [
+    _d("meteomatics", "Meteomatics Environmental API", "Meteomatics AG", "Meteomatics API (Mix)", "v3.0", "P0", "R",
+       1000, "PT1H", "2010-01-01", None, "https://www.meteomatics.com/en/api/", None, "LIVE"),
     _d("nasa_power_daily_ag", "NASA POWER Daily (AG community)", "NASA LaRC", "POWER Daily API", "v2.10.3", "P0", "R",
        55000, "P1D", "1981-01-01", None, "https://power.larc.nasa.gov/docs/services/api/temporal/daily/", None, "LIVE"),
     _d("usda_nrcs_ssurgo_sda", "SSURGO via Soil Data Access", "USDA NRCS", "SSURGO (SDA)", "live database", "P0", "F",
@@ -110,6 +112,8 @@ POWER_MET_RES_M = 55000.0  # ~0.5° x 0.625° MERRA-2 grid
 POWER_SOLAR_RES_M = 111000.0  # ~1° x 1° CERES SYN1deg grid
 
 SPATIAL: dict[str, SpatialSupport] = {
+    "meteomatics": SpatialSupport(support_class="R", native_resolution_m=1000.0,
+                                 extraction_method="api_point_query", crs="EPSG:4326"),
     "nasa_power_daily_ag": SpatialSupport(support_class="R", native_resolution_m=POWER_MET_RES_M,
                                           extraction_method="api_point_query", crs="EPSG:4326"),
     "usda_nrcs_ssurgo_sda": SpatialSupport(support_class="F", native_resolution_m=None,

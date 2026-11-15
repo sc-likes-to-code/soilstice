@@ -45,6 +45,7 @@ from app.contracts import (
     ResilienceProfile,
     RotationRecommendation,
     RotationScenario,
+    SoilMoistureProfile,
     SoilProfile,
     TerrainProfile,
     UpdateFarmRequest,
@@ -151,6 +152,12 @@ def delete_field(field_id: UUID, request: Request, svc: FieldService = Depends(f
     return ok(request, Deleted())
 
 
+@router.post("/fields/{field_id}/refresh", response_model=ApiResponse[CreateFieldResponse], tags=["fields"], operation_id="refreshField")
+@router.post("/fields/{field_id}/reprocess", response_model=ApiResponse[CreateFieldResponse], tags=["fields"], operation_id="reprocessField")
+def refresh_field(field_id: UUID, request: Request, svc: FieldService = Depends(fields_svc)):
+    return ok(request, svc.reprocess_field(field_id))
+
+
 @router.get("/fields/{field_id}/profile", response_model=ApiResponse[FieldProfile], tags=["fields"],
             operation_id="getFieldProfile")
 def field_profile(field_id: UUID, request: Request, season_year: int | None = None,
@@ -176,6 +183,12 @@ def climate(field_id: UUID, request: Request, season_year: int = Query(...), cro
             operation_id="getSoil")
 def soil(field_id: UUID, request: Request, svc: EnvironmentService = Depends(env_svc)):
     return ok(request, svc.soil(field_id))
+
+
+@router.get("/fields/{field_id}/soil-moisture", response_model=ApiResponse[SoilMoistureProfile], tags=["environment"],
+            operation_id="getSoilMoisture")
+def soil_moisture(field_id: UUID, request: Request, season_year: int | None = None, svc: EnvironmentService = Depends(env_svc)):
+    return ok(request, svc.soil_moisture(field_id, season_year))
 
 
 @router.get("/fields/{field_id}/terrain", response_model=ApiResponse[TerrainProfile], tags=["environment"],

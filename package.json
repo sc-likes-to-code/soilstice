@@ -12,7 +12,8 @@
     "contract:openapi": "node contract/export-openapi.mjs",
     "contract:gen": "openapi-typescript backend/openapi.json -o contract/openapi.gen.ts",
     "contract:check": "npm run contract:gen && tsc -p contract",
-    "contract:fixtures": "node contract/export-fixtures.mjs"
+    "contract:fixtures": "node contract/export-fixtures.mjs",
+    "diagnostics:environment": "node scripts/run-diagnostics.mjs"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.107.1",

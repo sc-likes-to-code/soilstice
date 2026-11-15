@@ -71,6 +71,7 @@ export const VERIFICATION_STYLE: Record<VerificationStatus, { label: string; fg:
 };
 
 export const DATASET_SHORT: Record<DatasetId, string> = {
+  meteomatics: "Meteomatics",
   nasa_power_daily_ag: "NASA POWER", usda_nrcs_ssurgo_sda: "SSURGO", usda_nass_cdl: "CDL", usda_nass_csb: "CSB",
   nasa_hls: "HLS SR", nasa_hls_vi: "HLS-VI", nasa_smap_spl4smgp: "SMAP L4", nasa_srtm_gl1: "SRTM",
   prism_daily: "PRISM", openet: "OpenET", usda_nass_quickstats: "Quick Stats", nasa_smap_spl3smp_e: "SMAP L3",

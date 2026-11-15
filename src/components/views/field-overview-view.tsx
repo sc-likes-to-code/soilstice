@@ -23,10 +23,7 @@ export function FieldOverviewView() {
 
 function Unavailable({ dataset, p }: { dataset: keyof typeof DATASET_SHORT; p: FieldProfile }) {
   const c = p.coverage.datasets.find((d) => d.dataset_id === dataset);
-  let desc = c?.missing_reason ? missingText(c.missing_reason) : c?.note ?? "This dataset has not been processed for this field.";
-  if (dataset === "nasa_srtm_gl1") {
-    desc = "NASA Earthdata Login required (SOILSTICE_EARTHDATA_TOKEN) to acquire SRTM GL1 30 m elevation rasters.";
-  }
+  const desc = c?.missing_reason ? missingText(c.missing_reason) : c?.note ?? "This dataset has not been processed for this field.";
   return <EmptyState title={`${DATASET_SHORT[dataset]} not available`} description={desc} />;
 }
 
@@ -74,7 +71,11 @@ function Overview({ p }: { p: FieldProfile }) {
             </CardBody>
           </Card>
           <Card>
-            <CardHeader eyebrow="Terrain · SRTM" title={<span className="inline-flex items-center gap-2"><Mountain className="h-4 w-4 text-soil-500" /> Terrain summary</span>} actions={terrain && <SupportBadge spatial={terrain.spatial} />} />
+            <CardHeader
+              eyebrow={terrain?.sources.some((s) => s.dataset_id === "meteomatics") ? "Terrain · Meteomatics" : "Terrain · Elevation"}
+              title={<span className="inline-flex items-center gap-2"><Mountain className="h-4 w-4 text-soil-500" /> Terrain summary</span>}
+              actions={terrain && <SupportBadge spatial={terrain.spatial} />}
+            />
             <CardBody>
               {terrain && terrain.quality.status !== "missing" ? (
                 <dl className="grid grid-cols-2 gap-x-4 gap-y-4 text-[13px]">
@@ -84,7 +85,7 @@ function Overview({ p }: { p: FieldProfile }) {
                   <Item label="Slope (90th pct)" value={<QuantityValue q={terrain.slope_p90_pct} />} />
                   <div className="col-span-2 border-t border-line/70 pt-3"><SourceList sources={terrain.sources} /></div>
                 </dl>
-              ) : <Unavailable dataset="nasa_srtm_gl1" p={p} />}
+              ) : <Unavailable dataset={p.coverage.datasets.some((d) => d.dataset_id === "meteomatics") ? "meteomatics" : "nasa_srtm_gl1"} p={p} />}
             </CardBody>
           </Card>
         </div>
