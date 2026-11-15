@@ -74,7 +74,7 @@ class Settings(BaseSettings):
     )
 
     # Crop knowledge base directory (Phase 5 canonical handoff)
-    crop_kb_dir: Path | None = Path("data/backend_handoff")
+    crop_kb_dir: Path | None = PROJECT_ROOT / "data" / "backend_handoff"
 
     def default_season_year(self) -> int:
         return self.climate_default_season_year or (date.today().year - 1)

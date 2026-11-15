@@ -15,8 +15,8 @@ from app.rotation.kb import load_kb
 from app.suitability.engine import CropSuitabilityEngine
 from tests.test_phase6_suitability import make_climate, make_soil, make_terrain, make_history
 
-HANDOFF_DIR = Path("data/backend_handoff")
-
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+HANDOFF_DIR = PROJECT_ROOT / "data" / "backend_handoff"
 
 @pytest.fixture
 def suitability_engine() -> CropSuitabilityEngine:

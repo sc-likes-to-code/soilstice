@@ -75,7 +75,8 @@ from app.suitability.evaluators import (
 )
 from app.suitability.scorer import calculate_suitability_score, classify_crop
 
-HANDOFF_DIR = Path("data/backend_handoff")
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+HANDOFF_DIR = PROJECT_ROOT / "data" / "backend_handoff"
 API = "/api/v1"
 
 # Shared mock primitives

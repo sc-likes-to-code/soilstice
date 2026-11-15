@@ -34,10 +34,10 @@ from app.rotation.kb import (
 )
 from app.services.container import Container
 
-HANDOFF_DIR = Path("data/backend_handoff")
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+HANDOFF_DIR = PROJECT_ROOT / "data" / "backend_handoff"
 KB_JSON_PATH = HANDOFF_DIR / "data" / "crop_knowledge_base.json"
 SCHEMA_JSON_PATH = HANDOFF_DIR / "data" / "schema.json"
-
 
 @pytest.fixture(scope="module")
 def canonical_kb() -> CropKnowledgeBase:
