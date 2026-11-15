@@ -2,13 +2,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, type ReactNode } from "react";
-import { BookOpen, CheckCircle2, FlaskConical, LayoutDashboard, Map as MapIcon, Settings } from "lucide-react";
+import { BookOpen, LayoutDashboard, Map as MapIcon, Settings } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { useActiveFarm } from "@/hooks/active-farm";
 import { usePrefs } from "@/hooks/preferences";
 import { Select, Skeleton } from "@/components/ui/primitives";
 import { Brand } from "./brand";
-import { DATA_MODE } from "@/services";
+import { DataModeToggle } from "./data-mode-toggle";
+import { useDataMode } from "@/hooks/data-mode";
 
 const NAV = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard, match: (p: string) => p.startsWith("/dashboard") },
@@ -70,6 +71,8 @@ function FarmSwitcher() {
 }
 
 export function AppShell({ children }: { children: ReactNode }) {
+  const { isMock } = useDataMode();
+
   return (
     <div className="canvas-grain flex min-h-full flex-1 flex-col">
       <header className="no-print sticky top-0 z-30 border-b border-line/90 bg-cream/92 shadow-[0_1px_3px_rgba(0,0,0,0.03)] backdrop-blur-md">
@@ -83,19 +86,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
 
           <div className="ml-auto flex items-center gap-3 md:ml-0">
-            <div className="hidden items-center gap-1.5 rounded-full border border-line bg-paper px-2.5 py-1 text-[11px] font-medium text-stone-600 sm:inline-flex">
-              {DATA_MODE === "mock" ? (
-                <>
-                  <FlaskConical className="h-3 w-3 text-clay-600" />
-                  <span>Demo mock</span>
-                </>
-              ) : (
-                <>
-                  <CheckCircle2 className="h-3 w-3 text-emerald-600" />
-                  <span className="font-semibold text-forest-900">Live API</span>
-                </>
-              )}
-            </div>
+            <DataModeToggle />
             <FarmSwitcher />
           </div>
         </div>
@@ -109,7 +100,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <span className="font-display font-semibold text-forest-900">SOILSTICE</span> · NASA Space Apps Challenge 2026 — Field Shift
           </p>
           <p className="text-[11.5px] text-stone-500">
-            {DATA_MODE === "mock"
+            {isMock
               ? "Phase 1 interface · Synthetic data demo"
               : "Live API operational · USDA NRCS SSURGO · USDA NASS CDL · NASA POWER"}
           </p>

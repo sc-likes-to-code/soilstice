@@ -53,5 +53,9 @@ export function createHttpServices(): Services {
       listDatasets: () => request("GET", "/datasets"),
       listEvidence: (id, opts) => request("GET", `/fields/${id}/evidence`, { query: { kind: opts?.kind, related_id: opts?.relatedId } }),
     },
+    suitability: {
+      getFieldSuitability: (id, seasonYear) => request("GET", `/fields/${id}/suitability`, { query: { season_year: seasonYear } }),
+      getCropSuitability: (id, cropId, seasonYear) => request("GET", `/fields/${id}/suitability/${cropId}`, { query: { season_year: seasonYear } }),
+    },
   };
 }

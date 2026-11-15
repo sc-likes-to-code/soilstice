@@ -1,6 +1,6 @@
 "use client";
 import { Database, FlaskConical } from "lucide-react";
-import { DATA_MODE } from "@/services";
+import { useDataMode } from "@/hooks/data-mode";
 
 /**
  * State-aware environment banner (UI_ARCHITECTURE §1, rule R6).
@@ -8,7 +8,9 @@ import { DATA_MODE } from "@/services";
  * In API mode: informs the user that live provider data is active (SSURGO, CDL, POWER).
  */
 export function DataModeBanner() {
-  if (DATA_MODE === "mock") {
+  const { isMock, setMode } = useDataMode();
+
+  if (isMock) {
     return (
       <div
         role="status"
@@ -18,7 +20,15 @@ export function DataModeBanner() {
         <span>
           <strong className="font-semibold text-wheat-200">Demonstration environment · Synthetic data, not field observations.</strong>{" "}
           <span className="text-wheat-200/80 max-sm:hidden">
-            Switch to Live API mode in settings for verified USDA &amp; NASA observations.
+            Switch to{" "}
+            <button
+              type="button"
+              onClick={() => setMode("api")}
+              className="font-semibold text-wheat-100 underline hover:text-white cursor-pointer"
+            >
+              Live API mode
+            </button>{" "}
+            for verified USDA &amp; NASA observations.
           </span>
         </span>
       </div>

@@ -13,7 +13,7 @@ import { multiPolygonAreaHa, validateFieldDraft, centroidOfRing, type LngLat } f
 import { CROPS, DATASETS, DEMO_AS_OF, LATEST_CROP_YEAR, cropName, globalEvidence, q } from "./catalog";
 import { AOI_BBOX, buildWorld, traitsForNewUserField, type MockFieldRecord, type World } from "./world";
 import {
-  climateProfile, coverage, cropHistory, evaluateScenario, fieldEvidence, recommendation, resilienceProfile,
+  climateProfile, coverage, cropHistory, evaluateScenario, fieldEvidence, fieldSuitability, recommendation, resilienceProfile,
   soilProfile, soilTerrainIndicators, terrainProfile, vegetationIndicators, vegetationProfile, bandFor,
 } from "./generators";
 import { createRng, round } from "./rng";
@@ -314,6 +314,15 @@ export function createMockServices(): Services {
     },
     resilience: {
       getResilience: (id) => respond("resilience.getResilience", () => resilienceProfile(fieldRec(id), s().world.uuid)),
+    },
+    suitability: {
+      getFieldSuitability: (id, seasonYear) => respond("suitability.getFieldSuitability", () => fieldSuitability(fieldRec(id), seasonYear)),
+      getCropSuitability: (id, cropId, seasonYear) => respond("suitability.getCropSuitability", () => {
+        const resp = fieldSuitability(fieldRec(id), seasonYear);
+        const crop = resp.crops.find((c) => c.crop_id === cropId);
+        if (!crop) notFound("CropSuitabilityAssessment", cropId);
+        return crop;
+      }),
     },
     evidence: {
       listDatasets: () => respond("evidence.listDatasets", () => DATASETS),

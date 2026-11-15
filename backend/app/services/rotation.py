@@ -141,7 +141,263 @@ class RotationService:
 
     def recommendation(self, field_id, season_year: int) -> RotationRecommendation:
         f = self.fields.get_field(field_id)
-        return self.ctx.rotation.recommend(f.field_id, season_year, self.ctx.kb)
+        # Attempt to synthesize recommendation from Phase 6 Environmental Suitability Engine
+        try:
+            from app.services.suitability import SuitabilityService
+            suit_svc = SuitabilityService(self.ctx)
+            default_year = self.ctx.settings.default_season_year()
+            baseline_year = season_year if season_year <= default_year else default_year
+            suit_res = suit_svc.evaluate_field(f.field_id, baseline_year)
+        except Exception:
+            suit_res = None
+
+        if (
+            suit_res is None
+            or suit_res.status == "insufficient_data"
+            or not any(c.assessment_status != "insufficient_data" for c in suit_res.crops)
+        ):
+            return self.ctx.rotation.recommend(f.field_id, season_year, self.ctx.kb)
+
+        # Retrieve field crop history to assess rotation continuity and monoculture risks
+        history = self.crop_history(f.field_id)
+        last_crop_code = None
+        last_crop_name = None
+        recent_codes = set()
+        valid_years = []
+        if history and history.years:
+            valid_years = [y for y in history.years if y.majority and y.majority.crop_code is not None]
+            if valid_years:
+                last_crop_code = valid_years[-1].majority.crop_code
+                last_crop_name = valid_years[-1].majority.crop_name
+                recent_codes = {y.majority.crop_code for y in valid_years[-5:]}
+
+        candidates = []
+        excluded = []
+
+        class_to_band = {
+            "suitable": "suitable",
+            "conditionally_suitable": "marginal",
+            "limited_suitability": "marginal",
+            "unsuitable": "unsuitable",
+            "unknown": "unknown",
+        }
+
+        compat_to_band = {
+            "optimal": "suitable",
+            "compatible": "suitable",
+            "manageable_limitation": "marginal",
+            "moderate_limitation": "marginal",
+            "critical_limitation": "unsuitable",
+            "unknown": "unknown",
+        }
+
+        from app.rotation.kb import CDL_TO_CROP_ID
+
+        for crop_eval in suit_res.crops:
+            if crop_eval.cdl_code is None:
+                continue
+
+            cdl_code = crop_eval.cdl_code
+            crop_name = crop_eval.crop_name
+
+            if crop_eval.suitability_class == "unsuitable":
+                from app.contracts import ExcludedCrop
+                excluded.append(
+                    ExcludedCrop(
+                        crop_code=cdl_code,
+                        crop_name=crop_name,
+                        reason=crop_eval.explanation or "Environmental constraints exceed agronomic tolerances.",
+                    )
+                )
+                continue
+
+            factors_map = {}
+            for fa in crop_eval.factor_assessments:
+                fkey = fa.factor_key
+                mapped_key = None
+                if fkey in ("soil_ph", "ph"):
+                    mapped_key = "ph"
+                elif fkey in ("soil_drainage", "drainage"):
+                    mapped_key = "drainage"
+                elif fkey in ("available_water", "available_water_storage", "water_holding"):
+                    mapped_key = "water_holding"
+                elif fkey in ("thermal_gdd", "gdd"):
+                    mapped_key = "gdd"
+                elif fkey in ("terrain_slope", "slope_p90", "slope"):
+                    mapped_key = "slope"
+                elif fkey in ("water_precipitation", "thermal_heat_stress", "regional_adaptation", "regional_climate"):
+                    mapped_key = "regional_climate"
+
+                if mapped_key and mapped_key not in factors_map:
+                    band = compat_to_band.get(fa.compatibility, class_to_band.get(fa.severity, "unknown"))
+                    support = "R" if mapped_key in ("gdd", "regional_climate") else "F"
+                    ev_uuids = []
+                    for ev_id in fa.evidence_ids:
+                        try:
+                            ev_uuids.append(uuid.UUID(ev_id))
+                        except Exception:
+                            pass
+                    from app.contracts import FactorAssessment
+                    factors_map[mapped_key] = FactorAssessment(
+                        factor=mapped_key,
+                        band=band,
+                        observed=fa.observed_value,
+                        requirement=fa.crop_requirement or fa.interpretation or "Agronomic tolerance threshold",
+                        support_class=support,
+                        evidence_ids=ev_uuids,
+                    )
+
+            rot_effects = []
+            from app.contracts import QualityFlag
+
+            # Check directed rotation compatibility from Crop Knowledge Base (EV0001–EV0212)
+            prev_id = CDL_TO_CROP_ID.get(last_crop_code) if last_crop_code is not None else None
+            following_id = CDL_TO_CROP_ID.get(cdl_code)
+            rot_trans = self.ctx.kb.get_rotation(prev_id, following_id) if (prev_id and following_id) else None
+
+            if last_crop_code is not None:
+                if cdl_code == last_crop_code:
+                    rot_band = "marginal"
+                    rot_effects.append(
+                        QualityFlag(
+                            code="REPEATS_LAST_CROP",
+                            severity="warning",
+                            message=f"Would repeat {last_crop_name} on this parcel.",
+                        )
+                    )
+                    rot_req = (
+                        rot_trans.limitations[0]
+                        if (rot_trans and rot_trans.limitations)
+                        else f"Avoid consecutive monoculture of {crop_name}."
+                    )
+                else:
+                    rot_effects.append(
+                        QualityFlag(
+                            code="BREAKS_RUN",
+                            severity="info",
+                            message=f"Breaks sequence of {last_crop_name}.",
+                        )
+                    )
+                    if rot_trans and rot_trans.compatibility_rating == "recommended":
+                        rot_band = "suitable"
+                        rot_req = f"Recommended rotation: {rot_trans.synergy_mechanisms or 'favorable sequence'}"
+                    elif rot_trans and rot_trans.compatibility_rating in ("caution", "not_recommended"):
+                        rot_band = "marginal"
+                        rot_req = f"Rotational caution: {rot_trans.shared_pest_disease_risks or rot_trans.herbicide_carryover_risks or 'potential carryover risk'}"
+                    else:
+                        rot_band = "suitable"
+                        rot_req = f"Compatible transition following {last_crop_name}."
+
+                    # Diversity benefit requires >= 3 valid historical seasons to verify absence
+                    if len(valid_years) >= 3 and cdl_code not in recent_codes:
+                        rot_effects.append(
+                            QualityFlag(
+                                code="DIVERSITY_BENEFIT",
+                                severity="info",
+                                message="Introduces rotational diversity (not grown in past 5 seasons).",
+                            )
+                        )
+            else:
+                rot_band = "unknown"
+                rot_req = "Historical crop sequence data unavailable for parcel."
+
+            from app.contracts import FactorAssessment
+            factors_map["rotation_history"] = FactorAssessment(
+                factor="rotation_history",
+                band=rot_band,
+                observed=None,
+                requirement=rot_req,
+                support_class="F",
+                evidence_ids=[],
+            )
+
+            for req_f in ("ph", "drainage", "water_holding", "slope", "gdd", "regional_climate"):
+                if req_f not in factors_map:
+                    support = "R" if req_f in ("gdd", "regional_climate") else "F"
+                    factors_map[req_f] = FactorAssessment(
+                        factor=req_f,
+                        band="unknown",
+                        observed=None,
+                        requirement="Observation not available for this parcel",
+                        support_class=support,
+                        evidence_ids=[],
+                    )
+
+            factors_list = [
+                factors_map[k]
+                for k in ["ph", "drainage", "water_holding", "gdd", "slope", "rotation_history", "regional_climate"]
+            ]
+
+            overall_band = class_to_band.get(crop_eval.suitability_class, "marginal")
+            if rot_band == "marginal" and overall_band == "suitable":
+                overall_band = "marginal"
+
+            reasons = [crop_eval.explanation]
+            if crop_eval.limiting_factors:
+                reasons.append(f"Limiting factors: {', '.join(crop_eval.limiting_factors)}")
+            if crop_eval.favorable_factors:
+                reasons.append(f"Favorable factors: {', '.join(crop_eval.favorable_factors[:3])}")
+
+            score = crop_eval.suitability_score or 0.0
+            if len(crop_eval.unknown_factors) > 2:
+                conf = "low"
+            elif score >= 75:
+                conf = "high"
+            else:
+                conf = "medium"
+
+            candidates.append({
+                "crop_code": cdl_code,
+                "crop_name": crop_name,
+                "overall": overall_band,
+                "confidence": conf,
+                "factors": factors_list,
+                "rotation_effects": rot_effects,
+                "reasons": reasons,
+                "score": score,
+                "is_repeat": (cdl_code == last_crop_code),
+            })
+
+        candidates.sort(key=lambda c: (1 if c["is_repeat"] else 0, -c["score"]))
+
+        from app.contracts import RecommendationCandidate, TargetSeason
+        from datetime import date
+        final_candidates = [
+            RecommendationCandidate(
+                rank=i + 1,
+                crop_code=c["crop_code"],
+                crop_name=c["crop_name"],
+                overall=c["overall"],
+                confidence=c["confidence"],
+                factors=c["factors"],
+                rotation_effects=c["rotation_effects"],
+                reasons=c["reasons"],
+            )
+            for i, c in enumerate(candidates[:6])
+        ]
+
+        rec_id = uuid.uuid5(uuid.NAMESPACE_DNS, f"{f.field_id}:{season_year}:rec")
+        return RotationRecommendation(
+            recommendation_id=rec_id,
+            field_id=f.field_id,
+            target_season=TargetSeason(
+                label=f"{season_year} season",
+                start=date(season_year - 1, 9, 1),
+                end=date(season_year, 11, 30),
+            ),
+            engine_version="soilstice-suitability-v1.0",
+            kb_version=self.ctx.kb.kb_version,
+            status="computed",
+            candidates=final_candidates,
+            excluded=excluded,
+            disclaimers=[
+                "Not a yield or profit forecast.",
+                "Recommendations synthesized from Phase 6 Environmental Suitability scores and historical rotation best practices.",
+                "Factors marked 'Regional context' (R) cannot make a crop unsuitable on their own.",
+                "Multi-year sequence optimization and economic scenario modeling will arrive in Phase 7.",
+            ],
+            generated_at=datetime.now(UTC),
+        )
 
     # ── scenarios ──────────────────────────────────────────────────────────
     def list_scenarios(self, field_id) -> list[RotationScenario]:

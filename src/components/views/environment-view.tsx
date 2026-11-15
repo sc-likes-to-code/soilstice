@@ -137,7 +137,10 @@ function MoistureTab({ fieldId, season }: { fieldId: string; season: number }) {
                 <CardHeader eyebrow="SMAP L4 · SPL4SMGP" title="Daily root-zone soil moisture (0–100 cm)" description="Gaps are missing retrievals, shown as breaks — never as zero." actions={<><SupportBadge spatial={sm.spatial} /><SourceList sources={sm.sources} /></>} />
                 <CardBody>
                   {valid === 0 ? (
-                    <EmptyState title="No soil-moisture data for this season" description={missingText(sm.points[0]?.missing_reason)} />
+                    <EmptyState
+                      title="No soil-moisture observations for this season"
+                      description="SMAP L4 9 km root-zone soil moisture is planned for future integration (Earthdata NSIDC provider). Soil moisture dynamics currently rely on SSURGO Available Water Storage (AWS)."
+                    />
                   ) : (
                     <TimeSeriesChart x="date" height={280} specs={[{ series: sm, kind: "area", color: "#4f7c8a", name: "Root-zone SM" }]} />
                   )}
@@ -312,7 +315,11 @@ function Terrain({ t }: { t: TerrainProfile }) {
         <MiniStat label="Max elevation" value={<QuantityValue q={t.elevation_max} />} />
         <MiniStat label="Mean slope" value={<QuantityValue q={t.slope_mean_pct} />} />
         <MiniStat label="Slope p90" value={<QuantityValue q={t.slope_p90_pct} />} />
-        {t.quality.status === "missing" && <p className="text-[12.5px] text-clay-600 sm:col-span-2 lg:col-span-5">{missingText(t.quality.missing_reason)}</p>}
+        {t.quality.status === "missing" && (
+          <p className="text-[12.5px] text-stone-600 sm:col-span-2 lg:col-span-5">
+            <span className="font-semibold text-clay-700">SRTM Data Unavailable:</span> NASA Earthdata Login credentials (SOILSTICE_EARTHDATA_TOKEN) required to fetch SRTM GL1 30m elevation rasters.
+          </p>
+        )}
       </CardBody>
     </Card>
   );

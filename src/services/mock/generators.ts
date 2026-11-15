@@ -4,10 +4,11 @@
  * exists only so that synthetic charts are internally consistent. All outputs carry dataset_id "synthetic".
  */
 import type {
-  ClimateProfile, CropCode, CropHistory, CropYear, DataCoverage, DatasetCoverage, DatasetId, EnvironmentalIndicator,
-  EvidenceItem, FactorAssessment, FitBand, IndicatorCategory, IndicatorKey, MissingReason, QualityFlag, QualityInfo,
+  ClimateProfile, CropCode, CropHistory, CropSuitabilityAssessment, CropYear, DataCoverage, DatasetCoverage, DatasetId, EnvironmentalIndicator,
+  EvidenceItem, FactorAssessment, FieldSuitabilityResponse, FitBand, IndicatorCategory, IndicatorKey, MissingReason, QualityFlag, QualityInfo,
   Quantity, RecommendationCandidate, ResilienceComponent, ResilienceComponentKey, ResilienceProfile,
   RotationRecommendation, ScenarioEvaluation, ScenarioYear, ScoreBand, SoilLayer, SoilProfile, SpatialSupport,
+  SuitabilityFactorAssessment, SuitabilityClass,
   TemporalSupport, TerrainProfile, TimeSeries, TimeSeriesPoint, Unit, VegetationIndex, VegetationProfile,
   VegetationScene, Confidence,
 } from "@/types/contracts";
@@ -644,3 +645,226 @@ export function fieldEvidence(rec: MockFieldRecord, indicators: EnvironmentalInd
     related_ids: [ind.indicator_id, ind.key],
   }));
 }
+
+// ───────────────────────── Phase 6: Field Suitability ─────────────────────────
+const CANONICAL_CROPS_SPEC = [
+  { id: "CRP001", name: "Corn (Maize)", cdl: 1, family: "Poaceae", role: "primary_cash_grain", cover: false, ph: [6.0, 6.8, 5.5, 7.8], gdd: [1167, 1556], p: [400, 1000] },
+  { id: "CRP002", name: "Soybean", cdl: 5, family: "Fabaceae", role: "primary_cash_grain", cover: false, ph: [6.0, 6.8, 5.8, 7.5], gdd: [1000, 1450], p: [400, 950] },
+  { id: "CRP003", name: "Winter Wheat", cdl: 24, family: "Poaceae", role: "primary_cash_grain", cover: false, ph: [6.0, 7.0, 5.5, 8.2], gdd: [1800, 2400], p: [300, 1000] },
+  { id: "CRP004", name: "Spring Wheat", cdl: 24, family: "Poaceae", role: "primary_cash_grain", cover: false, ph: [6.0, 7.0, 5.5, 8.2], gdd: [1150, 1400], p: [250, 750] },
+  { id: "CRP005", name: "Grain Sorghum", cdl: 4, family: "Poaceae", role: "primary_cash_grain", cover: false, ph: [6.0, 7.5, 5.2, 8.5], gdd: [944, 1333], p: [350, 800] },
+  { id: "CRP006", name: "Cotton", cdl: 2, family: "Malvaceae", role: "primary_cash_grain", cover: false, ph: [6.0, 7.0, 5.5, 8.2], gdd: [1167, 1444], p: [450, 1100] },
+  { id: "CRP007", name: "Rice", cdl: 3, family: "Poaceae", role: "specialty_cash_grain", cover: false, ph: [5.5, 6.8, 4.8, 7.8], gdd: [1167, 1556], p: [200, 1000] },
+  { id: "CRP008", name: "Barley", cdl: 21, family: "Poaceae", role: "primary_cash_grain", cover: false, ph: [6.0, 7.5, 5.5, 8.5], gdd: [1100, 2100], p: [250, 750] },
+  { id: "CRP009", name: "Cereal Rye", cdl: 27, family: "Poaceae", role: "cool_season_cover", cover: true, ph: [6.0, 7.0, 4.5, 8.2], gdd: [900, 2200], p: [300, 900] },
+  { id: "CRP010", name: "Oats", cdl: 28, family: "Poaceae", role: "cool_season_cover", cover: true, ph: [6.0, 7.0, 5.0, 8.0], gdd: [1300, 1700], p: [350, 850] },
+  { id: "CRP011", name: "Alfalfa", cdl: 36, family: "Fabaceae", role: "forage_perennial", cover: false, ph: [6.5, 7.5, 6.0, 8.0], gdd: [2200, 3500], p: [450, 1200] },
+  { id: "CRP012", name: "Hairy Vetch", cdl: null, family: "Fabaceae", role: "cool_season_cover", cover: true, ph: [6.0, 7.0, 5.2, 7.8], gdd: [1100, 1600], p: [350, 1100] },
+  { id: "CRP013", name: "Crimson Clover", cdl: null, family: "Fabaceae", role: "cool_season_cover", cover: true, ph: [6.0, 7.0, 5.5, 7.5], gdd: [1000, 1500], p: [500, 1100] },
+  { id: "CRP014", name: "Oilseed Radish", cdl: null, family: "Brassicaceae", role: "specialty_cover_crop", cover: true, ph: [6.0, 7.5, 5.5, 8.0], gdd: [600, 1000], p: [300, 600] },
+];
+
+export function fieldSuitability(rec: MockFieldRecord, seasonYear = 2026): FieldSuitabilityResponse {
+  const phVal = rec.traits.ph;
+  const drainVal = "moderately_well_drained";
+  const gddObs = 2862;
+  const pObs = 650;
+
+  const crops: CropSuitabilityAssessment[] = CANONICAL_CROPS_SPEC.map((spec) => {
+    const factors: SuitabilityFactorAssessment[] = [];
+    const limiting: string[] = [];
+    const favorable: string[] = [];
+
+    // 1. pH
+    const [optMin, optMax, tolMin, tolMax] = spec.ph;
+    let phComp: SuitabilityFactorAssessment["compatibility"] = "optimal";
+    let phSev: SuitabilityFactorAssessment["severity"] = "favorable";
+    let phScore = 95;
+    let phInterp = `Topsoil pH (${phVal.toFixed(1)}) is optimal (${optMin}–${optMax}).`;
+
+    if (phVal < tolMin || phVal > tolMax) {
+      phComp = "critical_limitation";
+      phSev = "critical";
+      phScore = 20;
+      phInterp = `Topsoil pH (${phVal.toFixed(1)}) violates physiological limits (${tolMin}–${tolMax}).`;
+      limiting.push(`[CRITICAL] Soil pH: ${phInterp}`);
+    } else if (phVal < optMin || phVal > optMax) {
+      phComp = "moderate_limitation";
+      phSev = "moderate";
+      phScore = 65;
+      phInterp = `Topsoil pH (${phVal.toFixed(1)}) is sub-optimal; tolerated range is ${tolMin}–${tolMax}.`;
+      limiting.push(`[MODERATE] Soil pH: ${phInterp}`);
+    } else {
+      favorable.push(`Soil pH: ${phInterp}`);
+    }
+
+    factors.push({
+      factor_key: "soil_ph",
+      factor_name: "Soil pH (0–30 cm)",
+      category: "soil",
+      observed_value: { value: phVal, unit: "pH", uncertainty: null, missing_reason: null },
+      crop_requirement: `Optimal: ${optMin}–${optMax}; Tolerated: ${tolMin}–${tolMax}`,
+      compatibility: phComp,
+      is_limiting: phSev === "moderate" || phSev === "critical",
+      is_favorable: phSev === "favorable",
+      severity: phSev,
+      score: phScore,
+      interpretation: phInterp,
+      evidence_ids: ["EV0008", "EV0042"],
+      data_status: "available",
+      support_class: "F",
+    });
+
+    // 2. Drainage
+    let drainComp: SuitabilityFactorAssessment["compatibility"] = "optimal";
+    let drainSev: SuitabilityFactorAssessment["severity"] = "favorable";
+    let drainScore = 95;
+    let drainInterp = `Drainage class (${drainVal}) provides adequate root aeration.`;
+
+    if (spec.id === "CRP007") {
+      // Rice prefers poor drainage
+      if (drainVal.includes("poorly")) {
+        drainComp = "optimal";
+        drainSev = "favorable";
+        drainScore = 95;
+      } else {
+        drainComp = "moderate_limitation";
+        drainSev = "moderate";
+        drainScore = 55;
+        drainInterp = `Well-drained soil increases water loss for flooded paddy culture.`;
+        limiting.push(`[MODERATE] Soil Drainage: ${drainInterp}`);
+      }
+    } else if (drainVal.includes("poorly")) {
+      drainComp = spec.id === "CRP011" ? "critical_limitation" : "moderate_limitation";
+      drainSev = spec.id === "CRP011" ? "critical" : "moderate";
+      drainScore = spec.id === "CRP011" ? 20 : 55;
+      drainInterp = `Poor drainage elevates root rot and seedling anoxia risk.`;
+      limiting.push(`[${drainSev === "critical" ? "CRITICAL" : "MODERATE"}] Soil Drainage: ${drainInterp}`);
+    } else {
+      favorable.push(`Soil Drainage: ${drainInterp}`);
+    }
+
+    factors.push({
+      factor_key: "soil_drainage",
+      factor_name: "Soil Drainage Class",
+      category: "soil",
+      observed_value: { value: null, unit: "unitless", uncertainty: null, missing_reason: null },
+      crop_requirement: spec.id === "CRP007" ? "Poorly drained / claypan" : "Well to moderately well drained",
+      compatibility: drainComp,
+      is_limiting: drainSev === "moderate" || drainSev === "critical",
+      is_favorable: drainSev === "favorable",
+      severity: drainSev,
+      score: drainScore,
+      interpretation: drainInterp,
+      evidence_ids: ["EV0008", "EV0012"],
+      data_status: "available",
+      support_class: "F",
+    });
+
+    // 3. Thermal GDD
+    factors.push({
+      factor_key: "thermal_gdd",
+      factor_name: "Growing Degree Days",
+      category: "thermal",
+      observed_value: { value: gddObs, unit: "degC_day", uncertainty: null, missing_reason: null },
+      crop_requirement: `${spec.gdd[0]}–${spec.gdd[1]} °C-days`,
+      compatibility: "optimal",
+      is_limiting: false,
+      is_favorable: true,
+      severity: "favorable",
+      score: 95,
+      interpretation: `Observed GDD (${gddObs} °C-days) satisfies maturity requirements.`,
+      evidence_ids: ["EV0003"],
+      data_status: "available",
+      support_class: "R",
+    });
+    favorable.push(`Thermal GDD: Observed ${gddObs} °C-days satisfies maturity requirements.`);
+
+    // 4. Precipitation
+    factors.push({
+      factor_key: "water_precipitation",
+      factor_name: "Seasonal Precipitation",
+      category: "water_climate",
+      observed_value: { value: pObs, unit: "mm", uncertainty: null, missing_reason: null },
+      crop_requirement: `${spec.p[0]}–${spec.p[1]} mm`,
+      compatibility: "optimal",
+      is_limiting: false,
+      is_favorable: true,
+      severity: "favorable",
+      score: 90,
+      interpretation: `Observed seasonal precipitation (${pObs} mm) is within normal range (${spec.p[0]}–${spec.p[1]} mm).`,
+      evidence_ids: ["EV0005"],
+      data_status: "available",
+      support_class: "R",
+    });
+
+    // Class & Score Determination
+    const hasCrit = factors.some((f) => f.severity === "critical");
+    const modCount = factors.filter((f) => f.severity === "moderate").length;
+    let sClass: SuitabilityClass = "suitable";
+    let score = 90.0;
+
+    if (hasCrit) {
+      sClass = "unsuitable";
+      score = 25.0;
+    } else if (modCount >= 3) {
+      sClass = "limited_suitability";
+      score = 52.0;
+    } else if (modCount >= 1) {
+      sClass = "conditionally_suitable";
+      score = 68.0;
+    } else {
+      sClass = "suitable";
+      score = 88.0;
+    }
+
+    return {
+      crop_id: spec.id,
+      crop_name: spec.name,
+      cdl_code: spec.cdl,
+      botanical_family: spec.family,
+      portfolio_role: spec.role,
+      is_cover_crop: spec.cover,
+      assessment_status: "evaluated",
+      suitability_class: sClass,
+      suitability_score: score,
+      score_methodology: `Multi-factor limiting-factor model for ${spec.name} (${score}/100).`,
+      factor_assessments: factors,
+      limiting_factors: limiting,
+      favorable_factors: favorable,
+      unknown_factors: [],
+      data_quality: { status: "valid", completeness: 1.0, flags: [], missing_reason: null },
+      spatial_support: { support_class: "F", native_resolution_m: 30, extraction_method: "vector_intersection", field_fraction_of_cell: null, cell_id: null, crs: "EPSG:4326" },
+      temporal_support: { resolution: "season", period_start: `${seasonYear}-01-01`, period_end: `${seasonYear}-12-31`, aggregation: "mean", time_standard: "UTC" },
+      evidence_ids: ["EV0001", "EV0003", "EV0008"],
+      explanation: `${spec.name} is classified as ${sClass.replace("_", " ")}. ${limiting.length ? `Constrained by: ${limiting.join("; ")}` : "High environmental compatibility."}`,
+      limitations: [
+        "Synthetic decision-support demonstration value.",
+        "Does not guarantee commercial emergence or yield.",
+      ],
+    };
+  });
+
+  return {
+    field_id: rec.field.field_id,
+    season_year: seasonYear,
+    as_of: DEMO_AS_OF,
+    engine_version: ENGINE_VERSION,
+    kb_version: KB_VERSION,
+    status: "evaluated",
+    summary: {
+      total_evaluated: crops.length,
+      suitable: crops.filter((c) => c.suitability_class === "suitable").length,
+      conditionally_suitable: crops.filter((c) => c.suitability_class === "conditionally_suitable").length,
+      limited_suitability: crops.filter((c) => c.suitability_class === "limited_suitability").length,
+      unsuitable: crops.filter((c) => c.suitability_class === "unsuitable").length,
+      insufficient_data: crops.filter((c) => c.suitability_class === "insufficient_data").length,
+    },
+    crops,
+    disclaimers: [
+      "Synthetic demonstration: suitability indicators generated for offline UI evaluation.",
+      "In live mode, evaluations run against USDA SSURGO, NASA POWER, NASA SRTM, and the Phase 5 Crop KB.",
+    ],
+  };
+}
+

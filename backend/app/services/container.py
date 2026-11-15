@@ -17,6 +17,7 @@ from app.providers.ssurgo import SsurgoClient
 from app.repositories import Repositories, SqliteDocumentStore
 from app.rotation.engine import PendingRotationEngine, RotationEngine
 from app.rotation.kb import CropKnowledgeBase, load_kb
+from app.suitability.engine import CropSuitabilityEngine
 
 
 @dataclass
@@ -38,6 +39,11 @@ class Container:
     resilience: ResilienceEngine
     rotation: RotationEngine
     executor: ThreadPoolExecutor | None = field(default=None)
+    suitability: CropSuitabilityEngine | None = field(default=None)
+
+    def __post_init__(self) -> None:
+        if self.suitability is None:
+            self.suitability = CropSuitabilityEngine(self.kb)
 
     def shutdown(self) -> None:
         if self.executor:

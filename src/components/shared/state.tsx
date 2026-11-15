@@ -1,9 +1,10 @@
 "use client";
 import type { UseQueryResult } from "@tanstack/react-query";
-import { AlertTriangle, CircleDashed, RefreshCw } from "lucide-react";
+import { AlertTriangle, CircleDashed, FlaskConical, RefreshCw } from "lucide-react";
 import type { ReactNode } from "react";
 import type { ApiResponse } from "@/types/contracts";
 import { isApiError } from "@/services";
+import { useDataMode } from "@/hooks/data-mode";
 import { cn } from "@/lib/cn";
 import { Button, Skeleton } from "@/components/ui/primitives";
 
@@ -36,21 +37,39 @@ export function DefaultSkeleton({ rows = 3, className }: { rows?: number; classN
 }
 
 export function ErrorState({ error, onRetry, compact, title }: { error: unknown; onRetry?: () => void; compact?: boolean; title?: string }) {
+  const { isApi, setMode } = useDataMode();
   const api = isApiError(error) ? error : null;
   const retryable = api ? api.retryable : true;
+  const isUpstream = api?.code === "UPSTREAM_UNAVAILABLE";
+
   return (
-    <div role="alert" className={cn("flex items-start gap-3 rounded-xl border border-clay-100 bg-clay-100/40 text-[13px]", compact ? "p-3" : "p-4")}>
-      <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-clay-600" aria-hidden />
-      <div className="min-w-0 flex-1">
-        <p className="font-semibold text-clay-600">{title ?? (api?.code === "NOT_FOUND" ? "Not found" : "Couldn’t load this")}</p>
-        <p className="mt-0.5 text-ink-soft">{api?.message ?? (error instanceof Error ? error.message : "Unexpected error.")}</p>
-        {api && <p className="mt-1 font-mono text-[11px] text-stone-500">{api.code} · request {api.requestId}</p>}
+    <div role="alert" className={cn("flex flex-wrap items-start justify-between gap-3 rounded-xl border border-clay-100 bg-clay-100/40 text-[13px]", compact ? "p-3" : "p-4")}>
+      <div className="flex items-start gap-3 min-w-0 flex-1">
+        <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-clay-600" aria-hidden />
+        <div className="min-w-0 flex-1">
+          <p className="font-semibold text-clay-600">
+            {title ?? (isUpstream ? "FastAPI backend unreachable" : api?.code === "NOT_FOUND" ? "Not found" : "Couldn’t load this")}
+          </p>
+          <p className="mt-0.5 text-ink-soft">
+            {isUpstream
+              ? "The live API at http://localhost:8000 is not reachable. You can verify the backend is running, or switch to Mock Data to explore offline fixtures."
+              : (api?.message ?? (error instanceof Error ? error.message : "Unexpected error."))}
+          </p>
+          {api && <p className="mt-1 font-mono text-[11px] text-stone-500">{api.code} · request {api.requestId}</p>}
+        </div>
       </div>
-      {onRetry && retryable && (
-        <Button size="sm" variant="secondary" onClick={onRetry}>
-          <RefreshCw className="h-3.5 w-3.5" aria-hidden /> Retry
-        </Button>
-      )}
+      <div className="flex items-center gap-2 shrink-0">
+        {isUpstream && isApi && (
+          <Button size="sm" variant="secondary" onClick={() => setMode("mock")} className="bg-clay-600 text-white hover:bg-clay-500 border-none">
+            <FlaskConical className="h-3.5 w-3.5" aria-hidden /> Switch to Mock Data
+          </Button>
+        )}
+        {onRetry && retryable && (
+          <Button size="sm" variant="secondary" onClick={onRetry}>
+            <RefreshCw className="h-3.5 w-3.5" aria-hidden /> Retry
+          </Button>
+        )}
+      </div>
     </div>
   );
 }

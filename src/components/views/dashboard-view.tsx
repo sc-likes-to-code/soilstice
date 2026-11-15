@@ -16,7 +16,7 @@ import { FieldMap } from "@/components/shared/field-map";
 import { IndicatorCard, CompletenessMeter } from "@/components/shared/data-display";
 import { FlagList, ScoreBandPill, SyntheticBadge } from "@/components/shared/provenance";
 import { LATEST_SEASON, seasonOptions } from "./common";
-import { DATA_MODE } from "@/services";
+import { useDataMode } from "@/hooks/data-mode";
 
 export function DashboardView() {
   const { farm, isLoading: farmsLoading, error: farmsError, refetch } = useActiveFarm();
@@ -46,6 +46,7 @@ export function DashboardView() {
 }
 
 function DashboardBody({ data, season }: { data: FarmOverview; season: number }) {
+  const { isMock } = useDataMode();
   const { units } = usePrefs();
   const router = useRouter();
   const [colorBy, setColorBy] = useState<"band" | "crop">("band");
@@ -93,7 +94,7 @@ function DashboardBody({ data, season }: { data: FarmOverview; season: number })
               colorBy={colorBy}
               selectedId={selected}
               onSelect={setSelected}
-              caption={DATA_MODE === "mock" ? "Satellite view · Synthetic parcel geometry" : "Satellite view · Field boundaries from API"}
+              caption={isMock ? "Satellite view · Synthetic parcel geometry" : "Satellite view · Field boundaries from API"}
             />
           </CardBody>
         </Card>
@@ -113,7 +114,7 @@ function DashboardBody({ data, season }: { data: FarmOverview; season: number })
           </CardBody>
         </Card>
         <Card>
-          <CardHeader eyebrow="Regional context" title={`${data.farm.aoi.label} · ${season}`} description="Area-level climate and soil-moisture context. These describe the surrounding region, not individual fields." actions={DATA_MODE === "mock" ? <SyntheticBadge /> : undefined} />
+          <CardHeader eyebrow="Regional context" title={`${data.farm.aoi.label} · ${season}`} description="Area-level climate and soil-moisture context. These describe the surrounding region, not individual fields." actions={isMock ? <SyntheticBadge /> : undefined} />
           <CardBody className="grid gap-3 sm:grid-cols-2">
             {data.regional_context.map((i) => (
               <IndicatorCard key={i.indicator_id} indicator={i} size="sm" />

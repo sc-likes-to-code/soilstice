@@ -601,3 +601,95 @@ export interface CropProfile {
   evidence_ids: string[];
 }
 
+export type SuitabilityClass =
+  | "suitable"
+  | "conditionally_suitable"
+  | "limited_suitability"
+  | "unsuitable"
+  | "insufficient_data";
+
+export type FactorCompatibility =
+  | "optimal"
+  | "compatible"
+  | "moderate_limitation"
+  | "critical_limitation"
+  | "unknown";
+
+export type FactorSeverity =
+  | "none"
+  | "favorable"
+  | "moderate"
+  | "critical"
+  | "unknown";
+
+export type FactorCategory =
+  | "thermal"
+  | "water_climate"
+  | "soil"
+  | "rooting"
+  | "terrain"
+  | "historical"
+  | "regional";
+
+export interface SuitabilityFactorAssessment {
+  factor_key: string;
+  factor_name: string;
+  category: FactorCategory;
+  observed_value: Quantity;
+  crop_requirement: string | null;
+  compatibility: FactorCompatibility;
+  is_limiting: boolean;
+  is_favorable: boolean;
+  severity: FactorSeverity;
+  score: number | null;
+  interpretation: string;
+  evidence_ids: string[];
+  data_status: "available" | "missing" | "provisional" | "not_integrated";
+  support_class: SupportClass;
+}
+
+export interface CropSuitabilityAssessment {
+  crop_id: string;
+  crop_name: string;
+  cdl_code: number | null;
+  botanical_family: string;
+  portfolio_role: string;
+  is_cover_crop: boolean;
+  assessment_status: "evaluated" | "provisional" | "insufficient_data";
+  suitability_class: SuitabilityClass;
+  suitability_score: number | null;
+  score_methodology: string | null;
+  factor_assessments: SuitabilityFactorAssessment[];
+  limiting_factors: string[];
+  favorable_factors: string[];
+  unknown_factors: string[];
+  data_quality: QualityInfo;
+  spatial_support: SpatialSupport;
+  temporal_support: TemporalSupport;
+  evidence_ids: string[];
+  explanation: string;
+  limitations: string[];
+}
+
+export interface SuitabilitySummaryCounts {
+  total_evaluated: number;
+  suitable: number;
+  conditionally_suitable: number;
+  limited_suitability: number;
+  unsuitable: number;
+  insufficient_data: number;
+}
+
+export interface FieldSuitabilityResponse {
+  field_id: UUID;
+  season_year: number;
+  as_of: string;
+  engine_version: string;
+  kb_version: string;
+  status: "evaluated" | "provisional" | "insufficient_data";
+  summary: SuitabilitySummaryCounts;
+  crops: CropSuitabilityAssessment[];
+  disclaimers: string[];
+}
+
+

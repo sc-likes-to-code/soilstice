@@ -23,7 +23,11 @@ export function FieldOverviewView() {
 
 function Unavailable({ dataset, p }: { dataset: keyof typeof DATASET_SHORT; p: FieldProfile }) {
   const c = p.coverage.datasets.find((d) => d.dataset_id === dataset);
-  return <EmptyState title={`${DATASET_SHORT[dataset]} not available`} description={c?.missing_reason ? missingText(c.missing_reason) : c?.note ?? "This dataset has not been processed for this field."} />;
+  let desc = c?.missing_reason ? missingText(c.missing_reason) : c?.note ?? "This dataset has not been processed for this field.";
+  if (dataset === "nasa_srtm_gl1") {
+    desc = "NASA Earthdata Login required (SOILSTICE_EARTHDATA_TOKEN) to acquire SRTM GL1 30 m elevation rasters.";
+  }
+  return <EmptyState title={`${DATASET_SHORT[dataset]} not available`} description={desc} />;
 }
 
 function Overview({ p }: { p: FieldProfile }) {

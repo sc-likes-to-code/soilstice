@@ -18,6 +18,7 @@ from app.contracts import (
     CropOption,
     CropProfile,
     CropProfileSummary,
+    CropSuitabilityAssessment,
     DataCoverage,
     DatasetDescriptor,
     Deleted,
@@ -31,6 +32,7 @@ from app.contracts import (
     FieldProcessingStatus,
     FieldProfile,
     FieldSource,
+    FieldSuitabilityResponse,
     FieldSummary,
     Health,
     IndicatorCategory,
@@ -51,6 +53,7 @@ from app.services.environment import EnvironmentService
 from app.services.evidence import EvidenceService
 from app.services.fields import FieldService
 from app.services.rotation import RotationService
+from app.services.suitability import SuitabilityService
 
 from .envelope import ok
 
@@ -72,6 +75,10 @@ def env_svc(c: Container = Depends(ctx)) -> EnvironmentService:
 
 def rot_svc(c: Container = Depends(ctx)) -> RotationService:
     return RotationService(c)
+
+
+def suit_svc(c: Container = Depends(ctx)) -> SuitabilityService:
+    return SuitabilityService(c)
 
 
 def ev_svc(c: Container = Depends(ctx)) -> EvidenceService:
@@ -286,6 +293,21 @@ def update_scenario(scenario_id: UUID, body: UpsertScenarioRequest, request: Req
 def delete_scenario(scenario_id: UUID, request: Request, svc: RotationService = Depends(rot_svc)):
     svc.delete_scenario(scenario_id)
     return ok(request, Deleted())
+
+
+# Phase 6: Suitability
+@router.get("/fields/{field_id}/suitability", response_model=ApiResponse[FieldSuitabilityResponse],
+            tags=["suitability"], operation_id="getFieldSuitability")
+def field_suitability(field_id: UUID, request: Request, season_year: int | None = None,
+                      svc: SuitabilityService = Depends(suit_svc)):
+    return ok(request, svc.evaluate_field(field_id, season_year))
+
+
+@router.get("/fields/{field_id}/suitability/{crop_id}", response_model=ApiResponse[CropSuitabilityAssessment],
+            tags=["suitability"], operation_id="getCropSuitability")
+def crop_suitability(field_id: UUID, crop_id: str, request: Request, season_year: int | None = None,
+                     svc: SuitabilityService = Depends(suit_svc)):
+    return ok(request, svc.evaluate_crop(field_id, crop_id, season_year))
 
 
 # E26 evidence, E27 jobs

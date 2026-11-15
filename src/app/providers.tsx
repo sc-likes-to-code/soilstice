@@ -2,6 +2,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState, type ReactNode } from "react";
 import { PreferencesProvider } from "@/hooks/preferences";
+import { DataModeProvider } from "@/hooks/data-mode";
 import { isApiError } from "@/services";
 
 export function Providers({ children }: { children: ReactNode }) {
@@ -20,7 +21,9 @@ export function Providers({ children }: { children: ReactNode }) {
   );
   return (
     <QueryClientProvider client={client}>
-      <PreferencesProvider>{children}</PreferencesProvider>
+      <DataModeProvider>
+        <PreferencesProvider>{children}</PreferencesProvider>
+      </DataModeProvider>
     </QueryClientProvider>
   );
 }

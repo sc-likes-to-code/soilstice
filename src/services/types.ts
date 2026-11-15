@@ -4,9 +4,9 @@
  */
 import type {
   ApiResponse, ClimateProfile, CreateFieldRequest, CreateFieldResponse, CropCode, CropEvidenceRecord,
-  CropHistory, CropOption, CropProfile, CropProfileSummary, DataCoverage, DatasetDescriptor,
+  CropHistory, CropOption, CropProfile, CropProfileSummary, CropSuitabilityAssessment, DataCoverage, DatasetDescriptor,
   DirectedRotationTransition, EnvironmentalIndicator, EvidenceItem, EvidenceKind, Farm, FarmOverview, Field,
-  FieldProcessingStatus, FieldProfile, FieldSource, FieldSummary, IndicatorCategory, KnowledgeBaseMetadata,
+  FieldProcessingStatus, FieldProfile, FieldSource, FieldSuitabilityResponse, FieldSummary, IndicatorCategory, KnowledgeBaseMetadata,
   ProcessingJob, ResilienceProfile, RotationRecommendation, RotationScenario, SoilProfile, TerrainProfile,
   UpsertScenarioRequest, UUID, VegetationIndex, VegetationProfile,
 } from "@/types/contracts";
@@ -62,6 +62,11 @@ export interface EvidenceService {
   listEvidence(fieldId: UUID, opts?: { kind?: EvidenceKind; relatedId?: string }): Promise<ApiResponse<EvidenceItem[]>>;
 }
 
+export interface SuitabilityService {
+  getFieldSuitability(fieldId: UUID, seasonYear?: number): Promise<ApiResponse<FieldSuitabilityResponse>>;
+  getCropSuitability(fieldId: UUID, cropId: string, seasonYear?: number): Promise<ApiResponse<CropSuitabilityAssessment>>;
+}
+
 export interface Services {
   mode: "mock" | "api";
   farms: FarmService;
@@ -70,4 +75,5 @@ export interface Services {
   rotation: RotationService;
   resilience: ResilienceService;
   evidence: EvidenceService;
+  suitability: SuitabilityService;
 }

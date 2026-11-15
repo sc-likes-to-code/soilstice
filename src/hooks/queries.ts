@@ -3,34 +3,36 @@
  * Data hooks over the service interfaces (UI_ARCHITECTURE §5). Pages call these; components receive contract types as props.
  */
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getServices } from "@/services";
+import { getDataMode, getServices } from "@/services";
 import type { CreateFieldRequest, CropCode, EvidenceKind, IndicatorCategory, UpsertScenarioRequest, UUID, VegetationIndex } from "@/types/contracts";
 
 const svc = () => getServices();
 
 export const qk = {
-  farms: ["farms"] as const,
-  overview: (farmId: UUID, season?: number) => ["farm", farmId, "overview", season] as const,
-  fields: (farmId: UUID) => ["farm", farmId, "fields"] as const,
-  field: (id: UUID) => ["field", id] as const,
-  profile: (id: UUID, season?: number) => ["field", id, "profile", season] as const,
-  coverage: (id: UUID) => ["field", id, "coverage"] as const,
-  climate: (id: UUID, season: number) => ["field", id, "climate", season] as const,
-  soil: (id: UUID) => ["field", id, "soil"] as const,
-  terrain: (id: UUID) => ["field", id, "terrain"] as const,
-  vegetation: (id: UUID, year: number, index: VegetationIndex) => ["field", id, "vegetation", year, index] as const,
-  indicators: (id: UUID, category?: IndicatorCategory, season?: number) => ["field", id, "indicators", category, season] as const,
-  cropHistory: (id: UUID) => ["field", id, "crop-history"] as const,
-  recommendation: (id: UUID, season: number) => ["field", id, "recommendation", season] as const,
-  scenarios: (id: UUID) => ["field", id, "scenarios"] as const,
-  resilience: (id: UUID) => ["field", id, "resilience"] as const,
-  evidence: (id: UUID, kind?: EvidenceKind, related?: string) => ["field", id, "evidence", kind, related] as const,
-  datasets: ["datasets"] as const,
-  crops: ["crops"] as const,
-  job: (id: UUID) => ["job", id] as const,
+  farms: () => [getDataMode(), "farms"] as const,
+  overview: (farmId: UUID, season?: number) => [getDataMode(), "farm", farmId, "overview", season] as const,
+  fields: (farmId: UUID) => [getDataMode(), "farm", farmId, "fields"] as const,
+  field: (id: UUID) => [getDataMode(), "field", id] as const,
+  profile: (id: UUID, season?: number) => [getDataMode(), "field", id, "profile", season] as const,
+  coverage: (id: UUID) => [getDataMode(), "field", id, "coverage"] as const,
+  climate: (id: UUID, season: number) => [getDataMode(), "field", id, "climate", season] as const,
+  soil: (id: UUID) => [getDataMode(), "field", id, "soil"] as const,
+  terrain: (id: UUID) => [getDataMode(), "field", id, "terrain"] as const,
+  vegetation: (id: UUID, year: number, index: VegetationIndex) => [getDataMode(), "field", id, "vegetation", year, index] as const,
+  indicators: (id: UUID, category?: IndicatorCategory, season?: number) => [getDataMode(), "field", id, "indicators", category, season] as const,
+  cropHistory: (id: UUID) => [getDataMode(), "field", id, "crop-history"] as const,
+  recommendation: (id: UUID, season: number) => [getDataMode(), "field", id, "recommendation", season] as const,
+  scenarios: (id: UUID) => [getDataMode(), "field", id, "scenarios"] as const,
+  resilience: (id: UUID) => [getDataMode(), "field", id, "resilience"] as const,
+  suitability: (id: UUID, season?: number) => [getDataMode(), "field", id, "suitability", season] as const,
+  cropSuitability: (id: UUID, cropId: string, season?: number) => [getDataMode(), "field", id, "cropSuitability", cropId, season] as const,
+  evidence: (id: UUID, kind?: EvidenceKind, related?: string) => [getDataMode(), "field", id, "evidence", kind, related] as const,
+  datasets: () => [getDataMode(), "datasets"] as const,
+  crops: () => [getDataMode(), "crops"] as const,
+  job: (id: UUID) => [getDataMode(), "job", id] as const,
 };
 
-export const useFarms = () => useQuery({ queryKey: qk.farms, queryFn: () => svc().farms.listFarms() });
+export const useFarms = () => useQuery({ queryKey: qk.farms(), queryFn: () => svc().farms.listFarms() });
 export const useFarmOverview = (farmId: UUID | null, season?: number) =>
   useQuery({ queryKey: qk.overview(farmId ?? "", season), queryFn: () => svc().farms.getOverview(farmId!, season), enabled: !!farmId, placeholderData: keepPreviousData });
 export const useFields = (farmId: UUID | null) =>
@@ -51,11 +53,15 @@ export const useCropHistory = (id: UUID) => useQuery({ queryKey: qk.cropHistory(
 export const useRecommendation = (id: UUID, season: number) =>
   useQuery({ queryKey: qk.recommendation(id, season), queryFn: () => svc().rotation.getRecommendation(id, season) });
 export const useScenarios = (id: UUID) => useQuery({ queryKey: qk.scenarios(id), queryFn: () => svc().rotation.listScenarios(id) });
-export const useCrops = () => useQuery({ queryKey: qk.crops, queryFn: () => svc().rotation.listCrops(), staleTime: Infinity });
+export const useCrops = () => useQuery({ queryKey: qk.crops(), queryFn: () => svc().rotation.listCrops(), staleTime: Infinity });
 export const useResilience = (id: UUID) => useQuery({ queryKey: qk.resilience(id), queryFn: () => svc().resilience.getResilience(id) });
+export const useFieldSuitability = (id: UUID, season?: number) =>
+  useQuery({ queryKey: qk.suitability(id, season), queryFn: () => svc().suitability.getFieldSuitability(id, season), placeholderData: keepPreviousData });
+export const useCropSuitability = (id: UUID, cropId: string, season?: number) =>
+  useQuery({ queryKey: qk.cropSuitability(id, cropId, season), queryFn: () => svc().suitability.getCropSuitability(id, cropId, season), placeholderData: keepPreviousData });
 export const useEvidence = (id: UUID | null, kind?: EvidenceKind, related?: string) =>
   useQuery({ queryKey: qk.evidence(id ?? "", kind, related), queryFn: () => svc().evidence.listEvidence(id!, { kind, relatedId: related }), enabled: !!id });
-export const useDatasets = () => useQuery({ queryKey: qk.datasets, queryFn: () => svc().evidence.listDatasets(), staleTime: Infinity });
+export const useDatasets = () => useQuery({ queryKey: qk.datasets(), queryFn: () => svc().evidence.listDatasets(), staleTime: Infinity });
 
 export const useJob = (jobId: UUID | null) =>
   useQuery({

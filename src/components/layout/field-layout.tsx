@@ -7,12 +7,12 @@ import { cn } from "@/lib/cn";
 import { useField, useFields, useCoverage } from "@/hooks/queries";
 import { usePrefs } from "@/hooks/preferences";
 import { qText } from "@/lib/format";
-import { Badge, Select, Skeleton } from "@/components/ui/primitives";
+import { Badge, Card, Select, Skeleton } from "@/components/ui/primitives";
 import { ErrorState } from "@/components/shared/state";
 import { CompletenessMeter } from "@/components/shared/data-display";
 import { SyntheticBadge } from "@/components/shared/provenance";
 import type { Field } from "@/types/contracts";
-import { DATA_MODE } from "@/services";
+import { useDataMode } from "@/hooks/data-mode";
 
 export function useFieldId(): string {
   const p = useParams<{ fieldId: string }>();
@@ -39,6 +39,7 @@ export function FieldLayoutClient({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const { units } = usePrefs();
+  const { isMock, setMode } = useDataMode();
   const field = useField(fieldId);
   const siblings = useFields(field.data?.data.farm_id ?? null);
   const cov = useCoverage(fieldId);
@@ -48,8 +49,28 @@ export function FieldLayoutClient({ children }: { children: ReactNode }) {
   if (field.isError) {
     return (
       <div className="mx-auto max-w-xl py-16">
-        <ErrorState error={field.error} onRetry={() => void field.refetch()} title="Field not available" />
-        <Link href="/fields" className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-semibold text-forest-700"><ArrowLeft className="h-4 w-4" /> Back to Field Explorer</Link>
+        <Card className="p-6">
+          <ErrorState
+            error={field.error}
+            onRetry={() => void field.refetch()}
+            title={`Field not found in ${isMock ? "Mock Data" : "Live API"} mode`}
+          />
+          <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-line/70 pt-4">
+            <Link
+              href="/fields"
+              className="inline-flex items-center gap-1.5 rounded-md bg-forest-800 px-3 py-1.5 text-[12.5px] font-semibold text-paper shadow-xs hover:bg-forest-900"
+            >
+              <ArrowLeft className="h-4 w-4" /> Go to Field Explorer
+            </Link>
+            <button
+              type="button"
+              onClick={() => setMode(isMock ? "api" : "mock")}
+              className="inline-flex items-center gap-1.5 rounded-md border border-line bg-paper px-3 py-1.5 text-[12.5px] font-semibold text-ink shadow-xs hover:bg-parchment/60 cursor-pointer"
+            >
+              Switch to {isMock ? "Live API" : "Mock Data"} mode
+            </button>
+          </div>
+        </Card>
       </div>
     );
   }
@@ -74,7 +95,7 @@ export function FieldLayoutClient({ children }: { children: ReactNode }) {
                   <span className="font-mono text-[11.5px] tabular">{f.centroid[1].toFixed(4)}°N, {Math.abs(f.centroid[0]).toFixed(4)}°W</span>
                   <Badge className={STATUS_STYLE[f.processing_status]}>{f.processing_status}</Badge>
                   <Badge className="border border-line bg-paper text-ink-soft">{f.source === "user" ? "User-drawn" : f.source === "csb" ? "CSB polygon" : "Synthetic geometry"}</Badge>
-                  {DATA_MODE === "mock" && f.source !== "csb" && <SyntheticBadge />}
+                  {isMock && f.source !== "csb" && <SyntheticBadge />}
                 </div>
               </>
             ) : (

@@ -6,7 +6,9 @@ import type { Farm, JobStatus } from "@/types/contracts";
 import { useActiveFarm } from "@/hooks/active-farm";
 import { useCreateField, useDeleteField, useFields, useJob, useUpdateFarm } from "@/hooks/queries";
 import { usePrefs } from "@/hooks/preferences";
-import { DATA_MODE, isApiError } from "@/services";
+import { isApiError } from "@/services";
+import { useDataMode } from "@/hooks/data-mode";
+import { DataModeToggle } from "@/components/layout/data-mode-toggle";
 import { apiBaseUrl } from "@/services/http/client";
 import { AOI_BBOX, MAX_FIELD_HA } from "@/lib/aoi";
 import { ringToMultiPolygon, validateFieldDraft, type FieldDraftIssue, type LngLat } from "@/lib/geo";
@@ -39,6 +41,7 @@ export function SettingsView() {
 
 function Settings({ farm }: { farm: Farm }) {
   const { units, setUnits } = usePrefs();
+  const { isApi } = useDataMode();
   return (
     <div className="grid gap-6 xl:grid-cols-[1fr_380px]">
       <div className="space-y-6">
@@ -52,11 +55,24 @@ function Settings({ farm }: { farm: Farm }) {
           <CardBody><Segmented label="Unit system" value={units} onChange={setUnits} options={[{ value: "metric", label: "Metric (ha, mm, °C)" }, { value: "us", label: "US customary (ac, in, °F)" }]} /></CardBody>
         </Card>
         <Card>
-          <CardHeader eyebrow="Data" title="Data mode" />
+          <CardHeader eyebrow="Data" title="Data source mode" description="Switch between live backend observations and offline demonstration fixtures." />
           <CardBody className="space-y-3 text-[12.5px] text-ink-soft">
-            <p className="flex items-center gap-2">Mode: <Badge className={DATA_MODE === "mock" ? "bg-clay-100 text-clay-700" : "bg-emerald-100 text-emerald-800"}>{DATA_MODE === "mock" ? "Mock (synthetic)" : "API (live observations)"}</Badge></p>
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <span className="font-semibold text-ink">Active mode:</span>
+              <DataModeToggle />
+            </div>
+            <p>
+              {isApi ? (
+                <span className="font-medium text-forest-800">
+                  Live API active. Connected to FastAPI backend on port 8000 for verified USDA (SSURGO, CDL) and NASA (POWER, SRTM) observations.
+                </span>
+              ) : (
+                <span className="font-medium text-clay-600">
+                  Mock Data active. Using offline synthetic demonstration world (Reno Demo Farm &amp; Finney Demo Farm, 14 parcels).
+                </span>
+              )}
+            </p>
             <p>API base URL: <span className="font-mono text-[11.5px] text-ink">{apiBaseUrl()}</span></p>
-            <p className="text-stone-500">Live API mode connects to FastAPI backend on port 8000 for direct USDA and NASA queries.</p>
           </CardBody>
         </Card>
         <Card>
@@ -102,6 +118,7 @@ function FarmCard({ farm }: { farm: Farm }) {
 
 function AddField({ farm }: { farm: Farm }) {
   const { units } = usePrefs();
+  const { isMock } = useDataMode();
   const fields = useFields(farm.farm_id);
   const create = useCreateField(farm.farm_id);
   const [drawing, setDrawing] = useState(false);
@@ -121,7 +138,7 @@ function AddField({ farm }: { farm: Farm }) {
 
   return (
     <Card>
-      <CardHeader eyebrow="Add field" title="Draw a field boundary" description={`Click on the map to place vertices inside ${farm.aoi.label}. Fields up to ${MAX_FIELD_HA} ha.`} actions={DATA_MODE === "mock" ? <SyntheticBadge /> : undefined} />
+      <CardHeader eyebrow="Add field" title="Draw a field boundary" description={`Click on the map to place vertices inside ${farm.aoi.label}. Fields up to ${MAX_FIELD_HA} ha.`} actions={isMock ? <SyntheticBadge /> : undefined} />
       <CardBody className="space-y-4">
         <div className="flex flex-wrap items-center gap-2">
           {!drawing ? (

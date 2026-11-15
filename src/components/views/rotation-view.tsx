@@ -5,7 +5,8 @@ import { ArrowRight, ChevronDown, GitCompare, Pencil, Plus, Trash2, X } from "lu
 import type { CropHistory, CropOption, RecommendationCandidate, RotationRecommendation, RotationScenario, ScenarioEvaluation } from "@/types/contracts";
 import { useCreateScenario, useCropHistory, useCrops, useDeleteScenario, useRecommendation, useScenarios, useUpdateScenario } from "@/hooks/queries";
 import { useFieldId } from "@/components/layout/field-layout";
-import { isApiError, DATA_MODE } from "@/services";
+import { isApiError } from "@/services";
+import { useDataMode } from "@/hooks/data-mode";
 import { cropColor, cropShort, FIT_STYLE } from "@/lib/vocab";
 import { formatDate } from "@/lib/format";
 import { cn } from "@/lib/cn";
@@ -13,6 +14,7 @@ import { Badge, Button, Card, CardBody, CardHeader, Skeleton } from "@/component
 import { EmptyState, ErrorState, StateBoundary } from "@/components/shared/state";
 import { CropLegend, CropTimeline, IndicatorCard } from "@/components/shared/data-display";
 import { FitBandPill, FlagList, QuantityValue, SupportBadge, SyntheticBadge } from "@/components/shared/provenance";
+import { CropSuitabilitySection } from "./suitability-section";
 import { LATEST_SEASON } from "./common";
 
 const TARGET_SEASON = LATEST_SEASON + 1;
@@ -44,14 +46,22 @@ export function RotationView() {
       </Card>
 
       <section>
-        <SectionTitle n="2" title={`Explained options for the ${TARGET_SEASON} season`} description="Each option is classed by its most limiting factor. Regional factors cannot rule a crop out on their own." />
+        <SectionTitle n="2" title={`Crop Suitability Intelligence (${LATEST_SEASON} Baseline Season)`} description="Independent factor-by-factor environmental suitability evaluation across all 14 canonical crops using Phase 5 knowledge and field data." />
+        <CropSuitabilitySection fieldId={fieldId} seasonYear={LATEST_SEASON} />
+      </section>
+
+      <section>
+        <SectionTitle n="3" title={`Explained options for the ${TARGET_SEASON} season`} description="Each option is classed by its most limiting factor. Regional factors cannot rule a crop out on their own." />
         <StateBoundary query={rec} skeleton={<div className="grid gap-4 lg:grid-cols-2"><Skeleton className="h-64" /><Skeleton className="h-64" /></div>}>
           {(r) => <Recommendations r={r} onUse={startFrom} />}
         </StateBoundary>
       </section>
 
       <section id="scenario-builder" className="scroll-mt-24">
-        <SectionTitle n="3" title="Compare rotations" description="Build multi-year sequences and compare their evaluations side by side." />
+        <SectionTitle n="4" title="Compare rotations" description="Build multi-year sequences and compare their evaluations side by side." />
+        <div className="mb-4 rounded-lg border border-line bg-cream/60 p-3 text-[12.5px] text-ink-soft">
+          <span className="font-semibold text-ink">Upcoming Phase 7 Engine:</span> Interactive multi-year scenario sequence authoring is enabled below. Algorithmic sequence optimization, nitrogen credit carryover, and economic rotation scoring arrive in Phase 7.
+        </div>
         {crops.isError ? <ErrorState error={crops.error} onRetry={() => void crops.refetch()} /> : (
           <Scenarios fieldId={fieldId} crops={crops.data?.data ?? []} draft={draft} setDraft={setDraft} builderOpen={builderOpen} setBuilderOpen={setBuilderOpen} />
         )}
@@ -86,13 +96,14 @@ function History({ h }: { h: CropHistory }) {
 }
 
 function Recommendations({ r, onUse }: { r: RotationRecommendation; onUse: (code: number) => void }) {
+  const { isMock } = useDataMode();
   if (r.status !== "computed") {
     return <EmptyState title={r.status === "pending" ? "Recommendations pending" : "Not enough data for recommendations"} description={r.status === "pending" ? "Waiting for this field's datasets to finish processing." : "Soil, terrain or climate inputs are missing for this field."} />;
   }
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-2 text-[11.5px] text-stone-500">
-        {DATA_MODE === "mock" && <SyntheticBadge />} engine {r.engine_version} · KB {r.kb_version} · generated {formatDate(r.generated_at, "long")}
+        {isMock && <SyntheticBadge />} engine {r.engine_version} · KB {r.kb_version} · generated {formatDate(r.generated_at, "long")}
       </div>
       <div className="grid items-start gap-4 lg:grid-cols-2">
         {r.candidates.map((c) => <CandidateCard key={c.crop_code} c={c} onUse={() => onUse(c.crop_code)} />)}

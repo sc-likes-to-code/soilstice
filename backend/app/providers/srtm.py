@@ -18,8 +18,12 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
-import rasterio
-from rasterio.transform import from_origin
+try:
+    import rasterio
+    from rasterio.transform import from_origin
+except ImportError:
+    rasterio = None  # type: ignore
+    from_origin = None  # type: ignore
 
 from app.repositories.records import AcquisitionRecord
 

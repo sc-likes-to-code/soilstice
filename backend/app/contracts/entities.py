@@ -692,3 +692,102 @@ class CropProfile(Contract):
     regional_suitability: list[dict[str, Any]]
     evidence_ids: list[str] = PField(default_factory=list)
 
+
+# ── 5.18 Crop Suitability Entities (Phase 6) ─────────────────────────────────
+
+SuitabilityClass = Literal[
+    "suitable",
+    "conditionally_suitable",
+    "limited_suitability",
+    "unsuitable",
+    "insufficient_data",
+]
+
+FactorCompatibility = Literal[
+    "optimal",
+    "compatible",
+    "moderate_limitation",
+    "critical_limitation",
+    "unknown",
+]
+
+FactorSeverity = Literal[
+    "none",
+    "favorable",
+    "moderate",
+    "critical",
+    "unknown",
+]
+
+FactorCategory = Literal[
+    "thermal",
+    "water_climate",
+    "soil",
+    "rooting",
+    "terrain",
+    "historical",
+    "regional",
+]
+
+
+class SuitabilityFactorAssessment(Contract):
+    factor_key: str
+    factor_name: str
+    category: FactorCategory
+    observed_value: Quantity
+    crop_requirement: str | None = None
+    compatibility: FactorCompatibility
+    is_limiting: bool
+    is_favorable: bool
+    severity: FactorSeverity
+    score: float | None = None
+    interpretation: str
+    evidence_ids: list[str] = PField(default_factory=list)
+    data_status: Literal["available", "missing", "provisional", "not_integrated"] = "available"
+    support_class: SupportClass = "F"
+
+
+class CropSuitabilityAssessment(Contract):
+    crop_id: str
+    crop_name: str
+    cdl_code: int | None = None
+    botanical_family: str
+    portfolio_role: str
+    is_cover_crop: bool
+    assessment_status: Literal["evaluated", "provisional", "insufficient_data"]
+    suitability_class: SuitabilityClass
+    suitability_score: float | None = None
+    score_methodology: str | None = None
+    factor_assessments: list[SuitabilityFactorAssessment]
+    limiting_factors: list[str]
+    favorable_factors: list[str]
+    unknown_factors: list[str]
+    data_quality: QualityInfo
+    spatial_support: SpatialSupport
+    temporal_support: TemporalSupport
+    evidence_ids: list[str] = PField(default_factory=list)
+    explanation: str
+    limitations: list[str]
+
+
+class SuitabilitySummaryCounts(Contract):
+    total_evaluated: int
+    suitable: int
+    conditionally_suitable: int
+    limited_suitability: int
+    unsuitable: int
+    insufficient_data: int
+
+
+class FieldSuitabilityResponse(Contract):
+    field_id: UUID
+    season_year: int
+    as_of: date
+    engine_version: str
+    kb_version: str
+    status: Literal["evaluated", "provisional", "insufficient_data"]
+    summary: SuitabilitySummaryCounts
+    crops: list[CropSuitabilityAssessment]
+    disclaimers: list[str]
+
+

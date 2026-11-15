@@ -2,7 +2,7 @@
 import { CheckCircle2, Clock, Database, ExternalLink, FlaskConical, HelpCircle, MapPin } from "lucide-react";
 import type { Confidence, FitBand, QualityFlag, QualityInfo, ScoreBand, SourceRef, SpatialSupport, TemporalSupport, Quantity } from "@/types/contracts";
 import { cn } from "@/lib/cn";
-import { BAND_STYLE, CONFIDENCE_LABEL, FIT_STYLE, SEVERITY_STYLE, SUPPORT_STYLE } from "@/lib/vocab";
+import { BAND_STYLE, CONFIDENCE_LABEL, DATASET_SHORT, FIT_STYLE, SEVERITY_STYLE, SUPPORT_STYLE } from "@/lib/vocab";
 import { formatDate, formatQuantity, missingText, pct, resolutionText } from "@/lib/format";
 import { usePrefs } from "@/hooks/preferences";
 import { Badge, Dot, Tip } from "@/components/ui/primitives";
@@ -112,6 +112,11 @@ export function PendingBadge({ className }: { className?: string }) {
 /** Source chip: product + version; synthetic variant (rule R6). */
 export function SourceChip({ source, className }: { source: SourceRef; className?: string }) {
   const synthetic = source.dataset_id === "synthetic";
+  const shortName = DATASET_SHORT[source.dataset_id] ?? source.product;
+  const chipLabel = synthetic
+    ? source.product.replace("Synthetic stand-in for ", "Synthetic · ")
+    : `${shortName}${source.product_version ? ` · ${source.product_version}` : ""}`;
+
   return (
     <Tip
       content={
@@ -127,9 +132,15 @@ export function SourceChip({ source, className }: { source: SourceRef; className
         </span>
       }
     >
-      <Badge className={cn("border transition-colors", synthetic ? "border-clay-200 bg-clay-100/60 text-clay-700" : "border-line bg-parchment/60 text-ink-soft hover:border-line-strong", className)}>
-        {synthetic ? <FlaskConical className="h-3 w-3 text-clay-600" aria-hidden /> : <Database className="h-3 w-3 text-forest-600" aria-hidden />}
-        {synthetic ? source.product.replace("Synthetic stand-in for ", "Synthetic · ") : `${source.product} ${source.product_version}`}
+      <Badge
+        className={cn(
+          "max-w-full truncate border text-[11px] transition-colors",
+          synthetic ? "border-clay-200 bg-clay-100/60 text-clay-700" : "border-line bg-parchment/60 text-ink-soft hover:border-line-strong",
+          className
+        )}
+      >
+        {synthetic ? <FlaskConical className="h-3 w-3 shrink-0 text-clay-600" aria-hidden /> : <Database className="h-3 w-3 shrink-0 text-forest-600" aria-hidden />}
+        <span className="truncate">{chipLabel}</span>
       </Badge>
     </Tip>
   );

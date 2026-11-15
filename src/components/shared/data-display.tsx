@@ -18,37 +18,39 @@ export function IndicatorCard({ indicator, className, size = "md" }: { indicator
   const delta = hasDelta ? indicator.value.value! - ref!.value! : null;
   const flags = indicator.quality.flags.filter((f) => f.code !== "SYNTHETIC");
   return (
-    <div className={cn("flex flex-col rounded-xl border border-line bg-paper p-4 transition-shadow hover:shadow-[var(--shadow-card)]", className)}>
-      <div className="flex items-start justify-between gap-2">
-        <p className="text-[12.5px] font-semibold leading-snug text-ink-soft">{indicator.label}</p>
-        <SupportBadge spatial={indicator.spatial} />
+    <div className={cn("flex flex-col min-w-0 max-w-full overflow-hidden rounded-xl border border-line bg-paper p-4 transition-shadow hover:shadow-[var(--shadow-card)]", className)}>
+      <div className="flex items-start justify-between gap-2 min-w-0">
+        <p className="min-w-0 flex-1 truncate text-[12.5px] font-semibold leading-snug text-ink-soft" title={indicator.label}>{indicator.label}</p>
+        <SupportBadge spatial={indicator.spatial} className="shrink-0" />
       </div>
-      <div className={cn("mt-2 font-display font-medium leading-none text-ink", size === "sm" ? "text-[22px]" : "text-[28px]")}>
+      <div className={cn("mt-2 min-w-0 truncate font-display font-medium leading-none text-ink", size === "sm" ? "text-[22px]" : "text-[28px]")}>
         <QuantityValue q={indicator.value} signed={indicator.key === "precip_anomaly_pct" || indicator.key === "water_balance_season"} />
       </div>
-      <div className="mt-2 min-h-[18px] text-[12px] text-ink-soft">
+      <div className="mt-2 min-h-[18px] text-[12px] text-ink-soft min-w-0">
         {indicator.value.value === null ? (
-          <span className="text-stone-500">{missingText(indicator.value.missing_reason)}</span>
+          <span className="text-stone-500 truncate block">{missingText(indicator.value.missing_reason)}</span>
         ) : hasDelta ? (
-          <span>
+          <span className="truncate block">
             Normal {formatQuantity(ref, units).text} {formatQuantity(ref, units).unit} ·{" "}
             <span className={cn("font-semibold", delta! >= 0 ? "text-forest-700" : "text-clay-600")}>{delta! >= 0 ? "+" : ""}{formatQuantity({ ...ref!, value: delta }, units).text}</span>
           </span>
         ) : (
-          <TemporalText t={indicator.temporal} />
+          <span className="truncate block"><TemporalText t={indicator.temporal} /></span>
         )}
       </div>
-      <div className="mt-3 flex flex-wrap items-center gap-1.5 border-t border-line/70 pt-3">
-        <SourceList sources={indicator.sources} />
-        <QualityIndicator quality={indicator.quality} className="ml-auto" />
+      <div className="mt-3 flex min-w-0 flex-wrap items-center gap-1.5 border-t border-line/70 pt-3">
+        <div className="min-w-0 max-w-[calc(100%-80px)] flex-1 overflow-hidden">
+          <SourceList sources={indicator.sources} />
+        </div>
+        <QualityIndicator quality={indicator.quality} className="ml-auto shrink-0" />
       </div>
       <button onClick={() => setOpen((o) => !o)} className="mt-2 inline-flex items-center gap-1 self-start text-[11.5px] font-semibold text-forest-700 hover:text-forest-900" aria-expanded={open}>
         <Info className="h-3 w-3" aria-hidden /> Method {open ? "▴" : "▾"}
       </button>
       {open && (
-        <div className="mt-2 space-y-2 rounded-lg bg-cream/70 p-3 text-[12px] leading-relaxed text-ink-soft">
+        <div className="mt-2 space-y-2 rounded-lg bg-cream/70 p-3 text-[12px] leading-relaxed text-ink-soft break-words">
           <p><span className="font-semibold text-ink">{indicator.method.name}</span> · v{indicator.method.version}</p>
-          <p>{indicator.method.description}</p>
+          <p className="break-words">{indicator.method.description}</p>
           <p className="text-stone-500">Nature: {indicator.nature.replace("_", " ")} · <TemporalText t={indicator.temporal} /></p>
           <FlagList flags={flags} />
         </div>

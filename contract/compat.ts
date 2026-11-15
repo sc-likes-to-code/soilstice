@@ -70,6 +70,10 @@ export type Checks = [
   Assert<Same<C.DirectedRotationTransition, S["DirectedRotationTransition"]>>,
   Assert<Same<C.CropProfileSummary, S["CropProfileSummary"]>>,
   Assert<Same<C.CropProfile, S["CropProfile"]>>,
+  Assert<Same<C.SuitabilityFactorAssessment, S["SuitabilityFactorAssessment"]>>,
+  Assert<Same<C.CropSuitabilityAssessment, S["CropSuitabilityAssessment"]>>,
+  Assert<Same<C.SuitabilitySummaryCounts, S["SuitabilitySummaryCounts"]>>,
+  Assert<Same<C.FieldSuitabilityResponse, S["FieldSuitabilityResponse"]>>,
   // Envelopes used by the frontend services
   Assert<Same<C.ApiResponse<C.Farm[]>, S["ApiResponse_list_Farm__"]>>,
   Assert<Same<C.ApiResponse<C.FieldProfile>, S["ApiResponse_FieldProfile_"]>>,
@@ -91,4 +95,5 @@ export type PathChecks = [
   paths["/api/v1/scenarios/{scenario_id}"], paths["/api/v1/fields/{field_id}/evidence"], paths["/api/v1/jobs/{job_id}"],
   paths["/api/v1/canonical-crops"], paths["/api/v1/crops/{crop_id}"], paths["/api/v1/crops/{crop_id}/attributes"],
   paths["/api/v1/rotations"], paths["/api/v1/rotations/matrix"], paths["/api/v1/evidence/{evidence_id}"], paths["/api/v1/kb/metadata"],
+  paths["/api/v1/fields/{field_id}/suitability"], paths["/api/v1/fields/{field_id}/suitability/{crop_id}"],
 ];

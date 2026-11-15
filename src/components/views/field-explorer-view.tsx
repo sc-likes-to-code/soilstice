@@ -14,11 +14,12 @@ import { EmptyState, ErrorState } from "@/components/shared/state";
 import { FieldMap } from "@/components/shared/field-map";
 import { CompletenessMeter } from "@/components/shared/data-display";
 import { ScoreBandPill } from "@/components/shared/provenance";
-import { DATA_MODE } from "@/services";
+import { useDataMode } from "@/hooks/data-mode";
 
 type Any<T> = T | "all";
 
 export function FieldExplorerView() {
+  const { isMock } = useDataMode();
   const { farm, error: farmErr, refetch } = useActiveFarm();
   const fields = useFields(farm?.farm_id ?? null);
   const { units } = usePrefs();
@@ -101,7 +102,7 @@ export function FieldExplorerView() {
             selectedId={selected}
             onSelect={setSelected}
             focusId={selected}
-            caption={DATA_MODE === "mock" ? "Geospatial view · Synthetic field boundaries" : "Geospatial view · Operational field boundaries"}
+            caption={isMock ? "Geospatial view · Synthetic field boundaries" : "Geospatial view · Operational field boundaries"}
           />
           {sel ? (
             <Card className="animate-[var(--animate-fade-up)]">
