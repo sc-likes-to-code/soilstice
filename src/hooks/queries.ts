@@ -4,7 +4,7 @@
  */
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getDataMode, getServices } from "@/services";
-import type { CreateFieldRequest, CropCode, EvidenceKind, IndicatorCategory, UpsertScenarioRequest, UUID, VegetationIndex } from "@/types/contracts";
+import type { CompareScenariosRequest, CreateFieldRequest, CropCode, EvidenceKind, GenerateRotationsRequest, IndicatorCategory, UpsertScenarioRequest, UUID, VegetationIndex } from "@/types/contracts";
 
 const svc = () => getServices();
 
@@ -94,6 +94,16 @@ export function useDeleteScenario(fieldId: UUID) {
   return useMutation({
     mutationFn: (id: UUID) => svc().rotation.deleteScenario(id),
     onSuccess: () => qc.invalidateQueries({ queryKey: qk.scenarios(fieldId) }),
+  });
+}
+export function useGenerateRotations(fieldId: UUID) {
+  return useMutation({
+    mutationFn: (req: GenerateRotationsRequest) => svc().rotation.generateRotations(fieldId, req),
+  });
+}
+export function useCompareScenarios(fieldId: UUID) {
+  return useMutation({
+    mutationFn: (req: CompareScenariosRequest) => svc().rotation.compareScenarios(fieldId, req),
   });
 }
 export function useUpdateFarm() {

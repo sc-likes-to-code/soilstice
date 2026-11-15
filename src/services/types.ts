@@ -3,10 +3,11 @@
  * UI code depends ONLY on these interfaces (obtained via `@/services`), never on an implementation.
  */
 import type {
-  ApiResponse, ClimateProfile, CreateFieldRequest, CreateFieldResponse, CropCode, CropEvidenceRecord,
+  ApiResponse, ClimateProfile, CompareScenariosRequest, CompareScenariosResponse, CreateFieldRequest, CreateFieldResponse, CropCode, CropEvidenceRecord,
   CropHistory, CropOption, CropProfile, CropProfileSummary, CropSuitabilityAssessment, DataCoverage, DatasetDescriptor,
   DirectedRotationTransition, EnvironmentalIndicator, EvidenceItem, EvidenceKind, Farm, FarmOverview, Field,
-  FieldProcessingStatus, FieldProfile, FieldSource, FieldSuitabilityResponse, FieldSummary, IndicatorCategory, KnowledgeBaseMetadata,
+  FieldProcessingStatus, FieldProfile, FieldSource, FieldSuitabilityResponse, FieldSummary, GenerateRotationsRequest,
+  GenerateRotationsResponse, IndicatorCategory, KnowledgeBaseMetadata,
   ProcessingJob, ResilienceProfile, RotationRecommendation, RotationScenario, SoilProfile, TerrainProfile,
   UpsertScenarioRequest, UUID, VegetationIndex, VegetationProfile,
 } from "@/types/contracts";
@@ -51,6 +52,8 @@ export interface RotationService {
   createScenario(fieldId: UUID, req: UpsertScenarioRequest): Promise<ApiResponse<RotationScenario>>;
   updateScenario(scenarioId: UUID, req: UpsertScenarioRequest): Promise<ApiResponse<RotationScenario>>;
   deleteScenario(scenarioId: UUID): Promise<ApiResponse<{ deleted: true }>>;
+  generateRotations(fieldId: UUID, req: GenerateRotationsRequest): Promise<ApiResponse<GenerateRotationsResponse>>;
+  compareScenarios(fieldId: UUID, req: CompareScenariosRequest): Promise<ApiResponse<CompareScenariosResponse>>;
 }
 
 export interface ResilienceService {

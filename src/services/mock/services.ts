@@ -13,7 +13,7 @@ import { multiPolygonAreaHa, validateFieldDraft, centroidOfRing, type LngLat } f
 import { CROPS, DATASETS, DEMO_AS_OF, LATEST_CROP_YEAR, cropName, globalEvidence, q } from "./catalog";
 import { AOI_BBOX, buildWorld, traitsForNewUserField, type MockFieldRecord, type World } from "./world";
 import {
-  climateProfile, coverage, cropHistory, evaluateScenario, fieldEvidence, fieldSuitability, recommendation, resilienceProfile,
+  climateProfile, coverage, cropHistory, evaluateScenario, fieldEvidence, fieldSuitability, mockCompareScenarios, mockGenerateRotations, recommendation, resilienceProfile,
   soilProfile, soilTerrainIndicators, terrainProfile, vegetationIndicators, vegetationProfile, bandFor,
 } from "./generators";
 import { createRng, round } from "./rng";
@@ -310,6 +310,18 @@ export function createMockServices(): Services {
       deleteScenario: (scenarioId) => respond("rotation.deleteScenario", () => {
         if (!s().scenarios.delete(scenarioId)) notFound("Scenario", scenarioId);
         return { deleted: true as const };
+      }),
+      generateRotations: (fieldId, req) => respond("rotation.generateRotations", () => {
+        return mockGenerateRotations(fieldRec(fieldId), req);
+      }),
+      compareScenarios: (fieldId, req) => respond("rotation.compareScenarios", () => {
+        const scenarios: RotationScenario[] = [];
+        for (const sid of req.scenario_ids) {
+          const sc = s().scenarios.get(sid);
+          if (!sc) notFound("Scenario", sid);
+          scenarios.push(sc);
+        }
+        return mockCompareScenarios(fieldId, scenarios);
       }),
     },
     resilience: {

@@ -31,6 +31,7 @@ from .vocab import (
     IndicatorCategory,
     IndicatorKey,
     MissingReason,
+    ScenarioInterpretation,
     ScoreBand,
     SupportClass,
     TemporalResolution,
@@ -447,6 +448,7 @@ class ScenarioEvaluation(Contract):
     engine_version: str
     kb_version: str
     overall: FitBand
+    interpretation: ScenarioInterpretation = "supported"
     dimensions: list[EvaluationDimension]
     year_findings: list[YearFinding]
     warnings: list[QualityFlag]
@@ -473,6 +475,48 @@ class UpsertScenarioRequest(Contract):
     name: str = PField(min_length=1, max_length=80)
     start_year: int
     sequence: list[ScenarioYearInput] = PField(min_length=2, max_length=8)
+
+
+class GenerateRotationsRequest(Contract):
+    horizon: int = PField(default=3, ge=2, le=5)
+    start_year: int = PField(default=2026, ge=2026, le=2035)
+    include_cover_crops: bool = True
+    max_candidates: int = PField(default=10, ge=1, le=20)
+
+
+class GenerateCandidate(Contract):
+    rank: int
+    name: str
+    sequence: list[ScenarioYear]
+    evaluation: ScenarioEvaluation
+    is_pareto_optimal: bool = True
+    pareto_rank: int = 1
+    pareto_explanation: str | None = None
+
+
+class GenerateRotationsResponse(Contract):
+    field_id: UUID
+    horizon: int
+    start_year: int
+    antecedent_crop: ScenarioYear | None = None
+    candidates: list[GenerateCandidate]
+    pareto_optimal_count: int = 0
+    generated_at: datetime
+
+
+class CompareScenariosRequest(Contract):
+    scenario_ids: list[UUID] = PField(min_length=2, max_length=3)
+
+
+class TradeoffFinding(Contract):
+    category: str
+    summary: str
+
+
+class CompareScenariosResponse(Contract):
+    field_id: UUID
+    scenarios: list[RotationScenario]
+    tradeoffs: list[TradeoffFinding]
 
 
 # ── 5.13 RotationRecommendation ─────────────────────────────────────────────

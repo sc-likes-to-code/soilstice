@@ -8,17 +8,24 @@ from typing import Any
 
 from app.catalog import SPATIAL
 from app.contracts import (
+    CompareScenariosRequest,
+    CompareScenariosResponse,
     CropEvidenceRecord,
     CropHistory,
     CropOption,
     CropProfile,
     CropProfileSummary,
     DirectedRotationTransition,
+    GenerateCandidate,
+    GenerateRotationsRequest,
+    GenerateRotationsResponse,
     KnowledgeBaseMetadata,
     QualityInfo,
     RotationRecommendation,
     RotationScenario,
+    ScenarioEvaluation,
     ScenarioYear,
+    TradeoffFinding,
     UpsertScenarioRequest,
     YearPeriod,
 )
@@ -417,13 +424,37 @@ class RotationService:
         return [ScenarioYear(year=i.year, crop_code=i.crop_code, crop_name=self.ctx.kb.crop_name(i.crop_code))
                 for i in req.sequence]
 
+    def _evaluate_scenario(self, field_id: uuid.UUID, seq: list[ScenarioYear]) -> ScenarioEvaluation:
+        try:
+            from app.services.suitability import SuitabilityService
+            suit_svc = SuitabilityService(self.ctx)
+            default_year = self.ctx.settings.default_season_year()
+            suit_res = suit_svc.evaluate_field(field_id, default_year)
+        except Exception:
+            suit_res = None
+
+        history = self.crop_history(field_id)
+        last_crop_code = None
+        if history and history.years:
+            valid_years = [y for y in history.years if y.majority and y.majority.crop_code is not None]
+            if valid_years:
+                last_crop_code = valid_years[-1].majority.crop_code
+
+        return self.ctx.rotation.evaluate(
+            sequence=seq,
+            kb=self.ctx.kb,
+            field_id=field_id,
+            baseline_suitability=suit_res,
+            antecedent_crop=last_crop_code,
+        )
+
     def create_scenario(self, field_id, req: UpsertScenarioRequest) -> RotationScenario:
         f = self.fields.get_field(field_id)
         seq = self._sequence(req)
         t = datetime.now(UTC)
         sc = RotationScenario(scenario_id=uuid.uuid4(), field_id=f.field_id, name=req.name.strip(),
                               start_year=req.start_year, sequence=seq,
-                              evaluation=self.ctx.rotation.evaluate(seq, self.ctx.kb), created_at=t, updated_at=t)
+                              evaluation=self._evaluate_scenario(f.field_id, seq), created_at=t, updated_at=t)
         return self.repos.scenarios.put(str(sc.scenario_id), sc, parent=f.field_id)
 
     def _get(self, scenario_id) -> RotationScenario:
@@ -436,10 +467,69 @@ class RotationService:
         sc = self._get(scenario_id)
         seq = self._sequence(req)
         sc = sc.model_copy(update={"name": req.name.strip(), "start_year": req.start_year, "sequence": seq,
-                                   "evaluation": self.ctx.rotation.evaluate(seq, self.ctx.kb),
+                                   "evaluation": self._evaluate_scenario(sc.field_id, seq),
                                    "updated_at": datetime.now(UTC)})
         return self.repos.scenarios.put(str(sc.scenario_id), sc, parent=sc.field_id)
 
     def delete_scenario(self, scenario_id) -> None:
         self._get(scenario_id)
         self.repos.scenarios.delete(str(scenario_id))
+
+    def generate_rotations(self, field_id, req: GenerateRotationsRequest) -> GenerateRotationsResponse:
+        f = self.fields.get_field(field_id)
+        try:
+            from app.services.suitability import SuitabilityService
+            suit_svc = SuitabilityService(self.ctx)
+            default_year = self.ctx.settings.default_season_year()
+            suit_res = suit_svc.evaluate_field(f.field_id, default_year)
+        except Exception:
+            suit_res = None
+
+        history = self.crop_history(f.field_id)
+        last_crop_code = None
+        antecedent_crop = None
+        if history and history.years:
+            valid_years = [y for y in history.years if y.majority and y.majority.crop_code is not None]
+            if valid_years:
+                last_y = valid_years[-1]
+                last_crop_code = last_y.majority.crop_code
+                antecedent_crop = ScenarioYear(
+                    year=last_y.year,
+                    crop_code=last_crop_code,
+                    crop_name=last_y.majority.crop_name or self.ctx.kb.crop_name(last_crop_code) or f"Crop {last_crop_code}",
+                )
+
+        candidates = self.ctx.rotation.generate_candidates(
+            field_id=f.field_id,
+            horizon=req.horizon,
+            start_year=req.start_year,
+            kb=self.ctx.kb,
+            baseline_suitability=suit_res,
+            antecedent_crop_code=last_crop_code,
+            include_cover_crops=req.include_cover_crops,
+            max_candidates=req.max_candidates,
+        )
+
+        return GenerateRotationsResponse(
+            field_id=f.field_id,
+            horizon=req.horizon,
+            start_year=req.start_year,
+            antecedent_crop=antecedent_crop,
+            candidates=candidates,
+            pareto_optimal_count=sum(1 for c in candidates if getattr(c, "is_pareto_optimal", True)),
+            generated_at=datetime.now(UTC),
+        )
+
+    def compare_scenarios(self, field_id, req: CompareScenariosRequest) -> CompareScenariosResponse:
+        f = self.fields.get_field(field_id)
+        scenarios: list[RotationScenario] = []
+        for sid in req.scenario_ids:
+            sc = self._get(sid)
+            if sc.field_id != f.field_id:
+                raise ValidationFailed(
+                    f"Scenario {sid} does not belong to field {f.field_id}.",
+                    details={"scenario_id": str(sid), "field_id": str(f.field_id)},
+                )
+            scenarios.append(sc)
+
+        return self.ctx.rotation.compare_scenarios(scenarios, self.ctx.kb)

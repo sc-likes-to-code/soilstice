@@ -406,16 +406,20 @@ export interface CropOption { crop_code: CropCode; name: string; family: string;
 
 // 5.12 RotationScenario
 export type FitBand = "suitable" | "marginal" | "unsuitable" | "unknown";
+export type ScenarioInterpretation = "supported" | "conditional" | "exploratory" | "not_recommended" | "insufficient_data";
 export interface ScenarioYear { year: number; crop_code: CropCode; crop_name: string; }
 export type EvaluationDimensionKey = "agronomic_fit" | "rotation_benefit" | "water_risk" | "diversity";
+export interface EvaluationDimension { band: FitBand; explanation: string; key: EvaluationDimensionKey; }
+export interface YearFinding { band: FitBand; evidence_ids: UUID[]; messages: QualityFlag[]; year: number; }
 export interface ScenarioEvaluation {
+  dimensions: EvaluationDimension[];
   engine_version: string;
+  evaluated_at: ISODateTime;
+  interpretation: ScenarioInterpretation;
   kb_version: string;
   overall: FitBand;
-  dimensions: { key: EvaluationDimensionKey; band: FitBand; explanation: string }[];
-  year_findings: { year: number; band: FitBand; messages: QualityFlag[]; evidence_ids: UUID[] }[];
   warnings: QualityFlag[];
-  evaluated_at: ISODateTime;
+  year_findings: YearFinding[];
 }
 export interface RotationScenario {
   scenario_id: UUID;
@@ -428,6 +432,44 @@ export interface RotationScenario {
   updated_at: ISODateTime;
 }
 export interface UpsertScenarioRequest { name: string; start_year: number; sequence: { year: number; crop_code: CropCode }[]; }
+
+// Phase 7: Rotation Candidate Generation & Comparison
+export interface GenerateRotationsRequest {
+  horizon: number;
+  include_cover_crops: boolean;
+  max_candidates: number;
+  start_year: number;
+}
+export interface GenerateCandidate {
+  rank: number;
+  name: string;
+  sequence: ScenarioYear[];
+  evaluation: ScenarioEvaluation;
+  is_pareto_optimal: boolean;
+  pareto_rank: number;
+  pareto_explanation: string | null;
+}
+export interface GenerateRotationsResponse {
+  field_id: UUID;
+  horizon: number;
+  start_year: number;
+  antecedent_crop: ScenarioYear | null;
+  candidates: GenerateCandidate[];
+  pareto_optimal_count: number;
+  generated_at: ISODateTime;
+}
+export interface CompareScenariosRequest {
+  scenario_ids: UUID[];
+}
+export interface TradeoffFinding {
+  category: string;
+  summary: string;
+}
+export interface CompareScenariosResponse {
+  field_id: UUID;
+  scenarios: RotationScenario[];
+  tradeoffs: TradeoffFinding[];
+}
 
 // 5.13 RotationRecommendation
 export type RecommendationFactor = "ph" | "drainage" | "water_holding" | "gdd" | "slope" | "rotation_history" | "regional_climate";

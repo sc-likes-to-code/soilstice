@@ -4,15 +4,66 @@
  */
 
 export interface paths {
-    "/api/v1/health": {
+    "/api/v1/canonical-crops": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Health */
-        get: operations["health"];
+        /** Canonical Crops */
+        get: operations["listCanonicalCrops"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/crops": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Crops */
+        get: operations["listCrops"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/crops/{crop_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Crop Profile */
+        get: operations["getCropProfile"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/crops/{crop_id}/attributes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Crop Attributes */
+        get: operations["getCropAttributes"];
         put?: never;
         post?: never;
         delete?: never;
@@ -30,6 +81,23 @@ export interface paths {
         };
         /** List Datasets */
         get: operations["listDatasets"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/evidence/{evidence_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Crop Evidence */
+        get: operations["getCropEvidence"];
         put?: never;
         post?: never;
         delete?: never;
@@ -73,23 +141,6 @@ export interface paths {
         patch: operations["updateFarm"];
         trace?: never;
     };
-    "/api/v1/farms/{farm_id}/overview": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Farm Overview */
-        get: operations["getFarmOverview"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/api/v1/farms/{farm_id}/fields": {
         parameters: {
             query?: never;
@@ -102,6 +153,23 @@ export interface paths {
         put?: never;
         /** Create Field */
         post: operations["createField"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/farms/{farm_id}/overview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Farm Overview */
+        get: operations["getFarmOverview"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -126,15 +194,15 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/v1/fields/{field_id}/profile": {
+    "/api/v1/fields/{field_id}/climate": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Field Profile */
-        get: operations["getFieldProfile"];
+        /** Climate */
+        get: operations["getClimate"];
         put?: never;
         post?: never;
         delete?: never;
@@ -160,17 +228,154 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/v1/fields/{field_id}/climate": {
+    "/api/v1/fields/{field_id}/crop-history": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Climate */
-        get: operations["getClimate"];
+        /** Crop History */
+        get: operations["getCropHistory"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/fields/{field_id}/evidence": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Evidence */
+        get: operations["listEvidence"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/fields/{field_id}/indicators": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Indicators */
+        get: operations["getIndicators"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/fields/{field_id}/profile": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Field Profile */
+        get: operations["getFieldProfile"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/fields/{field_id}/recommendations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Recommendations */
+        get: operations["getRecommendation"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/fields/{field_id}/resilience": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Resilience */
+        get: operations["getResilience"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/fields/{field_id}/rotations/compare": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Compare Scenarios */
+        post: operations["compareScenarios"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/fields/{field_id}/rotations/generate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Generate Rotations */
+        post: operations["generateRotations"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/fields/{field_id}/scenarios": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Scenarios */
+        get: operations["listScenarios"];
+        put?: never;
+        /** Create Scenario */
+        post: operations["createScenario"];
         delete?: never;
         options?: never;
         head?: never;
@@ -186,6 +391,40 @@ export interface paths {
         };
         /** Soil */
         get: operations["getSoil"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/fields/{field_id}/suitability": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Field Suitability */
+        get: operations["getFieldSuitability"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/fields/{field_id}/suitability/{crop_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Crop Suitability */
+        get: operations["getCropSuitability"];
         put?: never;
         post?: never;
         delete?: never;
@@ -228,15 +467,15 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/v1/fields/{field_id}/crop-history": {
+    "/api/v1/health": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Crop History */
-        get: operations["getCropHistory"];
+        /** Health */
+        get: operations["health"];
         put?: never;
         post?: never;
         delete?: never;
@@ -245,15 +484,15 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/v1/fields/{field_id}/indicators": {
+    "/api/v1/jobs/{job_id}": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Indicators */
-        get: operations["getIndicators"];
+        /** Get Job */
+        get: operations["getJob"];
         put?: never;
         post?: never;
         delete?: never;
@@ -262,83 +501,15 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/v1/fields/{field_id}/resilience": {
+    "/api/v1/kb/metadata": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Resilience */
-        get: operations["getResilience"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/crops": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Crops */
-        get: operations["listCrops"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/canonical-crops": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Canonical Crops */
-        get: operations["listCanonicalCrops"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/crops/{crop_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get Crop Profile */
-        get: operations["getCropProfile"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/crops/{crop_id}/attributes": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get Crop Attributes */
-        get: operations["getCropAttributes"];
+        /** Get Kb Metadata */
+        get: operations["getKbMetadata"];
         put?: never;
         post?: never;
         delete?: never;
@@ -381,75 +552,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/v1/evidence/{evidence_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get Crop Evidence */
-        get: operations["getCropEvidence"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/kb/metadata": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get Kb Metadata */
-        get: operations["getKbMetadata"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/fields/{field_id}/recommendations": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Recommendations */
-        get: operations["getRecommendation"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/fields/{field_id}/scenarios": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** List Scenarios */
-        get: operations["listScenarios"];
-        put?: never;
-        /** Create Scenario */
-        post: operations["createScenario"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/api/v1/scenarios/{scenario_id}": {
         parameters: {
             query?: never;
@@ -468,74 +570,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/v1/fields/{field_id}/suitability": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Field Suitability */
-        get: operations["getFieldSuitability"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/fields/{field_id}/suitability/{crop_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Crop Suitability */
-        get: operations["getCropSuitability"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/fields/{field_id}/evidence": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Evidence */
-        get: operations["listEvidence"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/jobs/{job_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get Job */
-        get: operations["getJob"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -547,10 +581,10 @@ export interface components {
              * @enum {string}
              */
             aoi_id: "ks_reno" | "ks_finney";
-            /** Label */
-            label: string;
             /** County Fips */
             county_fips: string[];
+            /** Label */
+            label: string;
             /**
              * State
              * @constant
@@ -564,12 +598,12 @@ export interface components {
              * @enum {string}
              */
             code: "NOT_FOUND" | "VALIDATION_ERROR" | "OUTSIDE_AOI" | "GEOMETRY_INVALID" | "FIELD_TOO_LARGE" | "NOT_EDITABLE" | "UPSTREAM_UNAVAILABLE" | "RATE_LIMITED" | "NOT_IMPLEMENTED" | "INTERNAL";
-            /** Message */
-            message: string;
             /** Details */
             details: {
                 [key: string]: unknown;
             } | null;
+            /** Message */
+            message: string;
             /** Request Id */
             request_id: string;
             /** Retryable */
@@ -582,6 +616,11 @@ export interface components {
         /** ApiResponse[ClimateProfile] */
         ApiResponse_ClimateProfile_: {
             data: components["schemas"]["ClimateProfile"];
+            meta: components["schemas"]["ResponseMeta"];
+        };
+        /** ApiResponse[CompareScenariosResponse] */
+        ApiResponse_CompareScenariosResponse_: {
+            data: components["schemas"]["CompareScenariosResponse"];
             meta: components["schemas"]["ResponseMeta"];
         };
         /** ApiResponse[CreateFieldResponse] */
@@ -647,6 +686,11 @@ export interface components {
         /** ApiResponse[Field] */
         ApiResponse_Field_: {
             data: components["schemas"]["Field"];
+            meta: components["schemas"]["ResponseMeta"];
+        };
+        /** ApiResponse[GenerateRotationsResponse] */
+        ApiResponse_GenerateRotationsResponse_: {
+            data: components["schemas"]["GenerateRotationsResponse"];
             meta: components["schemas"]["ResponseMeta"];
         };
         /** ApiResponse[Health] */
@@ -771,27 +815,44 @@ export interface components {
         };
         /** ClassValue */
         ClassValue: {
+            /** Missing Reason */
+            missing_reason: ("NO_DATA_SOURCE" | "FILL_VALUE" | "QA_MASKED_CLOUD" | "QA_MASKED_SHADOW" | "QA_MASKED_SNOW" | "QA_LOW_QUALITY_RETRIEVAL" | "INSUFFICIENT_COVERAGE" | "OUT_OF_TEMPORAL_RANGE" | "UPSTREAM_ERROR" | "NOT_YET_PUBLISHED" | "NOT_COMPUTED" | "OUTSIDE_AOI" | "PENDING_PROCESSING") | null;
             /** Value */
             value: string | null;
             /** Weight Share */
             weight_share: number | null;
-            /** Missing Reason */
-            missing_reason: ("NO_DATA_SOURCE" | "FILL_VALUE" | "QA_MASKED_CLOUD" | "QA_MASKED_SHADOW" | "QA_MASKED_SNOW" | "QA_LOW_QUALITY_RETRIEVAL" | "INSUFFICIENT_COVERAGE" | "OUT_OF_TEMPORAL_RANGE" | "UPSTREAM_ERROR" | "NOT_YET_PUBLISHED" | "NOT_COMPUTED" | "OUTSIDE_AOI" | "PENDING_PROCESSING") | null;
         };
         /** ClimateProfile */
         ClimateProfile: {
+            authoritative_source: components["schemas"]["AuthoritativeClimateSource"];
             /**
              * Field Id
              * Format: uuid
              */
             field_id: string;
-            season: components["schemas"]["Season"];
-            authoritative_source: components["schemas"]["AuthoritativeClimateSource"];
             /** Indicators */
             indicators: components["schemas"]["EnvironmentalIndicator"][];
+            quality: components["schemas"]["QualityInfo"];
+            season: components["schemas"]["Season"];
             /** Series */
             series: components["schemas"]["TimeSeries"][];
-            quality: components["schemas"]["QualityInfo"];
+        };
+        /** CompareScenariosRequest */
+        CompareScenariosRequest: {
+            /** Scenario Ids */
+            scenario_ids: string[];
+        };
+        /** CompareScenariosResponse */
+        CompareScenariosResponse: {
+            /**
+             * Field Id
+             * Format: uuid
+             */
+            field_id: string;
+            /** Scenarios */
+            scenarios: components["schemas"]["RotationScenario"][];
+            /** Tradeoffs */
+            tradeoffs: components["schemas"]["TradeoffFinding"][];
         };
         /** CoverageCount */
         CoverageCount: {
@@ -807,9 +868,9 @@ export interface components {
         };
         /** CreateFieldRequest */
         CreateFieldRequest: {
+            geometry: components["schemas"]["GeoJSONMultiPolygon"];
             /** Name */
             name: string;
-            geometry: components["schemas"]["GeoJSONMultiPolygon"];
         };
         /** CreateFieldResponse */
         CreateFieldResponse: {
@@ -818,46 +879,46 @@ export interface components {
         };
         /** CropEvidenceRecord */
         CropEvidenceRecord: {
-            /** Evidence Id */
-            evidence_id: string;
-            /** Crop Ids */
-            crop_ids: string[];
-            /** Related Domain */
-            related_domain: string;
-            /** Attribute Or Claim */
-            attribute_or_claim: string;
-            /** Recorded Value Or Summary */
-            recorded_value_or_summary: string | null;
-            /** Source Organization */
-            source_organization: string;
-            /** Source Title */
-            source_title: string;
-            /** Author Or Institution */
-            author_or_institution: string;
-            /** Publication Year */
-            publication_year: number | null;
-            /** Publication Date */
-            publication_date: string | null;
             /** Access Date */
             access_date: string | null;
-            /** Source Url Or Doi */
-            source_url_or_doi: string | null;
+            /** Attribute Or Claim */
+            attribute_or_claim: string;
+            /** Author Or Institution */
+            author_or_institution: string;
             /** Citation Location */
             citation_location: string | null;
+            /** Conditions And Assumptions */
+            conditions_and_assumptions: string | null;
+            /** Crop Ids */
+            crop_ids: string[];
+            /** Data Availability */
+            data_availability: string | null;
+            /** Evidence Id */
+            evidence_id: string;
             /** Exact Supporting Context */
             exact_supporting_context: string | null;
             /** Geographic Scope */
             geographic_scope: string | null;
-            /** Variety Scope */
-            variety_scope: string | null;
-            /** Source Quality */
-            source_quality: string;
-            /** Data Availability */
-            data_availability: string | null;
-            /** Conditions And Assumptions */
-            conditions_and_assumptions: string | null;
             /** Limitations */
             limitations: string | null;
+            /** Publication Date */
+            publication_date: string | null;
+            /** Publication Year */
+            publication_year: number | null;
+            /** Recorded Value Or Summary */
+            recorded_value_or_summary: string | null;
+            /** Related Domain */
+            related_domain: string;
+            /** Source Organization */
+            source_organization: string;
+            /** Source Quality */
+            source_quality: string;
+            /** Source Title */
+            source_title: string;
+            /** Source Url Or Doi */
+            source_url_or_doi: string | null;
+            /** Variety Scope */
+            variety_scope: string | null;
         };
         /** CropHistory */
         CropHistory: {
@@ -866,122 +927,122 @@ export interface components {
              * Format: uuid
              */
             field_id: string;
-            period: components["schemas"]["YearPeriod"];
-            /** Years */
-            years: components["schemas"]["CropYear"][];
             /** Metrics */
             metrics: components["schemas"]["EnvironmentalIndicator"][];
-            spatial: components["schemas"]["SpatialSupport"];
+            period: components["schemas"]["YearPeriod"];
             quality: components["schemas"]["QualityInfo"];
+            spatial: components["schemas"]["SpatialSupport"];
+            /** Years */
+            years: components["schemas"]["CropYear"][];
         };
         /** CropOption */
         CropOption: {
             /** Crop Code */
             crop_code: number;
-            /** Name */
-            name: string;
             /** Family */
             family: string;
             /** Is Double Crop */
             is_double_crop: boolean;
             /** Kb Version */
             kb_version: string;
+            /** Name */
+            name: string;
         };
         /** CropProfile */
         CropProfile: {
-            /** Crop Id */
-            crop_id: string;
-            /** Cdl Code */
-            cdl_code: number | null;
-            /** Common Name */
-            common_name: string;
-            /** Scientific Name */
-            scientific_name: string;
-            /** Taxonomic Authority */
-            taxonomic_authority: string | null;
             /** Botanical Family */
             botanical_family: string;
-            /** Crop Group */
-            crop_group: string;
-            /** Portfolio Role */
-            portfolio_role: string;
-            /** Lifecycle Class */
-            lifecycle_class: string;
-            /** Is Cover Crop */
-            is_cover_crop: boolean;
             /** Can Serve As Cover Crop */
             can_serve_as_cover_crop: boolean;
+            /** Cdl Code */
+            cdl_code: number | null;
             /** Commercial Harvest Feasible */
             commercial_harvest_feasible: boolean;
-            /** Usda Plants Symbol */
-            usda_plants_symbol: string | null;
+            /** Common Name */
+            common_name: string;
+            /** Crop Group */
+            crop_group: string;
+            /** Crop Id */
+            crop_id: string;
             /** Crop Identity */
             crop_identity: {
                 [key: string]: unknown;
             };
+            /** Evidence Ids */
+            evidence_ids: string[];
             /** Growing Duration */
             growing_duration: {
                 [key: string]: unknown;
             };
-            /** Temperature Requirements */
-            temperature_requirements: {
-                [key: string]: unknown;
-            };
-            /** Rainfall Requirements */
-            rainfall_requirements: {
-                [key: string]: unknown;
-            };
-            /** Water Demand And Tolerance */
-            water_demand_and_tolerance: {
-                [key: string]: unknown;
-            };
-            /** Soil Preferences */
-            soil_preferences: {
-                [key: string]: unknown;
-            };
-            /** Root And Nutrients */
-            root_and_nutrients: {
-                [key: string]: unknown;
-            };
+            /** Is Cover Crop */
+            is_cover_crop: boolean;
+            /** Lifecycle Class */
+            lifecycle_class: string;
             /** Nitrogen And Biomass */
             nitrogen_and_biomass: {
                 [key: string]: unknown;
             };
-            /** Rotation Compatibility */
-            rotation_compatibility: {
+            /** Portfolio Role */
+            portfolio_role: string;
+            /** Rainfall Requirements */
+            rainfall_requirements: {
                 [key: string]: unknown;
             };
             /** Regional Suitability */
             regional_suitability: {
                 [key: string]: unknown;
             }[];
-            /** Evidence Ids */
-            evidence_ids: string[];
+            /** Root And Nutrients */
+            root_and_nutrients: {
+                [key: string]: unknown;
+            };
+            /** Rotation Compatibility */
+            rotation_compatibility: {
+                [key: string]: unknown;
+            };
+            /** Scientific Name */
+            scientific_name: string;
+            /** Soil Preferences */
+            soil_preferences: {
+                [key: string]: unknown;
+            };
+            /** Taxonomic Authority */
+            taxonomic_authority: string | null;
+            /** Temperature Requirements */
+            temperature_requirements: {
+                [key: string]: unknown;
+            };
+            /** Usda Plants Symbol */
+            usda_plants_symbol: string | null;
+            /** Water Demand And Tolerance */
+            water_demand_and_tolerance: {
+                [key: string]: unknown;
+            };
         };
         /** CropProfileSummary */
         CropProfileSummary: {
-            /** Crop Id */
-            crop_id: string;
-            /** Cdl Code */
-            cdl_code: number | null;
-            /** Common Name */
-            common_name: string;
-            /** Scientific Name */
-            scientific_name: string;
             /** Botanical Family */
             botanical_family: string;
-            /** Crop Group */
-            crop_group: string;
-            /** Portfolio Role */
-            portfolio_role: string;
-            /** Lifecycle Class */
-            lifecycle_class: string;
-            /** Is Cover Crop */
-            is_cover_crop: boolean;
             /** Can Serve As Cover Crop */
             can_serve_as_cover_crop: boolean;
+            /** Cdl Code */
+            cdl_code: number | null;
             /** Commercial Harvest Feasible */
             commercial_harvest_feasible: boolean;
+            /** Common Name */
+            common_name: string;
+            /** Crop Group */
+            crop_group: string;
+            /** Crop Id */
+            crop_id: string;
+            /** Is Cover Crop */
+            is_cover_crop: boolean;
+            /** Lifecycle Class */
+            lifecycle_class: string;
+            /** Portfolio Role */
+            portfolio_role: string;
+            /** Scientific Name */
+            scientific_name: string;
             /** Usda Plants Symbol */
             usda_plants_symbol: string | null;
         };
@@ -994,32 +1055,48 @@ export interface components {
         };
         /** CropShare */
         CropShare: {
+            /** Area Fraction */
+            area_fraction: number;
             /** Crop Code */
             crop_code: number;
             /** Crop Name */
             crop_name: string;
-            /** Area Fraction */
-            area_fraction: number;
         };
         /** CropSuitabilityAssessment */
         CropSuitabilityAssessment: {
-            /** Crop Id */
-            crop_id: string;
-            /** Crop Name */
-            crop_name: string;
-            /** Cdl Code */
-            cdl_code: number | null;
-            /** Botanical Family */
-            botanical_family: string;
-            /** Portfolio Role */
-            portfolio_role: string;
-            /** Is Cover Crop */
-            is_cover_crop: boolean;
             /**
              * Assessment Status
              * @enum {string}
              */
             assessment_status: "evaluated" | "provisional" | "insufficient_data";
+            /** Botanical Family */
+            botanical_family: string;
+            /** Cdl Code */
+            cdl_code: number | null;
+            /** Crop Id */
+            crop_id: string;
+            /** Crop Name */
+            crop_name: string;
+            data_quality: components["schemas"]["QualityInfo"];
+            /** Evidence Ids */
+            evidence_ids: string[];
+            /** Explanation */
+            explanation: string;
+            /** Factor Assessments */
+            factor_assessments: components["schemas"]["SuitabilityFactorAssessment"][];
+            /** Favorable Factors */
+            favorable_factors: string[];
+            /** Is Cover Crop */
+            is_cover_crop: boolean;
+            /** Limitations */
+            limitations: string[];
+            /** Limiting Factors */
+            limiting_factors: string[];
+            /** Portfolio Role */
+            portfolio_role: string;
+            /** Score Methodology */
+            score_methodology: string | null;
+            spatial_support: components["schemas"]["SpatialSupport"];
             /**
              * Suitability Class
              * @enum {string}
@@ -1027,59 +1104,43 @@ export interface components {
             suitability_class: "suitable" | "conditionally_suitable" | "limited_suitability" | "unsuitable" | "insufficient_data";
             /** Suitability Score */
             suitability_score: number | null;
-            /** Score Methodology */
-            score_methodology: string | null;
-            /** Factor Assessments */
-            factor_assessments: components["schemas"]["SuitabilityFactorAssessment"][];
-            /** Limiting Factors */
-            limiting_factors: string[];
-            /** Favorable Factors */
-            favorable_factors: string[];
+            temporal_support: components["schemas"]["TemporalSupport"];
             /** Unknown Factors */
             unknown_factors: string[];
-            data_quality: components["schemas"]["QualityInfo"];
-            spatial_support: components["schemas"]["SpatialSupport"];
-            temporal_support: components["schemas"]["TemporalSupport"];
-            /** Evidence Ids */
-            evidence_ids: string[];
-            /** Explanation */
-            explanation: string;
-            /** Limitations */
-            limitations: string[];
         };
         /** CropYear */
         CropYear: {
-            /** Year */
-            year: number;
-            majority: components["schemas"]["CropRef"];
-            /** Purity */
-            purity: number | null;
+            /** Agrees With Csb */
+            agrees_with_csb: boolean | null;
+            class_accuracy: components["schemas"]["Uncertainty"] | null;
+            /** Csb Crop Code */
+            csb_crop_code: number | null;
             /** Histogram */
             histogram: components["schemas"]["CropShare"][];
             /** Low Purity */
             low_purity: boolean;
-            class_accuracy: components["schemas"]["Uncertainty"] | null;
-            /** Csb Crop Code */
-            csb_crop_code: number | null;
-            /** Agrees With Csb */
-            agrees_with_csb: boolean | null;
-            /** Native Resolution M */
-            native_resolution_m: number | null;
+            majority: components["schemas"]["CropRef"];
             /** Missing Reason */
             missing_reason: ("NO_DATA_SOURCE" | "FILL_VALUE" | "QA_MASKED_CLOUD" | "QA_MASKED_SHADOW" | "QA_MASKED_SNOW" | "QA_LOW_QUALITY_RETRIEVAL" | "INSUFFICIENT_COVERAGE" | "OUT_OF_TEMPORAL_RANGE" | "UPSTREAM_ERROR" | "NOT_YET_PUBLISHED" | "NOT_COMPUTED" | "OUTSIDE_AOI" | "PENDING_PROCESSING") | null;
+            /** Native Resolution M */
+            native_resolution_m: number | null;
+            /** Purity */
+            purity: number | null;
             source: components["schemas"]["SourceRef"];
+            /** Year */
+            year: number;
         };
         /** DataCoverage */
         DataCoverage: {
+            /** Completeness */
+            completeness: number;
+            /** Datasets */
+            datasets: components["schemas"]["DatasetCoverage"][];
             /**
              * Field Id
              * Format: uuid
              */
             field_id: string;
-            /** Datasets */
-            datasets: components["schemas"]["DatasetCoverage"][];
-            /** Completeness */
-            completeness: number;
         };
         /** DatasetCoverage */
         DatasetCoverage: {
@@ -1090,11 +1151,21 @@ export interface components {
             dataset_id: "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic";
             /** Label */
             label: string;
+            /** Last Updated */
+            last_updated: string | null;
+            /** Missing Reason */
+            missing_reason: ("NO_DATA_SOURCE" | "FILL_VALUE" | "QA_MASKED_CLOUD" | "QA_MASKED_SHADOW" | "QA_MASKED_SNOW" | "QA_LOW_QUALITY_RETRIEVAL" | "INSUFFICIENT_COVERAGE" | "OUT_OF_TEMPORAL_RANGE" | "UPSTREAM_ERROR" | "NOT_YET_PUBLISHED" | "NOT_COMPUTED" | "OUTSIDE_AOI" | "PENDING_PROCESSING") | null;
+            /** Native Resolution M */
+            native_resolution_m: number | null;
+            /** Note */
+            note: string | null;
             /**
              * Priority
              * @enum {string}
              */
             priority: "P0" | "P1" | "P2";
+            /** Product Version */
+            product_version: string | null;
             /**
              * Status
              * @enum {string}
@@ -1105,17 +1176,7 @@ export interface components {
              * @enum {string}
              */
             support_class: "F" | "S" | "R";
-            /** Native Resolution M */
-            native_resolution_m: number | null;
             temporal_coverage: components["schemas"]["TemporalRange"];
-            /** Product Version */
-            product_version: string | null;
-            /** Last Updated */
-            last_updated: string | null;
-            /** Missing Reason */
-            missing_reason: ("NO_DATA_SOURCE" | "FILL_VALUE" | "QA_MASKED_CLOUD" | "QA_MASKED_SHADOW" | "QA_MASKED_SNOW" | "QA_LOW_QUALITY_RETRIEVAL" | "INSUFFICIENT_COVERAGE" | "OUT_OF_TEMPORAL_RANGE" | "UPSTREAM_ERROR" | "NOT_YET_PUBLISHED" | "NOT_COMPUTED" | "OUTSIDE_AOI" | "PENDING_PROCESSING") | null;
-            /** Note */
-            note: string | null;
         };
         /** DatasetDescriptor */
         DatasetDescriptor: {
@@ -1124,51 +1185,51 @@ export interface components {
              * @enum {string}
              */
             dataset_id: "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic";
-            /** Title */
-            title: string;
-            /** Publisher */
-            publisher: string;
-            /** Product */
-            product: string;
-            /** Product Version */
-            product_version: string;
-            /**
-             * Priority
-             * @enum {string}
-             */
-            priority: "P0" | "P1" | "P2";
-            /**
-             * Support Class
-             * @enum {string}
-             */
-            support_class: "F" | "S" | "R";
-            /** Native Resolution M */
-            native_resolution_m: number | null;
-            /**
-             * Temporal Resolution
-             * @enum {string}
-             */
-            temporal_resolution: "PT3H" | "P1D" | "P1M" | "season" | "P1Y" | "static" | "irregular";
-            temporal_coverage: components["schemas"]["TemporalRange"];
             /** Documentation Url */
             documentation_url: string;
             /** Doi */
             doi: string | null;
             /**
-             * Verification Status
+             * Integration Status
              * @enum {string}
              */
-            verification_status: "LIVE" | "CMR" | "DOC" | "UNVERIFIED" | "SYNTHETIC";
+            integration_status: "integrated" | "planned";
             /**
              * Last Verified
              * Format: date
              */
             last_verified: string;
+            /** Native Resolution M */
+            native_resolution_m: number | null;
             /**
-             * Integration Status
+             * Priority
              * @enum {string}
              */
-            integration_status: "integrated" | "planned";
+            priority: "P0" | "P1" | "P2";
+            /** Product */
+            product: string;
+            /** Product Version */
+            product_version: string;
+            /** Publisher */
+            publisher: string;
+            /**
+             * Support Class
+             * @enum {string}
+             */
+            support_class: "F" | "S" | "R";
+            temporal_coverage: components["schemas"]["TemporalRange"];
+            /**
+             * Temporal Resolution
+             * @enum {string}
+             */
+            temporal_resolution: "PT3H" | "P1D" | "P1M" | "season" | "P1Y" | "static" | "irregular";
+            /** Title */
+            title: string;
+            /**
+             * Verification Status
+             * @enum {string}
+             */
+            verification_status: "LIVE" | "CMR" | "DOC" | "UNVERIFIED" | "SYNTHETIC";
         };
         /** Deleted */
         Deleted: {
@@ -1181,39 +1242,49 @@ export interface components {
         };
         /** DirectedRotationTransition */
         DirectedRotationTransition: {
-            /** Preceding Crop Id */
-            preceding_crop_id: string;
-            /** Preceding Crop Name */
-            preceding_crop_name: string;
+            /** Compatibility Rating */
+            compatibility_rating: string;
+            /** Disease Break Potential */
+            disease_break_potential: string | null;
+            /** Evidence Ids */
+            evidence_ids: string[];
             /** Following Crop Id */
             following_crop_id: string;
             /** Following Crop Name */
             following_crop_name: string;
-            /** Compatibility Rating */
-            compatibility_rating: string;
-            /** Is Monoculture */
-            is_monoculture: boolean;
-            /** Monoculture Risk */
-            monoculture_risk: string | null;
-            /** Synergy Mechanisms */
-            synergy_mechanisms: string | null;
-            /** Disease Break Potential */
-            disease_break_potential: string | null;
-            /** Shared Pest Disease Risks */
-            shared_pest_disease_risks: string | null;
             /** Herbicide Carryover Risks */
             herbicide_carryover_risks: string | null;
-            /** Rotational Niche */
-            rotational_niche: string | null;
-            /** Evidence Ids */
-            evidence_ids: string[];
+            /** Is Monoculture */
+            is_monoculture: boolean;
             /** Limitations */
             limitations: string | null;
+            /** Monoculture Risk */
+            monoculture_risk: string | null;
+            /** Preceding Crop Id */
+            preceding_crop_id: string;
+            /** Preceding Crop Name */
+            preceding_crop_name: string;
+            /** Rotational Niche */
+            rotational_niche: string | null;
+            /** Shared Pest Disease Risks */
+            shared_pest_disease_risks: string | null;
+            /** Synergy Mechanisms */
+            synergy_mechanisms: string | null;
         };
         /** EnvironmentalIndicator */
         EnvironmentalIndicator: {
+            /**
+             * Category
+             * @enum {string}
+             */
+            category: "climate" | "soil_moisture" | "vegetation" | "water" | "soil" | "terrain" | "rotation";
             /** Indicator Id */
             indicator_id: string;
+            /**
+             * Input Ids
+             * @default []
+             */
+            input_ids: string[];
             /**
              * Key
              * @enum {string}
@@ -1221,37 +1292,22 @@ export interface components {
             key: "precip_total_season" | "precip_anomaly_pct" | "gdd_season" | "heat_stress_days" | "frost_free_days" | "solar_total_season" | "rh_mean_season" | "et0_total_season" | "water_balance_season" | "et_actual_season" | "sm_rootzone_mean_season" | "sm_rootzone_percentile" | "sm_rootzone_dry_days" | "ndvi_peak" | "ndvi_peak_doy" | "ndvi_peak_cv" | "ndmi_peak_season" | "aws_0_150" | "ph_0_30" | "om_0_30" | "clay_0_30" | "slope_mean_pct" | "slope_p90_pct" | "elevation_mean" | "distinct_crops" | "max_monoculture_run" | "rotation_shannon";
             /** Label */
             label: string;
-            /**
-             * Category
-             * @enum {string}
-             */
-            category: "climate" | "soil_moisture" | "vegetation" | "water" | "soil" | "terrain" | "rotation";
-            value: components["schemas"]["Quantity"];
+            method: components["schemas"]["MethodRef"];
             /**
              * Nature
              * @enum {string}
              */
             nature: "observation" | "model" | "derived" | "classification" | "proxy_statistic";
-            spatial: components["schemas"]["SpatialSupport"];
-            temporal: components["schemas"]["TemporalSupport"];
             quality: components["schemas"]["QualityInfo"];
+            reference_value: components["schemas"]["Quantity"] | null;
             /** Sources */
             sources: components["schemas"]["SourceRef"][];
-            method: components["schemas"]["MethodRef"];
-            /**
-             * Input Ids
-             * @default []
-             */
-            input_ids: string[];
-            reference_value: components["schemas"]["Quantity"] | null;
+            spatial: components["schemas"]["SpatialSupport"];
+            temporal: components["schemas"]["TemporalSupport"];
+            value: components["schemas"]["Quantity"];
         };
         /** EvaluationDimension */
         EvaluationDimension: {
-            /**
-             * Key
-             * @enum {string}
-             */
-            key: "agronomic_fit" | "rotation_benefit" | "water_risk" | "diversity";
             /**
              * Band
              * @enum {string}
@@ -1259,49 +1315,54 @@ export interface components {
             band: "suitable" | "marginal" | "unsuitable" | "unknown";
             /** Explanation */
             explanation: string;
+            /**
+             * Key
+             * @enum {string}
+             */
+            key: "agronomic_fit" | "rotation_benefit" | "water_risk" | "diversity";
         };
         /** EvidenceItem */
         EvidenceItem: {
+            /** Accessed At */
+            accessed_at: string | null;
+            /** Citation */
+            citation: string | null;
+            /** Dataset Id */
+            dataset_id: ("nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic") | null;
+            /** Doi */
+            doi: string | null;
             /**
              * Evidence Id
              * Format: uuid
              */
             evidence_id: string;
+            /** Field Id */
+            field_id: string | null;
             /**
              * Kind
              * @enum {string}
              */
             kind: "dataset" | "indicator" | "method" | "kb_rule" | "literature";
-            /** Title */
-            title: string;
-            /** Summary */
-            summary: string;
-            /** Field Id */
-            field_id: string | null;
-            /** Dataset Id */
-            dataset_id: ("nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic") | null;
             /** Product Version */
             product_version: string | null;
-            /** Citation */
-            citation: string | null;
-            /** Url */
-            url: string | null;
-            /** Doi */
-            doi: string | null;
-            /** Accessed At */
-            accessed_at: string | null;
-            /**
-             * Verification Status
-             * @enum {string}
-             */
-            verification_status: "LIVE" | "CMR" | "DOC" | "UNVERIFIED" | "SYNTHETIC";
-            spatial: components["schemas"]["SpatialSupport"] | null;
-            temporal: components["schemas"]["TemporalSupport"] | null;
             /**
              * Related Ids
              * @default []
              */
             related_ids: string[];
+            spatial: components["schemas"]["SpatialSupport"] | null;
+            /** Summary */
+            summary: string;
+            temporal: components["schemas"]["TemporalSupport"] | null;
+            /** Title */
+            title: string;
+            /** Url */
+            url: string | null;
+            /**
+             * Verification Status
+             * @enum {string}
+             */
+            verification_status: "LIVE" | "CMR" | "DOC" | "UNVERIFIED" | "SYNTHETIC";
         };
         /** ExcludedCrop */
         ExcludedCrop: {
@@ -1315,15 +1376,20 @@ export interface components {
         /** FactorAssessment */
         FactorAssessment: {
             /**
-             * Factor
-             * @enum {string}
-             */
-            factor: "ph" | "drainage" | "water_holding" | "gdd" | "slope" | "rotation_history" | "regional_climate";
-            /**
              * Band
              * @enum {string}
              */
             band: "suitable" | "marginal" | "unsuitable" | "unknown";
+            /**
+             * Evidence Ids
+             * @default []
+             */
+            evidence_ids: string[];
+            /**
+             * Factor
+             * @enum {string}
+             */
+            factor: "ph" | "drainage" | "water_holding" | "gdd" | "slope" | "rotation_history" | "regional_climate";
             observed: components["schemas"]["Quantity"] | null;
             /** Requirement */
             requirement: string;
@@ -1332,30 +1398,25 @@ export interface components {
              * @enum {string}
              */
             support_class: "F" | "S" | "R";
-            /**
-             * Evidence Ids
-             * @default []
-             */
-            evidence_ids: string[];
         };
         /** Farm */
         Farm: {
-            /**
-             * Farm Id
-             * Format: uuid
-             */
-            farm_id: string;
-            /** Name */
-            name: string;
             aoi: components["schemas"]["AOI"];
-            /** Field Count */
-            field_count: number;
-            total_area: components["schemas"]["Quantity"];
             /**
              * Created At
              * Format: date-time
              */
             created_at: string;
+            /**
+             * Farm Id
+             * Format: uuid
+             */
+            farm_id: string;
+            /** Field Count */
+            field_count: number;
+            /** Name */
+            name: string;
+            total_area: components["schemas"]["Quantity"];
             /**
              * Updated At
              * Format: date-time
@@ -1364,170 +1425,240 @@ export interface components {
         };
         /** FarmOverview */
         FarmOverview: {
+            /** Alerts */
+            alerts: components["schemas"]["QualityFlag"][];
+            /** Coverage Summary */
+            coverage_summary: components["schemas"]["CoverageCount"][];
             farm: components["schemas"]["Farm"];
             /** Fields */
             fields: components["schemas"]["FieldSummary"][];
-            /** Coverage Summary */
-            coverage_summary: components["schemas"]["CoverageCount"][];
-            /** Alerts */
-            alerts: components["schemas"]["QualityFlag"][];
             /** Regional Context */
             regional_context: components["schemas"]["EnvironmentalIndicator"][];
         };
         /** Field */
         Field: {
-            /**
-             * Field Id
-             * Format: uuid
-             */
-            field_id: string;
-            /**
-             * Farm Id
-             * Format: uuid
-             */
-            farm_id: string;
-            /** Name */
-            name: string;
-            geometry: components["schemas"]["GeoJSONMultiPolygon"];
+            area: components["schemas"]["Quantity"];
             /** Centroid */
             centroid: [
                 number,
                 number
             ];
-            area: components["schemas"]["Quantity"];
-            /** State Fips */
-            state_fips: string;
             /** County Fips */
             county_fips: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Csb Id */
+            csb_id: string | null;
+            /** Editable */
+            editable: boolean;
+            /**
+             * Farm Id
+             * Format: uuid
+             */
+            farm_id: string;
+            /**
+             * Field Id
+             * Format: uuid
+             */
+            field_id: string;
+            geometry: components["schemas"]["GeoJSONMultiPolygon"];
+            /** Latest Job Id */
+            latest_job_id: string | null;
+            /** Name */
+            name: string;
+            /**
+             * Processing Status
+             * @enum {string}
+             */
+            processing_status: "ready" | "processing" | "partial" | "failed";
             /**
              * Source
              * @enum {string}
              */
             source: "csb" | "user" | "synthetic";
             source_ref: components["schemas"]["SourceRef"] | null;
-            /** Csb Id */
-            csb_id: string | null;
-            /** Editable */
-            editable: boolean;
-            /**
-             * Processing Status
-             * @enum {string}
-             */
-            processing_status: "ready" | "processing" | "partial" | "failed";
-            /** Latest Job Id */
-            latest_job_id: string | null;
-            /**
-             * Created At
-             * Format: date-time
-             */
-            created_at: string;
+            /** State Fips */
+            state_fips: string;
         };
         /** FieldProfile */
         FieldProfile: {
-            field: components["schemas"]["Field"];
-            coverage: components["schemas"]["DataCoverage"];
-            soil: components["schemas"]["SoilProfile"] | null;
-            terrain: components["schemas"]["TerrainProfile"] | null;
-            crop_history: components["schemas"]["CropHistory"] | null;
             /**
              * Climate Summary
              * @default []
              */
             climate_summary: components["schemas"]["EnvironmentalIndicator"][];
+            coverage: components["schemas"]["DataCoverage"];
+            crop_history: components["schemas"]["CropHistory"] | null;
+            field: components["schemas"]["Field"];
+            resilience: components["schemas"]["ResilienceProfile"] | null;
+            soil: components["schemas"]["SoilProfile"] | null;
+            terrain: components["schemas"]["TerrainProfile"] | null;
             /**
              * Vegetation Summary
              * @default []
              */
             vegetation_summary: components["schemas"]["EnvironmentalIndicator"][];
-            resilience: components["schemas"]["ResilienceProfile"] | null;
         };
         /** FieldSuitabilityResponse */
         FieldSuitabilityResponse: {
-            /**
-             * Field Id
-             * Format: uuid
-             */
-            field_id: string;
-            /** Season Year */
-            season_year: number;
             /**
              * As Of
              * Format: date
              */
             as_of: string;
+            /** Crops */
+            crops: components["schemas"]["CropSuitabilityAssessment"][];
+            /** Disclaimers */
+            disclaimers: string[];
             /** Engine Version */
             engine_version: string;
+            /**
+             * Field Id
+             * Format: uuid
+             */
+            field_id: string;
             /** Kb Version */
             kb_version: string;
+            /** Season Year */
+            season_year: number;
             /**
              * Status
              * @enum {string}
              */
             status: "evaluated" | "provisional" | "insufficient_data";
             summary: components["schemas"]["SuitabilitySummaryCounts"];
-            /** Crops */
-            crops: components["schemas"]["CropSuitabilityAssessment"][];
-            /** Disclaimers */
-            disclaimers: string[];
         };
         /** FieldSummary */
         FieldSummary: {
-            /**
-             * Field Id
-             * Format: uuid
-             */
-            field_id: string;
-            /** Name */
-            name: string;
+            area: components["schemas"]["Quantity"];
             /** Centroid */
             centroid: [
                 number,
                 number
             ];
-            geometry: components["schemas"]["GeoJSONMultiPolygon"];
-            area: components["schemas"]["Quantity"];
+            /** Coverage Completeness */
+            coverage_completeness: number | null;
             /**
-             * Source
-             * @enum {string}
+             * Field Id
+             * Format: uuid
              */
-            source: "csb" | "user" | "synthetic";
+            field_id: string;
+            geometry: components["schemas"]["GeoJSONMultiPolygon"];
+            latest_crop: components["schemas"]["LatestCrop"] | null;
+            /** Name */
+            name: string;
             /**
              * Processing Status
              * @enum {string}
              */
             processing_status: "ready" | "processing" | "partial" | "failed";
-            latest_crop: components["schemas"]["LatestCrop"] | null;
             /**
              * Resilience Band
              * @enum {string}
              */
             resilience_band: "low" | "moderate" | "high" | "unknown";
-            /** Coverage Completeness */
-            coverage_completeness: number | null;
+            /**
+             * Source
+             * @enum {string}
+             */
+            source: "csb" | "user" | "synthetic";
+        };
+        /** GenerateCandidate */
+        GenerateCandidate: {
+            evaluation: components["schemas"]["ScenarioEvaluation"];
+            /**
+             * Is Pareto Optimal
+             * @default true
+             */
+            is_pareto_optimal: boolean;
+            /** Name */
+            name: string;
+            /** Pareto Explanation */
+            pareto_explanation: string | null;
+            /**
+             * Pareto Rank
+             * @default 1
+             */
+            pareto_rank: number;
+            /** Rank */
+            rank: number;
+            /** Sequence */
+            sequence: components["schemas"]["ScenarioYear"][];
+        };
+        /** GenerateRotationsRequest */
+        GenerateRotationsRequest: {
+            /**
+             * Horizon
+             * @default 3
+             */
+            horizon: number;
+            /**
+             * Include Cover Crops
+             * @default true
+             */
+            include_cover_crops: boolean;
+            /**
+             * Max Candidates
+             * @default 10
+             */
+            max_candidates: number;
+            /**
+             * Start Year
+             * @default 2026
+             */
+            start_year: number;
+        };
+        /** GenerateRotationsResponse */
+        GenerateRotationsResponse: {
+            antecedent_crop: components["schemas"]["ScenarioYear"] | null;
+            /** Candidates */
+            candidates: components["schemas"]["GenerateCandidate"][];
+            /**
+             * Field Id
+             * Format: uuid
+             */
+            field_id: string;
+            /**
+             * Generated At
+             * Format: date-time
+             */
+            generated_at: string;
+            /** Horizon */
+            horizon: number;
+            /**
+             * Pareto Optimal Count
+             * @default 0
+             */
+            pareto_optimal_count: number;
+            /** Start Year */
+            start_year: number;
         };
         /** GeoJSONMultiPolygon */
         GeoJSONMultiPolygon: {
+            /** Coordinates */
+            coordinates: number[][][][];
             /**
              * Type
              * @constant
              */
             type: "MultiPolygon";
-            /** Coordinates */
-            coordinates: number[][][][];
         };
         /** Health */
         Health: {
+            /**
+             * Contract Version
+             * @default 1.0.0-phase0
+             */
+            contract_version: string;
             /**
              * Status
              * @default ok
              * @constant
              */
             status: "ok";
-            /**
-             * Contract Version
-             * @default 1.0.0-phase0
-             */
-            contract_version: string;
         };
         /** JobStep */
         JobStep: {
@@ -1536,52 +1667,52 @@ export interface components {
              * @enum {string}
              */
             dataset_id: "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic";
+            /** Message */
+            message: string | null;
+            /** Missing Reason */
+            missing_reason: ("NO_DATA_SOURCE" | "FILL_VALUE" | "QA_MASKED_CLOUD" | "QA_MASKED_SHADOW" | "QA_MASKED_SNOW" | "QA_LOW_QUALITY_RETRIEVAL" | "INSUFFICIENT_COVERAGE" | "OUT_OF_TEMPORAL_RANGE" | "UPSTREAM_ERROR" | "NOT_YET_PUBLISHED" | "NOT_COMPUTED" | "OUTSIDE_AOI" | "PENDING_PROCESSING") | null;
             /**
              * Status
              * @enum {string}
              */
             status: "queued" | "running" | "succeeded" | "partial" | "failed";
-            /** Missing Reason */
-            missing_reason: ("NO_DATA_SOURCE" | "FILL_VALUE" | "QA_MASKED_CLOUD" | "QA_MASKED_SHADOW" | "QA_MASKED_SNOW" | "QA_LOW_QUALITY_RETRIEVAL" | "INSUFFICIENT_COVERAGE" | "OUT_OF_TEMPORAL_RANGE" | "UPSTREAM_ERROR" | "NOT_YET_PUBLISHED" | "NOT_COMPUTED" | "OUTSIDE_AOI" | "PENDING_PROCESSING") | null;
-            /** Message */
-            message: string | null;
         };
         /** KnowledgeBaseMetadata */
         KnowledgeBaseMetadata: {
-            /** Dataset Name */
-            dataset_name: string;
-            /** Schema Version */
-            schema_version: string;
-            /** Stage */
-            stage: string;
-            /** Effective Date */
-            effective_date: string;
-            /** Geographic Scope */
-            geographic_scope: string;
             /** Canonical Crop Count */
             canonical_crop_count: number;
-            /** Evidence Records Count */
-            evidence_records_count: number;
+            /** Dataset Name */
+            dataset_name: string;
+            /** Description */
+            description: string;
             /**
              * Directed Rotation Transitions Count
              * @default 196
              */
             directed_rotation_transitions_count: number;
-            /** Description */
-            description: string;
+            /** Effective Date */
+            effective_date: string;
+            /** Evidence Records Count */
+            evidence_records_count: number;
+            /** Geographic Scope */
+            geographic_scope: string;
             /** Last Updated */
             last_updated: string | null;
             /** Notes */
             notes: string | null;
+            /** Schema Version */
+            schema_version: string;
+            /** Stage */
+            stage: string;
         };
         /** LatestCrop */
         LatestCrop: {
-            /** Year */
-            year: number;
             /** Crop Code */
             crop_code: number | null;
             /** Crop Name */
             crop_name: string | null;
+            /** Year */
+            year: number;
         };
         /** MaskCounts */
         MaskCounts: {
@@ -1598,44 +1729,49 @@ export interface components {
         };
         /** MethodRef */
         MethodRef: {
+            /** Description */
+            description: string;
             /** Method Id */
             method_id: string;
             /** Name */
             name: string;
-            /** Version */
-            version: string;
-            /** Description */
-            description: string;
             /** Reference Url */
             reference_url: string | null;
+            /** Version */
+            version: string;
         };
         /** Phenology */
         Phenology: {
-            peak_value: components["schemas"]["Quantity"];
-            /** Peak Date */
-            peak_date: string | null;
-            /** Greenup Date */
-            greenup_date: string | null;
-            /** Senescence Date */
-            senescence_date: string | null;
-            method: components["schemas"]["MethodRef"];
             /** Gap Filled */
             gap_filled: boolean;
+            /** Greenup Date */
+            greenup_date: string | null;
+            method: components["schemas"]["MethodRef"];
             /** Missing Reason */
             missing_reason: ("NO_DATA_SOURCE" | "FILL_VALUE" | "QA_MASKED_CLOUD" | "QA_MASKED_SHADOW" | "QA_MASKED_SNOW" | "QA_LOW_QUALITY_RETRIEVAL" | "INSUFFICIENT_COVERAGE" | "OUT_OF_TEMPORAL_RANGE" | "UPSTREAM_ERROR" | "NOT_YET_PUBLISHED" | "NOT_COMPUTED" | "OUTSIDE_AOI" | "PENDING_PROCESSING") | null;
+            /** Peak Date */
+            peak_date: string | null;
+            peak_value: components["schemas"]["Quantity"];
+            /** Senescence Date */
+            senescence_date: string | null;
         };
         /** ProcessingJob */
         ProcessingJob: {
             /**
-             * Job Id
-             * Format: uuid
+             * Created At
+             * Format: date-time
              */
-            job_id: string;
+            created_at: string;
             /**
              * Field Id
              * Format: uuid
              */
             field_id: string;
+            /**
+             * Job Id
+             * Format: uuid
+             */
+            job_id: string;
             /**
              * Status
              * @enum {string}
@@ -1643,11 +1779,6 @@ export interface components {
             status: "queued" | "running" | "succeeded" | "partial" | "failed";
             /** Steps */
             steps: components["schemas"]["JobStep"][];
-            /**
-             * Created At
-             * Format: date-time
-             */
-            created_at: string;
             /**
              * Updated At
              * Format: date-time
@@ -1658,71 +1789,85 @@ export interface components {
         QualityFlag: {
             /** Code */
             code: string;
+            /** Message */
+            message: string;
             /**
              * Severity
              * @enum {string}
              */
             severity: "info" | "warning" | "critical";
-            /** Message */
-            message: string;
         };
         /** QualityInfo */
         QualityInfo: {
-            /**
-             * Status
-             * @enum {string}
-             */
-            status: "valid" | "partial" | "flagged" | "missing";
+            /** Completeness */
+            completeness: number | null;
             /**
              * Flags
              * @default []
              */
             flags: components["schemas"]["QualityFlag"][];
-            /** Completeness */
-            completeness: number | null;
             /** Missing Reason */
             missing_reason: ("NO_DATA_SOURCE" | "FILL_VALUE" | "QA_MASKED_CLOUD" | "QA_MASKED_SHADOW" | "QA_MASKED_SNOW" | "QA_LOW_QUALITY_RETRIEVAL" | "INSUFFICIENT_COVERAGE" | "OUT_OF_TEMPORAL_RANGE" | "UPSTREAM_ERROR" | "NOT_YET_PUBLISHED" | "NOT_COMPUTED" | "OUTSIDE_AOI" | "PENDING_PROCESSING") | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "valid" | "partial" | "flagged" | "missing";
         };
         /** Quantity */
         Quantity: {
-            /** Value */
-            value: number | null;
+            /** Missing Reason */
+            missing_reason: ("NO_DATA_SOURCE" | "FILL_VALUE" | "QA_MASKED_CLOUD" | "QA_MASKED_SHADOW" | "QA_MASKED_SNOW" | "QA_LOW_QUALITY_RETRIEVAL" | "INSUFFICIENT_COVERAGE" | "OUT_OF_TEMPORAL_RANGE" | "UPSTREAM_ERROR" | "NOT_YET_PUBLISHED" | "NOT_COMPUTED" | "OUTSIDE_AOI" | "PENDING_PROCESSING") | null;
+            uncertainty: components["schemas"]["Uncertainty"] | null;
             /**
              * Unit
              * @enum {string}
              */
             unit: "mm" | "degC" | "degC_day" | "percent" | "MJ_m-2_day-1" | "MJ_m-2" | "m3_m-3" | "wetness_0_1" | "cm" | "cm_cm-1" | "m" | "degree" | "pH" | "ha" | "day" | "year" | "count" | "percentile" | "unitless" | "score_0_100";
-            uncertainty: components["schemas"]["Uncertainty"] | null;
-            /** Missing Reason */
-            missing_reason: ("NO_DATA_SOURCE" | "FILL_VALUE" | "QA_MASKED_CLOUD" | "QA_MASKED_SHADOW" | "QA_MASKED_SNOW" | "QA_LOW_QUALITY_RETRIEVAL" | "INSUFFICIENT_COVERAGE" | "OUT_OF_TEMPORAL_RANGE" | "UPSTREAM_ERROR" | "NOT_YET_PUBLISHED" | "NOT_COMPUTED" | "OUTSIDE_AOI" | "PENDING_PROCESSING") | null;
+            /** Value */
+            value: number | null;
         };
         /** RecommendationCandidate */
         RecommendationCandidate: {
-            /** Rank */
-            rank: number;
-            /** Crop Code */
-            crop_code: number;
-            /** Crop Name */
-            crop_name: string;
-            /**
-             * Overall
-             * @enum {string}
-             */
-            overall: "suitable" | "marginal" | "unsuitable" | "unknown";
             /**
              * Confidence
              * @enum {string}
              */
             confidence: "low" | "medium" | "high";
+            /** Crop Code */
+            crop_code: number;
+            /** Crop Name */
+            crop_name: string;
             /** Factors */
             factors: components["schemas"]["FactorAssessment"][];
-            /** Rotation Effects */
-            rotation_effects: components["schemas"]["QualityFlag"][];
+            /**
+             * Overall
+             * @enum {string}
+             */
+            overall: "suitable" | "marginal" | "unsuitable" | "unknown";
+            /** Rank */
+            rank: number;
             /** Reasons */
             reasons: string[];
+            /** Rotation Effects */
+            rotation_effects: components["schemas"]["QualityFlag"][];
         };
         /** ResilienceComponent */
         ResilienceComponent: {
+            /**
+             * Band
+             * @enum {string}
+             */
+            band: "low" | "moderate" | "high" | "unknown";
+            /**
+             * Confidence
+             * @enum {string}
+             */
+            confidence: "low" | "medium" | "high";
+            /** Explanation */
+            explanation: string;
+            /** Input Indicator Ids */
+            input_indicator_ids: string[];
             /**
              * Key
              * @enum {string}
@@ -1730,91 +1875,70 @@ export interface components {
             key: "soil_water_buffer" | "terrain_erosion_risk" | "vegetation_stability" | "climate_exposure" | "rotation_diversity";
             /** Label */
             label: string;
+            rule_ref: components["schemas"]["MethodRef"];
             score: components["schemas"]["Quantity"];
-            /**
-             * Band
-             * @enum {string}
-             */
-            band: "low" | "moderate" | "high" | "unknown";
             /**
              * Support Class
              * @enum {string}
              */
             support_class: "F" | "S" | "R";
-            /**
-             * Confidence
-             * @enum {string}
-             */
-            confidence: "low" | "medium" | "high";
-            /** Input Indicator Ids */
-            input_indicator_ids: string[];
-            /** Explanation */
-            explanation: string;
-            rule_ref: components["schemas"]["MethodRef"];
         };
         /** ResilienceComposite */
         ResilienceComposite: {
-            score: components["schemas"]["Quantity"];
             /**
              * Band
              * @enum {string}
              */
             band: "low" | "moderate" | "high" | "unknown";
-            /**
-             * Confidence
-             * @enum {string}
-             */
-            confidence: "low" | "medium" | "high";
-            /** Components Used */
-            components_used: number;
             /**
              * Components Total
              * @default 5
              * @constant
              */
             components_total: 5;
+            /** Components Used */
+            components_used: number;
+            /**
+             * Confidence
+             * @enum {string}
+             */
+            confidence: "low" | "medium" | "high";
+            score: components["schemas"]["Quantity"];
         };
         /** ResilienceProfile */
         ResilienceProfile: {
+            /**
+             * As Of
+             * Format: date
+             */
+            as_of: string;
+            /** Components */
+            components: components["schemas"]["ResilienceComponent"][];
+            composite: components["schemas"]["ResilienceComposite"];
+            /** Disclaimers */
+            disclaimers: string[];
+            /**
+             * Field Id
+             * Format: uuid
+             */
+            field_id: string;
+            /** Limitations */
+            limitations: components["schemas"]["QualityFlag"][];
+            /** Model Version */
+            model_version: string;
             /**
              * Profile Id
              * Format: uuid
              */
             profile_id: string;
             /**
-             * Field Id
-             * Format: uuid
-             */
-            field_id: string;
-            /**
-             * As Of
-             * Format: date
-             */
-            as_of: string;
-            /** Model Version */
-            model_version: string;
-            /**
              * Status
              * @enum {string}
              */
             status: "computed" | "insufficient_data" | "pending";
-            composite: components["schemas"]["ResilienceComposite"];
-            /** Components */
-            components: components["schemas"]["ResilienceComponent"][];
-            /** Limitations */
-            limitations: components["schemas"]["QualityFlag"][];
-            /** Disclaimers */
-            disclaimers: string[];
         };
         /** ResponseMeta */
         ResponseMeta: {
-            /** Request Id */
-            request_id: string;
-            /**
-             * Generated At
-             * Format: date-time
-             */
-            generated_at: string;
             /**
              * Api Version
              * @default v1
@@ -1831,6 +1955,13 @@ export interface components {
              */
             data_mode: "synthetic" | "live";
             /**
+             * Generated At
+             * Format: date-time
+             */
+            generated_at: string;
+            /** Request Id */
+            request_id: string;
+            /**
              * Warnings
              * @default []
              */
@@ -1838,45 +1969,46 @@ export interface components {
         };
         /** RotationRecommendation */
         RotationRecommendation: {
+            /** Candidates */
+            candidates: components["schemas"]["RecommendationCandidate"][];
+            /** Disclaimers */
+            disclaimers: string[];
+            /** Engine Version */
+            engine_version: string;
+            /** Excluded */
+            excluded: components["schemas"]["ExcludedCrop"][];
+            /**
+             * Field Id
+             * Format: uuid
+             */
+            field_id: string;
+            /**
+             * Generated At
+             * Format: date-time
+             */
+            generated_at: string;
+            /** Kb Version */
+            kb_version: string;
             /**
              * Recommendation Id
              * Format: uuid
              */
             recommendation_id: string;
             /**
-             * Field Id
-             * Format: uuid
-             */
-            field_id: string;
-            target_season: components["schemas"]["TargetSeason"];
-            /** Engine Version */
-            engine_version: string;
-            /** Kb Version */
-            kb_version: string;
-            /**
              * Status
              * @enum {string}
              */
             status: "computed" | "insufficient_data" | "pending";
-            /** Candidates */
-            candidates: components["schemas"]["RecommendationCandidate"][];
-            /** Excluded */
-            excluded: components["schemas"]["ExcludedCrop"][];
-            /** Disclaimers */
-            disclaimers: string[];
-            /**
-             * Generated At
-             * Format: date-time
-             */
-            generated_at: string;
+            target_season: components["schemas"]["TargetSeason"];
         };
         /** RotationScenario */
         RotationScenario: {
             /**
-             * Scenario Id
-             * Format: uuid
+             * Created At
+             * Format: date-time
              */
-            scenario_id: string;
+            created_at: string;
+            evaluation: components["schemas"]["ScenarioEvaluation"] | null;
             /**
              * Field Id
              * Format: uuid
@@ -1884,16 +2016,15 @@ export interface components {
             field_id: string;
             /** Name */
             name: string;
-            /** Start Year */
-            start_year: number;
+            /**
+             * Scenario Id
+             * Format: uuid
+             */
+            scenario_id: string;
             /** Sequence */
             sequence: components["schemas"]["ScenarioYear"][];
-            evaluation: components["schemas"]["ScenarioEvaluation"] | null;
-            /**
-             * Created At
-             * Format: date-time
-             */
-            created_at: string;
+            /** Start Year */
+            start_year: number;
             /**
              * Updated At
              * Format: date-time
@@ -1902,8 +2033,21 @@ export interface components {
         };
         /** ScenarioEvaluation */
         ScenarioEvaluation: {
+            /** Dimensions */
+            dimensions: components["schemas"]["EvaluationDimension"][];
             /** Engine Version */
             engine_version: string;
+            /**
+             * Evaluated At
+             * Format: date-time
+             */
+            evaluated_at: string;
+            /**
+             * Interpretation
+             * @default supported
+             * @enum {string}
+             */
+            interpretation: "supported" | "conditional" | "exploratory" | "not_recommended" | "insufficient_data";
             /** Kb Version */
             kb_version: string;
             /**
@@ -1911,36 +2055,36 @@ export interface components {
              * @enum {string}
              */
             overall: "suitable" | "marginal" | "unsuitable" | "unknown";
-            /** Dimensions */
-            dimensions: components["schemas"]["EvaluationDimension"][];
-            /** Year Findings */
-            year_findings: components["schemas"]["YearFinding"][];
             /** Warnings */
             warnings: components["schemas"]["QualityFlag"][];
-            /**
-             * Evaluated At
-             * Format: date-time
-             */
-            evaluated_at: string;
+            /** Year Findings */
+            year_findings: components["schemas"]["YearFinding"][];
         };
         /** ScenarioYear */
         ScenarioYear: {
-            /** Year */
-            year: number;
             /** Crop Code */
             crop_code: number;
             /** Crop Name */
             crop_name: string;
+            /** Year */
+            year: number;
         };
         /** ScenarioYearInput */
         ScenarioYearInput: {
-            /** Year */
-            year: number;
             /** Crop Code */
             crop_code: number;
+            /** Year */
+            year: number;
         };
         /** Season */
         Season: {
+            /** Crop Code */
+            crop_code: number | null;
+            /**
+             * End
+             * Format: date
+             */
+            end: string;
             /** Label */
             label: string;
             /**
@@ -1948,13 +2092,6 @@ export interface components {
              * Format: date
              */
             start: string;
-            /**
-             * End
-             * Format: date
-             */
-            end: string;
-            /** Crop Code */
-            crop_code: number | null;
         };
         /** SoilComponentRef */
         SoilComponentRef: {
@@ -1967,85 +2104,82 @@ export interface components {
         };
         /** SoilLayer */
         SoilLayer: {
-            /** Top Cm */
-            top_cm: number;
+            awc: components["schemas"]["Quantity"];
             /** Bottom Cm */
             bottom_cm: number;
+            clay_pct: components["schemas"]["Quantity"];
+            om_pct: components["schemas"]["Quantity"];
+            ph_h2o: components["schemas"]["Quantity"];
             sand_pct: components["schemas"]["Quantity"];
             silt_pct: components["schemas"]["Quantity"];
-            clay_pct: components["schemas"]["Quantity"];
             /** Texture Class */
             texture_class: string | null;
-            ph_h2o: components["schemas"]["Quantity"];
-            om_pct: components["schemas"]["Quantity"];
-            awc: components["schemas"]["Quantity"];
+            /** Top Cm */
+            top_cm: number;
         };
         /** SoilMapUnitShare */
         SoilMapUnitShare: {
-            /** Mukey */
-            mukey: string;
-            /** Muname */
-            muname: string;
             /** Area Fraction */
             area_fraction: number;
             /** Major Components */
             major_components: components["schemas"]["SoilComponentRef"][];
+            /** Mukey */
+            mukey: string;
+            /** Muname */
+            muname: string;
         };
         /** SoilProfile */
         SoilProfile: {
+            aws_0_100: components["schemas"]["Quantity"];
+            aws_0_150: components["schemas"]["Quantity"];
+            drainage_class: components["schemas"]["ClassValue"];
             /**
              * Field Id
              * Format: uuid
              */
             field_id: string;
+            hydrologic_group: components["schemas"]["ClassValue"];
             /** Layers */
             layers: components["schemas"]["SoilLayer"][];
-            aws_0_100: components["schemas"]["Quantity"];
-            aws_0_150: components["schemas"]["Quantity"];
-            drainage_class: components["schemas"]["ClassValue"];
-            hydrologic_group: components["schemas"]["ClassValue"];
-            slope_pct_ssurgo: components["schemas"]["Quantity"];
             /** Map Units */
             map_units: components["schemas"]["SoilMapUnitShare"][];
-            /** Survey */
-            survey: components["schemas"]["SurveyRef"][];
             method: components["schemas"]["MethodRef"];
             /** Null Weight Fraction */
             null_weight_fraction: number | null;
-            spatial: components["schemas"]["SpatialSupport"];
+            quality: components["schemas"]["QualityInfo"];
+            slope_pct_ssurgo: components["schemas"]["Quantity"];
             /** Sources */
             sources: components["schemas"]["SourceRef"][];
-            quality: components["schemas"]["QualityInfo"];
+            spatial: components["schemas"]["SpatialSupport"];
+            /** Survey */
+            survey: components["schemas"]["SurveyRef"][];
         };
         /** SourceRef */
         SourceRef: {
+            /** Acquisition Id */
+            acquisition_id: string | null;
             /**
              * Dataset Id
              * @enum {string}
              */
             dataset_id: "nasa_power_daily_ag" | "usda_nrcs_ssurgo_sda" | "usda_nass_cdl" | "usda_nass_csb" | "nasa_hls" | "nasa_hls_vi" | "nasa_smap_spl4smgp" | "nasa_srtm_gl1" | "prism_daily" | "openet" | "usda_nass_quickstats" | "nasa_smap_spl3smp_e" | "nasa_gpm_imerg" | "fao_gaez_v5" | "soilstice_derived" | "user_input" | "synthetic";
+            /** Documentation Url */
+            documentation_url: string | null;
+            /** Doi */
+            doi: string | null;
             /** Product */
             product: string;
             /** Product Version */
             product_version: string;
-            /** Acquisition Id */
-            acquisition_id: string | null;
-            /** Doi */
-            doi: string | null;
-            /** Documentation Url */
-            documentation_url: string | null;
             /** Retrieved At */
             retrieved_at: string | null;
         };
         /** SpatialSupport */
         SpatialSupport: {
-            /**
-             * Support Class
-             * @enum {string}
-             */
-            support_class: "F" | "S" | "R";
-            /** Native Resolution M */
-            native_resolution_m: number | null;
+            /** Cell Id */
+            cell_id: string | null;
+            /** Crs */
+            crs: string | null;
             /**
              * Extraction Method
              * @enum {string}
@@ -2053,51 +2187,54 @@ export interface components {
             extraction_method: "zonal_polygon" | "zonal_polygon_inward_buffer" | "containing_cell" | "api_point_query" | "vector_intersection" | "attribute_join" | "not_applicable";
             /** Field Fraction Of Cell */
             field_fraction_of_cell: number | null;
-            /** Cell Id */
-            cell_id: string | null;
-            /** Crs */
-            crs: string | null;
+            /** Native Resolution M */
+            native_resolution_m: number | null;
+            /**
+             * Support Class
+             * @enum {string}
+             */
+            support_class: "F" | "S" | "R";
         };
         /** SuitabilityFactorAssessment */
         SuitabilityFactorAssessment: {
-            /** Factor Key */
-            factor_key: string;
-            /** Factor Name */
-            factor_name: string;
             /**
              * Category
              * @enum {string}
              */
             category: "thermal" | "water_climate" | "soil" | "rooting" | "terrain" | "historical" | "regional";
-            observed_value: components["schemas"]["Quantity"];
-            /** Crop Requirement */
-            crop_requirement: string | null;
             /**
              * Compatibility
              * @enum {string}
              */
             compatibility: "optimal" | "compatible" | "moderate_limitation" | "critical_limitation" | "unknown";
-            /** Is Limiting */
-            is_limiting: boolean;
-            /** Is Favorable */
-            is_favorable: boolean;
-            /**
-             * Severity
-             * @enum {string}
-             */
-            severity: "none" | "favorable" | "moderate" | "critical" | "unknown";
-            /** Score */
-            score: number | null;
-            /** Interpretation */
-            interpretation: string;
-            /** Evidence Ids */
-            evidence_ids: string[];
+            /** Crop Requirement */
+            crop_requirement: string | null;
             /**
              * Data Status
              * @default available
              * @enum {string}
              */
             data_status: "available" | "missing" | "provisional" | "not_integrated";
+            /** Evidence Ids */
+            evidence_ids: string[];
+            /** Factor Key */
+            factor_key: string;
+            /** Factor Name */
+            factor_name: string;
+            /** Interpretation */
+            interpretation: string;
+            /** Is Favorable */
+            is_favorable: boolean;
+            /** Is Limiting */
+            is_limiting: boolean;
+            observed_value: components["schemas"]["Quantity"];
+            /** Score */
+            score: number | null;
+            /**
+             * Severity
+             * @enum {string}
+             */
+            severity: "none" | "favorable" | "moderate" | "critical" | "unknown";
             /**
              * Support Class
              * @default F
@@ -2107,18 +2244,18 @@ export interface components {
         };
         /** SuitabilitySummaryCounts */
         SuitabilitySummaryCounts: {
-            /** Total Evaluated */
-            total_evaluated: number;
-            /** Suitable */
-            suitable: number;
             /** Conditionally Suitable */
             conditionally_suitable: number;
-            /** Limited Suitability */
-            limited_suitability: number;
-            /** Unsuitable */
-            unsuitable: number;
             /** Insufficient Data */
             insufficient_data: number;
+            /** Limited Suitability */
+            limited_suitability: number;
+            /** Suitable */
+            suitable: number;
+            /** Total Evaluated */
+            total_evaluated: number;
+            /** Unsuitable */
+            unsuitable: number;
         };
         /** SurveyRef */
         SurveyRef: {
@@ -2129,6 +2266,11 @@ export interface components {
         };
         /** TargetSeason */
         TargetSeason: {
+            /**
+             * End
+             * Format: date
+             */
+            end: string;
             /** Label */
             label: string;
             /**
@@ -2136,35 +2278,30 @@ export interface components {
              * Format: date
              */
             start: string;
-            /**
-             * End
-             * Format: date
-             */
-            end: string;
         };
         /** TemporalRange */
         TemporalRange: {
-            /** Start */
-            start: string | null;
             /** End */
             end: string | null;
+            /** Start */
+            start: string | null;
         };
         /** TemporalSupport */
         TemporalSupport: {
-            /**
-             * Resolution
-             * @enum {string}
-             */
-            resolution: "PT3H" | "P1D" | "P1M" | "season" | "P1Y" | "static" | "irregular";
-            /** Period Start */
-            period_start: string | null;
-            /** Period End */
-            period_end: string | null;
             /**
              * Aggregation
              * @enum {string}
              */
             aggregation: "none" | "mean" | "sum" | "median" | "min" | "max" | "majority" | "weighted_mean" | "percentile" | "count";
+            /** Period End */
+            period_end: string | null;
+            /** Period Start */
+            period_start: string | null;
+            /**
+             * Resolution
+             * @enum {string}
+             */
+            resolution: "PT3H" | "P1D" | "P1M" | "season" | "P1Y" | "static" | "irregular";
             /**
              * Time Standard
              * @enum {string}
@@ -2173,81 +2310,90 @@ export interface components {
         };
         /** TerrainProfile */
         TerrainProfile: {
+            elevation_max: components["schemas"]["Quantity"];
+            elevation_mean: components["schemas"]["Quantity"];
+            elevation_min: components["schemas"]["Quantity"];
             /**
              * Field Id
              * Format: uuid
              */
             field_id: string;
-            elevation_mean: components["schemas"]["Quantity"];
-            elevation_min: components["schemas"]["Quantity"];
-            elevation_max: components["schemas"]["Quantity"];
+            method: components["schemas"]["MethodRef"];
+            quality: components["schemas"]["QualityInfo"];
             slope_mean_pct: components["schemas"]["Quantity"];
             slope_p90_pct: components["schemas"]["Quantity"];
-            method: components["schemas"]["MethodRef"];
-            spatial: components["schemas"]["SpatialSupport"];
             /** Sources */
             sources: components["schemas"]["SourceRef"][];
-            quality: components["schemas"]["QualityInfo"];
+            spatial: components["schemas"]["SpatialSupport"];
         };
         /** TimeSeries */
         TimeSeries: {
-            /** Series Id */
-            series_id: string;
-            /** Variable */
-            variable: string;
             /** Label */
             label: string;
-            /**
-             * Unit
-             * @enum {string}
-             */
-            unit: "mm" | "degC" | "degC_day" | "percent" | "MJ_m-2_day-1" | "MJ_m-2" | "m3_m-3" | "wetness_0_1" | "cm" | "cm_cm-1" | "m" | "degree" | "pH" | "ha" | "day" | "year" | "count" | "percentile" | "unitless" | "score_0_100";
             /**
              * Nature
              * @enum {string}
              */
             nature: "observation" | "model" | "derived" | "classification" | "proxy_statistic";
-            spatial: components["schemas"]["SpatialSupport"];
-            temporal: components["schemas"]["TemporalSupport"];
-            /** Sources */
-            sources: components["schemas"]["SourceRef"][];
             /** Points */
             points: components["schemas"]["TimeSeriesPoint"][];
             reference: components["schemas"]["TimeSeriesReference"] | null;
+            /** Series Id */
+            series_id: string;
+            /** Sources */
+            sources: components["schemas"]["SourceRef"][];
+            spatial: components["schemas"]["SpatialSupport"];
+            temporal: components["schemas"]["TemporalSupport"];
+            /**
+             * Unit
+             * @enum {string}
+             */
+            unit: "mm" | "degC" | "degC_day" | "percent" | "MJ_m-2_day-1" | "MJ_m-2" | "m3_m-3" | "wetness_0_1" | "cm" | "cm_cm-1" | "m" | "degree" | "pH" | "ha" | "day" | "year" | "count" | "percentile" | "unitless" | "score_0_100";
+            /** Variable */
+            variable: string;
         };
         /** TimeSeriesPoint */
         TimeSeriesPoint: {
-            /** T */
-            t: string;
-            /** Value */
-            value: number | null;
+            /** Missing Reason */
+            missing_reason: ("NO_DATA_SOURCE" | "FILL_VALUE" | "QA_MASKED_CLOUD" | "QA_MASKED_SHADOW" | "QA_MASKED_SNOW" | "QA_LOW_QUALITY_RETRIEVAL" | "INSUFFICIENT_COVERAGE" | "OUT_OF_TEMPORAL_RANGE" | "UPSTREAM_ERROR" | "NOT_YET_PUBLISHED" | "NOT_COMPUTED" | "OUTSIDE_AOI" | "PENDING_PROCESSING") | null;
             /**
              * Quality Status
              * @enum {string}
              */
             quality_status: "valid" | "partial" | "flagged" | "missing";
-            /** Missing Reason */
-            missing_reason: ("NO_DATA_SOURCE" | "FILL_VALUE" | "QA_MASKED_CLOUD" | "QA_MASKED_SHADOW" | "QA_MASKED_SNOW" | "QA_LOW_QUALITY_RETRIEVAL" | "INSUFFICIENT_COVERAGE" | "OUT_OF_TEMPORAL_RANGE" | "UPSTREAM_ERROR" | "NOT_YET_PUBLISHED" | "NOT_COMPUTED" | "OUTSIDE_AOI" | "PENDING_PROCESSING") | null;
+            /** T */
+            t: string;
+            /** Value */
+            value: number | null;
         };
         /** TimeSeriesReference */
         TimeSeriesReference: {
             /** Label */
             label: string;
             /**
-             * Period Start
-             * Format: date
-             */
-            period_start: string;
-            /**
              * Period End
              * Format: date
              */
             period_end: string;
+            /**
+             * Period Start
+             * Format: date
+             */
+            period_start: string;
             /** Points */
             points: components["schemas"]["TimeSeriesPoint"][];
         };
+        /** TradeoffFinding */
+        TradeoffFinding: {
+            /** Category */
+            category: string;
+            /** Summary */
+            summary: string;
+        };
         /** Uncertainty */
         Uncertainty: {
+            /** High */
+            high: number | null;
             /**
              * Kind
              * @enum {string}
@@ -2255,12 +2401,10 @@ export interface components {
             kind: "range" | "std" | "ci95" | "classification_accuracy" | "none_provided";
             /** Low */
             low: number | null;
-            /** High */
-            high: number | null;
-            /** Value */
-            value: number | null;
             /** Note */
             note: string | null;
+            /** Value */
+            value: number | null;
         };
         /**
          * UpdateFarmRequest
@@ -2274,10 +2418,10 @@ export interface components {
         UpsertScenarioRequest: {
             /** Name */
             name: string;
-            /** Start Year */
-            start_year: number;
             /** Sequence */
             sequence: components["schemas"]["ScenarioYearInput"][];
+            /** Start Year */
+            start_year: number;
         };
         /** VegetationProfile */
         VegetationProfile: {
@@ -2286,74 +2430,74 @@ export interface components {
              * Format: uuid
              */
             field_id: string;
-            /** Year */
-            year: number;
             /**
              * Index
              * @enum {string}
              */
             index: "NDVI" | "EVI" | "NDMI" | "SAVI" | "MSAVI" | "NDWI" | "NBR" | "NBR2" | "TVI";
+            phenology: components["schemas"]["Phenology"];
+            quality: components["schemas"]["QualityInfo"];
             /** Scenes */
             scenes: components["schemas"]["VegetationScene"][];
             series: components["schemas"]["TimeSeries"];
-            phenology: components["schemas"]["Phenology"];
-            spatial: components["schemas"]["SpatialSupport"];
             /** Sources */
             sources: components["schemas"]["SourceRef"][];
-            quality: components["schemas"]["QualityInfo"];
+            spatial: components["schemas"]["SpatialSupport"];
+            /** Year */
+            year: number;
         };
         /** VegetationScene */
         VegetationScene: {
-            /** Granule Id */
-            granule_id: string;
-            /**
-             * Product
-             * @enum {string}
-             */
-            product: "HLSL30_VI" | "HLSS30_VI" | "HLSL30" | "HLSS30" | "synthetic";
+            /** Accepted */
+            accepted: boolean;
             /**
              * Acquired At
              * Format: date-time
              */
             acquired_at: string;
+            /** Clear Fraction */
+            clear_fraction: number;
+            /** Granule Id */
+            granule_id: string;
+            mask_counts: components["schemas"]["MaskCounts"];
             /** Median */
             median: number | null;
+            /** Missing Reason */
+            missing_reason: ("NO_DATA_SOURCE" | "FILL_VALUE" | "QA_MASKED_CLOUD" | "QA_MASKED_SHADOW" | "QA_MASKED_SNOW" | "QA_LOW_QUALITY_RETRIEVAL" | "INSUFFICIENT_COVERAGE" | "OUT_OF_TEMPORAL_RANGE" | "UPSTREAM_ERROR" | "NOT_YET_PUBLISHED" | "NOT_COMPUTED" | "OUTSIDE_AOI" | "PENDING_PROCESSING") | null;
             /** P10 */
             p10: number | null;
             /** P90 */
             p90: number | null;
-            /** Valid Pixels */
-            valid_pixels: number;
+            /**
+             * Product
+             * @enum {string}
+             */
+            product: "HLSL30_VI" | "HLSS30_VI" | "HLSL30" | "HLSS30" | "synthetic";
             /** Total Pixels */
             total_pixels: number;
-            /** Clear Fraction */
-            clear_fraction: number;
-            /** Accepted */
-            accepted: boolean;
-            mask_counts: components["schemas"]["MaskCounts"];
-            /** Missing Reason */
-            missing_reason: ("NO_DATA_SOURCE" | "FILL_VALUE" | "QA_MASKED_CLOUD" | "QA_MASKED_SHADOW" | "QA_MASKED_SNOW" | "QA_LOW_QUALITY_RETRIEVAL" | "INSUFFICIENT_COVERAGE" | "OUT_OF_TEMPORAL_RANGE" | "UPSTREAM_ERROR" | "NOT_YET_PUBLISHED" | "NOT_COMPUTED" | "OUTSIDE_AOI" | "PENDING_PROCESSING") | null;
+            /** Valid Pixels */
+            valid_pixels: number;
         };
         /** YearFinding */
         YearFinding: {
-            /** Year */
-            year: number;
             /**
              * Band
              * @enum {string}
              */
             band: "suitable" | "marginal" | "unsuitable" | "unknown";
-            /** Messages */
-            messages: components["schemas"]["QualityFlag"][];
             /** Evidence Ids */
             evidence_ids: string[];
+            /** Messages */
+            messages: components["schemas"]["QualityFlag"][];
+            /** Year */
+            year: number;
         };
         /** YearPeriod */
         YearPeriod: {
-            /** Start Year */
-            start_year: number;
             /** End Year */
             end_year: number;
+            /** Start Year */
+            start_year: number;
         };
     };
     responses: never;
@@ -2364,7 +2508,84 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    health: {
+    listCanonicalCrops: {
+        parameters: {
+            query?: {
+                role?: string | null;
+                family?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_list_CropProfileSummary__"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    listCrops: {
         parameters: {
             query?: never;
             header?: never;
@@ -2379,7 +2600,162 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ApiResponse_Health_"];
+                    "application/json": components["schemas"]["ApiResponse_list_CropOption__"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    getCropProfile: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                crop_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_CropProfile_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    getCropAttributes: {
+        parameters: {
+            query?: {
+                domain?: string | null;
+                attribute?: string | null;
+            };
+            header?: never;
+            path: {
+                crop_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_dict_str__Any__"];
                 };
             };
             /** @description Not Found */
@@ -2454,6 +2830,82 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ApiResponse_list_DatasetDescriptor__"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    getCropEvidence: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                evidence_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_CropEvidenceRecord_"];
                 };
             };
             /** @description Not Found */
@@ -2742,84 +3194,6 @@ export interface operations {
             };
         };
     };
-    getFarmOverview: {
-        parameters: {
-            query?: {
-                season_year?: number | null;
-            };
-            header?: never;
-            path: {
-                farm_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiResponse_FarmOverview_"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Conflict */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Unprocessable Entity */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Too Many Requests */
-            429: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Service Unavailable */
-            503: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-        };
-    };
     listFields: {
         parameters: {
             query?: {
@@ -2921,6 +3295,84 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ApiResponse_CreateFieldResponse_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    getFarmOverview: {
+        parameters: {
+            query?: {
+                season_year?: number | null;
+            };
+            header?: never;
+            path: {
+                farm_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_FarmOverview_"];
                 };
             };
             /** @description Not Found */
@@ -3131,10 +3583,11 @@ export interface operations {
             };
         };
     };
-    getFieldProfile: {
+    getClimate: {
         parameters: {
-            query?: {
-                season_year?: number | null;
+            query: {
+                season_year: number;
+                crop_code?: number | null;
             };
             header?: never;
             path: {
@@ -3150,7 +3603,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ApiResponse_FieldProfile_"];
+                    "application/json": components["schemas"]["ApiResponse_ClimateProfile_"];
                 };
             };
             /** @description Not Found */
@@ -3285,316 +3738,6 @@ export interface operations {
             };
         };
     };
-    getClimate: {
-        parameters: {
-            query: {
-                season_year: number;
-                crop_code?: number | null;
-            };
-            header?: never;
-            path: {
-                field_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiResponse_ClimateProfile_"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Conflict */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Unprocessable Entity */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Too Many Requests */
-            429: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Service Unavailable */
-            503: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-        };
-    };
-    getSoil: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                field_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiResponse_SoilProfile_"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Conflict */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Unprocessable Entity */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Too Many Requests */
-            429: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Service Unavailable */
-            503: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-        };
-    };
-    getTerrain: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                field_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiResponse_TerrainProfile_"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Conflict */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Unprocessable Entity */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Too Many Requests */
-            429: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Service Unavailable */
-            503: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-        };
-    };
-    getVegetation: {
-        parameters: {
-            query: {
-                year: number;
-                index?: "NDVI" | "EVI" | "NDMI" | "SAVI" | "MSAVI" | "NDWI" | "NBR" | "NBR2" | "TVI";
-            };
-            header?: never;
-            path: {
-                field_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiResponse_VegetationProfile_"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Conflict */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Unprocessable Entity */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Too Many Requests */
-            429: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Service Unavailable */
-            503: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-        };
-    };
     getCropHistory: {
         parameters: {
             query?: never;
@@ -3613,6 +3756,85 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ApiResponse_CropHistory_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    listEvidence: {
+        parameters: {
+            query?: {
+                kind?: ("dataset" | "indicator" | "method" | "kb_rule" | "literature") | null;
+                related_id?: string | null;
+            };
+            header?: never;
+            path: {
+                field_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_list_EvidenceItem__"];
                 };
             };
             /** @description Not Found */
@@ -3750,9 +3972,11 @@ export interface operations {
             };
         };
     };
-    getResilience: {
+    getFieldProfile: {
         parameters: {
-            query?: never;
+            query?: {
+                season_year?: number | null;
+            };
             header?: never;
             path: {
                 field_id: string;
@@ -3767,618 +3991,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ApiResponse_ResilienceProfile_"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Conflict */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Unprocessable Entity */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Too Many Requests */
-            429: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Service Unavailable */
-            503: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-        };
-    };
-    listCrops: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiResponse_list_CropOption__"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Conflict */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Unprocessable Entity */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Too Many Requests */
-            429: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Service Unavailable */
-            503: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-        };
-    };
-    listCanonicalCrops: {
-        parameters: {
-            query?: {
-                role?: string | null;
-                family?: string | null;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiResponse_list_CropProfileSummary__"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Conflict */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Unprocessable Entity */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Too Many Requests */
-            429: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Service Unavailable */
-            503: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-        };
-    };
-    getCropProfile: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                crop_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiResponse_CropProfile_"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Conflict */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Unprocessable Entity */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Too Many Requests */
-            429: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Service Unavailable */
-            503: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-        };
-    };
-    getCropAttributes: {
-        parameters: {
-            query?: {
-                domain?: string | null;
-                attribute?: string | null;
-            };
-            header?: never;
-            path: {
-                crop_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiResponse_dict_str__Any__"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Conflict */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Unprocessable Entity */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Too Many Requests */
-            429: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Service Unavailable */
-            503: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-        };
-    };
-    getRotationCompatibility: {
-        parameters: {
-            query: {
-                /** @description Preceding crop ID (e.g. CRP014) or CDL code (e.g. 1) */
-                previous_crop: string;
-                /** @description Following crop ID (e.g. CRP001) or CDL code (e.g. 1) */
-                next_crop: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiResponse_DirectedRotationTransition_"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Conflict */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Unprocessable Entity */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Too Many Requests */
-            429: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Service Unavailable */
-            503: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-        };
-    };
-    listRotationMatrix: {
-        parameters: {
-            query?: {
-                crop_id?: string | null;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiResponse_list_DirectedRotationTransition__"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Conflict */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Unprocessable Entity */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Too Many Requests */
-            429: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Service Unavailable */
-            503: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-        };
-    };
-    getCropEvidence: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                evidence_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiResponse_CropEvidenceRecord_"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Conflict */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Unprocessable Entity */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Too Many Requests */
-            429: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Service Unavailable */
-            503: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-        };
-    };
-    getKbMetadata: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiResponse_KnowledgeBaseMetadata_"];
+                    "application/json": components["schemas"]["ApiResponse_FieldProfile_"];
                 };
             };
             /** @description Not Found */
@@ -4457,6 +4070,242 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ApiResponse_RotationRecommendation_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    getResilience: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                field_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_ResilienceProfile_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    compareScenarios: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                field_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CompareScenariosRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_CompareScenariosResponse_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    generateRotations: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                field_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GenerateRotationsRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_GenerateRotationsResponse_"];
                 };
             };
             /** @description Not Found */
@@ -4671,92 +4520,12 @@ export interface operations {
             };
         };
     };
-    updateScenario: {
+    getSoil: {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                scenario_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["UpsertScenarioRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiResponse_RotationScenario_"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Conflict */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Unprocessable Entity */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Too Many Requests */
-            429: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-            /** @description Service Unavailable */
-            503: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
-        };
-    };
-    deleteScenario: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                scenario_id: string;
+                field_id: string;
             };
             cookie?: never;
         };
@@ -4768,7 +4537,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ApiResponse_Deleted_"];
+                    "application/json": components["schemas"]["ApiResponse_SoilProfile_"];
                 };
             };
             /** @description Not Found */
@@ -4984,11 +4753,87 @@ export interface operations {
             };
         };
     };
-    listEvidence: {
+    getTerrain: {
         parameters: {
-            query?: {
-                kind?: ("dataset" | "indicator" | "method" | "kb_rule" | "literature") | null;
-                related_id?: string | null;
+            query?: never;
+            header?: never;
+            path: {
+                field_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_TerrainProfile_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    getVegetation: {
+        parameters: {
+            query: {
+                year: number;
+                index?: "NDVI" | "EVI" | "NDMI" | "SAVI" | "MSAVI" | "NDWI" | "NBR" | "NBR2" | "TVI";
             };
             header?: never;
             path: {
@@ -5004,7 +4849,81 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ApiResponse_list_EvidenceItem__"];
+                    "application/json": components["schemas"]["ApiResponse_VegetationProfile_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    health: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_Health_"];
                 };
             };
             /** @description Not Found */
@@ -5081,6 +5000,391 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ApiResponse_ProcessingJob_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    getKbMetadata: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_KnowledgeBaseMetadata_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    getRotationCompatibility: {
+        parameters: {
+            query: {
+                /** @description Preceding crop ID (e.g. CRP014) or CDL code (e.g. 1) */
+                previous_crop: string;
+                /** @description Following crop ID (e.g. CRP001) or CDL code (e.g. 1) */
+                next_crop: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_DirectedRotationTransition_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    listRotationMatrix: {
+        parameters: {
+            query?: {
+                crop_id?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_list_DirectedRotationTransition__"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    updateScenario: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                scenario_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpsertScenarioRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_RotationScenario_"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
+    deleteScenario: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                scenario_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiResponse_Deleted_"];
                 };
             };
             /** @description Not Found */

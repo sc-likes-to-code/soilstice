@@ -45,6 +45,8 @@ export function createHttpServices(): Services {
       createScenario: (id, req) => request("POST", `/fields/${id}/scenarios`, { body: req }),
       updateScenario: (scenarioId, req) => request("PUT", `/scenarios/${scenarioId}`, { body: req }),
       deleteScenario: (scenarioId) => request("DELETE", `/scenarios/${scenarioId}`),
+      generateRotations: (fieldId, req) => request("POST", `/fields/${fieldId}/rotations/generate`, { body: req }),
+      compareScenarios: (fieldId, req) => request("POST", `/fields/${fieldId}/rotations/compare`, { body: req }),
     },
     resilience: {
       getResilience: (id) => request("GET", `/fields/${id}/resilience`),

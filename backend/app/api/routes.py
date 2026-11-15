@@ -13,6 +13,8 @@ from app.contracts import (
     ClimateProfile,
     CreateFieldRequest,
     CreateFieldResponse,
+    CompareScenariosRequest,
+    CompareScenariosResponse,
     CropEvidenceRecord,
     CropHistory,
     CropOption,
@@ -34,6 +36,8 @@ from app.contracts import (
     FieldSource,
     FieldSuitabilityResponse,
     FieldSummary,
+    GenerateRotationsRequest,
+    GenerateRotationsResponse,
     Health,
     IndicatorCategory,
     KnowledgeBaseMetadata,
@@ -293,6 +297,22 @@ def update_scenario(scenario_id: UUID, body: UpsertScenarioRequest, request: Req
 def delete_scenario(scenario_id: UUID, request: Request, svc: RotationService = Depends(rot_svc)):
     svc.delete_scenario(scenario_id)
     return ok(request, Deleted())
+
+
+# Phase 7: Rotation Candidate Generation and Scenario Comparison
+@router.post("/fields/{field_id}/rotations/generate", response_model=ApiResponse[GenerateRotationsResponse],
+             tags=["rotation"], operation_id="generateRotations")
+def generate_rotations(field_id: UUID, body: GenerateRotationsRequest, request: Request,
+                       svc: RotationService = Depends(rot_svc)):
+    return ok(request, svc.generate_rotations(field_id, body))
+
+
+@router.post("/fields/{field_id}/rotations/compare", response_model=ApiResponse[CompareScenariosResponse],
+             tags=["rotation"], operation_id="compareScenarios")
+def compare_scenarios(field_id: UUID, body: CompareScenariosRequest, request: Request,
+                      svc: RotationService = Depends(rot_svc)):
+    return ok(request, svc.compare_scenarios(field_id, body))
+
 
 
 # Phase 6: Suitability

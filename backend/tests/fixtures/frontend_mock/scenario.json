@@ -24,6 +24,7 @@
     "engine_version": "synthetic-engine-0",
     "kb_version": "synthetic-kb-0",
     "overall": "marginal",
+    "interpretation": "conditional",
     "dimensions": [
      {
       "key": "agronomic_fit",
@@ -67,14 +68,14 @@
       "message": "Synthetic evaluation: bands are placeholders until the rules-based rotation engine arrives in Phase 5. Only the repeat/fallow/double-crop/new-crop notes are factual."
      }
     ],
-    "evaluated_at": "2026-11-14T05:38:15.873Z"
+    "evaluated_at": "2026-11-15T09:28:28.540Z"
    },
-   "created_at": "2026-11-14T05:38:15.873Z",
-   "updated_at": "2026-11-14T05:38:15.873Z"
+   "created_at": "2026-11-15T09:28:28.540Z",
+   "updated_at": "2026-11-15T09:28:28.540Z"
   },
   "meta": {
-   "request_id": "mock-5e-mwfz5tq9",
-   "generated_at": "2026-11-14T05:38:15.873Z",
+   "request_id": "mock-5e-mwhmtqbf",
+   "generated_at": "2026-11-15T09:28:28.540Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",

@@ -74,6 +74,12 @@ export type Checks = [
   Assert<Same<C.CropSuitabilityAssessment, S["CropSuitabilityAssessment"]>>,
   Assert<Same<C.SuitabilitySummaryCounts, S["SuitabilitySummaryCounts"]>>,
   Assert<Same<C.FieldSuitabilityResponse, S["FieldSuitabilityResponse"]>>,
+  Assert<Same<C.GenerateRotationsRequest, S["GenerateRotationsRequest"]>>,
+  Assert<Same<C.GenerateCandidate, S["GenerateCandidate"]>>,
+  Assert<Same<C.GenerateRotationsResponse, S["GenerateRotationsResponse"]>>,
+  Assert<Same<C.CompareScenariosRequest, S["CompareScenariosRequest"]>>,
+  Assert<Same<C.TradeoffFinding, S["TradeoffFinding"]>>,
+  Assert<Same<C.CompareScenariosResponse, S["CompareScenariosResponse"]>>,
   // Envelopes used by the frontend services
   Assert<Same<C.ApiResponse<C.Farm[]>, S["ApiResponse_list_Farm__"]>>,
   Assert<Same<C.ApiResponse<C.FieldProfile>, S["ApiResponse_FieldProfile_"]>>,
@@ -96,4 +102,5 @@ export type PathChecks = [
   paths["/api/v1/canonical-crops"], paths["/api/v1/crops/{crop_id}"], paths["/api/v1/crops/{crop_id}/attributes"],
   paths["/api/v1/rotations"], paths["/api/v1/rotations/matrix"], paths["/api/v1/evidence/{evidence_id}"], paths["/api/v1/kb/metadata"],
   paths["/api/v1/fields/{field_id}/suitability"], paths["/api/v1/fields/{field_id}/suitability/{crop_id}"],
+  paths["/api/v1/fields/{field_id}/rotations/generate"], paths["/api/v1/fields/{field_id}/rotations/compare"],
 ];

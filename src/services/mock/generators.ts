@@ -4,12 +4,12 @@
  * exists only so that synthetic charts are internally consistent. All outputs carry dataset_id "synthetic".
  */
 import type {
-  ClimateProfile, CropCode, CropHistory, CropSuitabilityAssessment, CropYear, DataCoverage, DatasetCoverage, DatasetId, EnvironmentalIndicator,
-  EvidenceItem, FactorAssessment, FieldSuitabilityResponse, FitBand, IndicatorCategory, IndicatorKey, MissingReason, QualityFlag, QualityInfo,
+  ClimateProfile, CompareScenariosResponse, CropCode, CropHistory, CropSuitabilityAssessment, CropYear, DataCoverage, DatasetCoverage, DatasetId, EnvironmentalIndicator,
+  EvidenceItem, FactorAssessment, FieldSuitabilityResponse, FitBand, GenerateCandidate, GenerateRotationsRequest, GenerateRotationsResponse, IndicatorCategory, IndicatorKey, MissingReason, QualityFlag, QualityInfo,
   Quantity, RecommendationCandidate, ResilienceComponent, ResilienceComponentKey, ResilienceProfile,
-  RotationRecommendation, ScenarioEvaluation, ScenarioYear, ScoreBand, SoilLayer, SoilProfile, SpatialSupport,
+  RotationRecommendation, RotationScenario, ScenarioEvaluation, ScenarioInterpretation, ScenarioYear, ScoreBand, SoilLayer, SoilProfile, SpatialSupport,
   SuitabilityFactorAssessment, SuitabilityClass,
-  TemporalSupport, TerrainProfile, TimeSeries, TimeSeriesPoint, Unit, VegetationIndex, VegetationProfile,
+  TemporalSupport, TerrainProfile, TimeSeries, TimeSeriesPoint, TradeoffFinding, Unit, VegetationIndex, VegetationProfile,
   VegetationScene, Confidence,
 } from "@/types/contracts";
 import { clamp, createRng, hashString, round } from "./rng";
@@ -614,10 +614,14 @@ export function evaluateScenario(rec: MockFieldRecord, sequence: ScenarioYear[])
     if (!hist.includes(s.crop_code)) messages.push({ code: "NEW_CROP", severity: "info", message: "Not grown on this field since 2006 (synthetic history)." });
     return { year: s.year, band: messages.some((m) => m.severity === "warning") ? "marginal" as FitBand : pick(), messages, evidence_ids: [] };
   });
+  const ov = worst(dims.map((d) => d.band));
+  const interpretation: ScenarioInterpretation =
+    ov === "suitable" ? "supported" : ov === "marginal" ? "conditional" : ov === "unsuitable" ? "not_recommended" : "insufficient_data";
   return {
     engine_version: ENGINE_VERSION,
     kb_version: KB_VERSION,
-    overall: worst(dims.map((d) => d.band)),
+    overall: ov,
+    interpretation,
     dimensions: dims,
     year_findings: yearFindings,
     warnings: [{ code: "SYNTHETIC_EVALUATION", severity: "warning", message: "Synthetic evaluation: bands are placeholders until the rules-based rotation engine arrives in Phase 5. Only the repeat/fallow/double-crop/new-crop notes are factual." }],
@@ -867,4 +871,148 @@ export function fieldSuitability(rec: MockFieldRecord, seasonYear = 2026): Field
     ],
   };
 }
+
+// ───────────────────────── Phase 7: Rotation Generator & Comparison ─────────────────────────
+export function mockGenerateRotations(rec: MockFieldRecord, req: GenerateRotationsRequest): GenerateRotationsResponse {
+  const horizon = Math.max(2, Math.min(5, req.horizon || 3));
+  const startYear = req.start_year || 2026;
+  const hist = rec.traits.history;
+  const lastCode = hist.length > 0 ? hist[hist.length - 1] : 24;
+
+  const candidateTemplates = [
+    { name: "Wheat – Sorghum – Soybean", codes: [24, 4, 5, 27, 36] },
+    { name: "Corn – Soybean – Winter Wheat", codes: [1, 5, 24, 4, 27] },
+    { name: "Sorghum – Soybean – Cereal Rye", codes: [4, 5, 27, 24, 36] },
+    { name: "Wheat – Fallow – Sorghum", codes: [24, 61, 4, 5, 27] },
+    { name: "Oats – Alfalfa – Corn", codes: [28, 36, 1, 5, 24] },
+  ];
+
+  const maxCands = Math.min(candidateTemplates.length, req.max_candidates || 10);
+  const candidates: GenerateCandidate[] = [];
+
+  for (let i = 0; i < maxCands; i++) {
+    const tpl = candidateTemplates[i];
+    const cropCodes = tpl.codes.slice(0, horizon);
+    const seq: ScenarioYear[] = cropCodes.map((code, idx) => ({
+      year: startYear + idx,
+      crop_code: code,
+      crop_name: cropName(code),
+    }));
+
+    const evaluation = evaluateScenario(rec, seq);
+    candidates.push({
+      rank: i + 1,
+      name: tpl.name,
+      sequence: seq,
+      evaluation,
+      is_pareto_optimal: true,
+      pareto_rank: 1,
+      pareto_explanation: null,
+    });
+  }
+
+  // Fast Non-dominated Sorting for Pareto frontier
+  const bandScores: Record<string, number> = { suitable: 2, marginal: 1, unsuitable: 0, unknown: 0 };
+  const dimKeys = ["agronomic_fit", "rotation_benefit", "water_risk", "diversity"];
+  const n = candidates.length;
+  const vectors = candidates.map((c) => {
+    const dMap = Object.fromEntries(c.evaluation.dimensions.map((d) => [d.key, bandScores[d.band] ?? 0]));
+    return dimKeys.map((k) => dMap[k] ?? 0);
+  });
+
+  const dominatedBy = new Array(n).fill(0);
+  const dominates: number[][] = Array.from({ length: n }, () => []);
+
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      if (i === j) continue;
+      const vi = vectors[i];
+      const vj = vectors[j];
+      const ge = vi.every((x, idx) => x >= vj[idx]);
+      const gt = vi.some((x, idx) => x > vj[idx]);
+      if (ge && gt) {
+        dominates[i].push(j);
+        dominatedBy[j]++;
+      }
+    }
+  }
+
+  let currentFront = dominatedBy.map((count, idx) => (count === 0 ? idx : -1)).filter((idx) => idx !== -1);
+  const ranks = new Array(n).fill(1);
+  let frontNum = 1;
+
+  while (currentFront.length > 0) {
+    const nextFront: number[] = [];
+    for (const i of currentFront) {
+      ranks[i] = frontNum;
+      for (const j of dominates[i]) {
+        dominatedBy[j]--;
+        if (dominatedBy[j] === 0) {
+          nextFront.push(j);
+        }
+      }
+    }
+    if (nextFront.length > 0) {
+      frontNum++;
+    }
+    currentFront = nextFront;
+  }
+
+  candidates.forEach((c, idx) => {
+    const isOpt = ranks[idx] === 1;
+    c.is_pareto_optimal = isOpt;
+    c.pareto_rank = ranks[idx];
+    if (isOpt) {
+      const v = vectors[idx];
+      c.pareto_explanation = v.every((x) => x === 2)
+        ? "Pareto Nondominated (Frontier 1): Achieves maximum suitability across all 4 evaluation dimensions."
+        : "Pareto Nondominated (Frontier 1): Multi-objective optimum; no candidate dominates this sequence across all dimensions.";
+    } else {
+      const domIdx = dominates.findIndex((list) => list.includes(idx));
+      c.pareto_explanation = `Pareto Dominated (Frontier ${ranks[idx]}): Outperformed across evaluated dimensions by sequence #${candidates[domIdx >= 0 ? domIdx : 0].rank}.`;
+    }
+  });
+
+  const antecedentCrop: ScenarioYear | null = hist.length > 0 ? {
+    year: startYear - 1,
+    crop_code: lastCode,
+    crop_name: cropName(lastCode),
+  } : null;
+
+  return {
+    field_id: rec.field.field_id,
+    horizon,
+    start_year: startYear,
+    antecedent_crop: antecedentCrop,
+    candidates,
+    pareto_optimal_count: candidates.filter((c) => c.is_pareto_optimal).length,
+    generated_at: new Date().toISOString(),
+  };
+}
+
+export function mockCompareScenarios(fieldId: string, scenarios: RotationScenario[]): CompareScenariosResponse {
+  const tradeoffs: TradeoffFinding[] = [
+    {
+      category: "diversity",
+      summary: scenarios.length > 1
+        ? `'${scenarios[0].name}' incorporates diverse grass and broadleaf families compared to '${scenarios[1].name}', mitigating soil-borne fungal pressure.`
+        : "Single scenario evaluated for diversity.",
+    },
+    {
+      category: "water_risk",
+      summary: "Rotations featuring sorghum and winter wheat conserve subsoil moisture better under semiarid climate conditions.",
+    },
+    {
+      category: "agronomic_fit",
+      summary: "All compared scenarios meet the baseline biophysical suitability requirements of the field.",
+    },
+  ];
+
+  return {
+    field_id: fieldId,
+    scenarios,
+    tradeoffs,
+  };
+}
+
 

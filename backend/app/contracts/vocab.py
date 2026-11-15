@@ -59,3 +59,5 @@ IndicatorKey = Literal[
     "distinct_crops", "max_monoculture_run", "rotation_shannon",
 ]
 CropCode = int
+ScenarioInterpretation = Literal["supported", "conditional", "exploratory", "not_recommended", "insufficient_data"]
+

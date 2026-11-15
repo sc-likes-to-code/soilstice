@@ -15,7 +15,7 @@ from app.providers.smap import SmapClient
 from app.providers.srtm import SrtmClient
 from app.providers.ssurgo import SsurgoClient
 from app.repositories import Repositories, SqliteDocumentStore
-from app.rotation.engine import PendingRotationEngine, RotationEngine
+from app.rotation.engine import MultiYearRotationEngine, PendingRotationEngine, RotationEngine
 from app.rotation.kb import CropKnowledgeBase, load_kb
 from app.suitability.engine import CropSuitabilityEngine
 
@@ -83,7 +83,7 @@ def build_container(settings: Settings, *, providers: Providers | None = None, t
         providers=providers or build_providers(settings, repos, transport),
         kb=load_kb(settings.crop_kb_dir),
         resilience=CalibratedResilienceEngine(),
-        rotation=PendingRotationEngine(),
+        rotation=MultiYearRotationEngine(),
         executor=ThreadPoolExecutor(max_workers=settings.job_workers, thread_name_prefix="soilstice-job")
         if settings.job_execution == "thread" else None,
     )
