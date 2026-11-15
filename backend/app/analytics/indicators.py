@@ -227,4 +227,9 @@ def all_indicators(field_id: UUID, *, soil: SoilProfile | None, terrain: Terrain
     out += terrain_indicators(field_id, terrain, terrain_reason)
     out += vegetation_indicators(field_id, year, veg=vegetation)
     out += crop_history.metrics if crop_history else []
-    return out
+    return [
+        i for i in out
+        if i.key not in {"et_actual_season", "sm_rootzone_percentile"}
+        and "actual et" not in i.label.lower()
+        and "openet" not in i.label.lower()
+    ]

@@ -4,7 +4,7 @@
  "list": false,
  "payload": {
   "data": {
-   "recommendation_id": "1e86c885-3b35-49e1-abcd-3660b3801590",
+   "recommendation_id": "2cb12b0a-052f-4acb-a378-457563c6e073",
    "field_id": "51e18c11-e9e2-4961-a004-8ca63bdc25c3",
    "target_season": {
     "label": "2026 season",
@@ -24,8 +24,8 @@
    "excluded": []
   },
   "meta": {
-   "request_id": "mock-30-mwhmtpcq",
-   "generated_at": "2026-11-15T09:28:27.291Z",
+   "request_id": "mock-30-mwi84yqx",
+   "generated_at": "2026-11-15T19:25:04.617Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",

@@ -4,7 +4,7 @@
  "list": false,
  "payload": {
   "data": {
-   "profile_id": "27f76983-328c-4089-8ef8-d8fd32f6e6b3",
+   "profile_id": "48244792-3994-470c-b08f-2491678f046e",
    "field_id": "b51ca161-9c78-4a01-8b6f-cd43029b543a",
    "as_of": "2026-11-01",
    "model_version": "soilstice-resilience-0.0.0-synthetic",
@@ -18,8 +18,8 @@
     },
     "band": "high",
     "confidence": "low",
-    "components_used": 5,
-    "components_total": 5
+    "components_used": 4,
+    "components_total": 4
    },
    "components": [
     {
@@ -71,34 +71,10 @@
      }
     },
     {
-     "key": "vegetation_stability",
-     "label": "Vegetation stability",
-     "score": {
-      "value": 83,
-      "unit": "score_0_100",
-      "uncertainty": null,
-      "missing_reason": null
-     },
-     "band": "high",
-     "support_class": "F",
-     "confidence": "high",
-     "input_indicator_ids": [
-      "b51ca161-9c78-4a01-8b6f-cd43029b543a:ndvi_peak_cv"
-     ],
-     "explanation": "Synthetic placeholder score. In Phase 4 this component maps ndvi_peak_cv through a cited breakpoint table.",
-     "rule_ref": {
-      "method_id": "resilience_vegetation_stability_breakpoints",
-      "name": "Vegetation stability breakpoint table",
-      "version": "synthetic-0",
-      "description": "Breakpoints pending (Phase 4).",
-      "reference_url": null
-     }
-    },
-    {
      "key": "climate_exposure",
      "label": "Climate exposure",
      "score": {
-      "value": 95,
+      "value": 83,
       "unit": "score_0_100",
       "uncertainty": null,
       "missing_reason": null
@@ -124,7 +100,7 @@
      "key": "rotation_diversity",
      "label": "Rotation diversity",
      "score": {
-      "value": 91,
+      "value": 95,
       "unit": "score_0_100",
       "uncertainty": null,
       "missing_reason": null
@@ -161,8 +137,8 @@
    ]
   },
   "meta": {
-   "request_id": "mock-3s-mwhmtpnk",
-   "generated_at": "2026-11-15T09:28:27.680Z",
+   "request_id": "mock-3s-mwi84z26",
+   "generated_at": "2026-11-15T19:25:05.022Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",

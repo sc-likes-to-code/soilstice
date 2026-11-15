@@ -1296,10 +1296,15 @@
       "crop_name": "Corn"
      },
      "resilience_band": "unknown",
-     "coverage_completeness": 0.67
+     "coverage_completeness": 0.8
     }
    ],
    "coverage_summary": [
+    {
+     "dataset_id": "meteomatics",
+     "fields_available": 6,
+     "fields_total": 6
+    },
     {
      "dataset_id": "nasa_power_daily_ag",
      "fields_available": 6,
@@ -1312,16 +1317,6 @@
     },
     {
      "dataset_id": "usda_nass_cdl",
-     "fields_available": 6,
-     "fields_total": 6
-    },
-    {
-     "dataset_id": "nasa_hls_vi",
-     "fields_available": 5,
-     "fields_total": 6
-    },
-    {
-     "dataset_id": "nasa_smap_spl4smgp",
      "fields_available": 6,
      "fields_total": 6
     },
@@ -1340,7 +1335,7 @@
     {
      "code": "INSUFFICIENT_COMPONENTS",
      "severity": "warning",
-     "message": "Demo Field F-F: resilience composite withheld — only 3 of 5 components available."
+     "message": "Demo Field F-F: resilience composite withheld — fewer than 3 of 4 components available."
     }
    ],
    "regional_context": [
@@ -1533,77 +1528,12 @@
      },
      "input_ids": [],
      "reference_value": null
-    },
-    {
-     "indicator_id": "ks_finney:sm_rootzone_percentile:2025",
-     "key": "sm_rootzone_percentile",
-     "label": "Root-zone moisture percentile (AOI)",
-     "category": "soil_moisture",
-     "value": {
-      "value": 25,
-      "unit": "percentile",
-      "uncertainty": null,
-      "missing_reason": null
-     },
-     "nature": "derived",
-     "spatial": {
-      "support_class": "R",
-      "native_resolution_m": 9000,
-      "extraction_method": "containing_cell",
-      "field_fraction_of_cell": 0.0052,
-      "cell_id": "synthetic-cell",
-      "crs": "EPSG:6933"
-     },
-     "temporal": {
-      "resolution": "season",
-      "period_start": "2025-01-01",
-      "period_end": "2025-12-31",
-      "aggregation": "percentile",
-      "time_standard": "UTC"
-     },
-     "quality": {
-      "status": "valid",
-      "flags": [
-       {
-        "code": "SYNTHETIC",
-        "severity": "info",
-        "message": "Synthetic demo value — not an observation."
-       },
-       {
-        "code": "SHORT_CLIMATOLOGY",
-        "severity": "warning",
-        "message": "SMAP record starts 2015-03-31; percentiles rest on ~10 years."
-       }
-      ],
-      "completeness": 1,
-      "missing_reason": null
-     },
-     "sources": [
-      {
-       "dataset_id": "synthetic",
-       "product": "Synthetic stand-in for SPL4SMGP",
-       "product_version": "synthetic-0",
-       "acquisition_id": null,
-       "doi": null,
-       "documentation_url": "https://nsidc.org/data/spl4smgp",
-       "retrieved_at": null
-      }
-     ],
-     "method": {
-      "method_id": "synthetic_sm_rootzone_percentile",
-      "name": "Synthetic root-zone moisture percentile",
-      "version": "synthetic-0",
-      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
-      "reference_url": null
-     },
-     "input_ids": [],
-     "reference_value": null
     }
    ]
   },
   "meta": {
-   "request_id": "mock-34-mwhmtpeh",
-   "generated_at": "2026-11-15T09:28:27.355Z",
+   "request_id": "mock-34-mwi84ysn",
+   "generated_at": "2026-11-15T19:25:04.681Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",

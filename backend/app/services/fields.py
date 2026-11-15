@@ -233,8 +233,10 @@ class FieldService:
         return FieldProfile(
             field=f, coverage=self.coverage(f), soil=self.repos.soil.get(str(f.field_id)),
             terrain=self.repos.terrain.get(str(f.field_id)), crop_history=self.repos.crop_history.get(str(f.field_id)),
-            climate_summary=[i for i in (climate.indicators if climate else []) if i.value.value is not None or
-                             i.key in ("precip_total_season", "solar_total_season", "rh_mean_season")],
+            climate_summary=[i for i in (climate.indicators if climate else []) if (i.value.value is not None or
+                             i.key in ("precip_total_season", "solar_total_season", "rh_mean_season")) and
+                             i.key not in ("et_actual_season", "sm_rootzone_percentile") and
+                             "actual et" not in i.label.lower() and "openet" not in i.label.lower()],
             vegetation_summary=veg, resilience=env.resilience(f.field_id),
         )
 

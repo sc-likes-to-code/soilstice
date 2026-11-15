@@ -4,7 +4,7 @@
  "list": false,
  "payload": {
   "data": {
-   "profile_id": "53ed9824-b054-4c30-b5b8-8715029ad890",
+   "profile_id": "3913d41c-15de-46e2-9983-ab9d71d3b93b",
    "field_id": "46984669-4195-4ead-8d67-19c1f31451fa",
    "as_of": "2026-11-01",
    "model_version": "soilstice-resilience-0.0.0-synthetic",
@@ -19,7 +19,7 @@
     "band": "unknown",
     "confidence": "low",
     "components_used": 0,
-    "components_total": 5
+    "components_total": 4
    },
    "components": [],
    "limitations": [
@@ -36,8 +36,8 @@
    ]
   },
   "meta": {
-   "request_id": "mock-2m-mwhmtp6n",
-   "generated_at": "2026-11-15T09:28:27.071Z",
+   "request_id": "mock-2m-mwi84ykt",
+   "generated_at": "2026-11-15T19:25:04.397Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",

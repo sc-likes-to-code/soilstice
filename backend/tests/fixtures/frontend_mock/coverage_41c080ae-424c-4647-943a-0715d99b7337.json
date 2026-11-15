@@ -7,6 +7,22 @@
    "field_id": "41c080ae-424c-4647-943a-0715d99b7337",
    "datasets": [
     {
+     "dataset_id": "meteomatics",
+     "label": "Meteomatics Environmental API",
+     "priority": "P0",
+     "status": "available",
+     "support_class": "R",
+     "native_resolution_m": 1000,
+     "temporal_coverage": {
+      "start": "2010-01-01",
+      "end": null
+     },
+     "product_version": "synthetic-0",
+     "last_updated": "2026-11-01T09:00:00Z",
+     "missing_reason": null,
+     "note": "Operational dataset integrated."
+    },
+    {
      "dataset_id": "nasa_power_daily_ag",
      "label": "NASA POWER Daily (AG community)",
      "priority": "P0",
@@ -20,7 +36,7 @@
      "product_version": "synthetic-0",
      "last_updated": "2026-11-01T09:00:00Z",
      "missing_reason": null,
-     "note": "Synthetic coverage record (Phase 1)."
+     "note": "Operational dataset integrated."
     },
     {
      "dataset_id": "usda_nrcs_ssurgo_sda",
@@ -36,7 +52,7 @@
      "product_version": "synthetic-0",
      "last_updated": "2026-11-01T09:00:00Z",
      "missing_reason": null,
-     "note": "Synthetic coverage record (Phase 1)."
+     "note": "Operational dataset integrated."
     },
     {
      "dataset_id": "usda_nass_cdl",
@@ -52,55 +68,7 @@
      "product_version": "synthetic-0",
      "last_updated": "2026-11-01T09:00:00Z",
      "missing_reason": null,
-     "note": "Synthetic coverage record (Phase 1)."
-    },
-    {
-     "dataset_id": "usda_nass_csb",
-     "label": "Crop Sequence Boundaries",
-     "priority": "P0",
-     "status": "not_applicable",
-     "support_class": "F",
-     "native_resolution_m": null,
-     "temporal_coverage": {
-      "start": "2018-01-01",
-      "end": "2025-12-31"
-     },
-     "product_version": null,
-     "last_updated": null,
-     "missing_reason": null,
-     "note": "Synthetic geometry — not a CSB polygon."
-    },
-    {
-     "dataset_id": "nasa_hls_vi",
-     "label": "HLS Vegetation Indices (L30/S30)",
-     "priority": "P0",
-     "status": "missing",
-     "support_class": "F",
-     "native_resolution_m": 30,
-     "temporal_coverage": {
-      "start": "2013-04-11",
-      "end": null
-     },
-     "product_version": "synthetic-0",
-     "last_updated": null,
-     "missing_reason": "INSUFFICIENT_COVERAGE",
-     "note": "Synthetic coverage record (Phase 1)."
-    },
-    {
-     "dataset_id": "nasa_smap_spl4smgp",
-     "label": "SMAP L4 Surface & Root-Zone Soil Moisture",
-     "priority": "P0",
-     "status": "available",
-     "support_class": "R",
-     "native_resolution_m": 9000,
-     "temporal_coverage": {
-      "start": "2015-03-31",
-      "end": null
-     },
-     "product_version": "synthetic-0",
-     "last_updated": "2026-11-01T09:00:00Z",
-     "missing_reason": null,
-     "note": "Synthetic coverage record (Phase 1)."
+     "note": "Operational dataset integrated."
     },
     {
      "dataset_id": "nasa_srtm_gl1",
@@ -116,78 +84,14 @@
      "product_version": "synthetic-0",
      "last_updated": null,
      "missing_reason": "UPSTREAM_ERROR",
-     "note": "Synthetic coverage record (Phase 1)."
-    },
-    {
-     "dataset_id": "prism_daily",
-     "label": "PRISM daily climate",
-     "priority": "P1",
-     "status": "not_integrated",
-     "support_class": "S",
-     "native_resolution_m": 4000,
-     "temporal_coverage": {
-      "start": "1981-01-01",
-      "end": null
-     },
-     "product_version": null,
-     "last_updated": null,
-     "missing_reason": null,
-     "note": "P1 dataset — planned, not yet integrated."
-    },
-    {
-     "dataset_id": "openet",
-     "label": "OpenET Ensemble ET",
-     "priority": "P1",
-     "status": "not_integrated",
-     "support_class": "F",
-     "native_resolution_m": 30,
-     "temporal_coverage": {
-      "start": "2000-01-01",
-      "end": null
-     },
-     "product_version": null,
-     "last_updated": null,
-     "missing_reason": null,
-     "note": "P1 dataset — planned, not yet integrated."
-    },
-    {
-     "dataset_id": "usda_nass_quickstats",
-     "label": "NASS Quick Stats",
-     "priority": "P1",
-     "status": "not_integrated",
-     "support_class": "R",
-     "native_resolution_m": null,
-     "temporal_coverage": {
-      "start": null,
-      "end": null
-     },
-     "product_version": null,
-     "last_updated": null,
-     "missing_reason": null,
-     "note": "P1 dataset — planned, not yet integrated."
-    },
-    {
-     "dataset_id": "nasa_smap_spl3smp_e",
-     "label": "SMAP L3 Enhanced Soil Moisture",
-     "priority": "P1",
-     "status": "not_integrated",
-     "support_class": "R",
-     "native_resolution_m": 9000,
-     "temporal_coverage": {
-      "start": "2015-03-31",
-      "end": null
-     },
-     "product_version": null,
-     "last_updated": null,
-     "missing_reason": null,
-     "note": "P1 dataset — planned, not yet integrated."
+     "note": "Operational dataset integrated."
     }
    ],
-   "completeness": 0.67
+   "completeness": 0.8
   },
   "meta": {
-   "request_id": "mock-51-mwhmtq5t",
-   "generated_at": "2026-11-15T09:28:28.337Z",
+   "request_id": "mock-51-mwi84zl9",
+   "generated_at": "2026-11-15T19:25:05.710Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",

@@ -54,17 +54,33 @@
     "csb_id": null,
     "editable": true,
     "processing_status": "processing",
-    "latest_job_id": "cfad4700-5010-4cc1-a747-c652d96ae453",
+    "latest_job_id": "51726bed-ade3-4868-ad88-14189a120877",
     "created_at": "2026-11-01T09:00:00Z"
    },
    "coverage": {
     "field_id": "51e18c11-e9e2-4961-a004-8ca63bdc25c3",
     "datasets": [
      {
+      "dataset_id": "meteomatics",
+      "label": "Meteomatics Environmental API",
+      "priority": "P0",
+      "status": "missing",
+      "support_class": "R",
+      "native_resolution_m": 1000,
+      "temporal_coverage": {
+       "start": "2010-01-01",
+       "end": null
+      },
+      "product_version": "synthetic-0",
+      "last_updated": null,
+      "missing_reason": "UPSTREAM_ERROR",
+      "note": "Processing job in progress."
+     },
+     {
       "dataset_id": "nasa_power_daily_ag",
       "label": "NASA POWER Daily (AG community)",
       "priority": "P0",
-      "status": "available",
+      "status": "missing",
       "support_class": "R",
       "native_resolution_m": 55000,
       "temporal_coverage": {
@@ -72,15 +88,15 @@
        "end": null
       },
       "product_version": "synthetic-0",
-      "last_updated": "2026-11-01T09:00:00Z",
-      "missing_reason": null,
-      "note": "Synthetic coverage record (Phase 1)."
+      "last_updated": null,
+      "missing_reason": "UPSTREAM_ERROR",
+      "note": "Processing job in progress."
      },
      {
       "dataset_id": "usda_nrcs_ssurgo_sda",
       "label": "SSURGO via Soil Data Access",
       "priority": "P0",
-      "status": "available",
+      "status": "missing",
       "support_class": "F",
       "native_resolution_m": null,
       "temporal_coverage": {
@@ -88,15 +104,15 @@
        "end": null
       },
       "product_version": "synthetic-0",
-      "last_updated": "2026-11-01T09:00:00Z",
-      "missing_reason": null,
-      "note": "Synthetic coverage record (Phase 1)."
+      "last_updated": null,
+      "missing_reason": "UPSTREAM_ERROR",
+      "note": "Processing job in progress."
      },
      {
       "dataset_id": "usda_nass_cdl",
       "label": "Cropland Data Layer (CropScape)",
       "priority": "P0",
-      "status": "available",
+      "status": "missing",
       "support_class": "F",
       "native_resolution_m": 30,
       "temporal_coverage": {
@@ -104,63 +120,15 @@
        "end": "2025-12-31"
       },
       "product_version": "synthetic-0",
-      "last_updated": "2026-11-01T09:00:00Z",
-      "missing_reason": null,
-      "note": "Synthetic coverage record (Phase 1)."
-     },
-     {
-      "dataset_id": "usda_nass_csb",
-      "label": "Crop Sequence Boundaries",
-      "priority": "P0",
-      "status": "not_applicable",
-      "support_class": "F",
-      "native_resolution_m": null,
-      "temporal_coverage": {
-       "start": "2018-01-01",
-       "end": "2025-12-31"
-      },
-      "product_version": null,
       "last_updated": null,
-      "missing_reason": null,
-      "note": "User-drawn field — not a CSB polygon."
-     },
-     {
-      "dataset_id": "nasa_hls_vi",
-      "label": "HLS Vegetation Indices (L30/S30)",
-      "priority": "P0",
-      "status": "pending",
-      "support_class": "F",
-      "native_resolution_m": 30,
-      "temporal_coverage": {
-       "start": "2013-04-11",
-       "end": null
-      },
-      "product_version": "synthetic-0",
-      "last_updated": null,
-      "missing_reason": "PENDING_PROCESSING",
-      "note": "Processing job running."
-     },
-     {
-      "dataset_id": "nasa_smap_spl4smgp",
-      "label": "SMAP L4 Surface & Root-Zone Soil Moisture",
-      "priority": "P0",
-      "status": "pending",
-      "support_class": "R",
-      "native_resolution_m": 9000,
-      "temporal_coverage": {
-       "start": "2015-03-31",
-       "end": null
-      },
-      "product_version": "synthetic-0",
-      "last_updated": null,
-      "missing_reason": "PENDING_PROCESSING",
-      "note": "Processing job running."
+      "missing_reason": "UPSTREAM_ERROR",
+      "note": "Processing job in progress."
      },
      {
       "dataset_id": "nasa_srtm_gl1",
       "label": "SRTM Global 1 arc-second",
       "priority": "P0",
-      "status": "available",
+      "status": "missing",
       "support_class": "F",
       "native_resolution_m": 30,
       "temporal_coverage": {
@@ -168,76 +136,12 @@
        "end": "2000-02-21"
       },
       "product_version": "synthetic-0",
-      "last_updated": "2026-11-01T09:00:00Z",
-      "missing_reason": null,
-      "note": "Synthetic coverage record (Phase 1)."
-     },
-     {
-      "dataset_id": "prism_daily",
-      "label": "PRISM daily climate",
-      "priority": "P1",
-      "status": "not_integrated",
-      "support_class": "S",
-      "native_resolution_m": 4000,
-      "temporal_coverage": {
-       "start": "1981-01-01",
-       "end": null
-      },
-      "product_version": null,
       "last_updated": null,
-      "missing_reason": null,
-      "note": "P1 dataset — planned, not yet integrated."
-     },
-     {
-      "dataset_id": "openet",
-      "label": "OpenET Ensemble ET",
-      "priority": "P1",
-      "status": "not_integrated",
-      "support_class": "F",
-      "native_resolution_m": 30,
-      "temporal_coverage": {
-       "start": "2000-01-01",
-       "end": null
-      },
-      "product_version": null,
-      "last_updated": null,
-      "missing_reason": null,
-      "note": "P1 dataset — planned, not yet integrated."
-     },
-     {
-      "dataset_id": "usda_nass_quickstats",
-      "label": "NASS Quick Stats",
-      "priority": "P1",
-      "status": "not_integrated",
-      "support_class": "R",
-      "native_resolution_m": null,
-      "temporal_coverage": {
-       "start": null,
-       "end": null
-      },
-      "product_version": null,
-      "last_updated": null,
-      "missing_reason": null,
-      "note": "P1 dataset — planned, not yet integrated."
-     },
-     {
-      "dataset_id": "nasa_smap_spl3smp_e",
-      "label": "SMAP L3 Enhanced Soil Moisture",
-      "priority": "P1",
-      "status": "not_integrated",
-      "support_class": "R",
-      "native_resolution_m": 9000,
-      "temporal_coverage": {
-       "start": "2015-03-31",
-       "end": null
-      },
-      "product_version": null,
-      "last_updated": null,
-      "missing_reason": null,
-      "note": "P1 dataset — planned, not yet integrated."
+      "missing_reason": "UPSTREAM_ERROR",
+      "note": "Processing job in progress."
      }
     ],
-    "completeness": 0.67
+    "completeness": 0
    },
    "soil": null,
    "terrain": null,
@@ -432,71 +336,6 @@
      },
      "input_ids": [],
      "reference_value": null
-    },
-    {
-     "indicator_id": "51e18c11-e9e2-4961-a004-8ca63bdc25c3:sm_rootzone_percentile:2025-01-01",
-     "key": "sm_rootzone_percentile",
-     "label": "Root-zone moisture percentile",
-     "category": "soil_moisture",
-     "value": {
-      "value": 23,
-      "unit": "percentile",
-      "uncertainty": null,
-      "missing_reason": null
-     },
-     "nature": "derived",
-     "spatial": {
-      "support_class": "R",
-      "native_resolution_m": 9000,
-      "extraction_method": "containing_cell",
-      "field_fraction_of_cell": 0.0064,
-      "cell_id": "synthetic-cell",
-      "crs": "EPSG:6933"
-     },
-     "temporal": {
-      "resolution": "season",
-      "period_start": "2025-01-01",
-      "period_end": "2025-12-31",
-      "aggregation": "percentile",
-      "time_standard": "UTC"
-     },
-     "quality": {
-      "status": "valid",
-      "flags": [
-       {
-        "code": "SYNTHETIC",
-        "severity": "info",
-        "message": "Synthetic demo value — not an observation."
-       },
-       {
-        "code": "SHORT_CLIMATOLOGY",
-        "severity": "warning",
-        "message": "SMAP record starts 2015-03-31; percentiles rest on ~10 years."
-       }
-      ],
-      "completeness": 1,
-      "missing_reason": null
-     },
-     "sources": [
-      {
-       "dataset_id": "synthetic",
-       "product": "Synthetic stand-in for SPL4SMGP",
-       "product_version": "synthetic-0",
-       "acquisition_id": null,
-       "doi": null,
-       "documentation_url": "https://nsidc.org/data/spl4smgp",
-       "retrieved_at": null
-      }
-     ],
-     "method": {
-      "method_id": "synthetic_sm_rootzone_percentile",
-      "name": "Synthetic root-zone moisture percentile",
-      "version": "synthetic-0",
-      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
-      "reference_url": null
-     },
-     "input_ids": [],
-     "reference_value": null
     }
    ],
    "vegetation_summary": [
@@ -622,7 +461,7 @@
     }
    ],
    "resilience": {
-    "profile_id": "0bc0ebd3-7ddc-4d34-a5f0-a9725e221674",
+    "profile_id": "af7f790e-8c96-441a-8c48-9c2fdac4a1f0",
     "field_id": "51e18c11-e9e2-4961-a004-8ca63bdc25c3",
     "as_of": "2026-11-01",
     "model_version": "soilstice-resilience-0.0.0-synthetic",
@@ -637,7 +476,7 @@
      "band": "unknown",
      "confidence": "low",
      "components_used": 0,
-     "components_total": 5
+     "components_total": 4
     },
     "components": [],
     "limitations": [
@@ -655,8 +494,8 @@
    }
   },
   "meta": {
-   "request_id": "mock-2r-mwhmtp8s",
-   "generated_at": "2026-11-15T09:28:27.149Z",
+   "request_id": "mock-2r-mwi84ymz",
+   "generated_at": "2026-11-15T19:25:04.477Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",

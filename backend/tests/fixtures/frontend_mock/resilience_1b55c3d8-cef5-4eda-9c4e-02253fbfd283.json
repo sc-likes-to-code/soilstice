@@ -4,22 +4,22 @@
  "list": false,
  "payload": {
   "data": {
-   "profile_id": "8758f225-69af-4129-b234-6531ca77165a",
+   "profile_id": "22eb6746-1c6a-46d3-8e7a-4029fca5db27",
    "field_id": "1b55c3d8-cef5-4eda-9c4e-02253fbfd283",
    "as_of": "2026-11-01",
    "model_version": "soilstice-resilience-0.0.0-synthetic",
    "status": "computed",
    "composite": {
     "score": {
-     "value": 58,
+     "value": 57,
      "unit": "score_0_100",
      "uncertainty": null,
      "missing_reason": null
     },
     "band": "moderate",
     "confidence": "low",
-    "components_used": 5,
-    "components_total": 5
+    "components_used": 4,
+    "components_total": 4
    },
    "components": [
     {
@@ -71,34 +71,10 @@
      }
     },
     {
-     "key": "vegetation_stability",
-     "label": "Vegetation stability",
-     "score": {
-      "value": 47,
-      "unit": "score_0_100",
-      "uncertainty": null,
-      "missing_reason": null
-     },
-     "band": "moderate",
-     "support_class": "F",
-     "confidence": "medium",
-     "input_indicator_ids": [
-      "1b55c3d8-cef5-4eda-9c4e-02253fbfd283:ndvi_peak_cv"
-     ],
-     "explanation": "Synthetic placeholder score. In Phase 4 this component maps ndvi_peak_cv through a cited breakpoint table.",
-     "rule_ref": {
-      "method_id": "resilience_vegetation_stability_breakpoints",
-      "name": "Vegetation stability breakpoint table",
-      "version": "synthetic-0",
-      "description": "Breakpoints pending (Phase 4).",
-      "reference_url": null
-     }
-    },
-    {
      "key": "climate_exposure",
      "label": "Climate exposure",
      "score": {
-      "value": 63,
+      "value": 47,
       "unit": "score_0_100",
       "uncertainty": null,
       "missing_reason": null
@@ -124,7 +100,7 @@
      "key": "rotation_diversity",
      "label": "Rotation diversity",
      "score": {
-      "value": 61,
+      "value": 63,
       "unit": "score_0_100",
       "uncertainty": null,
       "missing_reason": null
@@ -152,11 +128,6 @@
      "code": "REGIONAL_COMPONENT",
      "severity": "info",
      "message": "Climate exposure uses regional-context inputs (POWER ~55 km, SMAP 9 km)."
-    },
-    {
-     "code": "CLOUD_LIMITED",
-     "severity": "warning",
-     "message": "Vegetation stability rests on fewer clear scenes than usual."
     }
    ],
    "disclaimers": [
@@ -166,8 +137,8 @@
    ]
   },
   "meta": {
-   "request_id": "mock-4i-mwhmtpyf",
-   "generated_at": "2026-11-15T09:28:28.071Z",
+   "request_id": "mock-4i-mwi84zdg",
+   "generated_at": "2026-11-15T19:25:05.428Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",

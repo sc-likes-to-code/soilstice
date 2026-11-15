@@ -13,6 +13,14 @@ import { DocLink, FlagList, QualityIndicator, QuantityValue, SourceList, Support
 export function IndicatorCard({ indicator, className, size = "md" }: { indicator: EnvironmentalIndicator; className?: string; size?: "sm" | "md" }) {
   const { units } = usePrefs();
   const [open, setOpen] = useState(false);
+  if (
+    indicator.key === "et_actual_season" ||
+    indicator.key === "sm_rootzone_percentile" ||
+    indicator.label.toLowerCase().includes("actual et") ||
+    indicator.label.toLowerCase().includes("openet")
+  ) {
+    return null;
+  }
   const ref = indicator.reference_value;
   const hasDelta = ref && ref.value !== null && indicator.value.value !== null;
   const delta = hasDelta ? indicator.value.value! - ref!.value! : null;

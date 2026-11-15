@@ -4,22 +4,22 @@
  "list": false,
  "payload": {
   "data": {
-   "profile_id": "f764f1a7-8dfa-44f3-b594-6477ef7f0f70",
+   "profile_id": "de109d1e-4034-4f1d-9add-835651f2f120",
    "field_id": "474ea01b-7fdd-403c-a004-43d8c2312d17",
    "as_of": "2026-11-01",
    "model_version": "soilstice-resilience-0.0.0-synthetic",
    "status": "computed",
    "composite": {
     "score": {
-     "value": 31,
+     "value": 33,
      "unit": "score_0_100",
      "uncertainty": null,
      "missing_reason": null
     },
     "band": "low",
     "confidence": "low",
-    "components_used": 5,
-    "components_total": 5
+    "components_used": 4,
+    "components_total": 4
    },
    "components": [
     {
@@ -71,34 +71,10 @@
      }
     },
     {
-     "key": "vegetation_stability",
-     "label": "Vegetation stability",
-     "score": {
-      "value": 28,
-      "unit": "score_0_100",
-      "uncertainty": null,
-      "missing_reason": null
-     },
-     "band": "low",
-     "support_class": "F",
-     "confidence": "high",
-     "input_indicator_ids": [
-      "474ea01b-7fdd-403c-a004-43d8c2312d17:ndvi_peak_cv"
-     ],
-     "explanation": "Synthetic placeholder score. In Phase 4 this component maps ndvi_peak_cv through a cited breakpoint table.",
-     "rule_ref": {
-      "method_id": "resilience_vegetation_stability_breakpoints",
-      "name": "Vegetation stability breakpoint table",
-      "version": "synthetic-0",
-      "description": "Breakpoints pending (Phase 4).",
-      "reference_url": null
-     }
-    },
-    {
      "key": "climate_exposure",
      "label": "Climate exposure",
      "score": {
-      "value": 37,
+      "value": 28,
       "unit": "score_0_100",
       "uncertainty": null,
       "missing_reason": null
@@ -124,7 +100,7 @@
      "key": "rotation_diversity",
      "label": "Rotation diversity",
      "score": {
-      "value": 21,
+      "value": 37,
       "unit": "score_0_100",
       "uncertainty": null,
       "missing_reason": null
@@ -161,8 +137,8 @@
    ]
   },
   "meta": {
-   "request_id": "mock-4v-mwhmtq38",
-   "generated_at": "2026-11-15T09:28:28.244Z",
+   "request_id": "mock-4v-mwi84zio",
+   "generated_at": "2026-11-15T19:25:05.616Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",

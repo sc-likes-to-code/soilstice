@@ -69,6 +69,22 @@
     "field_id": "474ea01b-7fdd-403c-a004-43d8c2312d17",
     "datasets": [
      {
+      "dataset_id": "meteomatics",
+      "label": "Meteomatics Environmental API",
+      "priority": "P0",
+      "status": "available",
+      "support_class": "R",
+      "native_resolution_m": 1000,
+      "temporal_coverage": {
+       "start": "2010-01-01",
+       "end": null
+      },
+      "product_version": "synthetic-0",
+      "last_updated": "2026-11-01T09:00:00Z",
+      "missing_reason": null,
+      "note": "Operational dataset integrated."
+     },
+     {
       "dataset_id": "nasa_power_daily_ag",
       "label": "NASA POWER Daily (AG community)",
       "priority": "P0",
@@ -82,7 +98,7 @@
       "product_version": "synthetic-0",
       "last_updated": "2026-11-01T09:00:00Z",
       "missing_reason": null,
-      "note": "Synthetic coverage record (Phase 1)."
+      "note": "Operational dataset integrated."
      },
      {
       "dataset_id": "usda_nrcs_ssurgo_sda",
@@ -98,7 +114,7 @@
       "product_version": "synthetic-0",
       "last_updated": "2026-11-01T09:00:00Z",
       "missing_reason": null,
-      "note": "Synthetic coverage record (Phase 1)."
+      "note": "Operational dataset integrated."
      },
      {
       "dataset_id": "usda_nass_cdl",
@@ -114,55 +130,7 @@
       "product_version": "synthetic-0",
       "last_updated": "2026-11-01T09:00:00Z",
       "missing_reason": null,
-      "note": "Synthetic coverage record (Phase 1)."
-     },
-     {
-      "dataset_id": "usda_nass_csb",
-      "label": "Crop Sequence Boundaries",
-      "priority": "P0",
-      "status": "not_applicable",
-      "support_class": "F",
-      "native_resolution_m": null,
-      "temporal_coverage": {
-       "start": "2018-01-01",
-       "end": "2025-12-31"
-      },
-      "product_version": null,
-      "last_updated": null,
-      "missing_reason": null,
-      "note": "Synthetic geometry — not a CSB polygon."
-     },
-     {
-      "dataset_id": "nasa_hls_vi",
-      "label": "HLS Vegetation Indices (L30/S30)",
-      "priority": "P0",
-      "status": "available",
-      "support_class": "F",
-      "native_resolution_m": 30,
-      "temporal_coverage": {
-       "start": "2013-04-11",
-       "end": null
-      },
-      "product_version": "synthetic-0",
-      "last_updated": "2026-11-01T09:00:00Z",
-      "missing_reason": null,
-      "note": "Synthetic coverage record (Phase 1)."
-     },
-     {
-      "dataset_id": "nasa_smap_spl4smgp",
-      "label": "SMAP L4 Surface & Root-Zone Soil Moisture",
-      "priority": "P0",
-      "status": "available",
-      "support_class": "R",
-      "native_resolution_m": 9000,
-      "temporal_coverage": {
-       "start": "2015-03-31",
-       "end": null
-      },
-      "product_version": "synthetic-0",
-      "last_updated": "2026-11-01T09:00:00Z",
-      "missing_reason": null,
-      "note": "Synthetic coverage record (Phase 1)."
+      "note": "Operational dataset integrated."
      },
      {
       "dataset_id": "nasa_srtm_gl1",
@@ -178,71 +146,7 @@
       "product_version": "synthetic-0",
       "last_updated": "2026-11-01T09:00:00Z",
       "missing_reason": null,
-      "note": "Synthetic coverage record (Phase 1)."
-     },
-     {
-      "dataset_id": "prism_daily",
-      "label": "PRISM daily climate",
-      "priority": "P1",
-      "status": "not_integrated",
-      "support_class": "S",
-      "native_resolution_m": 4000,
-      "temporal_coverage": {
-       "start": "1981-01-01",
-       "end": null
-      },
-      "product_version": null,
-      "last_updated": null,
-      "missing_reason": null,
-      "note": "P1 dataset — planned, not yet integrated."
-     },
-     {
-      "dataset_id": "openet",
-      "label": "OpenET Ensemble ET",
-      "priority": "P1",
-      "status": "not_integrated",
-      "support_class": "F",
-      "native_resolution_m": 30,
-      "temporal_coverage": {
-       "start": "2000-01-01",
-       "end": null
-      },
-      "product_version": null,
-      "last_updated": null,
-      "missing_reason": null,
-      "note": "P1 dataset — planned, not yet integrated."
-     },
-     {
-      "dataset_id": "usda_nass_quickstats",
-      "label": "NASS Quick Stats",
-      "priority": "P1",
-      "status": "not_integrated",
-      "support_class": "R",
-      "native_resolution_m": null,
-      "temporal_coverage": {
-       "start": null,
-       "end": null
-      },
-      "product_version": null,
-      "last_updated": null,
-      "missing_reason": null,
-      "note": "P1 dataset — planned, not yet integrated."
-     },
-     {
-      "dataset_id": "nasa_smap_spl3smp_e",
-      "label": "SMAP L3 Enhanced Soil Moisture",
-      "priority": "P1",
-      "status": "not_integrated",
-      "support_class": "R",
-      "native_resolution_m": 9000,
-      "temporal_coverage": {
-       "start": "2015-03-31",
-       "end": null
-      },
-      "product_version": null,
-      "last_updated": null,
-      "missing_reason": null,
-      "note": "P1 dataset — planned, not yet integrated."
+      "note": "Operational dataset integrated."
      }
     ],
     "completeness": 1
@@ -1835,71 +1739,6 @@
      },
      "input_ids": [],
      "reference_value": null
-    },
-    {
-     "indicator_id": "474ea01b-7fdd-403c-a004-43d8c2312d17:sm_rootzone_percentile:2025-01-01",
-     "key": "sm_rootzone_percentile",
-     "label": "Root-zone moisture percentile",
-     "category": "soil_moisture",
-     "value": {
-      "value": 25,
-      "unit": "percentile",
-      "uncertainty": null,
-      "missing_reason": null
-     },
-     "nature": "derived",
-     "spatial": {
-      "support_class": "R",
-      "native_resolution_m": 9000,
-      "extraction_method": "containing_cell",
-      "field_fraction_of_cell": 0.0069,
-      "cell_id": "synthetic-cell",
-      "crs": "EPSG:6933"
-     },
-     "temporal": {
-      "resolution": "season",
-      "period_start": "2025-01-01",
-      "period_end": "2025-12-31",
-      "aggregation": "percentile",
-      "time_standard": "UTC"
-     },
-     "quality": {
-      "status": "valid",
-      "flags": [
-       {
-        "code": "SYNTHETIC",
-        "severity": "info",
-        "message": "Synthetic demo value — not an observation."
-       },
-       {
-        "code": "SHORT_CLIMATOLOGY",
-        "severity": "warning",
-        "message": "SMAP record starts 2015-03-31; percentiles rest on ~10 years."
-       }
-      ],
-      "completeness": 1,
-      "missing_reason": null
-     },
-     "sources": [
-      {
-       "dataset_id": "synthetic",
-       "product": "Synthetic stand-in for SPL4SMGP",
-       "product_version": "synthetic-0",
-       "acquisition_id": null,
-       "doi": null,
-       "documentation_url": "https://nsidc.org/data/spl4smgp",
-       "retrieved_at": null
-      }
-     ],
-     "method": {
-      "method_id": "synthetic_sm_rootzone_percentile",
-      "name": "Synthetic root-zone moisture percentile",
-      "version": "synthetic-0",
-      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
-      "reference_url": null
-     },
-     "input_ids": [],
-     "reference_value": null
     }
    ],
    "vegetation_summary": [
@@ -2025,22 +1864,22 @@
     }
    ],
    "resilience": {
-    "profile_id": "ba77d266-5554-4b2a-9469-1b24d84566df",
+    "profile_id": "f764f1a7-8dfa-44f3-b594-6477ef7f0f70",
     "field_id": "474ea01b-7fdd-403c-a004-43d8c2312d17",
     "as_of": "2026-11-01",
     "model_version": "soilstice-resilience-0.0.0-synthetic",
     "status": "computed",
     "composite": {
      "score": {
-      "value": 31,
+      "value": 33,
       "unit": "score_0_100",
       "uncertainty": null,
       "missing_reason": null
      },
      "band": "low",
      "confidence": "low",
-     "components_used": 5,
-     "components_total": 5
+     "components_used": 4,
+     "components_total": 4
     },
     "components": [
      {
@@ -2092,34 +1931,10 @@
       }
      },
      {
-      "key": "vegetation_stability",
-      "label": "Vegetation stability",
-      "score": {
-       "value": 28,
-       "unit": "score_0_100",
-       "uncertainty": null,
-       "missing_reason": null
-      },
-      "band": "low",
-      "support_class": "F",
-      "confidence": "high",
-      "input_indicator_ids": [
-       "474ea01b-7fdd-403c-a004-43d8c2312d17:ndvi_peak_cv"
-      ],
-      "explanation": "Synthetic placeholder score. In Phase 4 this component maps ndvi_peak_cv through a cited breakpoint table.",
-      "rule_ref": {
-       "method_id": "resilience_vegetation_stability_breakpoints",
-       "name": "Vegetation stability breakpoint table",
-       "version": "synthetic-0",
-       "description": "Breakpoints pending (Phase 4).",
-       "reference_url": null
-      }
-     },
-     {
       "key": "climate_exposure",
       "label": "Climate exposure",
       "score": {
-       "value": 37,
+       "value": 28,
        "unit": "score_0_100",
        "uncertainty": null,
        "missing_reason": null
@@ -2145,7 +1960,7 @@
       "key": "rotation_diversity",
       "label": "Rotation diversity",
       "score": {
-       "value": 21,
+       "value": 37,
        "unit": "score_0_100",
        "uncertainty": null,
        "missing_reason": null
@@ -2183,8 +1998,8 @@
    }
   },
   "meta": {
-   "request_id": "mock-4n-mwhmtq06",
-   "generated_at": "2026-11-15T09:28:28.136Z",
+   "request_id": "mock-4n-mwi84zfm",
+   "generated_at": "2026-11-15T19:25:05.507Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",

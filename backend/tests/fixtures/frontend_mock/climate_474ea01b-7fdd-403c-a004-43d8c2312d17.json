@@ -572,71 +572,6 @@
      "reference_value": null
     },
     {
-     "indicator_id": "474ea01b-7fdd-403c-a004-43d8c2312d17:et_actual_season:2025-01-01",
-     "key": "et_actual_season",
-     "label": "Actual ET (OpenET)",
-     "category": "water",
-     "value": {
-      "value": null,
-      "unit": "mm",
-      "uncertainty": null,
-      "missing_reason": "NOT_COMPUTED"
-     },
-     "nature": "derived",
-     "spatial": {
-      "support_class": "F",
-      "native_resolution_m": 30,
-      "extraction_method": "zonal_polygon",
-      "field_fraction_of_cell": null,
-      "cell_id": null,
-      "crs": null
-     },
-     "temporal": {
-      "resolution": "season",
-      "period_start": "2025-01-01",
-      "period_end": "2025-12-31",
-      "aggregation": "sum",
-      "time_standard": "LST"
-     },
-     "quality": {
-      "status": "missing",
-      "flags": [
-       {
-        "code": "SYNTHETIC",
-        "severity": "info",
-        "message": "Synthetic demo value — not an observation."
-       },
-       {
-        "code": "NOT_INTEGRATED",
-        "severity": "info",
-        "message": "OpenET is a P1 dataset, not yet integrated."
-       }
-      ],
-      "completeness": 0,
-      "missing_reason": "NOT_COMPUTED"
-     },
-     "sources": [
-      {
-       "dataset_id": "synthetic",
-       "product": "Synthetic stand-in for OpenET Collection",
-       "product_version": "synthetic-0",
-       "acquisition_id": null,
-       "doi": null,
-       "documentation_url": "https://openet.gitbook.io/docs",
-       "retrieved_at": null
-      }
-     ],
-     "method": {
-      "method_id": "synthetic_et_actual_season",
-      "name": "Synthetic actual et (openet)",
-      "version": "synthetic-0",
-      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
-      "reference_url": null
-     },
-     "input_ids": [],
-     "reference_value": null
-    },
-    {
      "indicator_id": "474ea01b-7fdd-403c-a004-43d8c2312d17:sm_rootzone_mean_season:2025-01-01",
      "key": "sm_rootzone_mean_season",
      "label": "Root-zone soil moisture (mean)",
@@ -697,77 +632,12 @@
      "reference_value": null
     },
     {
-     "indicator_id": "474ea01b-7fdd-403c-a004-43d8c2312d17:sm_rootzone_percentile:2025-01-01",
-     "key": "sm_rootzone_percentile",
-     "label": "Root-zone moisture percentile",
-     "category": "soil_moisture",
-     "value": {
-      "value": 25,
-      "unit": "percentile",
-      "uncertainty": null,
-      "missing_reason": null
-     },
-     "nature": "derived",
-     "spatial": {
-      "support_class": "R",
-      "native_resolution_m": 9000,
-      "extraction_method": "containing_cell",
-      "field_fraction_of_cell": 0.0069,
-      "cell_id": "synthetic-cell",
-      "crs": "EPSG:6933"
-     },
-     "temporal": {
-      "resolution": "season",
-      "period_start": "2025-01-01",
-      "period_end": "2025-12-31",
-      "aggregation": "percentile",
-      "time_standard": "UTC"
-     },
-     "quality": {
-      "status": "valid",
-      "flags": [
-       {
-        "code": "SYNTHETIC",
-        "severity": "info",
-        "message": "Synthetic demo value — not an observation."
-       },
-       {
-        "code": "SHORT_CLIMATOLOGY",
-        "severity": "warning",
-        "message": "SMAP record starts 2015-03-31; percentiles rest on ~10 years."
-       }
-      ],
-      "completeness": 1,
-      "missing_reason": null
-     },
-     "sources": [
-      {
-       "dataset_id": "synthetic",
-       "product": "Synthetic stand-in for SPL4SMGP",
-       "product_version": "synthetic-0",
-       "acquisition_id": null,
-       "doi": null,
-       "documentation_url": "https://nsidc.org/data/spl4smgp",
-       "retrieved_at": null
-      }
-     ],
-     "method": {
-      "method_id": "synthetic_sm_rootzone_percentile",
-      "name": "Synthetic root-zone moisture percentile",
-      "version": "synthetic-0",
-      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
-      "reference_url": null
-     },
-     "input_ids": [],
-     "reference_value": null
-    },
-    {
      "indicator_id": "474ea01b-7fdd-403c-a004-43d8c2312d17:sm_rootzone_dry_days:2025-01-01",
      "key": "sm_rootzone_dry_days",
      "label": "Root-zone dry days",
      "category": "soil_moisture",
      "value": {
-      "value": 61,
+      "value": 18,
       "unit": "day",
       "uncertainty": null,
       "missing_reason": null
@@ -3838,8 +3708,8 @@
    }
   },
   "meta": {
-   "request_id": "mock-4p-mwhmtq11",
-   "generated_at": "2026-11-15T09:28:28.166Z",
+   "request_id": "mock-4p-mwi84zgh",
+   "generated_at": "2026-11-15T19:25:05.537Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",

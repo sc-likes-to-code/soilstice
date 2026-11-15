@@ -1274,12 +1274,12 @@
      "crop_name": "Corn"
     },
     "resilience_band": "unknown",
-    "coverage_completeness": 0.67
+    "coverage_completeness": 0.8
    }
   ],
   "meta": {
-   "request_id": "mock-35-mwhmtpew",
-   "generated_at": "2026-11-15T09:28:27.369Z",
+   "request_id": "mock-35-mwi84yt3",
+   "generated_at": "2026-11-15T19:25:04.695Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",

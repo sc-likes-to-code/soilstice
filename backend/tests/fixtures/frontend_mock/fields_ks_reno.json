@@ -105,7 +105,7 @@
      "crop_code": 4,
      "crop_name": "Sorghum"
     },
-    "resilience_band": "moderate",
+    "resilience_band": "high",
     "coverage_completeness": 1
    },
    {
@@ -157,7 +157,7 @@
      "crop_code": 236,
      "crop_name": "Dbl Crop WinWht/Sorghum"
     },
-    "resilience_band": "high",
+    "resilience_band": "moderate",
     "coverage_completeness": 1
    },
    {
@@ -262,7 +262,7 @@
      "crop_name": "Winter Wheat"
     },
     "resilience_band": "unknown",
-    "coverage_completeness": 0.67
+    "coverage_completeness": 0.8
    },
    {
     "field_id": "e0b78e6b-7d25-434b-bea0-c569044bde56",
@@ -366,7 +366,7 @@
      "crop_name": "Corn"
     },
     "resilience_band": "unknown",
-    "coverage_completeness": 0.33
+    "coverage_completeness": 0.4
    },
    {
     "field_id": "51e18c11-e9e2-4961-a004-8ca63bdc25c3",
@@ -414,12 +414,12 @@
     "processing_status": "processing",
     "latest_crop": null,
     "resilience_band": "unknown",
-    "coverage_completeness": 0.67
+    "coverage_completeness": 0
    }
   ],
   "meta": {
-   "request_id": "mock-6-mwhmto88",
-   "generated_at": "2026-11-15T09:28:25.833Z",
+   "request_id": "mock-6-mwi84xm2",
+   "generated_at": "2026-11-15T19:25:03.147Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",

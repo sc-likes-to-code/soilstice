@@ -7,6 +7,25 @@
    {
     "evidence_id": "c9ab64e1-4a45-4e58-a403-84480b6f10cf",
     "kind": "dataset",
+    "title": "Meteomatics Environmental API",
+    "summary": "Meteomatics AG · Meteomatics API (Mix) vv3.0 · P0 · support R. Not yet integrated (Phase 3).",
+    "field_id": null,
+    "dataset_id": "meteomatics",
+    "product_version": "v3.0",
+    "citation": "Meteomatics AG. Meteomatics Environmental API (Meteomatics API (Mix), version v3.0).",
+    "url": "https://www.meteomatics.com/en/api/",
+    "doi": null,
+    "accessed_at": "2026-11-14",
+    "verification_status": "LIVE",
+    "spatial": null,
+    "temporal": null,
+    "related_ids": [
+     "meteomatics"
+    ]
+   },
+   {
+    "evidence_id": "30cbd476-1632-44cf-9aa0-a18a05dc060c",
+    "kind": "dataset",
     "title": "NASA POWER Daily (AG community)",
     "summary": "NASA LaRC · POWER Daily API vv2.10.3 · P0 · support R. Not yet integrated (Phase 3).",
     "field_id": null,
@@ -24,7 +43,7 @@
     ]
    },
    {
-    "evidence_id": "30cbd476-1632-44cf-9aa0-a18a05dc060c",
+    "evidence_id": "c81fcdf1-17e5-4489-b8b6-e47dd2dce860",
     "kind": "dataset",
     "title": "SSURGO via Soil Data Access",
     "summary": "USDA NRCS · SSURGO (SDA) vlive database · P0 · support F. Not yet integrated (Phase 3).",
@@ -43,7 +62,7 @@
     ]
    },
    {
-    "evidence_id": "c81fcdf1-17e5-4489-b8b6-e47dd2dce860",
+    "evidence_id": "26e53576-1ee1-45bf-86da-02eada75c40d",
     "kind": "dataset",
     "title": "Cropland Data Layer (CropScape)",
     "summary": "USDA NASS · CDL v2006–2025 (KS) · P0 · support F. Not yet integrated (Phase 3).",
@@ -62,7 +81,7 @@
     ]
    },
    {
-    "evidence_id": "26e53576-1ee1-45bf-86da-02eada75c40d",
+    "evidence_id": "7e191b28-32e4-4811-a158-784d4645b99c",
     "kind": "dataset",
     "title": "Crop Sequence Boundaries",
     "summary": "USDA NASS · CSB 2018–2025 rev23 vrev23 · P0 · support F. Not yet integrated (Phase 3).",
@@ -81,7 +100,7 @@
     ]
    },
    {
-    "evidence_id": "7e191b28-32e4-4811-a158-784d4645b99c",
+    "evidence_id": "c1fc5d16-15b4-4481-a917-18b73113afee",
     "kind": "dataset",
     "title": "HLS Vegetation Indices (L30/S30)",
     "summary": "NASA LP DAAC · HLSL30_VI / HLSS30_VI v2.0 · P0 · support F. Not yet integrated (Phase 3).",
@@ -100,7 +119,7 @@
     ]
    },
    {
-    "evidence_id": "c1fc5d16-15b4-4481-a917-18b73113afee",
+    "evidence_id": "779f2bef-7c95-41d6-8d32-a775eb4f969b",
     "kind": "dataset",
     "title": "HLS Surface Reflectance (L30/S30)",
     "summary": "NASA LP DAAC · HLSL30 / HLSS30 v2.0 · P0 · support F. Not yet integrated (Phase 3).",
@@ -119,7 +138,7 @@
     ]
    },
    {
-    "evidence_id": "779f2bef-7c95-41d6-8d32-a775eb4f969b",
+    "evidence_id": "c73414d0-5e04-4c30-b52a-db7a3800357b",
     "kind": "dataset",
     "title": "SMAP L4 Surface & Root-Zone Soil Moisture",
     "summary": "NASA NSIDC DAAC · SPL4SMGP v008 · P0 · support R. Not yet integrated (Phase 3).",
@@ -138,7 +157,7 @@
     ]
    },
    {
-    "evidence_id": "c73414d0-5e04-4c30-b52a-db7a3800357b",
+    "evidence_id": "170b7bf0-0bdf-41ba-9721-90485a2d8a17",
     "kind": "dataset",
     "title": "SRTM Global 1 arc-second",
     "summary": "NASA LP DAAC · SRTMGL1 v003 · P0 · support F. Not yet integrated (Phase 3).",
@@ -157,7 +176,7 @@
     ]
    },
    {
-    "evidence_id": "170b7bf0-0bdf-41ba-9721-90485a2d8a17",
+    "evidence_id": "951558af-25fb-4724-bb6e-d19d04da40ec",
     "kind": "dataset",
     "title": "PRISM daily climate",
     "summary": "PRISM Group, Oregon State University · PRISM daily (4 km / 800 m) vpost-2025-10 COG · P1 · support S. Not yet integrated (Phase 3).",
@@ -176,7 +195,7 @@
     ]
    },
    {
-    "evidence_id": "951558af-25fb-4724-bb6e-d19d04da40ec",
+    "evidence_id": "c2a5bd68-a510-44f3-a932-21d7f83c972f",
     "kind": "dataset",
     "title": "OpenET Ensemble ET",
     "summary": "OpenET consortium · OpenET Collection v2.1 · P1 · support F. Not yet integrated (Phase 3).",
@@ -195,7 +214,7 @@
     ]
    },
    {
-    "evidence_id": "c2a5bd68-a510-44f3-a932-21d7f83c972f",
+    "evidence_id": "f055b79e-3ca3-454e-bcbf-483e8926addf",
     "kind": "dataset",
     "title": "NASS Quick Stats",
     "summary": "USDA NASS · Quick Stats API vapi_GET · P1 · support R. Not yet integrated (Phase 3).",
@@ -214,7 +233,7 @@
     ]
    },
    {
-    "evidence_id": "f055b79e-3ca3-454e-bcbf-483e8926addf",
+    "evidence_id": "6db35364-403a-488c-8eb5-9ff0aa158c62",
     "kind": "dataset",
     "title": "SMAP L3 Enhanced Soil Moisture",
     "summary": "NASA NSIDC DAAC · SPL3SMP_E v006 · P1 · support R. Not yet integrated (Phase 3).",
@@ -233,7 +252,7 @@
     ]
    },
    {
-    "evidence_id": "6db35364-403a-488c-8eb5-9ff0aa158c62",
+    "evidence_id": "49ba94d7-4064-4678-9c41-c750a5fa62bf",
     "kind": "dataset",
     "title": "GPM IMERG Final daily",
     "summary": "NASA GES DISC · GPM_3IMERGDF v07 · P2 · support R. Not yet integrated (Phase 3).",
@@ -252,7 +271,7 @@
     ]
    },
    {
-    "evidence_id": "49ba94d7-4064-4678-9c41-c750a5fa62bf",
+    "evidence_id": "c4cafc96-fe95-4d38-9fd1-715d2412fef3",
     "kind": "dataset",
     "title": "FAO GAEZ v5 crop suitability",
     "summary": "FAO + IIASA · GAEZ v5 vv5 · P2 · support R. Not yet integrated (Phase 3).",
@@ -271,7 +290,7 @@
     ]
    },
    {
-    "evidence_id": "c4cafc96-fe95-4d38-9fd1-715d2412fef3",
+    "evidence_id": "34748246-651f-4128-9ad1-9432a985e1bd",
     "kind": "method",
     "title": "SSURGO area × component-percent weighting",
     "summary": "Normative soil aggregation: major components, fixed depth intervals 0–30/30–100/100–150 cm, AWS from muaggatt. See SOILSTICE_DATA_ARCHITECTURE §5.3.1.",
@@ -290,7 +309,7 @@
     ]
    },
    {
-    "evidence_id": "34748246-651f-4128-9ad1-9432a985e1bd",
+    "evidence_id": "e3975471-b8f0-409f-9c71-46184a0c3c8e",
     "kind": "method",
     "title": "Field resilience framework",
     "summary": "Five components, absolute breakpoints (set in Phase 4), equal-weight composite when ≥4 of 5 components exist, confidence from support class. See SOILSTICE_DATA_ARCHITECTURE §5.10.",
@@ -309,7 +328,7 @@
     ]
    },
    {
-    "evidence_id": "e3975471-b8f0-409f-9c71-46184a0c3c8e",
+    "evidence_id": "26d3fb5a-1d25-4c1e-8774-598dd03834a3",
     "kind": "method",
     "title": "Rotation recommendation: limiting-factor method",
     "summary": "Each factor classed suitable/marginal/unsuitable against cited KB thresholds; worst factor wins; regional factors cannot exceed 'marginal'. See SOILSTICE_DATA_ARCHITECTURE §5.11.",
@@ -328,7 +347,7 @@
     ]
    },
    {
-    "evidence_id": "26d3fb5a-1d25-4c1e-8774-598dd03834a3",
+    "evidence_id": "666e1555-2b6a-4572-9dc4-fd3b53dc971c",
     "kind": "method",
     "title": "HLS Fmask cloud-masking policy",
     "summary": "Bits 1–3 (cloud, adjacent, shadow) masked; bits 4–5 pending confirmation (Test H-5); scenes accepted at ≥70% clear field pixels.",
@@ -347,7 +366,7 @@
     ]
    },
    {
-    "evidence_id": "666e1555-2b6a-4572-9dc4-fd3b53dc971c",
+    "evidence_id": "07b2ca77-100e-474e-a797-2170a3dff3a2",
     "kind": "method",
     "title": "Field vs regional support classes",
     "summary": "F = field-resolved (≤100 m), S = sub-regional (≤5 km), R = regional context (>5 km). Coarse grids are never resampled to field pixels.",
@@ -366,7 +385,7 @@
     ]
    },
    {
-    "evidence_id": "07b2ca77-100e-474e-a797-2170a3dff3a2",
+    "evidence_id": "b12b3e49-55fe-463a-bcbb-8d8bfa771d39",
     "kind": "kb_rule",
     "title": "Crop KB rule: ph",
     "summary": "Placeholder rule. The cited threshold will be added to the crop knowledge base in Phase 5; until then no agronomic claim is made.",
@@ -385,7 +404,7 @@
     ]
    },
    {
-    "evidence_id": "b12b3e49-55fe-463a-bcbb-8d8bfa771d39",
+    "evidence_id": "a3f2aa68-17ba-4927-9471-bf502ce37e71",
     "kind": "kb_rule",
     "title": "Crop KB rule: drainage",
     "summary": "Placeholder rule. The cited threshold will be added to the crop knowledge base in Phase 5; until then no agronomic claim is made.",
@@ -404,7 +423,7 @@
     ]
    },
    {
-    "evidence_id": "a3f2aa68-17ba-4927-9471-bf502ce37e71",
+    "evidence_id": "f43dd19d-9f15-48c1-9843-3440c6d4c2c3",
     "kind": "kb_rule",
     "title": "Crop KB rule: water holding",
     "summary": "Placeholder rule. The cited threshold will be added to the crop knowledge base in Phase 5; until then no agronomic claim is made.",
@@ -423,7 +442,7 @@
     ]
    },
    {
-    "evidence_id": "f43dd19d-9f15-48c1-9843-3440c6d4c2c3",
+    "evidence_id": "34c8f961-f55a-4546-9e8e-cf149fc36a55",
     "kind": "kb_rule",
     "title": "Crop KB rule: gdd",
     "summary": "Placeholder rule. The cited threshold will be added to the crop knowledge base in Phase 5; until then no agronomic claim is made.",
@@ -442,7 +461,7 @@
     ]
    },
    {
-    "evidence_id": "34c8f961-f55a-4546-9e8e-cf149fc36a55",
+    "evidence_id": "09772340-5ed9-43f2-8564-a7058974f90d",
     "kind": "kb_rule",
     "title": "Crop KB rule: slope",
     "summary": "Placeholder rule. The cited threshold will be added to the crop knowledge base in Phase 5; until then no agronomic claim is made.",
@@ -461,7 +480,7 @@
     ]
    },
    {
-    "evidence_id": "09772340-5ed9-43f2-8564-a7058974f90d",
+    "evidence_id": "e0300005-a21c-4cef-af4c-a5b47adde45e",
     "kind": "kb_rule",
     "title": "Crop KB rule: rotation history",
     "summary": "Placeholder rule. The cited threshold will be added to the crop knowledge base in Phase 5; until then no agronomic claim is made.",
@@ -480,7 +499,7 @@
     ]
    },
    {
-    "evidence_id": "e0300005-a21c-4cef-af4c-a5b47adde45e",
+    "evidence_id": "cfad4700-5010-4cc1-a747-c652d96ae453",
     "kind": "kb_rule",
     "title": "Crop KB rule: regional climate",
     "summary": "Placeholder rule. The cited threshold will be added to the crop knowledge base in Phase 5; until then no agronomic claim is made.",
@@ -798,39 +817,6 @@
    {
     "evidence_id": "efc90035-deaf-4542-ad0f-09ba17395df1",
     "kind": "indicator",
-    "title": "Actual ET (OpenET)",
-    "summary": "Synthetic indicator for Demo Field F-A. Method: Synthetic actual et (openet). Support: F.",
-    "field_id": "7608c195-b364-49a2-a293-a4be862d9eac",
-    "dataset_id": "synthetic",
-    "product_version": "synthetic-0",
-    "citation": null,
-    "url": null,
-    "doi": null,
-    "accessed_at": "2026-11-01",
-    "verification_status": "SYNTHETIC",
-    "spatial": {
-     "support_class": "F",
-     "native_resolution_m": 30,
-     "extraction_method": "zonal_polygon",
-     "field_fraction_of_cell": null,
-     "cell_id": null,
-     "crs": null
-    },
-    "temporal": {
-     "resolution": "season",
-     "period_start": "2025-01-01",
-     "period_end": "2025-12-31",
-     "aggregation": "sum",
-     "time_standard": "LST"
-    },
-    "related_ids": [
-     "7608c195-b364-49a2-a293-a4be862d9eac:et_actual_season:2025-01-01",
-     "et_actual_season"
-    ]
-   },
-   {
-    "evidence_id": "10a9bae1-a054-4b31-b3f9-b4187871f535",
-    "kind": "indicator",
     "title": "Root-zone soil moisture (mean)",
     "summary": "Synthetic indicator for Demo Field F-A. Method: Synthetic root-zone soil moisture (mean). Support: R.",
     "field_id": "7608c195-b364-49a2-a293-a4be862d9eac",
@@ -862,40 +848,7 @@
     ]
    },
    {
-    "evidence_id": "dc0e7764-f558-4ca6-8c7b-80727af71228",
-    "kind": "indicator",
-    "title": "Root-zone moisture percentile",
-    "summary": "Synthetic indicator for Demo Field F-A. Method: Synthetic root-zone moisture percentile. Support: R.",
-    "field_id": "7608c195-b364-49a2-a293-a4be862d9eac",
-    "dataset_id": "synthetic",
-    "product_version": "synthetic-0",
-    "citation": null,
-    "url": null,
-    "doi": null,
-    "accessed_at": "2026-11-01",
-    "verification_status": "SYNTHETIC",
-    "spatial": {
-     "support_class": "R",
-     "native_resolution_m": 9000,
-     "extraction_method": "containing_cell",
-     "field_fraction_of_cell": 0.0052,
-     "cell_id": "synthetic-cell",
-     "crs": "EPSG:6933"
-    },
-    "temporal": {
-     "resolution": "season",
-     "period_start": "2025-01-01",
-     "period_end": "2025-12-31",
-     "aggregation": "percentile",
-     "time_standard": "UTC"
-    },
-    "related_ids": [
-     "7608c195-b364-49a2-a293-a4be862d9eac:sm_rootzone_percentile:2025-01-01",
-     "sm_rootzone_percentile"
-    ]
-   },
-   {
-    "evidence_id": "a965d759-1220-444d-b2be-2c89d69dd80f",
+    "evidence_id": "10a9bae1-a054-4b31-b3f9-b4187871f535",
     "kind": "indicator",
     "title": "Root-zone dry days",
     "summary": "Synthetic indicator for Demo Field F-A. Method: Synthetic root-zone dry days. Support: R.",
@@ -928,7 +881,7 @@
     ]
    },
    {
-    "evidence_id": "26904647-db07-440d-9e26-ad1da0f1f37e",
+    "evidence_id": "dc0e7764-f558-4ca6-8c7b-80727af71228",
     "kind": "indicator",
     "title": "Peak NDVI",
     "summary": "Synthetic indicator for Demo Field F-A. Method: Synthetic peak ndvi. Support: F.",
@@ -961,7 +914,7 @@
     ]
    },
    {
-    "evidence_id": "63020b7f-ccb4-4a44-9ece-29ce89be3f22",
+    "evidence_id": "a965d759-1220-444d-b2be-2c89d69dd80f",
     "kind": "indicator",
     "title": "Peak NDVI day of year",
     "summary": "Synthetic indicator for Demo Field F-A. Method: Synthetic peak ndvi day of year. Support: F.",
@@ -994,7 +947,7 @@
     ]
    },
    {
-    "evidence_id": "6439f3de-fe6f-4a6f-ac2f-348d4823fdcf",
+    "evidence_id": "26904647-db07-440d-9e26-ad1da0f1f37e",
     "kind": "indicator",
     "title": "Peak NDMI",
     "summary": "Synthetic indicator for Demo Field F-A. Method: Synthetic peak ndmi. Support: F.",
@@ -1027,7 +980,7 @@
     ]
    },
    {
-    "evidence_id": "e5aba523-aa25-419e-9eee-5c7551dd343b",
+    "evidence_id": "63020b7f-ccb4-4a44-9ece-29ce89be3f22",
     "kind": "indicator",
     "title": "Peak NDVI variability (2016–2025)",
     "summary": "Synthetic indicator for Demo Field F-A. Method: Synthetic peak ndvi variability (2016–2025). Support: F.",
@@ -1060,7 +1013,7 @@
     ]
    },
    {
-    "evidence_id": "a35e5d48-ef92-4ee8-ba11-f187f78b8aef",
+    "evidence_id": "6439f3de-fe6f-4a6f-ac2f-348d4823fdcf",
     "kind": "indicator",
     "title": "Available water storage 0–150 cm",
     "summary": "Synthetic indicator for Demo Field F-A. Method: Synthetic available water storage 0–150 cm. Support: F.",
@@ -1093,7 +1046,7 @@
     ]
    },
    {
-    "evidence_id": "3742b4d6-895f-4e15-a3a1-b2e04b56387e",
+    "evidence_id": "e5aba523-aa25-419e-9eee-5c7551dd343b",
     "kind": "indicator",
     "title": "Soil pH 0–30 cm",
     "summary": "Synthetic indicator for Demo Field F-A. Method: Synthetic soil ph 0–30 cm. Support: F.",
@@ -1126,7 +1079,7 @@
     ]
    },
    {
-    "evidence_id": "6cbaecca-539d-45e7-a426-cc5ceb202ad6",
+    "evidence_id": "a35e5d48-ef92-4ee8-ba11-f187f78b8aef",
     "kind": "indicator",
     "title": "Organic matter 0–30 cm",
     "summary": "Synthetic indicator for Demo Field F-A. Method: Synthetic organic matter 0–30 cm. Support: F.",
@@ -1159,7 +1112,7 @@
     ]
    },
    {
-    "evidence_id": "cad2c6b8-e48b-424e-ae6a-75044bef1d00",
+    "evidence_id": "3742b4d6-895f-4e15-a3a1-b2e04b56387e",
     "kind": "indicator",
     "title": "Clay 0–30 cm",
     "summary": "Synthetic indicator for Demo Field F-A. Method: Synthetic clay 0–30 cm. Support: F.",
@@ -1192,7 +1145,7 @@
     ]
    },
    {
-    "evidence_id": "d5b5144f-fa66-4d93-b50e-a6d1673c3433",
+    "evidence_id": "6cbaecca-539d-45e7-a426-cc5ceb202ad6",
     "kind": "indicator",
     "title": "Mean slope",
     "summary": "Synthetic indicator for Demo Field F-A. Method: Synthetic mean slope. Support: F.",
@@ -1225,7 +1178,7 @@
     ]
    },
    {
-    "evidence_id": "be11c6da-4607-4fab-bde8-c42c7af12bc6",
+    "evidence_id": "cad2c6b8-e48b-424e-ae6a-75044bef1d00",
     "kind": "indicator",
     "title": "Slope (90th percentile)",
     "summary": "Synthetic indicator for Demo Field F-A. Method: Synthetic slope (90th percentile). Support: F.",
@@ -1258,7 +1211,7 @@
     ]
    },
    {
-    "evidence_id": "8f377481-cda6-457a-85a8-e65348cf3fb5",
+    "evidence_id": "d5b5144f-fa66-4d93-b50e-a6d1673c3433",
     "kind": "indicator",
     "title": "Mean elevation",
     "summary": "Synthetic indicator for Demo Field F-A. Method: Synthetic mean elevation. Support: F.",
@@ -1291,7 +1244,7 @@
     ]
    },
    {
-    "evidence_id": "a7cd69be-5de0-4e58-92ef-38f3ba585aa4",
+    "evidence_id": "be11c6da-4607-4fab-bde8-c42c7af12bc6",
     "kind": "indicator",
     "title": "Distinct crops (2006–2025)",
     "summary": "Synthetic indicator for Demo Field F-A. Method: Synthetic distinct crops (2006–2025). Support: F.",
@@ -1324,7 +1277,7 @@
     ]
    },
    {
-    "evidence_id": "35d08369-d72a-4df7-ab89-50ddf8ebe613",
+    "evidence_id": "8f377481-cda6-457a-85a8-e65348cf3fb5",
     "kind": "indicator",
     "title": "Longest same-crop run",
     "summary": "Synthetic indicator for Demo Field F-A. Method: Synthetic longest same-crop run. Support: F.",
@@ -1357,7 +1310,7 @@
     ]
    },
    {
-    "evidence_id": "8c0b300d-dbe8-4301-aa38-467d5ca89bf3",
+    "evidence_id": "a7cd69be-5de0-4e58-92ef-38f3ba585aa4",
     "kind": "indicator",
     "title": "Rotation diversity (Shannon)",
     "summary": "Synthetic indicator for Demo Field F-A. Method: Synthetic rotation diversity (shannon). Support: F.",
@@ -1391,8 +1344,8 @@
    }
   ],
   "meta": {
-   "request_id": "mock-3i-mwhmtpk5",
-   "generated_at": "2026-11-15T09:28:27.559Z",
+   "request_id": "mock-3i-mwi84yya",
+   "generated_at": "2026-11-15T19:25:04.884Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",

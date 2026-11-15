@@ -127,7 +127,7 @@
       "crop_code": 4,
       "crop_name": "Sorghum"
      },
-     "resilience_band": "moderate",
+     "resilience_band": "high",
      "coverage_completeness": 1
     },
     {
@@ -179,7 +179,7 @@
       "crop_code": 236,
       "crop_name": "Dbl Crop WinWht/Sorghum"
      },
-     "resilience_band": "high",
+     "resilience_band": "moderate",
      "coverage_completeness": 1
     },
     {
@@ -284,7 +284,7 @@
       "crop_name": "Winter Wheat"
      },
      "resilience_band": "unknown",
-     "coverage_completeness": 0.67
+     "coverage_completeness": 0.8
     },
     {
      "field_id": "e0b78e6b-7d25-434b-bea0-c569044bde56",
@@ -388,7 +388,7 @@
       "crop_name": "Corn"
      },
      "resilience_band": "unknown",
-     "coverage_completeness": 0.33
+     "coverage_completeness": 0.4
     },
     {
      "field_id": "51e18c11-e9e2-4961-a004-8ca63bdc25c3",
@@ -436,38 +436,33 @@
      "processing_status": "processing",
      "latest_crop": null,
      "resilience_band": "unknown",
-     "coverage_completeness": 0.67
+     "coverage_completeness": 0
     }
    ],
    "coverage_summary": [
     {
+     "dataset_id": "meteomatics",
+     "fields_available": 6,
+     "fields_total": 8
+    },
+    {
      "dataset_id": "nasa_power_daily_ag",
-     "fields_available": 7,
+     "fields_available": 6,
      "fields_total": 8
     },
     {
      "dataset_id": "usda_nrcs_ssurgo_sda",
-     "fields_available": 8,
+     "fields_available": 7,
      "fields_total": 8
     },
     {
      "dataset_id": "usda_nass_cdl",
-     "fields_available": 8,
-     "fields_total": 8
-    },
-    {
-     "dataset_id": "nasa_hls_vi",
-     "fields_available": 5,
-     "fields_total": 8
-    },
-    {
-     "dataset_id": "nasa_smap_spl4smgp",
-     "fields_available": 6,
+     "fields_available": 7,
      "fields_total": 8
     },
     {
      "dataset_id": "nasa_srtm_gl1",
-     "fields_available": 6,
+     "fields_available": 5,
      "fields_total": 8
     }
    ],
@@ -480,7 +475,7 @@
     {
      "code": "INSUFFICIENT_COMPONENTS",
      "severity": "warning",
-     "message": "Demo Field E: resilience composite withheld — only 3 of 5 components available."
+     "message": "Demo Field E: resilience composite withheld — fewer than 3 of 4 components available."
     },
     {
      "code": "PROCESSING_FAILED",
@@ -683,77 +678,12 @@
      },
      "input_ids": [],
      "reference_value": null
-    },
-    {
-     "indicator_id": "ks_reno:sm_rootzone_percentile:2025",
-     "key": "sm_rootzone_percentile",
-     "label": "Root-zone moisture percentile (AOI)",
-     "category": "soil_moisture",
-     "value": {
-      "value": 23,
-      "unit": "percentile",
-      "uncertainty": null,
-      "missing_reason": null
-     },
-     "nature": "derived",
-     "spatial": {
-      "support_class": "R",
-      "native_resolution_m": 9000,
-      "extraction_method": "containing_cell",
-      "field_fraction_of_cell": 0.007,
-      "cell_id": "synthetic-cell",
-      "crs": "EPSG:6933"
-     },
-     "temporal": {
-      "resolution": "season",
-      "period_start": "2025-01-01",
-      "period_end": "2025-12-31",
-      "aggregation": "percentile",
-      "time_standard": "UTC"
-     },
-     "quality": {
-      "status": "valid",
-      "flags": [
-       {
-        "code": "SYNTHETIC",
-        "severity": "info",
-        "message": "Synthetic demo value — not an observation."
-       },
-       {
-        "code": "SHORT_CLIMATOLOGY",
-        "severity": "warning",
-        "message": "SMAP record starts 2015-03-31; percentiles rest on ~10 years."
-       }
-      ],
-      "completeness": 1,
-      "missing_reason": null
-     },
-     "sources": [
-      {
-       "dataset_id": "synthetic",
-       "product": "Synthetic stand-in for SPL4SMGP",
-       "product_version": "synthetic-0",
-       "acquisition_id": null,
-       "doi": null,
-       "documentation_url": "https://nsidc.org/data/spl4smgp",
-       "retrieved_at": null
-      }
-     ],
-     "method": {
-      "method_id": "synthetic_sm_rootzone_percentile",
-      "name": "Synthetic root-zone moisture percentile",
-      "version": "synthetic-0",
-      "description": "Synthetic placeholder generated for the Phase 1 UI. The real calculation is specified in SOILSTICE_DATA_ARCHITECTURE and implemented in Phase 4.",
-      "reference_url": null
-     },
-     "input_ids": [],
-     "reference_value": null
     }
    ]
   },
   "meta": {
-   "request_id": "mock-5-mwhmto84",
-   "generated_at": "2026-11-15T09:28:25.831Z",
+   "request_id": "mock-5-mwi84xln",
+   "generated_at": "2026-11-15T19:25:03.134Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",

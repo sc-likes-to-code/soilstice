@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { CloudRain, Droplets, Mountain } from "lucide-react";
-import type { ClimateProfile, SoilProfile, TerrainProfile, TimeSeries } from "@/types/contracts";
+import type { ClimateProfile, EnvironmentalIndicator, SoilProfile, TerrainProfile, TimeSeries } from "@/types/contracts";
 import { useClimate, useSoil, useTerrain } from "@/hooks/queries";
 import { useFieldId } from "@/components/layout/field-layout";
 import { pct } from "@/lib/format";
@@ -60,8 +60,13 @@ function ClimateTab({ fieldId, season }: { fieldId: string; season: number }) {
 function Climate({ c }: { c: ClimateProfile }) {
   const s = (v: string) => c.series.find((x) => x.variable === v);
   const precip = s("precipitation"), tmax = s("tmax"), tmin = s("tmin"), gdd = s("gdd_cumulative"), et0 = s("et0");
-  const climate = c.indicators.filter((i) => i.category === "climate");
-  const water = c.indicators.filter((i) => i.category === "water");
+  const isExcluded = (i: EnvironmentalIndicator) =>
+    i.key === "et_actual_season" ||
+    i.key === "sm_rootzone_percentile" ||
+    i.label.toLowerCase().includes("actual et") ||
+    i.label.toLowerCase().includes("openet");
+  const climate = c.indicators.filter((i) => i.category === "climate" && !isExcluded(i));
+  const water = c.indicators.filter((i) => i.category === "water" && !isExcluded(i));
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center gap-3 rounded-xl border border-wheat-200 bg-wheat-100/50 px-4 py-3 text-[12.5px] text-ink-soft">

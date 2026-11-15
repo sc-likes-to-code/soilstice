@@ -27,6 +27,15 @@ from .fields import FieldService
 from .pipeline import fetch_climate
 
 
+def _clean_indicators(inds: list[EnvironmentalIndicator]) -> list[EnvironmentalIndicator]:
+    return [
+        i for i in inds
+        if i.key not in {"et_actual_season", "sm_rootzone_percentile"}
+        and "actual et" not in i.label.lower()
+        and "openet" not in i.label.lower()
+    ]
+
+
 class EnvironmentService:
     def __init__(self, ctx: Container):
         self.ctx = ctx
@@ -62,14 +71,14 @@ class EnvironmentService:
                             retained_indicators = [i for i in cached.indicators if i.key not in extra_keys]
                             cached = cached.model_copy(update={
                                 "series": extra_series + cached.series,
-                                "indicators": retained_indicators + extra_indicators,
+                                "indicators": _clean_indicators(retained_indicators + extra_indicators),
                             })
                             self.repos.climate.put(f"{f.field_id}:{season_year}", cached, parent=f.field_id)
                     except Exception:
                         pass
-                return cached
+                return cached.model_copy(update={"indicators": _clean_indicators(cached.indicators)})
         profile, _ = fetch_climate(self.ctx, f, season_year, crop_code)
-        return profile
+        return profile.model_copy(update={"indicators": _clean_indicators(profile.indicators)})
 
     def soil(self, field_id) -> SoilProfile:
         f = self.fields.get_field(field_id)
@@ -162,7 +171,7 @@ class EnvironmentService:
             soil_reason=self._reason(f.field_id, "usda_nrcs_ssurgo_sda")[0],
             terrain_reason=self._reason(f.field_id, "meteomatics")[0],
         )
-        return [i for i in inds if category is None or i.category == category]
+        return [i for i in _clean_indicators(inds) if category is None or i.category == category]
 
     def resilience(self, field_id) -> ResilienceProfile:
         f = self.fields.get_field(field_id)

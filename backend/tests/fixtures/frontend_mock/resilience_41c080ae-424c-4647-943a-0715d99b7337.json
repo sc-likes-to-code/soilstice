@@ -4,7 +4,7 @@
  "list": false,
  "payload": {
   "data": {
-   "profile_id": "9bd22ece-038a-4c0e-8200-dd8fe55c6e6a",
+   "profile_id": "1c21c914-8b5e-4774-8346-8157b49142b8",
    "field_id": "41c080ae-424c-4647-943a-0715d99b7337",
    "as_of": "2026-11-01",
    "model_version": "soilstice-resilience-0.0.0-synthetic",
@@ -18,8 +18,8 @@
     },
     "band": "unknown",
     "confidence": "low",
-    "components_used": 3,
-    "components_total": 5
+    "components_used": 2,
+    "components_total": 4
    },
    "components": [
     {
@@ -71,30 +71,6 @@
      }
     },
     {
-     "key": "vegetation_stability",
-     "label": "Vegetation stability",
-     "score": {
-      "value": null,
-      "unit": "score_0_100",
-      "uncertainty": null,
-      "missing_reason": "INSUFFICIENT_COVERAGE"
-     },
-     "band": "unknown",
-     "support_class": "F",
-     "confidence": "low",
-     "input_indicator_ids": [
-      "41c080ae-424c-4647-943a-0715d99b7337:ndvi_peak_cv"
-     ],
-     "explanation": "Not scored: required inputs are unavailable for this field.",
-     "rule_ref": {
-      "method_id": "resilience_vegetation_stability_breakpoints",
-      "name": "Vegetation stability breakpoint table",
-      "version": "synthetic-0",
-      "description": "Breakpoints pending (Phase 4).",
-      "reference_url": null
-     }
-    },
-    {
      "key": "climate_exposure",
      "label": "Climate exposure",
      "score": {
@@ -124,20 +100,20 @@
      "key": "rotation_diversity",
      "label": "Rotation diversity",
      "score": {
-      "value": 39,
+      "value": null,
       "unit": "score_0_100",
       "uncertainty": null,
-      "missing_reason": null
+      "missing_reason": "UPSTREAM_ERROR"
      },
-     "band": "low",
+     "band": "unknown",
      "support_class": "F",
-     "confidence": "high",
+     "confidence": "low",
      "input_indicator_ids": [
       "41c080ae-424c-4647-943a-0715d99b7337:distinct_crops",
       "41c080ae-424c-4647-943a-0715d99b7337:max_monoculture_run",
       "41c080ae-424c-4647-943a-0715d99b7337:rotation_shannon"
      ],
-     "explanation": "Synthetic placeholder score. In Phase 4 this component maps distinct_crops, max_monoculture_run, rotation_shannon through a cited breakpoint table.",
+     "explanation": "Not scored: required inputs are unavailable for this field.",
      "rule_ref": {
       "method_id": "resilience_rotation_diversity_breakpoints",
       "name": "Rotation diversity breakpoint table",
@@ -156,7 +132,7 @@
     {
      "code": "INSUFFICIENT_COMPONENTS",
      "severity": "warning",
-     "message": "Only 3 of 5 components are available; a composite needs at least 4."
+     "message": "Only 2 of 4 components are available; a composite needs at least 3."
     }
    ],
    "disclaimers": [
@@ -166,8 +142,8 @@
    ]
   },
   "meta": {
-   "request_id": "mock-58-mwhmtq8u",
-   "generated_at": "2026-11-15T09:28:28.446Z",
+   "request_id": "mock-58-mwi84zoa",
+   "generated_at": "2026-11-15T19:25:05.818Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",

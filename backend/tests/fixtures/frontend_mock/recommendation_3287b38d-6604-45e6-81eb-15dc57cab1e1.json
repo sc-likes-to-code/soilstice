@@ -4,7 +4,7 @@
  "list": false,
  "payload": {
   "data": {
-   "recommendation_id": "1aa7e9aa-bc1c-41b4-b543-ea6bc445b097",
+   "recommendation_id": "7adf78e2-dd10-4004-947c-98fd993aab57",
    "field_id": "3287b38d-6604-45e6-81eb-15dc57cab1e1",
    "target_season": {
     "label": "2026 season",
@@ -46,7 +46,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "07b2ca77-100e-474e-a797-2170a3dff3a2"
+        "b12b3e49-55fe-463a-bcbb-8d8bfa771d39"
        ]
       },
       {
@@ -56,7 +56,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "b12b3e49-55fe-463a-bcbb-8d8bfa771d39"
+        "a3f2aa68-17ba-4927-9471-bf502ce37e71"
        ]
       },
       {
@@ -71,7 +71,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "a3f2aa68-17ba-4927-9471-bf502ce37e71"
+        "f43dd19d-9f15-48c1-9843-3440c6d4c2c3"
        ]
       },
       {
@@ -86,7 +86,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "34c8f961-f55a-4546-9e8e-cf149fc36a55"
+        "09772340-5ed9-43f2-8564-a7058974f90d"
        ]
       },
       {
@@ -96,7 +96,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "R",
        "evidence_ids": [
-        "f43dd19d-9f15-48c1-9843-3440c6d4c2c3"
+        "34c8f961-f55a-4546-9e8e-cf149fc36a55"
        ]
       },
       {
@@ -106,7 +106,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "R",
        "evidence_ids": [
-        "e0300005-a21c-4cef-af4c-a5b47adde45e"
+        "cfad4700-5010-4cc1-a747-c652d96ae453"
        ]
       },
       {
@@ -116,7 +116,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "09772340-5ed9-43f2-8564-a7058974f90d"
+        "e0300005-a21c-4cef-af4c-a5b47adde45e"
        ]
       }
      ],
@@ -157,7 +157,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "07b2ca77-100e-474e-a797-2170a3dff3a2"
+        "b12b3e49-55fe-463a-bcbb-8d8bfa771d39"
        ]
       },
       {
@@ -167,7 +167,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "b12b3e49-55fe-463a-bcbb-8d8bfa771d39"
+        "a3f2aa68-17ba-4927-9471-bf502ce37e71"
        ]
       },
       {
@@ -182,7 +182,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "a3f2aa68-17ba-4927-9471-bf502ce37e71"
+        "f43dd19d-9f15-48c1-9843-3440c6d4c2c3"
        ]
       },
       {
@@ -197,7 +197,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "34c8f961-f55a-4546-9e8e-cf149fc36a55"
+        "09772340-5ed9-43f2-8564-a7058974f90d"
        ]
       },
       {
@@ -207,7 +207,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "R",
        "evidence_ids": [
-        "f43dd19d-9f15-48c1-9843-3440c6d4c2c3"
+        "34c8f961-f55a-4546-9e8e-cf149fc36a55"
        ]
       },
       {
@@ -217,7 +217,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "R",
        "evidence_ids": [
-        "e0300005-a21c-4cef-af4c-a5b47adde45e"
+        "cfad4700-5010-4cc1-a747-c652d96ae453"
        ]
       },
       {
@@ -227,7 +227,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "09772340-5ed9-43f2-8564-a7058974f90d"
+        "e0300005-a21c-4cef-af4c-a5b47adde45e"
        ]
       }
      ],
@@ -262,7 +262,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "07b2ca77-100e-474e-a797-2170a3dff3a2"
+        "b12b3e49-55fe-463a-bcbb-8d8bfa771d39"
        ]
       },
       {
@@ -272,7 +272,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "b12b3e49-55fe-463a-bcbb-8d8bfa771d39"
+        "a3f2aa68-17ba-4927-9471-bf502ce37e71"
        ]
       },
       {
@@ -287,7 +287,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "a3f2aa68-17ba-4927-9471-bf502ce37e71"
+        "f43dd19d-9f15-48c1-9843-3440c6d4c2c3"
        ]
       },
       {
@@ -302,7 +302,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "34c8f961-f55a-4546-9e8e-cf149fc36a55"
+        "09772340-5ed9-43f2-8564-a7058974f90d"
        ]
       },
       {
@@ -312,7 +312,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "R",
        "evidence_ids": [
-        "f43dd19d-9f15-48c1-9843-3440c6d4c2c3"
+        "34c8f961-f55a-4546-9e8e-cf149fc36a55"
        ]
       },
       {
@@ -322,7 +322,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "R",
        "evidence_ids": [
-        "e0300005-a21c-4cef-af4c-a5b47adde45e"
+        "cfad4700-5010-4cc1-a747-c652d96ae453"
        ]
       },
       {
@@ -332,7 +332,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "09772340-5ed9-43f2-8564-a7058974f90d"
+        "e0300005-a21c-4cef-af4c-a5b47adde45e"
        ]
       }
      ],
@@ -367,7 +367,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "07b2ca77-100e-474e-a797-2170a3dff3a2"
+        "b12b3e49-55fe-463a-bcbb-8d8bfa771d39"
        ]
       },
       {
@@ -377,7 +377,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "b12b3e49-55fe-463a-bcbb-8d8bfa771d39"
+        "a3f2aa68-17ba-4927-9471-bf502ce37e71"
        ]
       },
       {
@@ -392,7 +392,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "a3f2aa68-17ba-4927-9471-bf502ce37e71"
+        "f43dd19d-9f15-48c1-9843-3440c6d4c2c3"
        ]
       },
       {
@@ -407,7 +407,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "34c8f961-f55a-4546-9e8e-cf149fc36a55"
+        "09772340-5ed9-43f2-8564-a7058974f90d"
        ]
       },
       {
@@ -417,7 +417,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "R",
        "evidence_ids": [
-        "f43dd19d-9f15-48c1-9843-3440c6d4c2c3"
+        "34c8f961-f55a-4546-9e8e-cf149fc36a55"
        ]
       },
       {
@@ -427,7 +427,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "R",
        "evidence_ids": [
-        "e0300005-a21c-4cef-af4c-a5b47adde45e"
+        "cfad4700-5010-4cc1-a747-c652d96ae453"
        ]
       },
       {
@@ -437,7 +437,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "09772340-5ed9-43f2-8564-a7058974f90d"
+        "e0300005-a21c-4cef-af4c-a5b47adde45e"
        ]
       }
      ],
@@ -472,7 +472,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "07b2ca77-100e-474e-a797-2170a3dff3a2"
+        "b12b3e49-55fe-463a-bcbb-8d8bfa771d39"
        ]
       },
       {
@@ -482,7 +482,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "b12b3e49-55fe-463a-bcbb-8d8bfa771d39"
+        "a3f2aa68-17ba-4927-9471-bf502ce37e71"
        ]
       },
       {
@@ -497,7 +497,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "a3f2aa68-17ba-4927-9471-bf502ce37e71"
+        "f43dd19d-9f15-48c1-9843-3440c6d4c2c3"
        ]
       },
       {
@@ -512,7 +512,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "34c8f961-f55a-4546-9e8e-cf149fc36a55"
+        "09772340-5ed9-43f2-8564-a7058974f90d"
        ]
       },
       {
@@ -522,7 +522,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "R",
        "evidence_ids": [
-        "f43dd19d-9f15-48c1-9843-3440c6d4c2c3"
+        "34c8f961-f55a-4546-9e8e-cf149fc36a55"
        ]
       },
       {
@@ -532,7 +532,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "R",
        "evidence_ids": [
-        "e0300005-a21c-4cef-af4c-a5b47adde45e"
+        "cfad4700-5010-4cc1-a747-c652d96ae453"
        ]
       },
       {
@@ -542,7 +542,7 @@
        "requirement": "Threshold pending a cited crop knowledge-base entry (Phase 5).",
        "support_class": "F",
        "evidence_ids": [
-        "09772340-5ed9-43f2-8564-a7058974f90d"
+        "e0300005-a21c-4cef-af4c-a5b47adde45e"
        ]
       }
      ],
@@ -573,8 +573,8 @@
    ]
   },
   "meta": {
-   "request_id": "mock-17-mwhmtomi",
-   "generated_at": "2026-11-15T09:28:26.346Z",
+   "request_id": "mock-17-mwi84y0f",
+   "generated_at": "2026-11-15T19:25:03.663Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",

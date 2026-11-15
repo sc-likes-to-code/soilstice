@@ -5,6 +5,26 @@
  "payload": {
   "data": [
    {
+    "dataset_id": "meteomatics",
+    "title": "Meteomatics Environmental API",
+    "publisher": "Meteomatics AG",
+    "product": "Meteomatics API (Mix)",
+    "product_version": "v3.0",
+    "priority": "P0",
+    "support_class": "R",
+    "native_resolution_m": 1000,
+    "temporal_resolution": "PT1H",
+    "temporal_coverage": {
+     "start": "2010-01-01",
+     "end": null
+    },
+    "documentation_url": "https://www.meteomatics.com/en/api/",
+    "doi": null,
+    "verification_status": "LIVE",
+    "last_verified": "2026-11-14",
+    "integration_status": "planned"
+   },
+   {
     "dataset_id": "nasa_power_daily_ag",
     "title": "NASA POWER Daily (AG community)",
     "publisher": "NASA LaRC",
@@ -286,8 +306,8 @@
    }
   ],
   "meta": {
-   "request_id": "mock-1-mwhmto6d",
-   "generated_at": "2026-11-15T09:28:25.765Z",
+   "request_id": "mock-1-mwi84xjw",
+   "generated_at": "2026-11-15T19:25:03.068Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",

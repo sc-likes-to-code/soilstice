@@ -4,22 +4,22 @@
  "list": false,
  "payload": {
   "data": {
-   "profile_id": "1cb39061-62cd-4a86-a2db-48ea6609cce0",
+   "profile_id": "7f2b4d4b-a800-4801-9757-c7a0c0a0af80",
    "field_id": "0a66f5ad-239e-4148-9f34-7f4a8c3a78cf",
    "as_of": "2026-11-01",
    "model_version": "soilstice-resilience-0.0.0-synthetic",
    "status": "computed",
    "composite": {
     "score": {
-     "value": 70,
+     "value": 75,
      "unit": "score_0_100",
      "uncertainty": null,
      "missing_reason": null
     },
-    "band": "moderate",
+    "band": "high",
     "confidence": "low",
-    "components_used": 5,
-    "components_total": 5
+    "components_used": 4,
+    "components_total": 4
    },
    "components": [
     {
@@ -71,34 +71,10 @@
      }
     },
     {
-     "key": "vegetation_stability",
-     "label": "Vegetation stability",
-     "score": {
-      "value": 83,
-      "unit": "score_0_100",
-      "uncertainty": null,
-      "missing_reason": null
-     },
-     "band": "high",
-     "support_class": "F",
-     "confidence": "high",
-     "input_indicator_ids": [
-      "0a66f5ad-239e-4148-9f34-7f4a8c3a78cf:ndvi_peak_cv"
-     ],
-     "explanation": "Synthetic placeholder score. In Phase 4 this component maps ndvi_peak_cv through a cited breakpoint table.",
-     "rule_ref": {
-      "method_id": "resilience_vegetation_stability_breakpoints",
-      "name": "Vegetation stability breakpoint table",
-      "version": "synthetic-0",
-      "description": "Breakpoints pending (Phase 4).",
-      "reference_url": null
-     }
-    },
-    {
      "key": "climate_exposure",
      "label": "Climate exposure",
      "score": {
-      "value": 90,
+      "value": 83,
       "unit": "score_0_100",
       "uncertainty": null,
       "missing_reason": null
@@ -124,12 +100,12 @@
      "key": "rotation_diversity",
      "label": "Rotation diversity",
      "score": {
-      "value": 51,
+      "value": 90,
       "unit": "score_0_100",
       "uncertainty": null,
       "missing_reason": null
      },
-     "band": "moderate",
+     "band": "high",
      "support_class": "F",
      "confidence": "high",
      "input_indicator_ids": [
@@ -161,8 +137,8 @@
    ]
   },
   "meta": {
-   "request_id": "mock-t-mwhmtohn",
-   "generated_at": "2026-11-15T09:28:26.171Z",
+   "request_id": "mock-t-mwi84xv6",
+   "generated_at": "2026-11-15T19:25:03.474Z",
    "api_version": "v1",
    "contract_version": "1.0.0-phase0",
    "data_mode": "synthetic",
