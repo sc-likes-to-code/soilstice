@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image-v2.png",
         width: 1200,
         height: 630,
         alt: "SOILSTICE — Field Resilience Intelligence | Satellite-Powered Agricultural Intelligence",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "SOILSTICE — Field Resilience Intelligence",
     description:
       "SOILSTICE transforms NASA Earth observations, USDA soil surveys and historical crop records into explainable field intelligence for smarter, climate-resilient agricultural decisions.",
-    images: ["/og-image.png"],
+    images: ["/og-image-v2.png"],
     creator: "@soilstice",
     site: "@soilstice",
   },
