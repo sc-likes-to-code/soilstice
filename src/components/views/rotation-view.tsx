@@ -190,19 +190,7 @@ function Recommendations({ r, onUse }: { r: RotationRecommendation; onUse: (code
           <CandidateCard key={c.crop_code} c={c} onUse={() => onUse(c.crop_code)} />
         ))}
       </div>
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card className="bg-cream/60">
-          <CardBody className="pt-5">
-            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-stone-500">Not offered</p>
-            <ul className="space-y-1.5 text-[12.5px] text-ink-soft">
-              {r.excluded.map((e) => (
-                <li key={e.crop_code}>
-                  <span className="font-semibold text-ink">{e.crop_name}</span> — {e.reason}
-                </li>
-              ))}
-            </ul>
-          </CardBody>
-        </Card>
+      {r.disclaimers.length > 0 && (
         <Card className="bg-cream/60">
           <CardBody className="pt-5">
             <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-stone-500">How to read this</p>
@@ -213,7 +201,7 @@ function Recommendations({ r, onUse }: { r: RotationRecommendation; onUse: (code
             </ul>
           </CardBody>
         </Card>
-      </div>
+      )}
     </div>
   );
 }
