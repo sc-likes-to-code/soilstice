@@ -193,9 +193,16 @@ def aggregate_soil(field_id: UUID, raw: SsurgoRaw) -> SoilProfile:
         status, reason = "valid", None
 
     survey_txt = "; ".join(f"{a} saverest {d.isoformat() if d else 'unknown'}" for a, d in raw.surveys) or "unknown"
-    sources = [source_ref(DATASET_ID_SSURGO, product="SSURGO via Soil Data Access",
-                          version=f"SDA live database ({survey_txt})", acquisition_id=a.acquisition_id,
-                          retrieved_at=a.retrieved_at) for a in raw.acquisitions]
+    version_str = f"SDA live database ({survey_txt})"
+    seen_sources = set()
+    sources = []
+    for a in raw.acquisitions:
+        key = (DATASET_ID_SSURGO, version_str)
+        if key not in seen_sources:
+            seen_sources.add(key)
+            sources.append(source_ref(DATASET_ID_SSURGO, product="SSURGO via Soil Data Access",
+                                      version=version_str, acquisition_id=a.acquisition_id,
+                                      retrieved_at=a.retrieved_at))
     map_units = [
         SoilMapUnitShare(
             mukey=mk, muname=raw.mapunit_names.get(mk, ""), area_fraction=round(frac, 6),

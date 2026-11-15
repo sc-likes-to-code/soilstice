@@ -223,7 +223,12 @@ function MoistureTab({ fieldId, season }: { fieldId: string; season: number }) {
                   eyebrow={isMeteomatics ? "Meteomatics · Multi-Depth Hydrology" : "SMAP L4 · SPL4SMGP"}
                   title="Daily volumetric soil water time series"
                   description={isMeteomatics ? "Continuous time series across four soil depths. Gaps appear as breaks, never zeros." : "Daily root-zone soil moisture (0–100 cm)."}
-                  actions={<><SupportBadge spatial={primarySeries.spatial} /><SourceList sources={primarySeries.sources} /></>}
+                  actions={
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <SupportBadge spatial={primarySeries.spatial} />
+                      <SourceList sources={primarySeries.sources} />
+                    </div>
+                  }
                 />
                 <CardBody>
                   {valid === 0 ? (
@@ -281,7 +286,18 @@ function Soil({ s }: { s: SoilProfile }) {
   return (
     <div className="space-y-6">
       <Card>
-        <CardHeader eyebrow="SSURGO · area × component-percent weighting" title="Soil profile by depth" description="Representative values with SSURGO low–high ranges in brackets." actions={<><SupportBadge spatial={s.spatial} /><SourceList sources={s.sources} /><QualityIndicator quality={s.quality} /></>} />
+        <CardHeader
+          eyebrow="SSURGO · area × component-percent weighting"
+          title="Soil profile by depth"
+          description="Representative values with SSURGO low–high ranges in brackets."
+          actions={
+            <div className="flex flex-wrap items-center gap-1.5">
+              <SupportBadge spatial={s.spatial} />
+              <SourceList sources={s.sources} />
+              <QualityIndicator quality={s.quality} />
+            </div>
+          }
+        />
         <CardBody className="pt-2">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[720px] text-left text-[12.5px]">
@@ -343,7 +359,13 @@ function Terrain({ t }: { t: TerrainProfile }) {
         eyebrow={isMeteomatics ? "Meteomatics · Elevation Model" : "SRTM GL1 · 30 m"}
         title="Terrain & Elevation"
         description={t.method.description}
-        actions={<><SupportBadge spatial={t.spatial} /><SourceList sources={t.sources} /><QualityIndicator quality={t.quality} /></>}
+        actions={
+          <div className="flex flex-wrap items-center gap-1.5">
+            <SupportBadge spatial={t.spatial} />
+            <SourceList sources={t.sources} />
+            <QualityIndicator quality={t.quality} />
+          </div>
+        }
       />
       <CardBody className="space-y-4">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">

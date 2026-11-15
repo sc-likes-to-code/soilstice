@@ -13,13 +13,13 @@ export function Card({ children, className, as: As = "section", ...rest }: { chi
 
 export function CardHeader({ title, eyebrow, description, actions, className }: { title: ReactNode; eyebrow?: ReactNode; description?: ReactNode; actions?: ReactNode; className?: string }) {
   return (
-    <header className={cn("flex flex-wrap items-start justify-between gap-3 px-5 pt-5", className)}>
-      <div className="min-w-0">
+    <header className={cn("flex flex-col sm:flex-row sm:items-start justify-between gap-3 px-5 pt-5", className)}>
+      <div className="min-w-0 flex-1">
         {eyebrow && <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-stone-500">{eyebrow}</p>}
         <h3 className="font-display text-[17px] font-medium leading-snug text-ink">{title}</h3>
         {description && <p className="mt-1 max-w-prose text-[13px] leading-relaxed text-ink-soft">{description}</p>}
       </div>
-      {actions && <div className="flex shrink-0 items-center gap-2">{actions}</div>}
+      {actions && <div className="flex flex-wrap items-center sm:justify-end gap-1.5 max-w-full">{actions}</div>}
     </header>
   );
 }

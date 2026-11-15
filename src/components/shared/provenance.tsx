@@ -113,9 +113,18 @@ export function PendingBadge({ className }: { className?: string }) {
 export function SourceChip({ source, className }: { source: SourceRef; className?: string }) {
   const synthetic = source.dataset_id === "synthetic";
   const shortName = DATASET_SHORT[source.dataset_id] ?? source.product;
+
+  let versionLabel = source.product_version ?? "";
+  if (versionLabel.includes("SDA live database")) {
+    const surveyMatch = versionLabel.match(/\(([^)]+)\)/);
+    versionLabel = surveyMatch ? `SDA (${surveyMatch[1].split(" saverest")[0]})` : "SDA";
+  } else if (versionLabel.length > 24) {
+    versionLabel = versionLabel.slice(0, 22) + "…";
+  }
+
   const chipLabel = synthetic
     ? source.product.replace("Synthetic stand-in for ", "Synthetic · ")
-    : `${shortName}${source.product_version ? ` · ${source.product_version}` : ""}`;
+    : `${shortName}${versionLabel ? ` · ${versionLabel}` : ""}`;
 
   return (
     <Tip
@@ -140,16 +149,26 @@ export function SourceChip({ source, className }: { source: SourceRef; className
         )}
       >
         {synthetic ? <FlaskConical className="h-3 w-3 shrink-0 text-clay-600" aria-hidden /> : <Database className="h-3 w-3 shrink-0 text-forest-600" aria-hidden />}
-        <span className="truncate">{chipLabel}</span>
+        <span className="truncate max-w-[220px]">{chipLabel}</span>
       </Badge>
     </Tip>
   );
 }
 
-export function SourceList({ sources }: { sources: SourceRef[] }) {
+export function SourceList({ sources, className }: { sources: SourceRef[]; className?: string }) {
+  const uniqueSources = sources.filter(
+    (s, idx, arr) =>
+      arr.findIndex(
+        (x) =>
+          x.dataset_id === s.dataset_id &&
+          x.product === s.product &&
+          x.product_version === s.product_version
+      ) === idx
+  );
+
   return (
-    <span className="inline-flex flex-wrap gap-1">
-      {sources.map((s, i) => (
+    <span className={cn("inline-flex flex-wrap items-center gap-1.5 max-w-full", className)}>
+      {uniqueSources.map((s, i) => (
         <SourceChip key={i} source={s} />
       ))}
     </span>

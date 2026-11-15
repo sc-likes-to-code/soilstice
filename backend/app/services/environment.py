@@ -83,6 +83,15 @@ class EnvironmentService:
     def soil(self, field_id) -> SoilProfile:
         f = self.fields.get_field(field_id)
         p = self.repos.soil.get(str(f.field_id))
+        if p is not None and len(p.sources) > 1:
+            seen_src = set()
+            deduped = []
+            for s in p.sources:
+                k = (s.dataset_id, s.product, s.product_version)
+                if k not in seen_src:
+                    seen_src.add(k)
+                    deduped.append(s)
+            p = p.model_copy(update={"sources": deduped})
         return p or missing_soil(f.field_id, *self._reason(f.field_id, "usda_nrcs_ssurgo_sda"))
 
     def terrain(self, field_id) -> TerrainProfile:
