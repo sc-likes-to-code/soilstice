@@ -1,6 +1,6 @@
 """Phase 7 Multi-Year Crop Rotation Engine Verification Suite.
 
-Tests the 25 formal verification criteria defined in PHASE_7_ARCHITECTURE_AND_SCIENTIFIC_SPEC.md:
+Tests the 25 formal verification criteria defined in SCIENTIFIC_SPECIFICATION.md (docs/SCIENTIFIC_SPECIFICATION.md):
 - Canonical 14 crops and CDL mappings
 - Asymmetric directed rotation transitions (EV0001–EV0212)
 - Monoculture penalties and botanical family repetitions

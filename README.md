@@ -136,8 +136,8 @@ soilstice/
 │   │   ├── http/                    # Live HTTP client implementation
 │   │   └── mock/                    # Deterministic synthetic generators for offline mode
 │   └── types/                       # Core TypeScript contracts and schemas
+├── docs/                            # Architectural specifications & scientific methodology
 ├── scripts/                         # Operational diagnostics & verification utilities
-├── SOILSTICE_PRODUCT_REFINEMENT_AUDIT.md # Comprehensive engineering & scientific audit log
 └── package.json                     # Frontend scripts & NPM workspace configuration
 ```
 
@@ -300,9 +300,12 @@ The operational Data Coverage / Essential Datasets engine tracks the active acqu
 
 ---
 
-## Documentation & Audits
+## Documentation
 
-- [SOILSTICE_PRODUCT_REFINEMENT_AUDIT.md](SOILSTICE_PRODUCT_REFINEMENT_AUDIT.md) — Comprehensive technical audit of the Data Coverage cleanup, Resilience reweighting equations, and Crop Ranking methodology.
+- [docs/SOILSTICE_DATA_ARCHITECTURE.md](docs/SOILSTICE_DATA_ARCHITECTURE.md) — Multi-tier agronomic data and provider architecture.
+- [docs/SOILSTICE_API_CONTRACTS.md](docs/SOILSTICE_API_CONTRACTS.md) — OpenAPI & Pydantic envelope definitions and schemas.
+- [docs/SCIENTIFIC_SPECIFICATION.md](docs/SCIENTIFIC_SPECIFICATION.md) — Comprehensive agronomic logic, evaluation criteria, and constraints.
+- [docs/ENVIRONMENTAL_PIPELINE.md](docs/ENVIRONMENTAL_PIPELINE.md) — Meteomatics-first environmental pipeline integration guide.
 - [backend/README.md](backend/README.md) — Backend-specific architecture, layer layout, and local testing instructions.
 
 ---
